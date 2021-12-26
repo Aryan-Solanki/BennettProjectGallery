@@ -159,7 +159,7 @@ class ParallaxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       top: top,
-      
+
       child: Container(
         color: Colors.transparent,
         height: MediaQuery.of(context).size.height,
