@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_parallax/HomePageElements/IconPalette.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,245 +81,68 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.transparent,
                 ),
                 Container(
-                  color: Color(0xff210002),
+                  color: Color(0xffffffff),
                   width: double.infinity,
-                  padding: EdgeInsets.only(top: 70),
+                  padding: EdgeInsets.only(top: 30),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Parallax In",
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: "MontSerrat-ExtraLight",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      Text(
-                        "Flutter",
-                        style: TextStyle(
-                            fontSize: 51,
-                            fontFamily: "MontSerrat-Regular",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: 190,
-                        child: Divider(
-                          height: 1,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Made By",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: "Montserrat-Extralight",
-                          letterSpacing: 1.3,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      Text(
-                        "The CS Guy",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "Montserrat-Regular",
-                          letterSpacing: 1.8,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
+                    children: [
+                      Text("How it works",style: GoogleFonts.nunito(
+                          fontSize: MediaQuery.of(context).size.height/35,
+                          fontWeight: FontWeight.w700
+                      )),
+                      SizedBox(height: 40,),
+                      ResponsiveBuilder(
+                        builder: (context, sizingInformation) {
+                          // Check the sizing information here and return your UI
+                          if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconPalette(icon: Icons.pie_chart_rounded,title:"Projects Overview" ,text: "Watch and learn from the Projects made by Bennett Achievers",),
+                                IconPalette(icon: Icons.people_rounded,title: "Community",text: "Get to know your fellow Bennatians and learn from their Projects",),
+                                IconPalette(icon: Icons.person_rounded,title: "DashBoard",text: "Manage all your projects by tracking Activities in Dashboard",),
+                              ],
+                            );
+                          }
+
+                          if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+                            return Padding(
+                              padding:  EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  IconPalette(icon: Icons.pie_chart_rounded,title:"Projects Overview" ,text: "Watch and learn from the Projects made by Bennett Achievers",),
+                                  SizedBox(width: 10,),
+                                  IconPalette(icon: Icons.people_rounded,title: "Community",text: "Get to know your fellow Bennatians and learn from their Projects",),
+                                  SizedBox(width: 10,),
+                                  IconPalette(icon: Icons.person_rounded,title: "DashBoard",text: "Manage all your projects by tracking Activities in Dashboard",),
+                                ],
+                              ),
+                            );
+                          }
+
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 25,right: 25),
+                                child: Align(alignment: Alignment.centerLeft,child: IconPalette(icon: Icons.pie_chart_rounded,title:"Projects Overview" ,text: "Watch and learn from the Projects made by Bennett Achievers",)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 25,right: 25),
+                                child: Align(alignment: Alignment.centerRight,child: IconPalette(icon: Icons.people_rounded,title: "Community",text: "Get to know your fellow Bennatians and learn from their Projects",)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 25,right: 25),
+                                child: Align(alignment: Alignment.centerLeft,child: IconPalette(icon: Icons.person_rounded,title: "DashBoard",text: "Manage all your projects by tracking Activities in Dashboard",)),
+                              ),
+                            ],
+                          );
+                        },
                       )
                     ],
                   ),
                 ),
-                Container(
-                  color: Color(0xff210002),
-                  width: double.infinity,
-                  padding: EdgeInsets.only(top: 70),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Parallax In",
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: "MontSerrat-ExtraLight",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      Text(
-                        "Flutter",
-                        style: TextStyle(
-                            fontSize: 51,
-                            fontFamily: "MontSerrat-Regular",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: 190,
-                        child: Divider(
-                          height: 1,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Made By",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: "Montserrat-Extralight",
-                          letterSpacing: 1.3,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      Text(
-                        "The CS Guy",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "Montserrat-Regular",
-                          letterSpacing: 1.8,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  color: Color(0xff210002),
-                  width: double.infinity,
-                  padding: EdgeInsets.only(top: 70),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Parallax In",
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: "MontSerrat-ExtraLight",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      Text(
-                        "Flutter",
-                        style: TextStyle(
-                            fontSize: 51,
-                            fontFamily: "MontSerrat-Regular",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: 190,
-                        child: Divider(
-                          height: 1,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Made By",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: "Montserrat-Extralight",
-                          letterSpacing: 1.3,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      Text(
-                        "The CS Guy",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "Montserrat-Regular",
-                          letterSpacing: 1.8,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  color: Color(0xff210002),
-                  width: double.infinity,
-                  padding: EdgeInsets.only(top: 70),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Parallax In",
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: "MontSerrat-ExtraLight",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      Text(
-                        "Flutter",
-                        style: TextStyle(
-                            fontSize: 51,
-                            fontFamily: "MontSerrat-Regular",
-                            letterSpacing: 1.8,
-                            color: Color(0xffffaf00)),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: 190,
-                        child: Divider(
-                          height: 1,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Made By",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: "Montserrat-Extralight",
-                          letterSpacing: 1.3,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      Text(
-                        "The CS Guy",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "Montserrat-Regular",
-                          letterSpacing: 1.8,
-                          color: Color(0xffffaf00),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      )
-                    ],
-                  ),
-                ),
+
               ],
             )
           ],

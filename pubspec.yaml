@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+  google_fonts: ^2.1.1
+  responsive_builder: ^0.2.0+2
 
 dev_dependencies:
   flutter_test:
