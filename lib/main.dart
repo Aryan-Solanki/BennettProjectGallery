@@ -69,11 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ParallaxWidget(top: rateZero, asset: "parallax2"),
             ParallaxWidget(top: rateFive, asset: "parallax1"),
             ParallaxWidget(top: rateSeven, asset: "parallax3"),
-            // ParallaxWidget(top: rateFour, asset: "parallax4"),
             ParallaxWidget(top: rateOne, asset: "parallax5"),
-            // ParallaxWidget(top: rateSix, asset: "parallax6"),
-            // ParallaxWidget(top: rateSeven, asset: "parallax7"),
-            // ParallaxWidget(top: rateEight, asset: "parallax8"),
             ListView(
               children: <Widget>[
                 Container(
@@ -83,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   color: Color(0xffffffff),
                   width: double.infinity,
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
                       Text("How it works",style: GoogleFonts.nunito(
@@ -142,6 +138,144 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
+                Container(
+                  padding: EdgeInsets.only(top: 40),
+                  color: Colors.white,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: TextButton(
+                      onPressed: (){
+
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        primary: Colors.black87,
+                        padding: EdgeInsets.all(0.0),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          border: Border.all(color: Colors.grey[800])
+                        ),
+                        child: Text(
+                          "Explore More",
+                          style: GoogleFonts.nunito(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w800
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 40),
+                  height: 500,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                  child: ResponsiveBuilder(
+                    builder: (context, sizingInformation) {
+                      // Check the sizing information here and return your UI
+                      if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                        return Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Positioned(
+                              left: -250,
+                              child: Container(
+                                height: MediaQuery.of(context).size.width/3.2,
+                                width: MediaQuery.of(context).size.width/1.5,
+                                decoration: BoxDecoration(
+                                  color: Colors.amber[400],
+                                  borderRadius: BorderRadius.circular(400),
+                                ),
+
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.width/65,
+                              left: MediaQuery.of(context).size.width/15,
+                              child: Container(
+                                height: MediaQuery.of(context).size.width/3.55,
+                                width: MediaQuery.of(context).size.width/2,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                      if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+                        return Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Positioned(
+                              left: -250,
+                              child: Container(
+                                height: MediaQuery.of(context).size.width/3.1,
+                                width: MediaQuery.of(context).size.width/1.3,
+                                decoration: BoxDecoration(
+                                  color: Colors.amber[400],
+                                  borderRadius: BorderRadius.circular(400),
+                                ),
+
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.width/50,
+                              left: MediaQuery.of(context).size.width/15,
+                              child: Container(
+                                height: MediaQuery.of(context).size.width/3.55,
+                                width: MediaQuery.of(context).size.width/2,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                      return Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Positioned(
+                            left: -100,
+                            child: Container(
+                              height: MediaQuery.of(context).size.width/2.3,
+                              width: MediaQuery.of(context).size.width/1.2,
+                              decoration: BoxDecoration(
+                                color: Colors.amber[400],
+                                borderRadius: BorderRadius.circular(400),
+                              ),
+
+                            ),
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.width/30,
+                            left: MediaQuery.of(context).size.width/15,
+                            child: Container(
+                              height: MediaQuery.of(context).size.width/2.7,
+                              width: MediaQuery.of(context).size.width/1.5,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                )
 
               ],
             )
