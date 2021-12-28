@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_parallax/HomePageElements/IconPalette.dart';
+import 'package:flutter_parallax/HomePageElements/ProfileTile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -200,12 +201,58 @@ class _MyHomePageState extends State<MyHomePage> {
                                 height: MediaQuery.of(context).size.width/3.55,
                                 width: MediaQuery.of(context).size.width/2,
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
                                   borderRadius: BorderRadius.circular(20),
+                                ),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: Image.network(
+                                  "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                  fit: BoxFit.cover,
                                 ),
 
                               ),
-                            )
+                            ),
+                            ProfileTile(
+                              top: MediaQuery.of(context).size.width/35,
+                              left: MediaQuery.of(context).size.width/45,
+                              title: "Students of Bennett University ",
+                              subtitle: "Under Prof Aryan",
+                              factor: MediaQuery.of(context).size.width/1300,
+                            ),
+                            ProfileTile(
+                              top: MediaQuery.of(context).size.width/4,
+                              left: MediaQuery.of(context).size.width/2.1,
+                              title: "Students of Bennett University ",
+                              subtitle: "Under Prof Aryan",
+                              factor: MediaQuery.of(context).size.width/1300,
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.width/10,
+                              right: MediaQuery.of(context).size.width/15,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      "Project Showcase",
+                                    style: GoogleFonts.nunito(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: MediaQuery.of(context).size.height/25,
+                                    ),
+                                  ),
+                                  SizedBox(height: 15,),
+                                  Container(
+                                    width: 250,
+                                    child: Text(
+                                      "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                      style: GoogleFonts.nunito(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black54,
+                                        fontSize: MediaQuery.of(context).size.height/52,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         );
                       }
@@ -236,17 +283,67 @@ class _MyHomePageState extends State<MyHomePage> {
                                   color: Colors.red,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: Image.network(
+                                  "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                  fit: BoxFit.cover,
+                                ),
+
 
                               ),
-                            )
+                            ),
+                            ProfileTile(
+                              top: MediaQuery.of(context).size.width/35,
+                              left: MediaQuery.of(context).size.width/45,
+                              title: "Students of Bennett University ",
+                              subtitle: "Under Prof Aryan",
+                              factor: MediaQuery.of(context).size.width/1000,
+                            ),
+                            ProfileTile(
+                              top: MediaQuery.of(context).size.width/4,
+                              left: MediaQuery.of(context).size.width/2.2,
+                              title: "Students of Bennett University ",
+                              subtitle: "Under Prof Aryan",
+                              factor: MediaQuery.of(context).size.width/1000,
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.width/10,
+                              right: 10,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Project Showcase",
+                                    style: GoogleFonts.nunito(
+                                        fontWeight: FontWeight.w800,
+                                      fontSize: MediaQuery.of(context).size.height/35,
+                                    ),
+                                  ),
+                                  SizedBox(height: 15,),
+                                  Container(
+                                    width: 250,
+                                    child: Text(
+                                      "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                      style: GoogleFonts.nunito(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.black54,
+                                        fontSize: MediaQuery.of(context).size.height/52,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         );
                       }
 
                       return Stack(
+                        alignment: Alignment.center,
                         clipBehavior: Clip.none,
                         children: [
                           Positioned(
+                            top: 0,
                             left: -100,
                             child: Container(
                               height: MediaQuery.of(context).size.width/2.3,
@@ -265,12 +362,60 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: MediaQuery.of(context).size.width/2.7,
                               width: MediaQuery.of(context).size.width/1.5,
                               decoration: BoxDecoration(
-                                color: Colors.red,
                                 borderRadius: BorderRadius.circular(20),
+                              ),
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: Image.network(
+                                "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                fit: BoxFit.cover,
                               ),
 
                             ),
-                          )
+                          ),
+                          ProfileTile(
+                            top: MediaQuery.of(context).size.width/20,
+                            left: MediaQuery.of(context).size.width/45,
+                            title: "Students of Bennett University ",
+                            subtitle: "Under Prof Aryan",
+                            factor: MediaQuery.of(context).size.width/700,
+                          ),
+                          ProfileTile(
+                            top: MediaQuery.of(context).size.width/3.15,
+                            left: MediaQuery.of(context).size.width/1.75,
+                            title: "Students of Bennett University ",
+                            subtitle: "Under Prof Aryan",
+                            factor: MediaQuery.of(context).size.width/700,
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.width/2,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Project Showcase",
+                                    style: GoogleFonts.nunito(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: MediaQuery.of(context).size.height/35,
+                                    ),
+                                  ),
+                                  SizedBox(height: 15,),
+                                  Container(
+                                    width: 250,
+                                    child: Text(
+                                      "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                      style: GoogleFonts.nunito(
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black54,
+                                        fontSize: MediaQuery.of(context).size.height/52,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     },
