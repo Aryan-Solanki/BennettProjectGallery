@@ -27,7 +27,7 @@ class _CardExpandAnimationState extends State<CardExpandAnimation> {
   void changer(bool a) {
     setState(() {
       if (a) {
-        height = 400;
+        height = 370;
         width = 700;
         color = Color(0xff004b93);
         border = BorderRadius.circular(40.0);
