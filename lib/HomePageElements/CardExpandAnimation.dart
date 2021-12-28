@@ -39,7 +39,7 @@ class _CardExpandAnimationState extends State<CardExpandAnimation> {
       } else {
         height = 370;
         width = 370;
-        color = Colors.red[700];
+        color = Color(0xff004b93);
         border = BorderRadius.circular(300.0);
       }
     });
