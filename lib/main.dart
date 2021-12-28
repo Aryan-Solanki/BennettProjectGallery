@@ -6,6 +6,8 @@ import 'package:flutter_parallax/HomePageElements/ProfileTile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import 'HomePageElements/CardExpandAnimation.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
@@ -170,16 +172,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: 40),
-                  height: 500,
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.white,
-                  child: ResponsiveBuilder(
-                    builder: (context, sizingInformation) {
-                      // Check the sizing information here and return your UI
-                      if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
-                        return Stack(
+                ResponsiveBuilder(
+                  builder: (context, sizingInformation) {
+                    // Check the sizing information here and return your UI
+                    if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                      return Container(
+                        padding: EdgeInsets.only(top: 40),
+                        height: MediaQuery.of(context).size.width/2.7,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Stack(
                           clipBehavior: Clip.none,
                           children: [
                             Positioned(
@@ -254,11 +256,17 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ],
-                        );
-                      }
+                        ),
+                      );
+                    }
 
-                      if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
-                        return Stack(
+                    if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+                      return Container(
+                        padding: EdgeInsets.only(top: 40),
+                        height: MediaQuery.of(context).size.width/2.4,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.white,
+                        child: Stack(
                           clipBehavior: Clip.none,
                           children: [
                             Positioned(
@@ -335,10 +343,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ],
-                        );
-                      }
+                        ),
+                      );
+                    }
 
-                      return Stack(
+                    return Container(
+                      padding: EdgeInsets.only(top: 40),
+                      height: MediaQuery.of(context).size.width/1.07,
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.white,
+                      child: Stack(
                         alignment: Alignment.center,
                         clipBehavior: Clip.none,
                         children: [
@@ -417,10 +431,45 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ],
-                      );
-                    },
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  color: Color(0xffffffff),
+                  width: double.infinity,
+                  // padding: EdgeInsets.only(top: 40),
+                  child: Column(
+                    children: [
+                      Text("Be in the Community",style: GoogleFonts.nunito(
+                          fontSize: MediaQuery.of(context).size.height/35,
+                          fontWeight: FontWeight.w700
+                      )),
+                      SizedBox(height: 5,),
+                      Text("Meet new people and get to learn from their Experience",style: GoogleFonts.nunito(
+                          fontSize: MediaQuery.of(context).size.height/52,
+                          fontWeight: FontWeight.w400
+                      )),
+                      SizedBox(height: 40,),
+                      ResponsiveBuilder(
+                        builder: (context, sizingInformation) {
+                          // Check the sizing information here and return your UI
+                          if (sizingInformation.deviceScreenType == DeviceScreenType.mobile) {
+                            return CardExpandAnimation(widdth: 1.2,left: false,imagelink: "https://www.bennett.edu.in/wp-content/uploads/2021/07/CSE-LAB-learning-technology.jpg",);
+                          }
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CardExpandAnimation(widdth: 2.1,left: true,imagelink: "https://www.bennett.edu.in/wp-content/uploads/2021/07/CSE-LAB-learning-technology.jpg",),
+                              SizedBox(width: 20,),
+                              CardExpandAnimation(widdth: 2.1,left: false,imagelink: "https://www.bennett.edu.in/wp-content/uploads/2021/07/MCE-LAB-Sharp-and-Innovative-Brains.jpg",),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                )
+                ),
 
               ],
             )
