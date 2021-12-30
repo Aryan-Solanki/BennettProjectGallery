@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'HomePageElements/CardExpandAnimation.dart';
+import 'HomePageElements/Footer.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -151,21 +152,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       },
                       style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40.0),
+                          side: BorderSide(color: Colors.black),
+                        ),
                         backgroundColor: Colors.white,
                         primary: Colors.black87,
                         padding: EdgeInsets.all(0.0),
+
                       ),
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(40),
-                          border: Border.all(color: Colors.grey[800])
-                        ),
                         child: Text(
                           "Explore More",
                           style: GoogleFonts.nunito(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w800
+                              fontSize: 12,
+                              fontWeight: FontWeight.w800
                           ),
                         ),
                       ),
@@ -436,6 +438,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 ),
                 Container(
+                  padding: EdgeInsets.only(bottom: 40),
                   color: Color(0xffffffff),
                   width: double.infinity,
                   // padding: EdgeInsets.only(top: 40),
@@ -470,6 +473,110 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
+
+                Container(
+                  height: 300,
+                  color: Color(0xff004b93),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Get Started Today",
+                        style: GoogleFonts.josefinSans(
+                          letterSpacing: 1.0,
+                          fontWeight: FontWeight.w500,
+                          fontSize: MediaQuery.of(context).size.height/25,
+                          color: Colors.white
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Text(
+                          "Project Showcase - For people who wants to learn from others",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.nunito(
+                              letterSpacing: 1.0,
+                              fontWeight: FontWeight.w600,
+                              fontSize: MediaQuery.of(context).size.height/45,
+                              color: Colors.white
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: (){
+
+                            },
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40.0),
+                              ),
+                              backgroundColor: Colors.white,
+                              primary: Colors.black87,
+                              padding: EdgeInsets.all(0.0),
+
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
+                              child: Text(
+                                "Start Now",
+                                style: GoogleFonts.nunito(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w800
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          TextButton(
+                            onPressed: (){
+
+                            },
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                                  side: BorderSide(color: Colors.white)
+                              ),
+                              backgroundColor: Colors.transparent,
+                              primary: Colors.black87,
+                              padding: EdgeInsets.all(0.0),
+
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 30,vertical: 8),
+                              child: Text(
+                                "Start Now",
+                                style: GoogleFonts.nunito(
+                                  color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w800
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  child: Footer(),
+                ),
+                Container(
+                  height: 30,
+                  color: Colors.white,
+                )
               ],
             )
           ],
