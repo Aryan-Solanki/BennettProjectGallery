@@ -75,6 +75,77 @@ class _MyHomePageState extends State<MyHomePage> {
             ParallaxWidget(top: rateFive, asset: "parallax1"),
             ParallaxWidget(top: rateSeven, asset: "parallax3"),
             ParallaxWidget(top: rateOne, asset: "parallax5"),
+            Positioned(
+              top: 100,
+              left: 50,
+              child: Text("Project Gallery\nFor Bennett University",
+                  style: GoogleFonts.nunito(
+                      fontSize: MediaQuery.of(context).size.height / 25,
+                      fontWeight: FontWeight.w700)),
+            ),
+            Positioned(
+              top: 200,
+              left: 50,
+              child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur\nvoluptatum laborum numquam blanditiis",
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.nunito(
+                      fontSize: MediaQuery.of(context).size.height / 45,
+                      fontWeight: FontWeight.w400)),
+            ),
+            Positioned(
+              top: 300,
+              left: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                      ),
+                      backgroundColor: Colors.white,
+                      primary: Colors.black87,
+                      padding: EdgeInsets.all(0.0),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 8),
+                      child: Text(
+                        "Start Now",
+                        style: GoogleFonts.nunito(
+                            fontSize: MediaQuery.of(context).size.height / 52, fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40.0),
+                          side: BorderSide(color: Colors.white)),
+                      backgroundColor: Colors.transparent,
+                      primary: Colors.black87,
+                      padding: EdgeInsets.all(0.0),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 8),
+                      child: Text(
+                        "Start Now",
+                        style: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.height / 52,
+                            fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             ListView(
               children: <Widget>[
                 Container(
@@ -692,6 +763,7 @@ class ParallaxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       top: top,
+      right: 0,
       child: Container(
         color: Colors.transparent,
         height: MediaQuery.of(context).size.height,
