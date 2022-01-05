@@ -5,11 +5,13 @@ class IconPalette extends StatelessWidget {
   final String title;
   final String text;
   final IconData icon;
+  final bool mobile;
 
-   IconPalette({
+  IconPalette({
     this.title,
-     this.text,
-     this.icon,
+    this.mobile,
+    this.text,
+    this.icon,
   });
 
   @override
@@ -17,23 +19,23 @@ class IconPalette extends StatelessWidget {
     return Container(
       width: 180,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: mobile==true?CrossAxisAlignment.end:CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(3),
+              padding: EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: Colors.grey[900],
-                borderRadius: BorderRadius.circular(6)
+                  color: Colors.grey[900],
+                  borderRadius: BorderRadius.circular(6)
               ),
               child: Icon(icon,size:MediaQuery.of(context).size.height/40,color: Colors.white,)
           ),
           SizedBox(height: 10,),
           Text(title,style: GoogleFonts.nunito(
-            fontSize: MediaQuery.of(context).size.height/45,
-            fontWeight: FontWeight.w800
+              fontSize: MediaQuery.of(context).size.height/45,
+              fontWeight: FontWeight.w800
           )),
           SizedBox(height: 10,),
-          Text(text,style: GoogleFonts.nunito(
+          Text(text,textAlign: mobile==true?TextAlign.right:TextAlign.left,style: GoogleFonts.nunito(
               fontSize: MediaQuery.of(context).size.height/52,
               fontWeight: FontWeight.w400,
               color:Colors.black54
@@ -42,7 +44,7 @@ class IconPalette extends StatelessWidget {
           TextButton(
               onPressed: (){},
               style: TextButton.styleFrom(
-                padding: EdgeInsets.zero
+                  padding: EdgeInsets.zero
               ),
               child: Text("Learn More...",style: GoogleFonts.nunito(
                   fontSize: MediaQuery.of(context).size.height/52,

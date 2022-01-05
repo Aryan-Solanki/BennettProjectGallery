@@ -179,6 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: Align(
                                     alignment: Alignment.centerRight,
                                     child: IconPalette(
+                                      mobile: true,
                                       icon: Icons.people_rounded,
                                       title: "Community",
                                       text:
