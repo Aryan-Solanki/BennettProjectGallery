@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ParallaxWidget(top: rateSeven, asset: "parallax3"),
             ParallaxWidget(top: rateOne, asset: "parallax5"),
             Positioned(
-              top: 100,
+              top: rateFour+250,
               left: 50,
               child: Text("Project Gallery\nFor Bennett University",
                   style: GoogleFonts.nunito(
@@ -84,16 +84,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontWeight: FontWeight.w700)),
             ),
             Positioned(
-              top: 200,
+              width: MediaQuery.of(context).size.width/3.5,
+              top: rateFour+350,
               left: 50,
-              child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur\nvoluptatum laborum numquam blanditiis",
+              child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequunturvoluptatum laborum numquam blanditiis",
                   textAlign: TextAlign.left,
                   style: GoogleFonts.nunito(
                       fontSize: MediaQuery.of(context).size.height / 45,
                       fontWeight: FontWeight.w400)),
             ),
             Positioned(
-              top: 300,
+              top: rateFour+450,
               left: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -102,10 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      backgroundColor: Colors.white,
-                      primary: Colors.black87,
+                      backgroundColor: Color(0xffa71932),
+                      primary: Colors.white,
                       padding: EdgeInsets.all(0.0),
                     ),
                     child: Container(
@@ -114,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "Start Now",
                         style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height / 52, fontWeight: FontWeight.w800),
+                            fontSize: MediaQuery.of(context).size.height / 42, fontWeight: FontWeight.w800),
                       ),
                     ),
                   ),
@@ -125,8 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40.0),
-                          side: BorderSide(color: Colors.white)),
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: BorderSide(color: Colors.black)),
                       backgroundColor: Colors.transparent,
                       primary: Colors.black87,
                       padding: EdgeInsets.all(0.0),
@@ -137,8 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "Start Now",
                         style: GoogleFonts.nunito(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.height / 52,
+                            color: Colors.black,
+                            fontSize: MediaQuery.of(context).size.height / 42,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
