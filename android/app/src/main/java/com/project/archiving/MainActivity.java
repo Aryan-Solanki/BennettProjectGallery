@@ -1,4 +1,4 @@
-package com.example.flutter_parallax;
+package com.project.archiving;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

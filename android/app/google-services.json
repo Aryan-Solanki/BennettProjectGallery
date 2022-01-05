@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "162710403477",
+    "project_id": "bennettprojectarchive",
+    "storage_bucket": "bennettprojectarchive.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162710403477:android:ad102b018e210c183c1e9c",
+        "android_client_info": {
+          "package_name": "com.project.archiving"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162710403477-c2vmqulpsjeeu3bc55lajcupollt9958.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMAtxvbcQ4dmWEcYgnrxan0CRuUq8U4D4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162710403477-c2vmqulpsjeeu3bc55lajcupollt9958.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

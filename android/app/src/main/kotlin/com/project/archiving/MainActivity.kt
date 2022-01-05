@@ -1,4 +1,4 @@
-package com.example.bennett_project_gallery
+package com.project.archiving
 
 import io.flutter.embedding.android.FlutterActivity
 
