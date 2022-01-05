@@ -518,7 +518,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   // padding: EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
-                      Text("\nBe in the Community",
+                      Text("\n\nBe in the Community",
                           style: GoogleFonts.nunito(
                               fontSize: MediaQuery.of(context).size.height / 35,
                               fontWeight: FontWeight.w700)),
