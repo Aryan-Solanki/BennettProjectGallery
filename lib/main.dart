@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: NotificationListener(
         onNotification: (v) {
           if (v is ScrollUpdateNotification) {
@@ -471,11 +472,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             factor: MediaQuery.of(context).size.width / 700,
                           ),
                           Positioned(
-                            top: MediaQuery.of(context).size.width / 2,
+                            top: MediaQuery.of(context).size.width / 1.85,
                             child: Align(
                               alignment: Alignment.center,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "Project Showcase",
@@ -492,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Container(
                                     width: 250,
                                     child: Text(
-                                      "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                      "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University",
                                       style: GoogleFonts.nunito(
                                         fontWeight: FontWeight.w400,
                                         color: Colors.black54,
@@ -518,7 +518,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   // padding: EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
-                      Text("Be in the Community",
+                      Text("\nBe in the Community",
                           style: GoogleFonts.nunito(
                               fontSize: MediaQuery.of(context).size.height / 35,
                               fontWeight: FontWeight.w700)),
@@ -527,11 +527,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Text(
                           "Meet new people and get to learn from their Experience",
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.nunito(
                               fontSize: MediaQuery.of(context).size.height / 52,
                               fontWeight: FontWeight.w400)),
                       SizedBox(
-                        height: 40,
+                        height: 50,
                       ),
                       ResponsiveBuilder(
                         builder: (context, sizingInformation) {
@@ -571,7 +572,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
-                  height: 300,
+                  height: 250,
                   color: Color(0xff004b93),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -581,7 +582,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: GoogleFonts.josefinSans(
                             letterSpacing: 1.0,
                             fontWeight: FontWeight.w500,
-                            fontSize: MediaQuery.of(context).size.height / 25,
+                            fontSize: MediaQuery.of(context).size.height / 35,
                             color: Colors.white),
                       ),
                       SizedBox(
@@ -595,7 +596,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: GoogleFonts.nunito(
                               letterSpacing: 1.0,
                               fontWeight: FontWeight.w600,
-                              fontSize: MediaQuery.of(context).size.height / 45,
+                              fontSize: MediaQuery.of(context).size.height / 52,
                               color: Colors.white),
                         ),
                       ),
@@ -621,7 +622,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Text(
                                 "Start Now",
                                 style: GoogleFonts.nunito(
-                                    fontSize: 12, fontWeight: FontWeight.w800),
+                                    fontSize: MediaQuery.of(context).size.height / 52, fontWeight: FontWeight.w800),
                               ),
                             ),
                           ),
@@ -645,7 +646,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "Start Now",
                                 style: GoogleFonts.nunito(
                                     color: Colors.white,
-                                    fontSize: 12,
+                                    fontSize: MediaQuery.of(context).size.height / 52,
                                     fontWeight: FontWeight.w800),
                               ),
                             ),
