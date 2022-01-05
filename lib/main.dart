@@ -99,30 +99,33 @@ class _MyHomePageState extends State<MyHomePage> {
                           // Check the sizing information here and return your UI
                           if (sizingInformation.deviceScreenType ==
                               DeviceScreenType.desktop) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconPalette(
-                                  icon: Icons.pie_chart_rounded,
-                                  title: "Projects Overview",
-                                  text:
-                                      "Watch and learn from the Projects made by Bennett Achievers",
-                                ),
-                                SizedBox(width: 20,),
-                                IconPalette(
-                                  icon: Icons.people_rounded,
-                                  title: "Community",
-                                  text:
-                                      "Get to know your fellow Bennatians and learn from their Projects",
-                                ),
-                                SizedBox(width: 20,),
-                                IconPalette(
-                                  icon: Icons.person_rounded,
-                                  title: "DashBoard",
-                                  text:
-                                      "Manage all your projects by tracking Activities in Dashboard",
-                                ),
-                              ],
+                            return Padding(
+                              padding:  EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconPalette(
+                                    icon: Icons.pie_chart_rounded,
+                                    title: "Projects Overview",
+                                    text:
+                                        "Watch and learn from the Projects made by Bennett Achievers",
+                                  ),
+                                  SizedBox(width: 20,),
+                                  IconPalette(
+                                    icon: Icons.people_rounded,
+                                    title: "Community",
+                                    text:
+                                        "Get to know your fellow Bennatians and learn from their Projects",
+                                  ),
+                                  SizedBox(width: 20,),
+                                  IconPalette(
+                                    icon: Icons.person_rounded,
+                                    title: "DashBoard",
+                                    text:
+                                        "Manage all your projects by tracking Activities in Dashboard",
+                                  ),
+                                ],
+                              ),
                             );
                           }
 
@@ -166,9 +169,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           return Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(left: 25, right: 25),
+                                padding: EdgeInsets.only(left: 25, right: 25,bottom: 20),
                                 child: Align(
-                                    alignment: Alignment.centerLeft,
+                                    alignment: Alignment.center,
                                     child: IconPalette(
                                       icon: Icons.pie_chart_rounded,
                                       title: "Projects Overview",
@@ -180,9 +183,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 padding:
                                     const EdgeInsets.only(left: 25, right: 25),
                                 child: Align(
-                                    alignment: Alignment.centerRight,
+                                    alignment: Alignment.center,
                                     child: IconPalette(
-                                      mobile: true,
+                                      // mobile: true,
                                       icon: Icons.people_rounded,
                                       title: "Community",
                                       text:
@@ -191,9 +194,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 25, right: 25),
+                                    const EdgeInsets.only(left: 25, right: 25,top: 20),
                                 child: Align(
-                                    alignment: Alignment.centerLeft,
+                                    alignment: Alignment.center,
                                     child: IconPalette(
                                       icon: Icons.person_rounded,
                                       title: "DashBoard",
