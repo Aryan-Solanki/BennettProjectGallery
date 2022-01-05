@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           if (sizingInformation.deviceScreenType ==
                               DeviceScreenType.desktop) {
                             return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconPalette(
                                   icon: Icons.pie_chart_rounded,
@@ -108,12 +108,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                   text:
                                       "Watch and learn from the Projects made by Bennett Achievers",
                                 ),
+                                SizedBox(width: 20,),
                                 IconPalette(
                                   icon: Icons.people_rounded,
                                   title: "Community",
                                   text:
                                       "Get to know your fellow Bennatians and learn from their Projects",
                                 ),
+                                SizedBox(width: 20,),
                                 IconPalette(
                                   icon: Icons.person_rounded,
                                   title: "DashBoard",
