@@ -1,3 +1,4 @@
+import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -69,9 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
           }
         },
         child: Stack(
+          clipBehavior: Clip.none,
           children: <Widget>[
+
             ParallaxWidget(top: rateZero, asset: "parallax0"),
-            ParallaxWidget(top: rateZero, asset: "parallax2"),
             ParallaxWidget(top: rateFive, asset: "parallax1"),
             ParallaxWidget(top: rateSeven, asset: "parallax3"),
             ParallaxWidget(top: rateOne, asset: "parallax5"),
@@ -79,27 +81,24 @@ class _MyHomePageState extends State<MyHomePage> {
               top: rateFour+250,
               left: 50,
               child: Text("Project Gallery\nFor Bennett University",
-                  style: GoogleFonts.nunito(
-                      fontSize: MediaQuery.of(context).size.height / 25,
-                      fontWeight: FontWeight.w700)),
+                  style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 50)),
             ),
             Positioned(
               width: MediaQuery.of(context).size.width/3.5,
-              top: rateFour+350,
+              top: rateFour+370,
               left: 50,
-              child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequunturvoluptatum laborum numquam blanditiis",
+              child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae",
                   textAlign: TextAlign.left,
-                  style: GoogleFonts.nunito(
-                      fontSize: MediaQuery.of(context).size.height / 45,
-                      fontWeight: FontWeight.w400)),
+                  style: TextStyle(color: Colors.black54,height: 1.5,fontFamily: "Metrisch-Medium",fontSize: 17,fontWeight: FontWeight.w100)),
             ),
             Positioned(
-              top: rateFour+450,
+              top: rateFour+470,
               left: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
+
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -742,7 +741,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.white,
                 )
               ],
-            )
+            ),
+
+            Positioned(top: 0,child: Header()),
           ],
         ),
       ),
