@@ -129,14 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
             //   ),
             // ),
             Positioned(
-              top: MediaQuery.of(context).size.height/3.5,
+              top: MediaQuery.of(context).size.height/3.5+rateOne,
               left: 50,
               child: Text("Project Gallery",
                   style: TextStyle(fontFamily: "Metrisch-ExtraBold",fontSize: 40)),
             ),
             Positioned(
               width: MediaQuery.of(context).size.width/3.5,
-              top: MediaQuery.of(context).size.height/2.8,
+              top: MediaQuery.of(context).size.height/2.8+rateOne,
               left: 50,
               child: Text("An intricate showcase of all the projects made by students of Bennett University",
                   textAlign: TextAlign.left,
