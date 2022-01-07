@@ -72,80 +72,84 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Stack(
           clipBehavior: Clip.none,
           children: <Widget>[
-
             ParallaxWidget(top: rateZero, asset: "parallax0"),
-            ParallaxWidget(top: rateFive, asset: "parallax1"),
-            ParallaxWidget(top: rateSeven, asset: "parallax3"),
-            ParallaxWidget(top: rateOne, asset: "parallax5"),
+            // Positioned(
+            //   top: rateFour+470,
+            //   left: 50,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       TextButton(
+            //
+            //         onPressed: () {},
+            //         style: TextButton.styleFrom(
+            //           shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(10.0),
+            //           ),
+            //           backgroundColor: Color(0xffa71932),
+            //           primary: Colors.white,
+            //           padding: EdgeInsets.all(0.0),
+            //         ),
+            //         child: Container(
+            //           padding: EdgeInsets.symmetric(
+            //               horizontal: 30, vertical: 8),
+            //           child: Text(
+            //             "Start Now",
+            //             style: GoogleFonts.nunito(
+            //                 fontSize: MediaQuery.of(context).size.height / 42, fontWeight: FontWeight.w800),
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         width: 20,
+            //       ),
+            //       TextButton(
+            //         onPressed: () {},
+            //         style: TextButton.styleFrom(
+            //           shape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(10.0),
+            //               side: BorderSide(color: Colors.black)),
+            //           backgroundColor: Colors.transparent,
+            //           primary: Colors.black87,
+            //           padding: EdgeInsets.all(0.0),
+            //         ),
+            //         child: Container(
+            //           padding: EdgeInsets.symmetric(
+            //               horizontal: 30, vertical: 8),
+            //           child: Text(
+            //             "Start Now",
+            //             style: GoogleFonts.nunito(
+            //                 color: Colors.black,
+            //                 fontSize: MediaQuery.of(context).size.height / 42,
+            //                 fontWeight: FontWeight.w800),
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Positioned(
-              top: rateFour+250,
+              top: MediaQuery.of(context).size.height/3.5,
               left: 50,
-              child: Text("Project Gallery\nFor Bennett University",
-                  style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 50)),
+              child: Text("Project Gallery",
+                  style: TextStyle(fontFamily: "Metrisch-ExtraBold",fontSize: 40)),
             ),
             Positioned(
               width: MediaQuery.of(context).size.width/3.5,
-              top: rateFour+370,
+              top: MediaQuery.of(context).size.height/2.8,
               left: 50,
-              child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae",
+              child: Text("An intricate showcase of all the projects made by students of Bennett University",
                   textAlign: TextAlign.left,
-                  style: TextStyle(color: Colors.black54,height: 1.5,fontFamily: "Metrisch-Medium",fontSize: 17,fontWeight: FontWeight.w100)),
+                  style: GoogleFonts.nunito(
+                      fontSize: MediaQuery.of(context).size.height / 45,
+                      fontWeight: FontWeight.w400)),
             ),
-            Positioned(
-              top: rateFour+470,
-              left: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
+            ParallaxWidget(top: 20, asset: "parallax2"),
+            ParallaxWidget(top: rateFive, asset: "parallax1"),
+            ParallaxWidget(top: rateSeven, asset: "parallax3"),
+            ParallaxWidget(top: rateOne, asset: "parallax5"),
 
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      backgroundColor: Color(0xffa71932),
-                      primary: Colors.white,
-                      padding: EdgeInsets.all(0.0),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 8),
-                      child: Text(
-                        "Start Now",
-                        style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height / 42, fontWeight: FontWeight.w800),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          side: BorderSide(color: Colors.black)),
-                      backgroundColor: Colors.transparent,
-                      primary: Colors.black87,
-                      padding: EdgeInsets.all(0.0),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 8),
-                      child: Text(
-                        "Start Now",
-                        style: GoogleFonts.nunito(
-                            color: Colors.black,
-                            fontSize: MediaQuery.of(context).size.height / 42,
-                            fontWeight: FontWeight.w800),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
             ListView(
               children: <Widget>[
                 Container(
@@ -743,7 +747,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
 
-            Positioned(top: 0,child: Header()),
+            Positioned(top: 0,child: Header(current: "Home",)),
           ],
         ),
       ),

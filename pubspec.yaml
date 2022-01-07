@@ -42,3 +42,6 @@ flutter:
     - family: Metrisch-Medium
       fonts:
         - asset: fonts/Metrisch-Medium.otf
+    - family: Metrisch-ExtraBold
+      fonts:
+        - asset: fonts/Metrisch-ExtraBold.otf
