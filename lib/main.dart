@@ -702,7 +702,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Text(
                                 "Start Now",
                                 style: GoogleFonts.nunito(
-                                    fontSize: MediaQuery.of(context).size.height / 52, fontWeight: FontWeight.w800),
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 52,
+                                    fontWeight: FontWeight.w800),
                               ),
                             ),
                           ),
@@ -726,7 +728,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "Start Now",
                                 style: GoogleFonts.nunito(
                                     color: Colors.white,
-                                    fontSize: MediaQuery.of(context).size.height / 52,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 52,
                                     fontWeight: FontWeight.w800),
                               ),
                             ),
@@ -740,10 +743,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   bottom: 0.0,
                   child: Footer(),
                 ),
-                Container(
-                  height: 30,
-                  color: Colors.white,
-                )
+                // Container(
+                //   height: 30,
+                //   color: Colors.white,
+                // )
               ],
             ),
 
