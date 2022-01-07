@@ -1,3 +1,4 @@
+import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -69,12 +70,86 @@ class _MyHomePageState extends State<MyHomePage> {
           }
         },
         child: Stack(
+          clipBehavior: Clip.none,
           children: <Widget>[
             ParallaxWidget(top: rateZero, asset: "parallax0"),
-            ParallaxWidget(top: rateZero, asset: "parallax2"),
+            // Positioned(
+            //   top: rateFour+470,
+            //   left: 50,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       TextButton(
+            //
+            //         onPressed: () {},
+            //         style: TextButton.styleFrom(
+            //           shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(10.0),
+            //           ),
+            //           backgroundColor: Color(0xffa71932),
+            //           primary: Colors.white,
+            //           padding: EdgeInsets.all(0.0),
+            //         ),
+            //         child: Container(
+            //           padding: EdgeInsets.symmetric(
+            //               horizontal: 30, vertical: 8),
+            //           child: Text(
+            //             "Start Now",
+            //             style: GoogleFonts.nunito(
+            //                 fontSize: MediaQuery.of(context).size.height / 42, fontWeight: FontWeight.w800),
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         width: 20,
+            //       ),
+            //       TextButton(
+            //         onPressed: () {},
+            //         style: TextButton.styleFrom(
+            //           shape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(10.0),
+            //               side: BorderSide(color: Colors.black)),
+            //           backgroundColor: Colors.transparent,
+            //           primary: Colors.black87,
+            //           padding: EdgeInsets.all(0.0),
+            //         ),
+            //         child: Container(
+            //           padding: EdgeInsets.symmetric(
+            //               horizontal: 30, vertical: 8),
+            //           child: Text(
+            //             "Start Now",
+            //             style: GoogleFonts.nunito(
+            //                 color: Colors.black,
+            //                 fontSize: MediaQuery.of(context).size.height / 42,
+            //                 fontWeight: FontWeight.w800),
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            Positioned(
+              top: MediaQuery.of(context).size.height/3.5,
+              left: 50,
+              child: Text("Project Gallery",
+                  style: TextStyle(fontFamily: "Metrisch-ExtraBold",fontSize: 40)),
+            ),
+            Positioned(
+              width: MediaQuery.of(context).size.width/3.5,
+              top: MediaQuery.of(context).size.height/2.8,
+              left: 50,
+              child: Text("An intricate showcase of all the projects made by students of Bennett University",
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.nunito(
+                      fontSize: MediaQuery.of(context).size.height / 45,
+                      fontWeight: FontWeight.w400)),
+            ),
+            ParallaxWidget(top: 20, asset: "parallax2"),
             ParallaxWidget(top: rateFive, asset: "parallax1"),
             ParallaxWidget(top: rateSeven, asset: "parallax3"),
             ParallaxWidget(top: rateOne, asset: "parallax5"),
+
+
             ListView(
               children: <Widget>[
                 Container(
@@ -99,28 +174,33 @@ class _MyHomePageState extends State<MyHomePage> {
                           // Check the sizing information here and return your UI
                           if (sizingInformation.deviceScreenType ==
                               DeviceScreenType.desktop) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                IconPalette(
-                                  icon: Icons.pie_chart_rounded,
-                                  title: "Projects Overview",
-                                  text:
-                                      "Watch and learn from the Projects made by Bennett Achievers",
-                                ),
-                                IconPalette(
-                                  icon: Icons.people_rounded,
-                                  title: "Community",
-                                  text:
-                                      "Get to know your fellow Bennatians and learn from their Projects",
-                                ),
-                                IconPalette(
-                                  icon: Icons.person_rounded,
-                                  title: "DashBoard",
-                                  text:
-                                      "Manage all your projects by tracking Activities in Dashboard",
-                                ),
-                              ],
+                            return Padding(
+                              padding:  EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconPalette(
+                                    icon: Icons.pie_chart_rounded,
+                                    title: "Projects Overview",
+                                    text:
+                                        "Watch and learn from the Projects made by Bennett Achievers",
+                                  ),
+                                  SizedBox(width: 20,),
+                                  IconPalette(
+                                    icon: Icons.people_rounded,
+                                    title: "Community",
+                                    text:
+                                        "Get to know your fellow Bennatians and learn from their Projects",
+                                  ),
+                                  SizedBox(width: 20,),
+                                  IconPalette(
+                                    icon: Icons.person_rounded,
+                                    title: "DashBoard",
+                                    text:
+                                        "Manage all your projects by tracking Activities in Dashboard",
+                                  ),
+                                ],
+                              ),
                             );
                           }
 
@@ -164,9 +244,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           return Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(left: 25, right: 25),
+                                padding: EdgeInsets.only(left: 25, right: 25,bottom: 20),
                                 child: Align(
-                                    alignment: Alignment.centerLeft,
+                                    alignment: Alignment.center,
                                     child: IconPalette(
                                       icon: Icons.pie_chart_rounded,
                                       title: "Projects Overview",
@@ -178,9 +258,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 padding:
                                     const EdgeInsets.only(left: 25, right: 25),
                                 child: Align(
-                                    alignment: Alignment.centerRight,
+                                    alignment: Alignment.center,
                                     child: IconPalette(
-                                      mobile: true,
+                                      // mobile: true,
                                       icon: Icons.people_rounded,
                                       title: "Community",
                                       text:
@@ -189,9 +269,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 25, right: 25),
+                                    const EdgeInsets.only(left: 25, right: 25,top: 20),
                                 child: Align(
-                                    alignment: Alignment.centerLeft,
+                                    alignment: Alignment.center,
                                     child: IconPalette(
                                       icon: Icons.person_rounded,
                                       title: "DashBoard",
@@ -668,7 +748,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 //   color: Colors.white,
                 // )
               ],
-            )
+            ),
+
+            Positioned(top: 0,child: Header(current: "Home",)),
           ],
         ),
       ),
@@ -690,6 +772,7 @@ class ParallaxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       top: top,
+      right: 0,
       child: Container(
         color: Colors.transparent,
         height: MediaQuery.of(context).size.height,

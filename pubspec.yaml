@@ -34,3 +34,14 @@ flutter:
     - family: Montserrat-Medium
       fonts:    
         - asset: fonts/Montserrat-Medium.ttf
+
+    - family: Metrisch-Bold
+      fonts:
+        - asset: fonts/Metrisch-Bold.otf
+
+    - family: Metrisch-Medium
+      fonts:
+        - asset: fonts/Metrisch-Medium.otf
+    - family: Metrisch-ExtraBold
+      fonts:
+        - asset: fonts/Metrisch-ExtraBold.otf
