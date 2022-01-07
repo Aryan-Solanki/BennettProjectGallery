@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double rateSix = 0;
   double rateSeven = 0;
   double rateEight = 90;
+  double rateFivepointFive = 0;
 
   String asset;
   double top;
@@ -60,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               rateEight -= v.scrollDelta / 1;
               rateSeven -= v.scrollDelta / 1.5;
               rateSix -= v.scrollDelta / 2;
+              rateFivepointFive -= v.scrollDelta / 2.25;
               rateFive -= v.scrollDelta / 2.5;
               rateFour -= v.scrollDelta / 3;
               rateThree -= v.scrollDelta / 3.5;
@@ -129,16 +131,18 @@ class _MyHomePageState extends State<MyHomePage> {
             //   ),
             // ),
             Positioned(
-              top: MediaQuery.of(context).size.height/3.5+rateSeven,
+              top: MediaQuery.of(context).size.height / 3.5 + rateFivepointFive,
               left: 50,
               child: Text("Project Gallery",
-                  style: TextStyle(fontFamily: "Metrisch-ExtraBold",fontSize: 40)),
+                  style: TextStyle(
+                      fontFamily: "Metrisch-ExtraBold", fontSize: 40)),
             ),
             Positioned(
-              width: MediaQuery.of(context).size.width/3.5,
-              top: MediaQuery.of(context).size.height/2.8+rateSeven,
+              width: MediaQuery.of(context).size.width / 3.5,
+              top: MediaQuery.of(context).size.height / 2.8 + rateFivepointFive,
               left: 50,
-              child: Text("An intricate showcase of all the projects made by students of Bennett University",
+              child: Text(
+                  "An intricate showcase of all the projects made by students of Bennett University",
                   textAlign: TextAlign.left,
                   style: GoogleFonts.nunito(
                       fontSize: MediaQuery.of(context).size.height / 45,
@@ -148,7 +152,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ParallaxWidget(top: rateFive, asset: "parallax1"),
             ParallaxWidget(top: rateSeven, asset: "parallax3"),
             ParallaxWidget(top: rateOne, asset: "parallax5"),
-
 
             ListView(
               children: <Widget>[
@@ -175,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           if (sizingInformation.deviceScreenType ==
                               DeviceScreenType.desktop) {
                             return Padding(
-                              padding:  EdgeInsets.only(bottom: 10),
+                              padding: EdgeInsets.only(bottom: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -185,14 +188,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                     text:
                                         "Watch and learn from the Projects made by Bennett Achievers",
                                   ),
-                                  SizedBox(width: 20,),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
                                   IconPalette(
                                     icon: Icons.people_rounded,
                                     title: "Community",
                                     text:
                                         "Get to know your fellow Bennatians and learn from their Projects",
                                   ),
-                                  SizedBox(width: 20,),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
                                   IconPalette(
                                     icon: Icons.person_rounded,
                                     title: "DashBoard",
@@ -244,7 +251,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           return Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(left: 25, right: 25,bottom: 20),
+                                padding: EdgeInsets.only(
+                                    left: 25, right: 25, bottom: 20),
                                 child: Align(
                                     alignment: Alignment.center,
                                     child: IconPalette(
@@ -268,8 +276,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     )),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 25, right: 25,top: 20),
+                                padding: const EdgeInsets.only(
+                                    left: 25, right: 25, top: 20),
                                 child: Align(
                                     alignment: Alignment.center,
                                     child: IconPalette(
@@ -750,7 +758,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
 
-            Positioned(top: 0,child: Header(current: "Home",)),
+            Positioned(
+                top: 0,
+                child: Header(
+                  current: "Home",
+                )),
           ],
         ),
       ),
