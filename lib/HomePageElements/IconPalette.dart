@@ -24,14 +24,14 @@ class _IconPaletteState extends State<IconPalette> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
       elevation: 8,
       child: TextButton(
         style: TextButton.styleFrom(
           // backgroundColor: Colors.red,
           padding: EdgeInsets.all(30),
           primary: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
         onPressed: (){
 
