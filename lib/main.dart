@@ -1,4 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -130,23 +132,72 @@ class _MyHomePageState extends State<MyHomePage> {
             //     ],
             //   ),
             // ),
-            Positioned(
-              top: MediaQuery.of(context).size.height / 3.5 + rateFivepointFive,
-              left: 50,
-              child: Text("Project Gallery",
-                  style: TextStyle(
-                      fontFamily: "Metrisch-ExtraBold", fontSize: 40)),
+            ResponsiveBuilder(
+              breakpoints: ScreenBreakpoints(
+                  tablet: 550,
+                  desktop: 750,
+                  watch: 300
+              ),
+              builder: (context, sizingInformation) {
+                // Check the sizing information here and return your UI
+                if (sizingInformation.deviceScreenType ==
+                    DeviceScreenType.desktop) {
+                  return Align(
+                    // top: MediaQuery.of(context).size.height / 3.5 + rateFivepointFive,
+                    // left: 50,
+                    alignment: Alignment(-0.91,-0.4+rateZero/15),
+                    // widthFactor: 0,
+                    // heightFactor: 10,
+                    child: Text("Project Gallery",
+                        style: TextStyle(
+                            fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.width / 33+5)),
+                  );
+                }
+
+                return Center();
+              },
             ),
-            Positioned(
-              width: MediaQuery.of(context).size.width / 3.5,
-              top: MediaQuery.of(context).size.height / 2.8 + rateFivepointFive,
-              left: 50,
-              child: Text(
-                  "An intricate showcase of all the projects made by students of Bennett University",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.nunito(
-                      fontSize: MediaQuery.of(context).size.height / 45,
-                      fontWeight: FontWeight.w400)),
+            ResponsiveBuilder(
+              breakpoints: ScreenBreakpoints(
+                  tablet: 550,
+                  desktop: 750,
+                  watch: 300
+              ),
+              builder: (context, sizingInformation) {
+                // Check the sizing information here and return your UI
+                if (sizingInformation.deviceScreenType ==
+                    DeviceScreenType.desktop) {
+                  return Align(
+                    alignment: Alignment(-0.91,-0.23+rateZero/15),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 4,
+                      child: DefaultTextStyle(
+                        style: TextStyle(
+                          height: 1.3,
+                          fontSize: 15,
+                            fontFamily: "Metrisch-Medium"),
+                        child: AnimatedTextKit(
+
+                          repeatForever: true,
+                          pause: Duration(milliseconds: 500),
+                          animatedTexts: [
+                            TypewriterAnimatedText('An intricate showcase of all the projects made by students of Bennett',speed: Duration(milliseconds: 100)),
+                            TypewriterAnimatedText(' all the projects made by students of Bennett',speed: Duration(milliseconds: 100)),
+                            TypewriterAnimatedText('An intricate showcase ofade by students of Bennett',speed: Duration(milliseconds: 100)),
+                            TypewriterAnimatedText('An indshuabf made by students of Bennett',speed: Duration(milliseconds: 100)),
+                          ],
+
+                          onTap: () {
+                            print("Tap Event");
+                          },
+                        ),
+                      ),
+                    ),
+                  );
+                }
+
+                return Center();
+              },
             ),
             ParallaxWidget(top: 20, asset: "parallax2"),
             ParallaxWidget(top: rateFive, asset: "parallax1"),
@@ -159,6 +210,62 @@ class _MyHomePageState extends State<MyHomePage> {
                   height: MediaQuery.of(context).size.height,
                   color: Colors.transparent,
                 ),
+                ResponsiveBuilder(
+                  breakpoints: ScreenBreakpoints(
+                      tablet: 550,
+                      desktop: 750,
+                      watch: 300
+                  ),
+                  builder: (context, sizingInformation) {
+                    // Check the sizing information here and return your UI
+                    if (sizingInformation.deviceScreenType !=
+                        DeviceScreenType.desktop) {
+                      return Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            color: Color(0xffffffff),
+                            width: double.infinity,
+                            padding: EdgeInsets.only(top: 40),
+                            child: Text("Project Gallery",
+                                style: TextStyle(
+                                    fontFamily: "Metrisch-ExtraBold", fontSize: 27)),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                            alignment: Alignment.center,
+                            color: Color(0xffffffff),
+                            width: double.infinity,
+                            child: DefaultTextStyle(
+                              style: TextStyle(
+                                  height: 1.3,
+                                  fontSize: 15,
+                                  fontFamily: "Metrisch-Medium"),
+                              child: AnimatedTextKit(
+
+                                repeatForever: true,
+                                pause: Duration(milliseconds: 500),
+                                animatedTexts: [
+                                  TypewriterAnimatedText('An intricate showcase of all the projects made by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
+                                  TypewriterAnimatedText(' all the projects made by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
+                                  TypewriterAnimatedText('An intricate showcase ofade by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
+                                  TypewriterAnimatedText('An indshuabf made by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
+                                ],
+
+                                onTap: () {
+                                  print("Tap Event");
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    }
+
+                    return Center();
+                  },
+                ),
+
                 Container(
                   color: Color(0xffffffff),
                   width: double.infinity,
@@ -166,13 +273,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     children: [
                       Text("How it works",
-                          style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height / 35,
-                              fontWeight: FontWeight.w700)),
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Bold", fontSize: 23)),
                       SizedBox(
                         height: 40,
                       ),
                       ResponsiveBuilder(
+                        breakpoints: ScreenBreakpoints(
+                            tablet: 550,
+                            desktop: 805,
+                            watch: 300
+                        ),
                         builder: (context, sizingInformation) {
                           // Check the sizing information here and return your UI
                           if (sizingInformation.deviceScreenType ==
@@ -215,36 +326,41 @@ class _MyHomePageState extends State<MyHomePage> {
                               DeviceScreenType.tablet) {
                             return Padding(
                               padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                              child: Column(
                                 children: [
-                                  IconPalette(
-                                    icon: Icons.pie_chart_rounded,
-                                    title: "Projects Overview",
-                                    text:
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      IconPalette(
+                                        icon: Icons.pie_chart_rounded,
+                                        title: "Projects Overview",
+                                        text:
                                         "Watch and learn from the Projects made by Bennett Achievers",
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  IconPalette(
-                                    icon: Icons.people_rounded,
-                                    title: "Community",
-                                    text:
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      IconPalette(
+                                        icon: Icons.people_rounded,
+                                        title: "Community",
+                                        text:
                                         "Get to know your fellow Bennatians and learn from their Projects",
+                                      ),
+
+                                    ],
                                   ),
                                   SizedBox(
-                                    width: 10,
+                                    height: 10,
                                   ),
                                   IconPalette(
                                     icon: Icons.person_rounded,
                                     title: "DashBoard",
                                     text:
-                                        "Manage all your projects by tracking Activities in Dashboard",
+                                    "Manage all your projects by tracking Activities in Dashboard",
                                   ),
                                 ],
-                              ),
+                              )
                             );
                           }
 

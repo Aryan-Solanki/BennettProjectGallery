@@ -50,23 +50,14 @@ class _IconPaletteState extends State<IconPalette> {
                   child: Icon(widget.icon,size:MediaQuery.of(context).size.height/40,color: Colors.white,)
               ),
               SizedBox(height: 10,),
-              Text(widget.title,style: GoogleFonts.nunito(
-                  fontSize: MediaQuery.of(context).size.height/45,
-                  fontWeight: FontWeight.w800,
-                color: Colors.black
-              )),
+              Text(widget.title,style: TextStyle(
+                  fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/45,color: Colors.black)),
               SizedBox(height: 10,),
-              Text(widget.text,textAlign: widget.mobile==true?TextAlign.right:TextAlign.left,style: GoogleFonts.nunito(
-                  fontSize: MediaQuery.of(context).size.height/52,
-                  fontWeight: FontWeight.w400,
-                  color:Colors.black54
-              )),
-              SizedBox(height: 2,),
-              Text("Learn More...",style: GoogleFonts.nunito(
-                  fontSize: MediaQuery.of(context).size.height/52,
-                  fontWeight: FontWeight.w800,
-                  color:Colors.black
-              )),
+              Text(widget.text,textAlign: widget.mobile==true?TextAlign.right:TextAlign.left,style: TextStyle(
+                  fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/52,color: Colors.black54)),
+              SizedBox(height: 10,),
+              Text("Learn More...",style: TextStyle(
+                  fontFamily: "Metrisch-Bold",height: 1.3, fontSize: MediaQuery.of(context).size.height/52,color: Colors.black)),
               Container(
                 height: 1.5,
                 width: 80,
