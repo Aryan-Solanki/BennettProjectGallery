@@ -16,6 +16,7 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color:Colors.white.withOpacity(0.7),
       borderOnForeground: true,
       elevation: 3,
       margin: EdgeInsets.zero,
@@ -32,7 +33,7 @@ class _HeaderState extends State<Header> {
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 20,),
               width: MediaQuery.of(context).size.width,
-              color: Colors.white,
+              color: Colors.white.withOpacity(0.7),
               height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +63,7 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Home"?Colors.black:hover=="Home"?Colors.black26:Colors.white,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Home"?Colors.black:hover=="Home"?Colors.black26:Colors.transparent,),),
                           ),
                           child: Text("Home",style: TextStyle(color: Colors.black,fontFamily: "Metrisch-Bold"),)
                       )
@@ -96,7 +97,7 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="About"?Colors.black:hover=="About"?Colors.black26:Colors.white,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="About"?Colors.black:hover=="About"?Colors.black26:Colors.transparent,),),
                           ),
                           child: Text("About",style: TextStyle(color: Colors.black,fontFamily: "Metrisch-Bold"),)
                       )
@@ -130,7 +131,7 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Project Gallery"?Colors.black:hover=="Project Gallery"?Colors.black26:Colors.white,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Project Gallery"?Colors.black:hover=="Project Gallery"?Colors.black26:Colors.transparent,),),
                           ),
                           child: Text("Project Gallery",style: TextStyle(color: Colors.black,fontFamily: "Metrisch-Bold"),)
                       )
@@ -164,7 +165,7 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Achievers"?Colors.black:hover=="Achievers"?Colors.black26:Colors.white,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Achievers"?Colors.black:hover=="Achievers"?Colors.black26:Colors.transparent,),),
                           ),
                           child: Text("Achievers",style: TextStyle(color: Colors.black,fontFamily: "Metrisch-Bold"),)
                       )
@@ -198,7 +199,7 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Times of Bennett"?Colors.black:hover=="Times of Bennett"?Colors.black26:Colors.white,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Times of Bennett"?Colors.black:hover=="Times of Bennett"?Colors.black26:Colors.transparent,),),
                           ),
                           child: Text("Times of Bennett",style: TextStyle(color: Colors.black,fontFamily: "Metrisch-Bold"),)
                       )
@@ -232,7 +233,7 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Video Gallery"?Colors.black:hover=="Video Gallery"?Colors.black26:Colors.white,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Video Gallery"?Colors.black:hover=="Video Gallery"?Colors.black26:Colors.transparent,),),
                           ),
                           child: Text("Video Gallery",style: TextStyle(color: Colors.black,fontFamily: "Metrisch-Bold"),)
                       )
@@ -266,7 +267,7 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Contact"?Colors.black:hover=="Contact"?Colors.black26:Colors.white,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Contact"?Colors.black:hover=="Contact"?Colors.black26:Colors.transparent,),),
                           ),
                           child: Text("Contact",style: TextStyle(color: Colors.black,fontFamily: "Metrisch-Bold"),)
                       )
