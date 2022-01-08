@@ -20,24 +20,40 @@ class IconPalette extends StatefulWidget {
   _IconPaletteState createState() => _IconPaletteState();
 }
 Color buttoncolor=Colors.black;
+double elev=0;
+Color col=Color(0xfff5f6fb);
 class _IconPaletteState extends State<IconPalette> {
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      elevation: 8,
+      elevation: elev,
       child: TextButton(
         style: TextButton.styleFrom(
-          // backgroundColor: Colors.red,
+          backgroundColor: col,
           padding: EdgeInsets.all(30),
-          primary: Colors.white,
+          primary: col,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         ),
         onPressed: (){
 
         },
+        onHover: (x){
+          if(x){
+            setState(() {
+              col=Colors.white;
+              elev=8;
+            });
+          }
+          else{
+            setState(() {
+              col=Color(0xfff5f6fb);
+              elev=0;
+            });
+          }
+        },
         child: Container(
-          width: 180,
+          width: 280,
           child: Column(
             crossAxisAlignment: widget.mobile==true?CrossAxisAlignment.end:CrossAxisAlignment.start,
             children: [
@@ -47,17 +63,17 @@ class _IconPaletteState extends State<IconPalette> {
                       color: Colors.grey[900],
                       borderRadius: BorderRadius.circular(6)
                   ),
-                  child: Icon(widget.icon,size:MediaQuery.of(context).size.height/40,color: Colors.white,)
+                  child: Icon(widget.icon,size:MediaQuery.of(context).size.height/30,color: Colors.white,)
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 20,),
               Text(widget.title,style: TextStyle(
-                  fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/45,color: Colors.black)),
-              SizedBox(height: 10,),
+                  fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/35,color: Colors.black)),
+              SizedBox(height: 20,),
               Text(widget.text,textAlign: widget.mobile==true?TextAlign.right:TextAlign.left,style: TextStyle(
-                  fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/52,color: Colors.black54)),
-              SizedBox(height: 10,),
+                  fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54)),
+              SizedBox(height: 20,),
               Text("Learn More...",style: TextStyle(
-                  fontFamily: "Metrisch-Bold",height: 1.3, fontSize: MediaQuery.of(context).size.height/52,color: Colors.black)),
+                  fontFamily: "Metrisch-Bold",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black)),
               Container(
                 height: 1.5,
                 width: 80,

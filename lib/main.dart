@@ -267,21 +267,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
                 Container(
-                  color: Color(0xffffffff),
+                  color: Color(0xfff5f6fb),
                   width: double.infinity,
                   padding: EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
                       Text("How it works",
                           style: TextStyle(
-                              fontFamily: "Metrisch-Bold", fontSize: 25)),
+                              fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
                       SizedBox(
                         height: 40,
                       ),
                       ResponsiveBuilder(
                         breakpoints: ScreenBreakpoints(
-                            tablet: 550,
-                            desktop: 805,
+                            tablet: 750,
+                            desktop: 1100,
                             watch: 300
                         ),
                         builder: (context, sizingInformation) {
@@ -506,7 +506,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Text(
                                     "Project Showcase",
                                     style: TextStyle(
-                                        fontFamily: "Metrisch-Bold", fontSize: 25),
+                                        fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),
                                   ),
                                   SizedBox(
                                     height: 15,
@@ -516,7 +516,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
                                       style: TextStyle(
-                                          fontFamily: "Metrisch-Medium", color: Colors.black54,height: 1.3,fontSize:MediaQuery.of(context).size.height / 52),
+                                          fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
                                     ),
                                   )
                                 ],
@@ -588,12 +588,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   Text(
                                     "Project Showcase",
-                                    style: GoogleFonts.nunito(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              35,
-                                    ),
+                                    style: TextStyle(
+                                        fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),
                                   ),
                                   SizedBox(
                                     height: 15,
@@ -602,13 +598,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     width: 250,
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
-                                      style: GoogleFonts.nunito(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black54,
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                52,
-                                      ),
+                                      style: TextStyle(
+                                          fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
                                     ),
                                   )
                                 ],
@@ -678,12 +669,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   Text(
                                     "Project Showcase",
-                                    style: GoogleFonts.nunito(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              35,
-                                    ),
+                                    style: TextStyle(
+                                        fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),
                                   ),
                                   SizedBox(
                                     height: 15,
@@ -692,13 +679,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     width: 250,
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University",
-                                      style: GoogleFonts.nunito(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black54,
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                52,
-                                      ),
+                                      style: TextStyle(
+                                          fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
                                     ),
                                   )
                                 ],
@@ -718,18 +700,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     children: [
                       Text("\n\nBe in the Community",
-                          style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height / 35,
-                              fontWeight: FontWeight.w700)),
+                          style:TextStyle(
+                              fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
                       SizedBox(
                         height: 5,
                       ),
                       Text(
                           "Meet new people and get to learn from their Experience",
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height / 52,
-                              fontWeight: FontWeight.w400)),
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54)),
                       SizedBox(
                         height: 50,
                       ),
