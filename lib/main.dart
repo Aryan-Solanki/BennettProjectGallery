@@ -410,34 +410,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: 40),
-                  color: Colors.white,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40.0),
-                          side: BorderSide(color: Colors.black),
-                        ),
-                        backgroundColor: Colors.white,
-                        primary: Colors.black87,
-                        padding: EdgeInsets.all(0.0),
-                      ),
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-                        child: Text(
-                          "Explore More",
-                          style: GoogleFonts.nunito(
-                              fontSize: 12, fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
                 ResponsiveBuilder(
                   builder: (context, sizingInformation) {
                     // Check the sizing information here and return your UI
