@@ -224,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Container(
                             alignment: Alignment.center,
-                            color: Color(0xffffffff),
+                            color: Color(0xfff5f6fb),
                             width: double.infinity,
                             padding: EdgeInsets.only(top: 40),
                             child: Text("Project Gallery",
@@ -234,7 +234,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
                             alignment: Alignment.center,
-                            color: Color(0xffffffff),
+                            color: Color(0xfff5f6fb),
                             width: double.infinity,
                             child: DefaultTextStyle(
                               style: TextStyle(
@@ -269,7 +269,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   color: Color(0xfff5f6fb),
                   width: double.infinity,
-                  padding: EdgeInsets.only(top: 40),
+                  padding: EdgeInsets.only(top: 40,bottom: 40),
                   child: Column(
                     children: [
                       Text("How it works",
