@@ -281,7 +281,7 @@ class _HeaderState extends State<Header> {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 20,),
             width: MediaQuery.of(context).size.width,
-            color: Colors.white,
+            color: Colors.white.withOpacity(0.7),
             height: 50,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,

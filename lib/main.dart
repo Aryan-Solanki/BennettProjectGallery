@@ -274,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Text("How it works",
                           style: TextStyle(
-                              fontFamily: "Metrisch-Bold", fontSize: 23)),
+                              fontFamily: "Metrisch-Bold", fontSize: 25)),
                       SizedBox(
                         height: 40,
                       ),
@@ -465,17 +465,21 @@ class _MyHomePageState extends State<MyHomePage> {
                             Positioned(
                               top: MediaQuery.of(context).size.width / 65,
                               left: MediaQuery.of(context).size.width / 15,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.width / 3.55,
-                                width: MediaQuery.of(context).size.width / 2,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                child: Image.network(
-                                  "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
-                                  fit: BoxFit.cover,
+                              child: Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                                elevation: 5,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.width / 3.55,
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  child: Image.network(
+                                    "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -501,12 +505,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   Text(
                                     "Project Showcase",
-                                    style: GoogleFonts.nunito(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              25,
-                                    ),
+                                    style: TextStyle(
+                                        fontFamily: "Metrisch-Bold", fontSize: 25),
                                   ),
                                   SizedBox(
                                     height: 15,
@@ -515,13 +515,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     width: 250,
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
-                                      style: GoogleFonts.nunito(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.black54,
-                                        fontSize:
-                                            MediaQuery.of(context).size.height /
-                                                52,
-                                      ),
+                                      style: TextStyle(
+                                          fontFamily: "Metrisch-Medium", color: Colors.black54,height: 1.3,fontSize:MediaQuery.of(context).size.height / 52),
                                     ),
                                   )
                                 ],
