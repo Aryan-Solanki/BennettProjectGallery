@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/cupertino.dart';
@@ -527,7 +528,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ],
                                       ),
                                     ],
-                                  )
+                                  ),
+                                  SizedBox(height: 20,),
+                                  GradientButton(),
                                 ],
                               ),
                             ),
