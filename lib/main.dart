@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
+import 'package:countup/countup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -383,6 +384,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 ResponsiveBuilder(
+                    breakpoints: ScreenBreakpoints(
+                        tablet: 550,
+                        desktop: 1100,
+                        watch: 300
+                    ),
                   builder: (context, sizingInformation) {
                     // Check the sizing information here and return your UI
                     if (sizingInformation.deviceScreenType ==
@@ -442,26 +448,85 @@ class _MyHomePageState extends State<MyHomePage> {
                               factor: MediaQuery.of(context).size.width / 1300,
                             ),
                             Positioned(
-                              top: MediaQuery.of(context).size.width / 10,
-                              right: MediaQuery.of(context).size.width / 15,
+                              width: MediaQuery.of(context).size.width / 3,
+                              top: MediaQuery.of(context).size.width / 20,
+                              right: MediaQuery.of(context).size.width / 23,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Project Showcase",
+                                    "Project Accomplished by Student of Bennett University",
                                     style: TextStyle(
+                                      height: 1.3,
                                         fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),
                                   ),
                                   SizedBox(
                                     height: 15,
                                   ),
                                   Container(
-                                    width: 250,
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
                                       style: TextStyle(
                                           fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
                                     ),
+                                  ),
+                                  SizedBox(height: 20,),
+                                  Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Countup(
+                                                softWrap: true,
+                                                begin: 0,
+                                                end: 270,
+                                                duration: Duration(seconds: 7),
+                                                style: TextStyle(
+                                                  color: Color(0xff004b93),
+                                                    height: 1.3,
+                                                    fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/15),
+                                              ),
+                                              SizedBox(width: 5,),
+                                              Text("+",style: TextStyle(
+                                                color: Colors.orange,
+                                                  height: 1.3,
+                                                  fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),)
+                                            ],
+                                          ),
+                                          Text("PROJECTS MADE",style: TextStyle(
+                                              fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/50,color: Colors.black),)
+                                        ],
+                                      ),
+                                      SizedBox(width: MediaQuery.of(context).size.height/13),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Countup(
+                                                softWrap: true,
+                                                begin: 0,
+                                                end: 90,
+                                                duration: Duration(seconds: 7),
+                                                style: TextStyle(
+                                                    color: Color(0xff004b93),
+                                                    height: 1.3,
+                                                    fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/15),
+                                              ),
+                                              SizedBox(width: 5,),
+                                              Text("+",style: TextStyle(
+                                                  color: Colors.orange,
+                                                  height: 1.3,
+                                                  fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),)
+                                            ],
+                                          ),
+                                          Text("ACHIEVEMENTS",style: TextStyle(
+                                              fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/50,color: Colors.black),)
+                                        ],
+                                      ),
+                                    ],
                                   )
                                 ],
                               ),

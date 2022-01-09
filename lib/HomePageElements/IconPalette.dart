@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'dart:ui' as ui;
 
 
 class IconPalette extends StatefulWidget {
@@ -88,10 +89,25 @@ class _IconPaletteState extends State<IconPalette> {
                         Container(
                             padding: EdgeInsets.all(3),
                             decoration: BoxDecoration(
-                                color: Colors.grey[900],
+                                color: col1,
                                 borderRadius: BorderRadius.circular(6)
                             ),
-                            child: Icon(Icons.pie_chart_rounded,size:MediaQuery.of(context).size.height/30,color: Colors.white,)
+                            child: Tab(
+                                height: 100,
+                                icon: ShaderMask(
+
+                                    blendMode: BlendMode.srcIn,
+                                    shaderCallback: (Rect bounds) {
+                                      return ui.Gradient.linear(
+                                        Offset(20.0, 30.0),
+                                        Offset(44.0, 40.0),
+                                        [
+                                          Colors.lightGreen,
+                                          Colors.deepOrange,
+                                        ],
+                                      );
+                                    },
+                                    child: Icon(Icons.pie_chart_rounded,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
                         ),
                         SizedBox(height: 20,),
                         Text("Projects Overview",style: TextStyle(
@@ -158,10 +174,25 @@ class _IconPaletteState extends State<IconPalette> {
                         Container(
                             padding: EdgeInsets.all(3),
                             decoration: BoxDecoration(
-                                color: Colors.grey[900],
+                                color: col2,
                                 borderRadius: BorderRadius.circular(6)
                             ),
-                            child: Icon(Icons.people_rounded,size:MediaQuery.of(context).size.height/30,color: Colors.white,)
+                            child: Tab(
+                                height: 100,
+                                icon: ShaderMask(
+
+                                    blendMode: BlendMode.srcIn,
+                                    shaderCallback: (Rect bounds) {
+                                      return ui.Gradient.linear(
+                                        Offset(20.0, 30.0),
+                                        Offset(44.0, 40.0),
+                                        [
+                                          Colors.lightGreen,
+                                          Colors.deepOrange,
+                                        ],
+                                      );
+                                    },
+                                    child: Icon(Icons.people_rounded,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
                         ),
                         SizedBox(height: 20,),
                         Text("Community",style: TextStyle(
@@ -228,10 +259,25 @@ class _IconPaletteState extends State<IconPalette> {
                         Container(
                             padding: EdgeInsets.all(3),
                             decoration: BoxDecoration(
-                                color: Colors.grey[900],
+                                color: col3,
                                 borderRadius: BorderRadius.circular(6)
                             ),
-                            child: Icon(Icons.person_rounded,size:MediaQuery.of(context).size.height/30,color: Colors.white,)
+                            child: Tab(
+                                height: 100,
+                                icon: ShaderMask(
+
+                                    blendMode: BlendMode.srcIn,
+                                    shaderCallback: (Rect bounds) {
+                                      return ui.Gradient.linear(
+                                        Offset(20.0, 30.0),
+                                        Offset(44.0, 40.0),
+                                        [
+                                          Colors.lightGreen,
+                                          Colors.deepOrange,
+                                        ],
+                                      );
+                                    },
+                                    child: Icon(Icons.person_rounded,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
                         ),
                         SizedBox(height: 20,),
                         Text("DashBoard",style: TextStyle(
@@ -276,10 +322,25 @@ class _IconPaletteState extends State<IconPalette> {
                   Container(
                       padding: EdgeInsets.all(3),
                       decoration: BoxDecoration(
-                          color: Colors.grey[900],
+                          // color: Colors.grey[900],
                           borderRadius: BorderRadius.circular(6)
                       ),
-                      child: Icon(widget.icon,size:MediaQuery.of(context).size.height/30,color: Colors.white,)
+                      child: Tab(
+                        height: 100,
+                          icon: ShaderMask(
+
+                          blendMode: BlendMode.srcIn,
+                          shaderCallback: (Rect bounds) {
+                            return ui.Gradient.linear(
+                              Offset(20.0, 30.0),
+                              Offset(44.0, 40.0),
+                              [
+                                Colors.lightGreen,
+                                Colors.deepOrange,
+                              ],
+                            );
+                          },
+                          child: Icon(widget.icon,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
                   ),
                   SizedBox(height: 20,),
                   Text(widget.title,style: TextStyle(
