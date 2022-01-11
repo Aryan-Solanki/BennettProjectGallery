@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:bennettprojectgallery/HomePageElements/BlueBanner.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:countup/countup.dart';
@@ -11,7 +12,7 @@ import 'package:bennettprojectgallery/HomePageElements/ProfileTile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'HomePageElements/CardExpandAnimation.dart';
+import 'HomePageElements/ZoomInImage.dart';
 import 'HomePageElements/Footer.dart';
 
 void main() {
@@ -277,9 +278,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text("How it works",
                           style: TextStyle(
                               fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
-                      SizedBox(
-                        height: 40,
+                      Container(
+                        width: 400,
+                        padding: EdgeInsets.only(top: 10,bottom: 40),
+                        child: Text(
+                          "We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                        ),
                       ),
+
                       ResponsiveBuilder(
                         breakpoints: ScreenBreakpoints(
                             tablet: 750,
@@ -468,7 +476,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
                                       style: TextStyle(
-                                          fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                          fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
                                     ),
                                   ),
                                   SizedBox(height: 20,),
@@ -485,7 +493,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 end: 270,
                                                 duration: Duration(seconds: 7),
                                                 style: TextStyle(
-                                                  color: Color(0xff004b93),
+                                                  color: Color(0xff101770),
                                                     height: 1.3,
                                                     fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/15),
                                               ),
@@ -512,7 +520,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 end: 90,
                                                 duration: Duration(seconds: 7),
                                                 style: TextStyle(
-                                                    color: Color(0xff004b93),
+                                                    color: Color(0xff101770),
                                                     height: 1.3,
                                                     fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/15),
                                               ),
@@ -611,7 +619,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
                                       style: TextStyle(
-                                          fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                          fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
                                     ),
                                   )
                                 ],
@@ -692,7 +700,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Text(
                                       "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University",
                                       style: TextStyle(
-                                          fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                          fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
                                     ),
                                   )
                                 ],
@@ -729,127 +737,27 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context, sizingInformation) {
                           // Check the sizing information here and return your UI
                           if (sizingInformation.deviceScreenType ==
-                              DeviceScreenType.mobile) {
-                            return CardExpandAnimation(
-                              widdth: 1.2,
-                              left: false,
-                              imagelink:
-                                  "https://www.bennett.edu.in/wp-content/uploads/2021/07/CSE-LAB-learning-technology.jpg",
+                              DeviceScreenType.desktop) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ZoomInImage(ImageLink: "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",),
+                                SizedBox(width: 40,),
+                                ZoomInImage(ImageLink:"https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1" ),
+                                SizedBox(width: 40,),
+                                ZoomInImage(ImageLink: "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
+                                SizedBox(width: 40,),
+                                ZoomInImage(ImageLink:"https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
+                              ],
                             );
                           }
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CardExpandAnimation(
-                                widdth: 2.1,
-                                left: true,
-                                imagelink:
-                                    "https://www.bennett.edu.in/wp-content/uploads/2021/07/CSE-LAB-learning-technology.jpg",
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              CardExpandAnimation(
-                                widdth: 2.1,
-                                left: false,
-                                imagelink:
-                                    "https://www.bennett.edu.in/wp-content/uploads/2021/07/MCE-LAB-Sharp-and-Innovative-Brains.jpg",
-                              ),
-                            ],
-                          );
+                          return ZoomInImage();
                         },
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  height: 250,
-                  color: Color(0xff004b93),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Get Started Today",
-                        style: GoogleFonts.josefinSans(
-                            letterSpacing: 1.0,
-                            fontWeight: FontWeight.w500,
-                            fontSize: MediaQuery.of(context).size.height / 35,
-                            color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          "Project Showcase - For people who wants to learn from others",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.nunito(
-                              letterSpacing: 1.0,
-                              fontWeight: FontWeight.w600,
-                              fontSize: MediaQuery.of(context).size.height / 52,
-                              color: Colors.white),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40.0),
-                              ),
-                              backgroundColor: Colors.white,
-                              primary: Colors.black87,
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 8),
-                              child: Text(
-                                "Start Now",
-                                style: GoogleFonts.nunito(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 52,
-                                    fontWeight: FontWeight.w800),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40.0),
-                                  side: BorderSide(color: Colors.white)),
-                              backgroundColor: Colors.transparent,
-                              primary: Colors.black87,
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 8),
-                              child: Text(
-                                "Start Now",
-                                style: GoogleFonts.nunito(
-                                    color: Colors.white,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 52,
-                                    fontWeight: FontWeight.w800),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                BlueBanner(),
                 Positioned(
                   bottom: 0.0,
                   child: Footer(),
