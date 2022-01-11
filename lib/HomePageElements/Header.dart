@@ -1,3 +1,5 @@
+import 'package:bennettprojectgallery/login.dart';
+import 'package:bennettprojectgallery/main.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -40,7 +42,7 @@ class _HeaderState extends State<Header> {
                 children: [
                   TextButton(
                       onPressed: (){
-
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
                       },
                       onHover: (x){
                         if(x){
@@ -244,7 +246,7 @@ class _HeaderState extends State<Header> {
                   ),
                   TextButton(
                       onPressed: (){
-
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
                       },
                       onHover: (x){
                         if(x){

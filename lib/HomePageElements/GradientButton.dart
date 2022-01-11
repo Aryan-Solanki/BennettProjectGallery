@@ -3,6 +3,11 @@ import 'package:flutter/animation.dart';
 
 class GradientButton extends StatefulWidget {
 
+  final double buttonwidth;
+  const GradientButton({
+    this.buttonwidth=180,
+  });
+
 
   @override
   _GradientButtonState createState() => _GradientButtonState();
@@ -53,7 +58,7 @@ class _GradientButtonState extends State<GradientButton> with TickerProviderStat
       ),
       child: AnimatedContainer(
         height: 50,
-        width: 180,
+        width: widget.buttonwidth,
         duration: Duration(milliseconds: 300),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
