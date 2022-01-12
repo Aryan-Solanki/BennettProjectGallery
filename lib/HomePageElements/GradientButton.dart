@@ -4,8 +4,10 @@ import 'package:flutter/animation.dart';
 class GradientButton extends StatefulWidget {
 
   final double buttonwidth;
+  final String title;
   const GradientButton({
     this.buttonwidth=180,
+    this.title="Explore More",
   });
 
 
@@ -72,7 +74,7 @@ class _GradientButtonState extends State<GradientButton> with TickerProviderStat
             horizontal: 30, vertical: 8),
         child: Center(
           child: Text(
-            "Explore More",
+            widget.title,
             style: TextStyle(color: Colors.white,
                 height: 1.3,
                 fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/40),

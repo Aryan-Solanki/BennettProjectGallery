@@ -1,16 +1,17 @@
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
+import 'package:bennettprojectgallery/SignUpElements/SignUpCard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUp extends StatefulWidget {
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
               DeviceScreenType.desktop) {
             return Column(
               children: [
-                Header(current: "Sign In",),
+                Header(current: "",),
                 SizedBox(height: 70,),
                 Container(
                   padding:  EdgeInsets.only(left: 20.0),
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                         clipBehavior: Clip.none,
                         children: [
                           Container( height: MediaQuery.of(context).size.height/1.4,child: Image(image:AssetImage("assets/loginpageimg.png"))),
-                          LoginCard(),
+                          SignUpCard(),
                         ],
                       )
 
@@ -110,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
 
           return Column(
             children: [
-              Header(current: "Sign In",),
+              Header(current: "",),
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
@@ -172,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                             ),
-                            LoginCard(),
+                            SignUpCard(),
                           ],
                         ),
 

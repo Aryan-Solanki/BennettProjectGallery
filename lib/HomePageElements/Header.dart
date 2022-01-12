@@ -251,7 +251,7 @@ class _HeaderState extends State<Header> {
                       onHover: (x){
                         if(x){
                           setState(() {
-                            hover="Login";
+                            hover="Sign In";
                           });
                         }
                         else{
@@ -269,9 +269,9 @@ class _HeaderState extends State<Header> {
                       child: Container(
                           padding: EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Login"?Colors.white:hover=="Login"?Colors.white60:Colors.transparent,),),
+                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Sign In"?Colors.white:hover=="Sign In"?Colors.white60:Colors.transparent,),),
                           ),
-                          child: Text("Login",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                       )
                   ),
 

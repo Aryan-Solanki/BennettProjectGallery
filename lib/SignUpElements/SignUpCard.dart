@@ -1,17 +1,18 @@
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
-import 'package:bennettprojectgallery/signup.dart';
 import 'package:flutter/material.dart';
 
-class LoginCard extends StatefulWidget {
+import '../login.dart';
+
+class SignUpCard extends StatefulWidget {
 
   @override
-  _LoginCardState createState() => _LoginCardState();
+  _SignUpCardState createState() => _SignUpCardState();
 }
 
-class _LoginCardState extends State<LoginCard> {
+class _SignUpCardState extends State<SignUpCard> {
   final myController = TextEditingController();
   bool Hoverforgotpass=false;
-  bool Hoverdonthaveaccnt=false;
+  bool Hoveralreadyhaveaccnt=false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -24,14 +25,14 @@ class _LoginCardState extends State<LoginCard> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Sign In",
+            Text("Sign Up",
                 style: TextStyle(
                     height: 1.3,
                     fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/25)),
             SizedBox(height: 15,),
             Container(
               child: Text(
-                "Please enter your credentials first.\nWo'nt be shared publicly.",
+                "Please enter your email first.\nVerification link will be send",
                 style: TextStyle(
                     fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black),
               ),
@@ -69,49 +70,14 @@ class _LoginCardState extends State<LoginCard> {
                 ),
               ),
             ),
-            SizedBox(height: 10,),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                padding: EdgeInsets.only(left: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  color: Colors.grey.shade200,
-                ),
-
-
-                height: 40,
-                child: TextField(
-                  style: TextStyle(
-
-                      fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
-                  onChanged: (value) {
-                    //Do something with the user input.
-                  },
-                  decoration: InputDecoration(
-
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(
-
-                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
-                    hintText: 'password',
-                    // contentPadding:
-                    // EdgeInsets.symmetric(horizontal: 20.0),
-                    // border: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    // ),
-                  ),
-                ),
-              ),
-            ),
             SizedBox(height: 15,),
-            Align(alignment: Alignment.center,child: GradientButton(title: "Sign In",buttonwidth: 300,)),
+            Align(alignment: Alignment.center,child: GradientButton(title: "Send Verification",buttonwidth: 300,)),
             SizedBox(height: 10,),
             Align(
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignUp()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
@@ -119,21 +85,21 @@ class _LoginCardState extends State<LoginCard> {
                 onHover: (x){
                   if(x){
                     setState(() {
-                      Hoverdonthaveaccnt=true;
+                      Hoveralreadyhaveaccnt=true;
                     });
                   }
                   else{
                     setState(() {
-                      Hoverdonthaveaccnt=false;
+                      Hoveralreadyhaveaccnt=false;
                     });
                   }
                 },
                 child: Container(
                   padding: EdgeInsets.only(bottom: 1),
                   decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1.0, color: Hoverdonthaveaccnt==true?Colors.black54:Colors.white),),
+                    border: Border(bottom: BorderSide(width: 1.0, color: Hoveralreadyhaveaccnt==true?Colors.black54:Colors.white),),
                   ),
-                  child: Text("Don't have a Account ?",
+                  child: Text("Already have an Account ?",
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: MediaQuery.of(context).size.height/50)),
                 ),
