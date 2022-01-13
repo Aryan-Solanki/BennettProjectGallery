@@ -289,13 +289,13 @@ class _HeaderState extends State<Header> {
             child: Column(
               children: [
                 mobilemenu==true?AnimatedContainer(
-                  height: 262,
-                  duration: Duration(seconds: 1),
+                  height: 272,
+                  duration: Duration(milliseconds: 600),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(height: 20,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
@@ -518,12 +518,12 @@ class _HeaderState extends State<Header> {
                   ),
                 ):AnimatedContainer(
                   height: 0,
-                  duration: Duration(seconds: 1),
+                  duration: Duration(milliseconds: 600),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(height: 20,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
