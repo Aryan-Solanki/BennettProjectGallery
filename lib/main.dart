@@ -80,61 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
           clipBehavior: Clip.none,
           children: <Widget>[
             ParallaxWidget(top: rateZero, asset: "parallax0"),
-            // Positioned(
-            //   top: rateFour+470,
-            //   left: 50,
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       TextButton(
-            //
-            //         onPressed: () {},
-            //         style: TextButton.styleFrom(
-            //           shape: RoundedRectangleBorder(
-            //             borderRadius: BorderRadius.circular(10.0),
-            //           ),
-            //           backgroundColor: Color(0xffa71932),
-            //           primary: Colors.white,
-            //           padding: EdgeInsets.all(0.0),
-            //         ),
-            //         child: Container(
-            //           padding: EdgeInsets.symmetric(
-            //               horizontal: 30, vertical: 8),
-            //           child: Text(
-            //             "Start Now",
-            //             style: GoogleFonts.nunito(
-            //                 fontSize: MediaQuery.of(context).size.height / 42, fontWeight: FontWeight.w800),
-            //           ),
-            //         ),
-            //       ),
-            //       SizedBox(
-            //         width: 20,
-            //       ),
-            //       TextButton(
-            //         onPressed: () {},
-            //         style: TextButton.styleFrom(
-            //           shape: RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.circular(10.0),
-            //               side: BorderSide(color: Colors.black)),
-            //           backgroundColor: Colors.transparent,
-            //           primary: Colors.black87,
-            //           padding: EdgeInsets.all(0.0),
-            //         ),
-            //         child: Container(
-            //           padding: EdgeInsets.symmetric(
-            //               horizontal: 30, vertical: 8),
-            //           child: Text(
-            //             "Start Now",
-            //             style: GoogleFonts.nunito(
-            //                 color: Colors.black,
-            //                 fontSize: MediaQuery.of(context).size.height / 42,
-            //                 fontWeight: FontWeight.w800),
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             ResponsiveBuilder(
               breakpoints: ScreenBreakpoints(
                   tablet: 550,

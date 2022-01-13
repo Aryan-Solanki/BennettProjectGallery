@@ -1,18 +1,16 @@
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
-import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:flutter/material.dart';
 
 import '../login.dart';
 
-class SignUpCard extends StatefulWidget {
+class ForgotPasswordCard extends StatefulWidget {
 
   @override
-  _SignUpCardState createState() => _SignUpCardState();
+  _ForgotPasswordCardState createState() => _ForgotPasswordCardState();
 }
 
-class _SignUpCardState extends State<SignUpCard> {
+class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
   final myController = TextEditingController();
-  bool Hoverforgotpass=false;
   bool Hoveralreadyhaveaccnt=false;
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,7 @@ class _SignUpCardState extends State<SignUpCard> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Sign Up",
+            Text("Forgot Password",
                 style: TextStyle(
                     height: 1.3,
                     fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/25)),
@@ -101,38 +99,6 @@ class _SignUpCardState extends State<SignUpCard> {
                     border: Border(bottom: BorderSide(width: 1.0, color: Hoveralreadyhaveaccnt==true?Colors.black54:Colors.white),),
                   ),
                   child: Text("Already have an Account ?",
-                      style: TextStyle(
-                          fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: MediaQuery.of(context).size.height/50)),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ForgotPassword()));
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                ),
-                onHover: (x){
-                  if(x){
-                    setState(() {
-                      Hoverforgotpass=true;
-                    });
-                  }
-                  else{
-                    setState(() {
-                      Hoverforgotpass=false;
-                    });
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 1),
-                  decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1.0, color: Hoverforgotpass==true?Colors.black54:Colors.white),),
-                  ),
-                  child: Text("Forgot Password",
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: MediaQuery.of(context).size.height/50)),
                 ),

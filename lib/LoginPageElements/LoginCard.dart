@@ -1,4 +1,5 @@
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
+import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -143,7 +144,7 @@ class _LoginCardState extends State<LoginCard> {
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: (){
-
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ForgotPassword()));
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
