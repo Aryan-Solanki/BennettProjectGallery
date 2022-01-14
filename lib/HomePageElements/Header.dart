@@ -1,6 +1,7 @@
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Header extends StatefulWidget {
@@ -289,12 +290,29 @@ class _HeaderState extends State<Header> {
             child: Column(
               children: [
                 mobilemenu==true?AnimatedContainer(
-                  height: 272,
+                  height: 335,
                   duration: Duration(milliseconds: 600),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FaIcon(FontAwesomeIcons.facebookF,size: 18,color: Colors.white,),
+                            SizedBox(width: 27,),
+                            FaIcon(FontAwesomeIcons.twitter,size: 18,color: Colors.white),
+                            SizedBox(width: 27,),
+                            FaIcon(FontAwesomeIcons.linkedinIn,size: 18,color: Colors.white),
+                          ],
+                        ),
+                        SizedBox(height: 20,),
+                        Container(
+                          color: Colors.white60,
+                          height: 1,
+                          width: 300,
+                        ),
                         SizedBox(height: 20,),
                         TextButton(
                             onPressed: (){
@@ -524,6 +542,23 @@ class _HeaderState extends State<Header> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FaIcon(FontAwesomeIcons.facebookF,size: 18,color: Colors.white,),
+                            SizedBox(width: 27,),
+                            FaIcon(FontAwesomeIcons.twitter,size: 18,color: Colors.white),
+                            SizedBox(width: 27,),
+                            FaIcon(FontAwesomeIcons.linkedinIn,size: 18,color: Colors.white),
+                          ],
+                        ),
+                        SizedBox(height: 20,),
+                        Container(
+                          color: Colors.white60,
+                          height: 1,
+                          width: 300,
+                        ),
+                        SizedBox(height: 20,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
@@ -747,7 +782,6 @@ class _HeaderState extends State<Header> {
                 ),
                 AnimatedContainer(
                   height: 50,
-
                   duration: Duration(seconds: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

@@ -160,19 +160,6 @@ class _SignUpState extends State<SignUp> {
                           clipBehavior: Clip.none,
                           children: [
                             Container( height: MediaQuery.of(context).size.height/1.2,child: Image(fit: BoxFit.cover,image:AssetImage("assets/loginpageimg.png"))),
-                            Positioned(
-                              bottom: 0,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FaIcon(FontAwesomeIcons.facebookF,size: 23,),
-                                  SizedBox(width: 27,),
-                                  FaIcon(FontAwesomeIcons.twitter,size: 23),
-                                  SizedBox(width: 27,),
-                                  FaIcon(FontAwesomeIcons.linkedinIn,size: 23),
-                                ],
-                              ),
-                            ),
                             SignUpCard(),
                           ],
                         ),
