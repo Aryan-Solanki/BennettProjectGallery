@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bennettprojectgallery/HomePageElements/BlueBanner.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
+import 'package:bennettprojectgallery/featuredprojects.dart';
 import 'package:countup/countup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:bennettprojectgallery/HomePageElements/IconPalette.dart';
 import 'package:bennettprojectgallery/HomePageElements/ProfileTile.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'HomePageElements/ZoomInImage.dart';
@@ -763,6 +765,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       BlueBanner(),
+                      FeaturedProjects(),
                       Positioned(
                         bottom: 0.0,
                         child: Footer(),

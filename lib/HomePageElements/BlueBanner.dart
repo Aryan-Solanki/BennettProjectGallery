@@ -71,8 +71,8 @@ class _BlueBannerState extends State<BlueBanner> {
                     ),
                   ),
                   Positioned(
+                    right: -35,
                     bottom: -35,
-                    left: -35,
                     child: Card(
                       elevation: 8,
                       child:  Container(
