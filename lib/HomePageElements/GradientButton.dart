@@ -2,54 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 
 class GradientButton extends StatefulWidget {
-
   final double buttonwidth;
   final String title;
+  final Function onPressed;
   const GradientButton({
-    this.buttonwidth=180,
-    this.title="Explore More",
+    this.buttonwidth = 180,
+    this.title = "Explore More",
+    this.onPressed,
   });
-
 
   @override
   _GradientButtonState createState() => _GradientButtonState();
 }
 
-
-
-Color col1=Colors.lightGreen.shade500;
-Color col2=Colors.deepOrange.shade800;
-List <Color> colors=[
+Color col1 = Colors.lightGreen.shade500;
+Color col2 = Colors.deepOrange.shade800;
+List<Color> colors = [
   col1,
   col2,
 ];
 
-
-class _GradientButtonState extends State<GradientButton> with TickerProviderStateMixin{
-
+class _GradientButtonState extends State<GradientButton>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onHover: (x){
-        if(x){
+      onHover: (x) {
+        if (x) {
           setState(() {
-            colors=[
+            colors = [
               col2,
               col1,
             ];
           });
-
-        }
-        else{
+        } else {
           setState(() {
-            colors=[
+            colors = [
               col1,
               col2,
             ];
           });
         }
       },
-      onPressed: () {},
+      onPressed: () {
+        widget.onPressed();
+      },
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0),
@@ -64,20 +61,20 @@ class _GradientButtonState extends State<GradientButton> with TickerProviderStat
         duration: Duration(milliseconds: 300),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          gradient:LinearGradient(
-            begin: const FractionalOffset(0.0, 0.0),
-            end: const FractionalOffset(1.0, 0.0),
-              colors: colors
-          ),
+          gradient: LinearGradient(
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.0, 0.0),
+              colors: colors),
         ),
-        padding: EdgeInsets.symmetric(
-            horizontal: 30, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
         child: Center(
           child: Text(
             widget.title,
-            style: TextStyle(color: Colors.white,
+            style: TextStyle(
+                color: Colors.white,
                 height: 1.3,
-                fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/40),
+                fontFamily: "Metrisch-Bold",
+                fontSize: MediaQuery.of(context).size.height / 40),
           ),
         ),
       ),
