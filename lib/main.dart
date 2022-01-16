@@ -62,9 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.white,
       body: NotificationListener(
         onNotification: (v) {
+
           if (v is ScrollUpdateNotification) {
+            if(v.metrics.axisDirection==AxisDirection.down || v.metrics.axisDirection==AxisDirection.up)
             //only if scroll update notification is triggered
             setState(() {
+              print(v.metrics.axisDirection);
               rateEight -= v.scrollDelta / 1;
               rateSeven -= v.scrollDelta / 1.5;
               rateSix -= v.scrollDelta / 2;
@@ -76,7 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
               rateOne -= v.scrollDelta / 4.5;
               rateZero -= v.scrollDelta / 50;
             });
+
           }
+
         },
         child: Column(
           children: [
