@@ -49,7 +49,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
        i=1;
        print(argumentcolor);
     }
-    
+
 
 
     return Card(

@@ -1,319 +1,379 @@
+import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class Footer extends StatelessWidget {
+class Footer extends StatefulWidget {
 
+  @override
+  _FooterState createState() => _FooterState();
+}
+
+class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      height: 250,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/footerimg.png"),
+            fit: BoxFit.cover
+        ),
+        color: Color(0xfff5f6fb),
+      ),
+
+      height: 700,
       width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ResponsiveBuilder(
-            builder: (context, sizingInformation) {
-              // Check the sizing information here and return your UI
-              if (sizingInformation.deviceScreenType == DeviceScreenType.mobile) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Resources",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/45,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Resources",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/45,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Resources",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/45,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          child: Text("About",style: GoogleFonts.nunito(
-                              fontSize: MediaQuery.of(context).size.height/55,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500
-                          )),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              }
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Padding(
+        padding:EdgeInsets.only(top: 300,left: MediaQuery.of(context).size.width/20,right: MediaQuery.of(context).size.width/20),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Expanded(
+              child: Column(
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("Resources",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/45,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800
-                        )),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                        SizedBox(height: 65,),
+                          Container(
+                            width: 270,
+                            child: Text("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur voluptatum.",style: TextStyle(
+                                fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                          ),
+                          SizedBox(height: 20,),
+                          Row(
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  shape: BoxShape.circle,
+
+                                ),
+                                child: Center(child: FaIcon(FontAwesomeIcons.twitter,color: Colors.white,size: 10,)),
+                              ),
+                              SizedBox(width: 8,),
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  shape: BoxShape.circle,
+
+                                ),
+                                child: Center(child: FaIcon(FontAwesomeIcons.twitter,color: Colors.white,size: 10,)),
+                              ),
+                              SizedBox(width: 8,),
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  shape: BoxShape.circle,
+
+                                ),
+                                child: Center(child: FaIcon(FontAwesomeIcons.twitter,color: Colors.white,size: 10,)),
+                              ),
+                              SizedBox(width: 8,),
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  shape: BoxShape.circle,
+
+                                ),
+                                child: Center(child: FaIcon(FontAwesomeIcons.twitter,color: Colors.white,size: 10,)),
+                              ),
+                              SizedBox(width: 8,),
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  shape: BoxShape.circle,
+
+                                ),
+                                child: Center(child: FaIcon(FontAwesomeIcons.twitter,color: Colors.white,size: 10,)),
+                              ),
+
+                            ],
+                          )
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              "Services",
+                              style: TextStyle(
+                                  fontFamily: "Metrisch-Bold",height: 1.8,fontSize: MediaQuery.of(context).size.height/33,color: Colors.white)
+                          ),
+                          SizedBox(height: 30,),
+                          InkWell(
+                            onHover: (x){
+                              if(x){
+                                setState(() {
+
+                                });
+
+                              }
+                              else{
+                                setState(() {
+
+                                });
+                              }
+                            },
+                            child: Text("Search Engine Marketing",style: TextStyle(
+                                fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                          ),
+                          InkWell(
+                            onHover: (x){
+                              if(x){
+                                setState(() {
+
+                                });
+
+                              }
+                              else{
+                                setState(() {
+
+                                });
+                              }
+                            },
+                            child: Text("Search Engine Marketing",style: TextStyle(
+                                fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                          ),
+                          InkWell(
+                            onHover: (x){
+                              if(x){
+                                setState(() {
+
+                                });
+
+                              }
+                              else{
+                                setState(() {
+
+                                });
+                              }
+                            },
+                            child: Text("Search Engine Marketing",style: TextStyle(
+                                fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                          ),
+                          InkWell(
+                            onHover: (x){
+                              if(x){
+                                setState(() {
+
+                                });
+
+                              }
+                              else{
+                                setState(() {
+
+                                });
+                              }
+                            },
+                            child: Text("Search Engine Marketing",style: TextStyle(
+                                fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                          ),
+                          InkWell(
+                            onHover: (x){
+                              if(x){
+                                setState(() {
+
+                                });
+
+                              }
+                              else{
+                                setState(() {
+
+                                });
+                              }
+                            },
+                            child: Text("Search Engine Marketing",style: TextStyle(
+                                fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                          ),
+                        ],
+
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
+                      Container(
+                        width: 250,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "Contacts",
+                                style: TextStyle(
+                                    fontFamily: "Metrisch-Bold",height: 1.8,fontSize: MediaQuery.of(context).size.height/33,color: Colors.white)
+                            ),
+                            SizedBox(height: 30,),
+                            InkWell(
+                              onHover: (x){
+                                if(x){
+                                  setState(() {
+
+                                  });
+
+                                }
+                                else{
+                                  setState(() {
+
+                                  });
+                                }
+                              },
+                              child: Text("Adress: 27 Division St, New York, NY 10002, United States of America",style: TextStyle(
+                                  fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                            ),
+                            InkWell(
+                              onHover: (x){
+                                if(x){
+                                  setState(() {
+
+                                  });
+
+                                }
+                                else{
+                                  setState(() {
+
+                                  });
+                                }
+                              },
+                              child: Text("Website: seofy.com",style: TextStyle(
+                                  fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                            ),
+                            InkWell(
+                              onHover: (x){
+                                if(x){
+                                  setState(() {
+
+                                  });
+
+                                }
+                                else{
+                                  setState(() {
+
+                                  });
+                                }
+                              },
+                              child: Text("Email: seofy@mail.com",style: TextStyle(
+                                  fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                            ),
+                            InkWell(
+                              onHover: (x){
+                                if(x){
+                                  setState(() {
+
+                                  });
+
+                                }
+                                else{
+                                  setState(() {
+
+                                  });
+                                }
+                              },
+                              child: Text("Phone: +91 92385 78339",style: TextStyle(
+                                  fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/46,color: Colors.white)),
+                            ),
+                          ],
+
+                        ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              "Updates",
+                              style: TextStyle(
+                                  fontFamily: "Metrisch-Bold",height: 1.8,fontSize: MediaQuery.of(context).size.height/33,color: Colors.white)
+                          ),
+                          SizedBox(height: 30,),
+                          Container(
+                            padding: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                              color: Colors.grey.shade200,
+                            ),
+
+
+                            height: 50,
+                            width: 200,
+                            child: TextField(
+                              style: TextStyle(
+
+                                  fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                              onChanged: (value) {
+                                //Do something with the user input.
+                              },
+                              decoration: InputDecoration(
+
+                                border: InputBorder.none,
+                                hintStyle: TextStyle(
+
+                                    fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                hintText: 'Enter Your Email *',
+                                // contentPadding:
+                                // EdgeInsets.symmetric(horizontal: 20.0),
+                                // border: OutlineInputBorder(
+                                //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                // ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15,),
+                          GradientButton(title: "Sign In",buttonwidth: 200,),
+
+                        ],
+                      )
                     ],
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  SizedBox(height: 100,),
+                  Container(
+                    height: 1,
+                    color: Colors.white24,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("Resources",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/45,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800
-                        )),
+                      Text(
+                        "Terms of use | Privacy Environmental Policy",style: TextStyle(
+                          fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/56,color: Colors.white)
+
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
+                      Text(
+                          "Copyright © 2021 Bennett University. All Rights Reserved.",style: TextStyle(
+                          fontFamily: "Metrisch-Medium",height: 1.8, fontSize: MediaQuery.of(context).size.height/56,color: Colors.white)
+
                       ),
                     ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("Resources",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/45,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("Resources",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/45,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w800
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Text("About",style: GoogleFonts.nunito(
-                            fontSize: MediaQuery.of(context).size.height/55,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500
-                        )),
-                      ),
-                    ],
-                  ),
+                  )
                 ],
-              );
-            },
-          ),
-          SizedBox(height: 40,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.copyright_rounded,color: Colors.black54,size: MediaQuery.of(context).size.height/45,),
-              SizedBox(width:5,),
-              Text("2020 all rights reserved",style: GoogleFonts.nunito(
-                color: Colors.black54,
-                  fontSize: MediaQuery.of(context).size.height/55,
-                  fontWeight: FontWeight.w500
-              )),
-            ],
-          )
-        ],
+              ),
+            ),
+            Positioned(
+              top: -40,
+              child: Image(
+                height: 90,
+                image: AssetImage("assets/logo1.png",),
+                fit: BoxFit.fill,
+              ),
+            ),
+
+          ],
+        ),
       ),
     );
   }
 }
+
