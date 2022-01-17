@@ -102,8 +102,8 @@ class _IconPaletteState extends State<IconPalette> {
                                         Offset(20.0, 30.0),
                                         Offset(44.0, 40.0),
                                         [
-                                          Colors.lightGreen,
-                                          Colors.deepOrange,
+                                          Colors.blue.shade400,
+                                          Colors.purple.shade800,
                                         ],
                                       );
                                     },
@@ -187,8 +187,8 @@ class _IconPaletteState extends State<IconPalette> {
                                         Offset(20.0, 30.0),
                                         Offset(44.0, 40.0),
                                         [
-                                          Colors.lightGreen,
-                                          Colors.deepOrange,
+                                          Colors.blue.shade400,
+                                          Colors.purple.shade800,
                                         ],
                                       );
                                     },
@@ -272,8 +272,8 @@ class _IconPaletteState extends State<IconPalette> {
                                         Offset(20.0, 30.0),
                                         Offset(44.0, 40.0),
                                         [
-                                          Colors.lightGreen,
-                                          Colors.deepOrange,
+                                          Colors.blue.shade400,
+                                          Colors.purple.shade800,
                                         ],
                                       );
                                     },
@@ -335,8 +335,8 @@ class _IconPaletteState extends State<IconPalette> {
                               Offset(20.0, 30.0),
                               Offset(44.0, 40.0),
                               [
-                                Colors.lightGreen,
-                                Colors.deepOrange,
+                                Colors.blue.shade400,
+                                Colors.purple.shade800,
                               ],
                             );
                           },

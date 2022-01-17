@@ -15,8 +15,8 @@ class GradientButton extends StatefulWidget {
   _GradientButtonState createState() => _GradientButtonState();
 }
 
-Color col1 = Colors.lightGreen.shade500;
-Color col2 = Colors.deepOrange.shade800;
+Color col1 = Colors.blue.shade400;
+Color col2 = Colors.purple.shade800;
 List<Color> colors = [
   col1,
   col2,
