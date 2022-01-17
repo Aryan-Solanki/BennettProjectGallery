@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 import '../login.dart';
 
 class SignUpCard extends StatefulWidget {
-
   @override
   _SignUpCardState createState() => _SignUpCardState();
 }
 
 class _SignUpCardState extends State<SignUpCard> {
   final myController = TextEditingController();
-  bool Hoverforgotpass=false;
-  bool Hoveralreadyhaveaccnt=false;
+  bool Hoverforgotpass = false;
+  bool Hoveralreadyhaveaccnt = false;
+  String emailId = "";
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 8,
       child: Container(
         padding: EdgeInsets.all(20),
-        width: MediaQuery.of(context).size.height/2.3,
-        height: MediaQuery.of(context).size.height/1.8,
+        width: MediaQuery.of(context).size.height / 2.3,
+        height: MediaQuery.of(context).size.height / 1.8,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,16 +29,24 @@ class _SignUpCardState extends State<SignUpCard> {
             Text("Sign Up",
                 style: TextStyle(
                     height: 1.3,
-                    fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/25)),
-            SizedBox(height: 15,),
+                    fontFamily: "Metrisch-ExtraBold",
+                    fontSize: MediaQuery.of(context).size.height / 25)),
+            SizedBox(
+              height: 15,
+            ),
             Container(
               child: Text(
                 "Please enter your email first.\nVerification link will be send",
                 style: TextStyle(
-                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black),
+                    fontFamily: "Metrisch-Medium",
+                    height: 1.3,
+                    fontSize: MediaQuery.of(context).size.height / 46,
+                    color: Colors.black),
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -50,17 +58,20 @@ class _SignUpCardState extends State<SignUpCard> {
                 height: 40,
                 child: TextField(
                   style: TextStyle(
-
-                      fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                      fontFamily: "Metrisch-Medium",
+                      height: 1.5,
+                      fontSize: MediaQuery.of(context).size.height / 46,
+                      color: Colors.black54),
                   onChanged: (value) {
-                    //Do something with the user input.
+                    emailId = value;
                   },
                   decoration: InputDecoration(
-
                     border: InputBorder.none,
                     hintStyle: TextStyle(
-
-                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                        fontFamily: "Metrisch-Medium",
+                        height: 1.5,
+                        fontSize: MediaQuery.of(context).size.height / 46,
+                        color: Colors.black54),
                     hintText: 'roll@bennett.edu.in',
                     // contentPadding:
                     // EdgeInsets.symmetric(horizontal: 20.0),
@@ -71,70 +82,96 @@ class _SignUpCardState extends State<SignUpCard> {
                 ),
               ),
             ),
-            SizedBox(height: 15,),
-            Align(alignment: Alignment.center,child: GradientButton(title: "Send Verification",buttonwidth: 300,)),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 15,
+            ),
+            Align(
+                alignment: Alignment.center,
+                child: GradientButton(
+                  title: "Send Verification",
+                  buttonwidth: 300,
+                  onPressed: () {},
+                )),
+            SizedBox(
+              height: 10,
+            ),
             Align(
               alignment: Alignment.center,
               child: TextButton(
-                onPressed: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
                 ),
-                onHover: (x){
-                  if(x){
+                onHover: (x) {
+                  if (x) {
                     setState(() {
-                      Hoveralreadyhaveaccnt=true;
+                      Hoveralreadyhaveaccnt = true;
                     });
-                  }
-                  else{
+                  } else {
                     setState(() {
-                      Hoveralreadyhaveaccnt=false;
+                      Hoveralreadyhaveaccnt = false;
                     });
                   }
                 },
                 child: Container(
                   padding: EdgeInsets.only(bottom: 1),
                   decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1.0, color: Hoveralreadyhaveaccnt==true?Colors.black54:Colors.white),),
+                    border: Border(
+                      bottom: BorderSide(
+                          width: 1.0,
+                          color: Hoveralreadyhaveaccnt == true
+                              ? Colors.black54
+                              : Colors.white),
+                    ),
                   ),
                   child: Text("Already have an Account ?",
                       style: TextStyle(
-                          fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: MediaQuery.of(context).size.height/50)),
+                          fontFamily: "Metrisch-Medium",
+                          color: Colors.black54,
+                          fontSize: MediaQuery.of(context).size.height / 50)),
                 ),
               ),
             ),
             Align(
               alignment: Alignment.center,
               child: TextButton(
-                onPressed: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ForgotPassword()));
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => ForgotPassword()));
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
                 ),
-                onHover: (x){
-                  if(x){
+                onHover: (x) {
+                  if (x) {
                     setState(() {
-                      Hoverforgotpass=true;
+                      Hoverforgotpass = true;
                     });
-                  }
-                  else{
+                  } else {
                     setState(() {
-                      Hoverforgotpass=false;
+                      Hoverforgotpass = false;
                     });
                   }
                 },
                 child: Container(
                   padding: EdgeInsets.only(bottom: 1),
                   decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1.0, color: Hoverforgotpass==true?Colors.black54:Colors.white),),
+                    border: Border(
+                      bottom: BorderSide(
+                          width: 1.0,
+                          color: Hoverforgotpass == true
+                              ? Colors.black54
+                              : Colors.white),
+                    ),
                   ),
                   child: Text("Forgot Password",
                       style: TextStyle(
-                          fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: MediaQuery.of(context).size.height/50)),
+                          fontFamily: "Metrisch-Medium",
+                          color: Colors.black54,
+                          fontSize: MediaQuery.of(context).size.height / 50)),
                 ),
               ),
             ),
