@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../login.dart';
 
@@ -14,6 +17,43 @@ class _SignUpCardState extends State<SignUpCard> {
   bool Hoverforgotpass = false;
   bool Hoveralreadyhaveaccnt = false;
   String emailId = "";
+  String password = "";
+  final auth = FirebaseAuth.instance;
+  Timer timer;
+  User user;
+  Future<void> checkEmailVerified() async {
+    user = auth.currentUser;
+    await user.reload();
+    if (user.emailVerified) {
+      // user.delete().then((value) => (){
+      //   auth.createUserWithEmailAndPassword(email: emailId, password: password).then((_){
+      //     print("User Successfully Verified")
+      //   });
+      // });
+      timer.cancel();
+      print("Email Verified");
+    }
+  }
+
+  createverifyUser() {
+    auth
+        .createUserWithEmailAndPassword(email: emailId, password: password)
+        .then((_) async {
+      user = FirebaseAuth.instance.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification().then((value) => () {
+              timer = Timer.periodic(Duration(seconds: 5), (timer) {
+                checkEmailVerified();
+              });
+            });
+      }
+      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+      //     builder: (context) => VerifyScreen()));
+    });
+  }
+
+  bool verificationSent = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -63,7 +103,8 @@ class _SignUpCardState extends State<SignUpCard> {
                       fontSize: MediaQuery.of(context).size.height / 46,
                       color: Colors.black54),
                   onChanged: (value) {
-                    emailId = value;
+                    emailId = value.trim();
+                    ;
                   },
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -83,6 +124,45 @@ class _SignUpCardState extends State<SignUpCard> {
               ),
             ),
             SizedBox(
+              height: 10,
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding: EdgeInsets.only(left: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  color: Colors.grey.shade200,
+                ),
+                height: 40,
+                child: TextField(
+                  obscureText: true,
+                  style: TextStyle(
+                      fontFamily: "Metrisch-Medium",
+                      height: 1.5,
+                      fontSize: MediaQuery.of(context).size.height / 46,
+                      color: Colors.black54),
+                  onChanged: (value) {
+                    password = value.trim();
+                  },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(
+                        fontFamily: "Metrisch-Medium",
+                        height: 1.5,
+                        fontSize: MediaQuery.of(context).size.height / 46,
+                        color: Colors.black54),
+                    hintText: 'password',
+                    // contentPadding:
+                    // EdgeInsets.symmetric(horizontal: 20.0),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    // ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
               height: 15,
             ),
             Align(
@@ -90,7 +170,14 @@ class _SignUpCardState extends State<SignUpCard> {
                 child: GradientButton(
                   title: "Send Verification",
                   buttonwidth: 300,
-                  onPressed: () {},
+                  onPressed: () async {
+                    setState(() {
+                      verificationSent = true;
+                    });
+                    createverifyUser();
+                    // UserCredential userCredential =
+                    //     await FirebaseAuth.instance.signInAnonymously();
+                  },
                 )),
             SizedBox(
               height: 10,
@@ -135,46 +222,50 @@ class _SignUpCardState extends State<SignUpCard> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => ForgotPassword()));
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                ),
-                onHover: (x) {
-                  if (x) {
-                    setState(() {
-                      Hoverforgotpass = true;
-                    });
-                  } else {
-                    setState(() {
-                      Hoverforgotpass = false;
-                    });
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 1),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                          width: 1.0,
-                          color: Hoverforgotpass == true
-                              ? Colors.black54
-                              : Colors.white),
+            verificationSent
+                ? Align(
+                    alignment: Alignment.center,
+                    child: TextButton(
+                      onPressed: () {
+                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        //     builder: (context) => ForgotPassword()));
+                        user.delete().then((value) => () {});
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                      ),
+                      onHover: (x) {
+                        if (x) {
+                          setState(() {
+                            Hoverforgotpass = true;
+                          });
+                        } else {
+                          setState(() {
+                            Hoverforgotpass = false;
+                          });
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(bottom: 1),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                                width: 1.0,
+                                color: Hoverforgotpass == true
+                                    ? Colors.black54
+                                    : Colors.white),
+                          ),
+                        ),
+                        child: Text("Resend Verification",
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Medium",
+                                color: Colors.black54,
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 50)),
+                      ),
                     ),
-                  ),
-                  child: Text("Forgot Password",
-                      style: TextStyle(
-                          fontFamily: "Metrisch-Medium",
-                          color: Colors.black54,
-                          fontSize: MediaQuery.of(context).size.height / 50)),
-                ),
-              ),
-            ),
+                  )
+                : Center(),
           ],
         ),
       ),
