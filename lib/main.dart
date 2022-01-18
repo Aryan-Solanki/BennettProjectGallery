@@ -4,6 +4,7 @@ import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/featuredprojects.dart';
 import 'package:countup/countup.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -17,8 +18,16 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'HomePageElements/ZoomInImage.dart';
 import 'HomePageElements/Footer.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyAEIYggOFQByKpPDY6b-lhqo-Z7YRiJpQ0",
+      appId: "1:162710403477:web:5905ae37bf1411843c1e9c",
+      messagingSenderId: "162710403477",
+      projectId: "bennettprojectarchive",
+    ),
+  );
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
       .then((_) {
     runApp(MyApp());
@@ -62,26 +71,24 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.white,
       body: NotificationListener(
         onNotification: (v) {
-
           if (v is ScrollUpdateNotification) {
-            if(v.metrics.axisDirection==AxisDirection.down || v.metrics.axisDirection==AxisDirection.up)
-            //only if scroll update notification is triggered
-            setState(() {
-              print(v.metrics.axisDirection);
-              rateEight -= v.scrollDelta / 1;
-              rateSeven -= v.scrollDelta / 1.5;
-              rateSix -= v.scrollDelta / 2;
-              rateFivepointFive -= v.scrollDelta / 2.25;
-              rateFive -= v.scrollDelta / 2.5;
-              rateFour -= v.scrollDelta / 3;
-              rateThree -= v.scrollDelta / 3.5;
-              rateTwo -= v.scrollDelta / 4;
-              rateOne -= v.scrollDelta / 4.5;
-              rateZero -= v.scrollDelta / 50;
-            });
-
+            if (v.metrics.axisDirection == AxisDirection.down ||
+                v.metrics.axisDirection == AxisDirection.up)
+              //only if scroll update notification is triggered
+              setState(() {
+                print(v.metrics.axisDirection);
+                rateEight -= v.scrollDelta / 1;
+                rateSeven -= v.scrollDelta / 1.5;
+                rateSix -= v.scrollDelta / 2;
+                rateFivepointFive -= v.scrollDelta / 2.25;
+                rateFive -= v.scrollDelta / 2.5;
+                rateFour -= v.scrollDelta / 3;
+                rateThree -= v.scrollDelta / 3.5;
+                rateTwo -= v.scrollDelta / 4;
+                rateOne -= v.scrollDelta / 4.5;
+                rateZero -= v.scrollDelta / 50;
+              });
           }
-
         },
         child: Column(
           children: [
@@ -149,10 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   // ),
                   ResponsiveBuilder(
                     breakpoints: ScreenBreakpoints(
-                        tablet: 550,
-                        desktop: 790,
-                        watch: 300
-                    ),
+                        tablet: 550, desktop: 790, watch: 300),
                     builder: (context, sizingInformation) {
                       // Check the sizing information here and return your UI
                       if (sizingInformation.deviceScreenType ==
@@ -160,12 +164,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         return Align(
                           // top: MediaQuery.of(context).size.height / 3.5 + rateFivepointFive,
                           // left: 50,
-                          alignment: Alignment(-0.91,-0.4+rateZero/15),
+                          alignment: Alignment(-0.91, -0.4 + rateZero / 15),
                           // widthFactor: 0,
                           // heightFactor: 10,
                           child: Text("Project Gallery",
                               style: TextStyle(
-                                  fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.width / 33+5)),
+                                  fontFamily: "Metrisch-ExtraBold",
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 33 +
+                                          5)),
                         );
                       }
 
@@ -174,34 +181,37 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   ResponsiveBuilder(
                     breakpoints: ScreenBreakpoints(
-                        tablet: 550,
-                        desktop: 790,
-                        watch: 300
-                    ),
+                        tablet: 550, desktop: 790, watch: 300),
                     builder: (context, sizingInformation) {
                       // Check the sizing information here and return your UI
                       if (sizingInformation.deviceScreenType ==
                           DeviceScreenType.desktop) {
                         return Align(
-                          alignment: Alignment(-0.91,-0.23+rateZero/15),
+                          alignment: Alignment(-0.91, -0.23 + rateZero / 15),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width / 4,
                             child: DefaultTextStyle(
                               style: TextStyle(
-                                height: 1.3,
-                                fontSize: 15,
+                                  height: 1.3,
+                                  fontSize: 15,
                                   fontFamily: "Metrisch-Medium"),
                               child: AnimatedTextKit(
-
                                 repeatForever: true,
                                 pause: Duration(milliseconds: 500),
                                 animatedTexts: [
-                                  TypewriterAnimatedText('An intricate showcase of all the projects made by students of Bennett',speed: Duration(milliseconds: 100)),
-                                  TypewriterAnimatedText(' all the projects made by students of Bennett',speed: Duration(milliseconds: 100)),
-                                  TypewriterAnimatedText('An intricate showcase ofade by students of Bennett',speed: Duration(milliseconds: 100)),
-                                  TypewriterAnimatedText('An indshuabf made by students of Bennett',speed: Duration(milliseconds: 100)),
+                                  TypewriterAnimatedText(
+                                      'An intricate showcase of all the projects made by students of Bennett',
+                                      speed: Duration(milliseconds: 100)),
+                                  TypewriterAnimatedText(
+                                      ' all the projects made by students of Bennett',
+                                      speed: Duration(milliseconds: 100)),
+                                  TypewriterAnimatedText(
+                                      'An intricate showcase ofade by students of Bennett',
+                                      speed: Duration(milliseconds: 100)),
+                                  TypewriterAnimatedText(
+                                      'An indshuabf made by students of Bennett',
+                                      speed: Duration(milliseconds: 100)),
                                 ],
-
                                 onTap: () {
                                   print("Tap Event");
                                 },
@@ -227,10 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       ResponsiveBuilder(
                         breakpoints: ScreenBreakpoints(
-                            tablet: 550,
-                            desktop: 790,
-                            watch: 300
-                        ),
+                            tablet: 550, desktop: 790, watch: 300),
                         builder: (context, sizingInformation) {
                           // Check the sizing information here and return your UI
                           if (sizingInformation.deviceScreenType !=
@@ -244,10 +251,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                   padding: EdgeInsets.only(top: 40),
                                   child: Text("Project Gallery",
                                       style: TextStyle(
-                                          fontFamily: "Metrisch-ExtraBold", fontSize: 27)),
+                                          fontFamily: "Metrisch-ExtraBold",
+                                          fontSize: 27)),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 20),
                                   alignment: Alignment.center,
                                   color: Color(0xfff5f6fb),
                                   width: double.infinity,
@@ -257,16 +266,26 @@ class _MyHomePageState extends State<MyHomePage> {
                                         fontSize: 15,
                                         fontFamily: "Metrisch-Medium"),
                                     child: AnimatedTextKit(
-
                                       repeatForever: true,
                                       pause: Duration(milliseconds: 500),
                                       animatedTexts: [
-                                        TypewriterAnimatedText('An intricate showcase of all the projects made by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
-                                        TypewriterAnimatedText(' all the projects made by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
-                                        TypewriterAnimatedText('An intricate showcase ofade by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
-                                        TypewriterAnimatedText('An indshuabf made by students of Bennett',textAlign: TextAlign.center,speed: Duration(milliseconds: 100)),
+                                        TypewriterAnimatedText(
+                                            'An intricate showcase of all the projects made by students of Bennett',
+                                            textAlign: TextAlign.center,
+                                            speed: Duration(milliseconds: 100)),
+                                        TypewriterAnimatedText(
+                                            ' all the projects made by students of Bennett',
+                                            textAlign: TextAlign.center,
+                                            speed: Duration(milliseconds: 100)),
+                                        TypewriterAnimatedText(
+                                            'An intricate showcase ofade by students of Bennett',
+                                            textAlign: TextAlign.center,
+                                            speed: Duration(milliseconds: 100)),
+                                        TypewriterAnimatedText(
+                                            'An indshuabf made by students of Bennett',
+                                            textAlign: TextAlign.center,
+                                            speed: Duration(milliseconds: 100)),
                                       ],
-
                                       onTap: () {
                                         print("Tap Event");
                                       },
@@ -284,28 +303,32 @@ class _MyHomePageState extends State<MyHomePage> {
                       Container(
                         color: Color(0xfff5f6fb),
                         width: double.infinity,
-                        padding: EdgeInsets.only(top: 40,bottom: 40),
+                        padding: EdgeInsets.only(top: 40, bottom: 40),
                         child: Column(
                           children: [
                             Text("How it works",
                                 style: TextStyle(
-                                    fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
+                                    fontFamily: "Metrisch-Bold",
+                                    fontSize:
+                                        MediaQuery.of(context).size.height /
+                                            25)),
                             Container(
                               width: 400,
-                              padding: EdgeInsets.only(top: 10,bottom: 40),
+                              padding: EdgeInsets.only(top: 10, bottom: 40),
                               child: Text(
-                                "We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",textAlign: TextAlign.center,
+                                "We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                    fontFamily: "Metrisch-Medium",
+                                    height: 1.5,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 46,
+                                    color: Colors.black54),
                               ),
                             ),
-
                             ResponsiveBuilder(
                               breakpoints: ScreenBreakpoints(
-                                  tablet: 750,
-                                  desktop: 1100,
-                                  watch: 300
-                              ),
+                                  tablet: 750, desktop: 1100, watch: 300),
                               builder: (context, sizingInformation) {
                                 // Check the sizing information here and return your UI
                                 if (sizingInformation.deviceScreenType ==
@@ -319,43 +342,42 @@ class _MyHomePageState extends State<MyHomePage> {
                                 if (sizingInformation.deviceScreenType ==
                                     DeviceScreenType.tablet) {
                                   return Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 20),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            IconPalette(
-                                              icon: Icons.pie_chart_rounded,
-                                              title: "Projects Overview",
-                                              text:
-                                              "Watch and learn from the Projects made by Bennett Achievers",
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            IconPalette(
-                                              icon: Icons.people_rounded,
-                                              title: "Community",
-                                              text:
-                                              "Get to know your fellow Bennatians and learn from their Projects",
-                                            ),
-
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        IconPalette(
-                                          icon: Icons.person_rounded,
-                                          title: "DashBoard",
-                                          text:
-                                          "Manage all your projects by tracking Activities in Dashboard",
-                                        ),
-                                      ],
-                                    )
-                                  );
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              IconPalette(
+                                                icon: Icons.pie_chart_rounded,
+                                                title: "Projects Overview",
+                                                text:
+                                                    "Watch and learn from the Projects made by Bennett Achievers",
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              IconPalette(
+                                                icon: Icons.people_rounded,
+                                                title: "Community",
+                                                text:
+                                                    "Get to know your fellow Bennatians and learn from their Projects",
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          IconPalette(
+                                            icon: Icons.person_rounded,
+                                            title: "DashBoard",
+                                            text:
+                                                "Manage all your projects by tracking Activities in Dashboard",
+                                          ),
+                                        ],
+                                      ));
                                 }
 
                                 return Column(
@@ -373,8 +395,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                           )),
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 25, right: 25),
+                                      padding: const EdgeInsets.only(
+                                          left: 25, right: 25),
                                       child: Align(
                                           alignment: Alignment.center,
                                           child: IconPalette(
@@ -405,11 +427,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       ResponsiveBuilder(
-                          breakpoints: ScreenBreakpoints(
-                              tablet: 550,
-                              desktop: 1100,
-                              watch: 300
-                          ),
+                        breakpoints: ScreenBreakpoints(
+                            tablet: 550, desktop: 1100, watch: 300),
                         builder: (context, sizingInformation) {
                           // Check the sizing information here and return your UI
                           if (sizingInformation.deviceScreenType ==
@@ -425,28 +444,40 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Positioned(
                                     left: -250,
                                     child: Container(
-                                      height: MediaQuery.of(context).size.width / 3.2,
-                                      width: MediaQuery.of(context).size.width / 1.5,
+                                      height:
+                                          MediaQuery.of(context).size.width /
+                                              3.2,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.5,
                                       decoration: BoxDecoration(
                                         color: Colors.amber[400],
-                                        borderRadius: BorderRadius.circular(400),
+                                        borderRadius:
+                                            BorderRadius.circular(400),
                                       ),
                                     ),
                                   ),
                                   Positioned(
                                     top: MediaQuery.of(context).size.width / 65,
-                                    left: MediaQuery.of(context).size.width / 15,
+                                    left:
+                                        MediaQuery.of(context).size.width / 15,
                                     child: Card(
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0)),
                                       elevation: 5,
                                       child: Container(
                                         height:
-                                            MediaQuery.of(context).size.width / 3.55,
-                                        width: MediaQuery.of(context).size.width / 2,
+                                            MediaQuery.of(context).size.width /
+                                                3.55,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
-                                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
                                         child: Image.network(
                                           "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
                                           fit: BoxFit.cover,
@@ -456,30 +487,41 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   ProfileTile(
                                     top: MediaQuery.of(context).size.width / 35,
-                                    left: MediaQuery.of(context).size.width / 45,
+                                    left:
+                                        MediaQuery.of(context).size.width / 45,
                                     title: "Students of Bennett University ",
                                     subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width / 1300,
+                                    factor: MediaQuery.of(context).size.width /
+                                        1300,
                                   ),
                                   ProfileTile(
                                     top: MediaQuery.of(context).size.width / 4,
-                                    left: MediaQuery.of(context).size.width / 2.1,
+                                    left:
+                                        MediaQuery.of(context).size.width / 2.1,
                                     title: "Students of Bennett University ",
                                     subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width / 1300,
+                                    factor: MediaQuery.of(context).size.width /
+                                        1300,
                                   ),
                                   Positioned(
-                                    width: MediaQuery.of(context).size.width / 3,
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
                                     top: MediaQuery.of(context).size.width / 20,
-                                    right: MediaQuery.of(context).size.width / 23,
+                                    right:
+                                        MediaQuery.of(context).size.width / 23,
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Project Accomplished by Student of Bennett University",
                                           style: TextStyle(
-                                            height: 1.3,
-                                              fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),
+                                              height: 1.3,
+                                              fontFamily: "Metrisch-Bold",
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  25),
                                         ),
                                         SizedBox(
                                           height: 15,
@@ -488,14 +530,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                           child: Text(
                                             "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
                                             style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                                fontFamily: "Metrisch-Medium",
+                                                height: 1.5,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    46,
+                                                color: Colors.black54),
                                           ),
                                         ),
-                                        SizedBox(height: 20,),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
                                         Row(
                                           children: [
                                             Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -503,26 +554,61 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       softWrap: true,
                                                       begin: 0,
                                                       end: 270,
-                                                      duration: Duration(seconds: 7),
+                                                      duration:
+                                                          Duration(seconds: 7),
                                                       style: TextStyle(
-                                                        color: Color(0xff101770),
+                                                          color:
+                                                              Color(0xff101770),
                                                           height: 1.3,
-                                                          fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/15),
+                                                          fontFamily:
+                                                              "Metrisch-Bold",
+                                                          fontSize: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height /
+                                                              15),
                                                     ),
-                                                    SizedBox(width: 5,),
-                                                    Text("+",style: TextStyle(
-                                                      color: Colors.orange,
-                                                        height: 1.3,
-                                                        fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),)
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "+",
+                                                      style: TextStyle(
+                                                          color: Colors.orange,
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                              "Metrisch-Bold",
+                                                          fontSize: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height /
+                                                              25),
+                                                    )
                                                   ],
                                                 ),
-                                                Text("PROJECTS MADE",style: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/50,color: Colors.black),)
+                                                Text(
+                                                  "PROJECTS MADE",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
+                                                      height: 1.3,
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              50,
+                                                      color: Colors.black),
+                                                )
                                               ],
                                             ),
-                                            SizedBox(width: MediaQuery.of(context).size.height/13),
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    13),
                                             Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -530,26 +616,58 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       softWrap: true,
                                                       begin: 0,
                                                       end: 90,
-                                                      duration: Duration(seconds: 7),
+                                                      duration:
+                                                          Duration(seconds: 7),
                                                       style: TextStyle(
-                                                          color: Color(0xff101770),
+                                                          color:
+                                                              Color(0xff101770),
                                                           height: 1.3,
-                                                          fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/15),
+                                                          fontFamily:
+                                                              "Metrisch-Bold",
+                                                          fontSize: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height /
+                                                              15),
                                                     ),
-                                                    SizedBox(width: 5,),
-                                                    Text("+",style: TextStyle(
-                                                        color: Colors.orange,
-                                                        height: 1.3,
-                                                        fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),)
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "+",
+                                                      style: TextStyle(
+                                                          color: Colors.orange,
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                              "Metrisch-Bold",
+                                                          fontSize: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height /
+                                                              25),
+                                                    )
                                                   ],
                                                 ),
-                                                Text("ACHIEVEMENTS",style: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/50,color: Colors.black),)
+                                                Text(
+                                                  "ACHIEVEMENTS",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
+                                                      height: 1.3,
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              50,
+                                                      color: Colors.black),
+                                                )
                                               ],
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 20,),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
                                         GradientButton(),
                                       ],
                                     ),
@@ -572,21 +690,28 @@ class _MyHomePageState extends State<MyHomePage> {
                                   Positioned(
                                     left: -250,
                                     child: Container(
-                                      height: MediaQuery.of(context).size.width / 3.1,
-                                      width: MediaQuery.of(context).size.width / 1.3,
+                                      height:
+                                          MediaQuery.of(context).size.width /
+                                              3.1,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.3,
                                       decoration: BoxDecoration(
                                         color: Colors.amber[400],
-                                        borderRadius: BorderRadius.circular(400),
+                                        borderRadius:
+                                            BorderRadius.circular(400),
                                       ),
                                     ),
                                   ),
                                   Positioned(
                                     top: MediaQuery.of(context).size.width / 50,
-                                    left: MediaQuery.of(context).size.width / 15,
+                                    left:
+                                        MediaQuery.of(context).size.width / 15,
                                     child: Container(
                                       height:
-                                          MediaQuery.of(context).size.width / 3.55,
-                                      width: MediaQuery.of(context).size.width / 2,
+                                          MediaQuery.of(context).size.width /
+                                              3.55,
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
                                       decoration: BoxDecoration(
                                         color: Colors.red,
                                         borderRadius: BorderRadius.circular(20),
@@ -600,28 +725,37 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   ProfileTile(
                                     top: MediaQuery.of(context).size.width / 35,
-                                    left: MediaQuery.of(context).size.width / 45,
+                                    left:
+                                        MediaQuery.of(context).size.width / 45,
                                     title: "Students of Bennett University ",
                                     subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width / 1000,
+                                    factor: MediaQuery.of(context).size.width /
+                                        1000,
                                   ),
                                   ProfileTile(
                                     top: MediaQuery.of(context).size.width / 4,
-                                    left: MediaQuery.of(context).size.width / 2.2,
+                                    left:
+                                        MediaQuery.of(context).size.width / 2.2,
                                     title: "Students of Bennett University ",
                                     subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width / 1000,
+                                    factor: MediaQuery.of(context).size.width /
+                                        1000,
                                   ),
                                   Positioned(
                                     top: MediaQuery.of(context).size.width / 10,
                                     right: 10,
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Project Showcase",
                                           style: TextStyle(
-                                              fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),
+                                              fontFamily: "Metrisch-Bold",
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  25),
                                         ),
                                         SizedBox(
                                           height: 15,
@@ -631,7 +765,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                           child: Text(
                                             "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
                                             style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                                fontFamily: "Metrisch-Medium",
+                                                height: 1.5,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    46,
+                                                color: Colors.black54),
                                           ),
                                         )
                                       ],
@@ -655,8 +795,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   top: 0,
                                   left: -100,
                                   child: Container(
-                                    height: MediaQuery.of(context).size.width / 2.3,
-                                    width: MediaQuery.of(context).size.width / 1.2,
+                                    height:
+                                        MediaQuery.of(context).size.width / 2.3,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
                                     decoration: BoxDecoration(
                                       color: Colors.amber[400],
                                       borderRadius: BorderRadius.circular(400),
@@ -667,8 +809,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   top: MediaQuery.of(context).size.width / 30,
                                   left: MediaQuery.of(context).size.width / 15,
                                   child: Container(
-                                    height: MediaQuery.of(context).size.width / 2.7,
-                                    width: MediaQuery.of(context).size.width / 1.5,
+                                    height:
+                                        MediaQuery.of(context).size.width / 2.7,
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.5,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                     ),
@@ -684,14 +828,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                   left: MediaQuery.of(context).size.width / 45,
                                   title: "Students of Bennett University ",
                                   subtitle: "Under Prof Aryan",
-                                  factor: MediaQuery.of(context).size.width / 700,
+                                  factor:
+                                      MediaQuery.of(context).size.width / 700,
                                 ),
                                 ProfileTile(
                                   top: MediaQuery.of(context).size.width / 3.15,
-                                  left: MediaQuery.of(context).size.width / 1.75,
+                                  left:
+                                      MediaQuery.of(context).size.width / 1.75,
                                   title: "Students of Bennett University ",
                                   subtitle: "Under Prof Aryan",
-                                  factor: MediaQuery.of(context).size.width / 700,
+                                  factor:
+                                      MediaQuery.of(context).size.width / 700,
                                 ),
                                 Positioned(
                                   top: MediaQuery.of(context).size.width / 1.85,
@@ -702,7 +849,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                         Text(
                                           "Project Showcase",
                                           style: TextStyle(
-                                              fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25),
+                                              fontFamily: "Metrisch-Bold",
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  25),
                                         ),
                                         SizedBox(
                                           height: 15,
@@ -712,7 +863,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                           child: Text(
                                             "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University",
                                             style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                                fontFamily: "Metrisch-Medium",
+                                                height: 1.5,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    46,
+                                                color: Colors.black54),
                                           ),
                                         )
                                       ],
@@ -732,8 +889,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Column(
                           children: [
                             Text("\n\nBe in the Community",
-                                style:TextStyle(
-                                    fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
+                                style: TextStyle(
+                                    fontFamily: "Metrisch-Bold",
+                                    fontSize:
+                                        MediaQuery.of(context).size.height /
+                                            25)),
                             SizedBox(
                               height: 5,
                             ),
@@ -741,7 +901,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                 "Meet new people and get to learn from their Experience",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54)),
+                                    fontFamily: "Metrisch-Medium",
+                                    height: 1.3,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height / 46,
+                                    color: Colors.black54)),
                             SizedBox(
                               height: 50,
                             ),
@@ -753,13 +917,28 @@ class _MyHomePageState extends State<MyHomePage> {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      ZoomInImage(ImageLink: "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",),
-                                      SizedBox(width: 40,),
-                                      ZoomInImage(ImageLink:"https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1" ),
-                                      SizedBox(width: 40,),
-                                      ZoomInImage(ImageLink: "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
-                                      SizedBox(width: 40,),
-                                      ZoomInImage(ImageLink:"https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
+                                      ZoomInImage(
+                                        ImageLink:
+                                            "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
+                                      ),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      ZoomInImage(
+                                          ImageLink:
+                                              "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      ZoomInImage(
+                                          ImageLink:
+                                              "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      ZoomInImage(
+                                          ImageLink:
+                                              "https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
                                     ],
                                   );
                                 }
@@ -781,8 +960,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       // )
                     ],
                   ),
-
-
                 ],
               ),
             ),
