@@ -28,6 +28,38 @@ class _BlueBannerState extends State<BlueBanner> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 10,
+                      height: 2,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 50,
+                      height: 2,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 10,
+                      height: 2,
+                    )
+                  ],
+                ),
+                SizedBox(height: 20,),
                 Text(
                   "Get Started Today",
                   style: TextStyle(

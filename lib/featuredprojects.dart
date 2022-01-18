@@ -151,7 +151,40 @@ class _FeaturedProjectsState extends State<FeaturedProjects> {
       color: Color(0xfff5f6fb),
       child: Column(
         children: [
-          Text("\n\nFeatured Projects",
+          SizedBox(height: 40,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.orange.shade400,
+                ),
+                width: 10,
+                height: 2,
+              ),
+              SizedBox(width: 10,),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.orange.shade400,
+                ),
+                width: 50,
+                height: 2,
+              ),
+              SizedBox(width: 10,),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.orange.shade400,
+                ),
+                width: 10,
+                height: 2,
+              )
+            ],
+          ),
+          SizedBox(height: 20,),
+          Text("Featured Projects",
               style:TextStyle(
                   fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
           SizedBox(

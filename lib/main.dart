@@ -72,22 +72,21 @@ class _MyHomePageState extends State<MyHomePage> {
       body: NotificationListener(
         onNotification: (v) {
           if (v is ScrollUpdateNotification) {
-            if (v.metrics.axisDirection == AxisDirection.down ||
-                v.metrics.axisDirection == AxisDirection.up)
-              //only if scroll update notification is triggered
-              setState(() {
-                print(v.metrics.axisDirection);
-                rateEight -= v.scrollDelta / 1;
-                rateSeven -= v.scrollDelta / 1.5;
-                rateSix -= v.scrollDelta / 2;
-                rateFivepointFive -= v.scrollDelta / 2.25;
-                rateFive -= v.scrollDelta / 2.5;
-                rateFour -= v.scrollDelta / 3;
-                rateThree -= v.scrollDelta / 3.5;
-                rateTwo -= v.scrollDelta / 4;
-                rateOne -= v.scrollDelta / 4.5;
-                rateZero -= v.scrollDelta / 50;
-              });
+            if(v.metrics.axisDirection==AxisDirection.down || v.metrics.axisDirection==AxisDirection.up)
+            //only if scroll update notification is triggered
+            setState(() {
+              rateEight -= v.scrollDelta / 1;
+              rateSeven -= v.scrollDelta / 1.5;
+              rateSix -= v.scrollDelta / 2;
+              rateFivepointFive -= v.scrollDelta / 2.25;
+              rateFive -= v.scrollDelta / 2.5;
+              rateFour -= v.scrollDelta / 3;
+              rateThree -= v.scrollDelta / 3.5;
+              rateTwo -= v.scrollDelta / 4;
+              rateOne -= v.scrollDelta / 4.5;
+              rateZero -= v.scrollDelta / 50;
+            });
+
           }
         },
         child: Column(
@@ -306,6 +305,38 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: EdgeInsets.only(top: 40, bottom: 40),
                         child: Column(
                           children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.orange.shade400,
+                                ),
+                                width: 10,
+                                height: 2,
+                              ),
+                                SizedBox(width: 10,),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  width: 50,
+                                  height: 2,
+                                ),
+                                SizedBox(width: 10,),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  width: 10,
+                                  height: 2,
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 20,),
                             Text("How it works",
                                 style: TextStyle(
                                     fontFamily: "Metrisch-Bold",
@@ -504,17 +535,46 @@ class _MyHomePageState extends State<MyHomePage> {
                                         1300,
                                   ),
                                   Positioned(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                    top: MediaQuery.of(context).size.width / 20,
-                                    right:
-                                        MediaQuery.of(context).size.width / 23,
+                                    width: MediaQuery.of(context).size.width / 3,
+                                    top: MediaQuery.of(context).size.width / 30,
+                                    right: MediaQuery.of(context).size.width / 23,
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 10,
+                                              height: 2,
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 50,
+                                              height: 2,
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 10,
+                                              height: 2,
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
                                         Text(
-                                          "Project Accomplished by Student of Bennett University",
+                                          "Project Accomplished by Student of Bennett University",textAlign: TextAlign.end,
                                           style: TextStyle(
                                               height: 1.3,
                                               fontFamily: "Metrisch-Bold",
@@ -528,7 +588,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ),
                                         Container(
                                           child: Text(
-                                            "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                            "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",textAlign: TextAlign.end,
                                             style: TextStyle(
                                                 fontFamily: "Metrisch-Medium",
                                                 height: 1.5,
@@ -543,6 +603,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           height: 20,
                                         ),
                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
                                             Column(
                                               crossAxisAlignment:
@@ -888,12 +949,40 @@ class _MyHomePageState extends State<MyHomePage> {
                         // padding: EdgeInsets.only(top: 40),
                         child: Column(
                           children: [
-                            Text("\n\nBe in the Community",
-                                style: TextStyle(
-                                    fontFamily: "Metrisch-Bold",
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            25)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  width: 10,
+                                  height: 2,
+                                ),
+                                SizedBox(width: 10,),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  width: 50,
+                                  height: 2,
+                                ),
+                                SizedBox(width: 10,),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  width: 10,
+                                  height: 2,
+                                )
+                              ],
+                            ),
+                            Text("\nBe in the Community",
+                                style:TextStyle(
+                                    fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
                             SizedBox(
                               height: 5,
                             ),
@@ -987,7 +1076,7 @@ class ParallaxWidget extends StatelessWidget {
       right: 0,
       child: Container(
         color: Colors.transparent,
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height-60,
         width: MediaQuery.of(context).size.width,
         child: Image.asset("assets/$asset.png", fit: BoxFit.cover),
       ),

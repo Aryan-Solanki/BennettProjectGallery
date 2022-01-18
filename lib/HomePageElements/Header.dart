@@ -1,5 +1,6 @@
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
+import 'package:bennettprojectgallery/projectgallery.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -38,7 +39,7 @@ class _HeaderState extends State<Header> {
               padding: EdgeInsets.symmetric(horizontal: 20,),
               width: MediaQuery.of(context).size.width,
               color: Color(0xff101770),
-              height: 50,
+              height: 60,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -64,18 +65,28 @@ class _HeaderState extends State<Header> {
                         primary: Color(0xff101770),
                         // padding: EdgeInsets.all(0.0),
                       ),
-                      child: Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Home"?Colors.white:hover=="Home"?Colors.white60:Colors.transparent,),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                           ),
-                          child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current=="Home"?25:hover=="Home"?25:0,
+                            height: 2,
+
+                          )
+                        ],
                       )
                   ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Container(width: 1,color: Colors.white60,height: 18,),
-                  ),
+                  SizedBox(width: 10,),
                   TextButton(
                       onPressed: (){
 
@@ -98,20 +109,30 @@ class _HeaderState extends State<Header> {
                         primary: Color(0xff101770),
                         // padding: EdgeInsets.all(0.0),
                       ),
-                      child: Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="About"?Colors.white:hover=="About"?Colors.white60:Colors.transparent,),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                           ),
-                          child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current=="About"?25:hover=="About"?25:0,
+                            height: 2,
+                          )
+                        ],
                       )
                   ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Container(width: 1,color: Colors.white60,height: 18,),
-                  ),
+                  SizedBox(width: 10,),
                   TextButton(
                       onPressed: (){
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
 
                       },
                       onHover: (x){
@@ -132,18 +153,27 @@ class _HeaderState extends State<Header> {
                         primary: Color(0xff101770),
                         // padding: EdgeInsets.all(0.0),
                       ),
-                      child: Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Project Gallery"?Colors.white:hover=="Project Gallery"?Colors.white60:Colors.transparent,),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                           ),
-                          child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current=="Project Gallery"?25:hover=="Project Gallery"?25:0,
+                            height: 2,
+                          )
+                        ],
                       )
                   ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Container(width: 1,color: Colors.white60,height: 18,),
-                  ),
+                  SizedBox(width: 10,),
                   TextButton(
                       onPressed: (){
 
@@ -166,18 +196,27 @@ class _HeaderState extends State<Header> {
                         primary: Color(0xff101770),
                         // padding: EdgeInsets.all(0.0),
                       ),
-                      child: Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Achievers"?Colors.white:hover=="Achievers"?Colors.white60:Colors.transparent,),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                           ),
-                          child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current=="Achievers"?25:hover=="Achievers"?25:0,
+                            height: 2,
+                          )
+                        ],
                       )
                   ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Container(width: 1,color: Colors.white60,height: 18,),
-                  ),
+                  SizedBox(width: 10,),
                   TextButton(
                       onPressed: (){
 
@@ -200,18 +239,27 @@ class _HeaderState extends State<Header> {
                         primary: Color(0xff101770),
                         // padding: EdgeInsets.all(0.0),
                       ),
-                      child: Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Times of Bennett"?Colors.white:hover=="Times of Bennett"?Colors.white60:Colors.transparent,),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                           ),
-                          child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current=="Times of Bennett"?25:hover=="Times of Bennett"?25:0,
+                            height: 2,
+                          )
+                        ],
                       )
                   ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Container(width: 1,color: Colors.white60,height: 18,),
-                  ),
+                  SizedBox(width: 10,),
                   TextButton(
                       onPressed: (){
 
@@ -234,18 +282,27 @@ class _HeaderState extends State<Header> {
                         primary: Color(0xff101770),
                         // padding: EdgeInsets.all(0.0),
                       ),
-                      child: Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Contact"?Colors.white:hover=="Contact"?Colors.white60:Colors.transparent,),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                           ),
-                          child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current=="Contact"?25:hover=="Contact"?25:0,
+                            height: 2,
+                          )
+                        ],
                       )
                   ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Container(width: 1,color: Colors.white60,height: 18,),
-                  ),
+                  SizedBox(width: 10,),
                   TextButton(
                       onPressed: (){
                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
@@ -268,12 +325,24 @@ class _HeaderState extends State<Header> {
                         primary: Color(0xff101770),
                         // padding: EdgeInsets.all(0.0),
                       ),
-                      child: Container(
-                          padding: EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Sign In"?Colors.white:hover=="Sign In"?Colors.white60:Colors.transparent,),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                           ),
-                          child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current=="Sign In"?25:hover=="Sign In"?25:0,
+                            height: 2,
+                          )
+                        ],
                       )
                   ),
 
@@ -336,12 +405,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Home"?Colors.white:hover=="Home"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Home"?25:hover=="Home"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -367,18 +449,31 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="About"?Colors.white:hover=="About"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="About"?25:hover=="About"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
                         TextButton(
                             onPressed: (){
-
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
                             },
                             onHover: (x){
                               if(x){
@@ -398,12 +493,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Project Gallery"?Colors.white:hover=="Project Gallery"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Project Gallery"?25:hover=="Project Gallery"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -429,12 +537,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Achievers"?Colors.white:hover=="Achievers"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Achievers"?25:hover=="Achievers"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -460,12 +581,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Times of Bennett"?Colors.white:hover=="Times of Bennett"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Times of Bennett"?25:hover=="Times of Bennett"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -491,12 +625,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Contact"?Colors.white:hover=="Contact"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Contact"?25:hover=="Contact"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -522,12 +669,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Sign In"?Colors.white:hover=="Sign In"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Sign In"?25:hover=="Sign In"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
 
@@ -581,12 +741,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Home"?Colors.white:hover=="Home"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Home"?25:hover=="Home"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -612,18 +785,31 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="About"?Colors.white:hover=="About"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="About"?25:hover=="About"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
                         TextButton(
                             onPressed: (){
-
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
                             },
                             onHover: (x){
                               if(x){
@@ -643,12 +829,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Project Gallery"?Colors.white:hover=="Project Gallery"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Project Gallery"?25:hover=="Project Gallery"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -674,12 +873,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Achievers"?Colors.white:hover=="Achievers"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Achievers"?25:hover=="Achievers"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -705,12 +917,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Times of Bennett"?Colors.white:hover=="Times of Bennett"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Times of Bennett"?25:hover=="Times of Bennett"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -736,12 +961,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Contact"?Colors.white:hover=="Contact"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Contact"?25:hover=="Contact"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
                         SizedBox(height: 10,),
@@ -767,12 +1005,25 @@ class _HeaderState extends State<Header> {
                               primary: Color(0xff101770),
                               // padding: EdgeInsets.all(0.0),
                             ),
-                            child: Container(
-                                padding: EdgeInsets.only(bottom: 5),
-                                decoration: BoxDecoration(
-                                  border: Border(bottom: BorderSide(width: 1.0, color: widget.current=="Sign In"?Colors.white:hover=="Sign In"?Colors.white60:Colors.transparent,),),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.only(bottom: 5),
+                                    child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
                                 ),
-                                child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
+                                AnimatedContainer(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  duration: Duration(milliseconds: 200),
+                                  width: widget.current=="Sign In"?25:hover=="Sign In"?25:0,
+                                  height: 2,
+
+                                )
+                              ],
                             )
                         ),
 
