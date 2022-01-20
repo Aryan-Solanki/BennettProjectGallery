@@ -88,19 +88,7 @@ class _RightSideState extends State<RightSide> {
 
           ),
           SizedBox(height: 40,),
-          Container(
-            height: 1300,
-            child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 9,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.68,crossAxisSpacing: 20
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return ProjectCard();
-              },
-            ),
-          ),
+          ProjectCard(),
 
         ],
       ),
