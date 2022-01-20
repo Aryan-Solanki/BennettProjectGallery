@@ -53,14 +53,14 @@ class _TopProjectsState extends State<TopProjects> {
                 Container(
                   width: 180,
                   child: Text(
-                    widget.projectName.toString(),maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/45,color: hover==true?Colors.green:Colors.black87),
+                    widget.projectName.toString(),maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color: hover==true?Colors.green:Colors.black87),
                   ),
                 ),
                 SizedBox(height: 8,),
                 Container(
                   width: 180,
                   child: Text(
-                    widget.madeBy.toString(),overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: MediaQuery.of(context).size.height/50,color: Colors.green),
+                    widget.madeBy.toString(),overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: Colors.green),
                   ),
                 ),
               ],

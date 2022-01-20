@@ -60,8 +60,8 @@ class _SignUpCardState extends State<SignUpCard> {
       elevation: 8,
       child: Container(
         padding: EdgeInsets.all(20),
-        width: MediaQuery.of(context).size.height / 2.3,
-        height: MediaQuery.of(context).size.height / 1.8,
+        width: 330,
+        height: 470,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +70,7 @@ class _SignUpCardState extends State<SignUpCard> {
                 style: TextStyle(
                     height: 1.3,
                     fontFamily: "Metrisch-ExtraBold",
-                    fontSize: MediaQuery.of(context).size.height / 25)),
+                    fontSize: 25)),
             SizedBox(
               height: 15,
             ),
@@ -80,7 +80,7 @@ class _SignUpCardState extends State<SignUpCard> {
                 style: TextStyle(
                     fontFamily: "Metrisch-Medium",
                     height: 1.3,
-                    fontSize: MediaQuery.of(context).size.height / 46,
+                    fontSize: 15,
                     color: Colors.black),
               ),
             ),
@@ -100,7 +100,7 @@ class _SignUpCardState extends State<SignUpCard> {
                   style: TextStyle(
                       fontFamily: "Metrisch-Medium",
                       height: 1.5,
-                      fontSize: MediaQuery.of(context).size.height / 46,
+                      fontSize: 15,
                       color: Colors.black54),
                   onChanged: (value) {
                     emailId = value.trim();
@@ -111,7 +111,7 @@ class _SignUpCardState extends State<SignUpCard> {
                     hintStyle: TextStyle(
                         fontFamily: "Metrisch-Medium",
                         height: 1.5,
-                        fontSize: MediaQuery.of(context).size.height / 46,
+                        fontSize: 15,
                         color: Colors.black54),
                     hintText: 'roll@bennett.edu.in',
                     // contentPadding:
@@ -140,7 +140,7 @@ class _SignUpCardState extends State<SignUpCard> {
                   style: TextStyle(
                       fontFamily: "Metrisch-Medium",
                       height: 1.5,
-                      fontSize: MediaQuery.of(context).size.height / 46,
+                      fontSize: 15,
                       color: Colors.black54),
                   onChanged: (value) {
                     password = value.trim();
@@ -150,7 +150,7 @@ class _SignUpCardState extends State<SignUpCard> {
                     hintStyle: TextStyle(
                         fontFamily: "Metrisch-Medium",
                         height: 1.5,
-                        fontSize: MediaQuery.of(context).size.height / 46,
+                        fontSize: 15,
                         color: Colors.black54),
                     hintText: 'password',
                     // contentPadding:
@@ -218,7 +218,7 @@ class _SignUpCardState extends State<SignUpCard> {
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",
                           color: Colors.black54,
-                          fontSize: MediaQuery.of(context).size.height / 50)),
+                          fontSize: 13)),
                 ),
               ),
             ),
@@ -261,7 +261,7 @@ class _SignUpCardState extends State<SignUpCard> {
                                 fontFamily: "Metrisch-Medium",
                                 color: Colors.black54,
                                 fontSize:
-                                    MediaQuery.of(context).size.height / 50)),
+                                13)),
                       ),
                     ),
                   )

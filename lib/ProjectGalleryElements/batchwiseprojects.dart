@@ -53,7 +53,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 height: 30,
                 child: Center(
                   child: Text(
-                    "Batch of 2016",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: MediaQuery.of(context).size.height/50,color: hover1==true?Colors.white:Colors.grey.shade600),
+                    "Batch of 2016",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: hover1==true?Colors.white:Colors.grey.shade600),
                   ),
                 ),
               ),
@@ -92,7 +92,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 height: 30,
                 child: Center(
                   child: Text(
-                    "Batch of 2017",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: MediaQuery.of(context).size.height/50,color: hover2==true?Colors.white:Colors.grey.shade600),
+                    "Batch of 2017",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: hover2==true?Colors.white:Colors.grey.shade600),
                   ),
                 ),
               ),
@@ -136,7 +136,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 height: 30,
                 child: Center(
                   child: Text(
-                    "Batch of 2018",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: MediaQuery.of(context).size.height/50,color: hover3==true?Colors.white:Colors.grey.shade600),
+                    "Batch of 2018",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: hover3==true?Colors.white:Colors.grey.shade600),
                   ),
                 ),
               ),
@@ -175,7 +175,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 height: 30,
                 child: Center(
                   child: Text(
-                    "Batch of 2019",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: MediaQuery.of(context).size.height/50,color: hover4==true?Colors.white:Colors.grey.shade600),
+                    "Batch of 2019",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: hover4==true?Colors.white:Colors.grey.shade600),
                   ),
                 ),
               ),
@@ -220,7 +220,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 height: 30,
                 child: Center(
                   child: Text(
-                    "Batch of 2020",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: MediaQuery.of(context).size.height/50,color: hover5==true?Colors.white:Colors.grey.shade600),
+                    "Batch of 2020",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: hover5==true?Colors.white:Colors.grey.shade600),
                   ),
                 ),
               ),
@@ -259,7 +259,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 height: 30,
                 child: Center(
                   child: Text(
-                    "Batch of 2021",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: MediaQuery.of(context).size.height/50,color: hover6==true?Colors.white:Colors.grey.shade600),
+                    "Batch of 2021",style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: hover6==true?Colors.white:Colors.grey.shade600),
                   ),
                 ),
               ),

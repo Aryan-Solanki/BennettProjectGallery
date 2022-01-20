@@ -24,13 +24,13 @@ class _LeftSideState extends State<LeftSide> {
             padding: EdgeInsets.only(left: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              color: Colors.grey.shade200,
+              color: Color(0xfff3f5fe)
             ),
             height: 45,
             child: TextField(
               style: TextStyle(
 
-                  fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                  fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
               onChanged: (value) {
                 //Do something with the user input.
               },
@@ -40,7 +40,7 @@ class _LeftSideState extends State<LeftSide> {
                 border: InputBorder.none,
                 hintStyle: TextStyle(
 
-                    fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                    fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
                 hintText: 'Search Project',
                 // contentPadding:
                 // EdgeInsets.symmetric(horizontal: 20.0),
@@ -83,7 +83,7 @@ class _LeftSideState extends State<LeftSide> {
             ],
           ),
           SizedBox(height: 15,),
-          Text("Categories",style: TextStyle(fontSize: MediaQuery.of(context).size.height/33,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+          Text("Categories",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
           SizedBox(height: 20,),
           Container(
             height: 180,
@@ -134,7 +134,7 @@ class _LeftSideState extends State<LeftSide> {
             ],
           ),
           SizedBox(height: 15,),
-          Text("Most Viewed Projects",style: TextStyle(fontSize: MediaQuery.of(context).size.height/33,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+          Text("Most Viewed Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
           SizedBox(height: 20,),
           Container(
             height: 300,
@@ -180,7 +180,7 @@ class _LeftSideState extends State<LeftSide> {
             ],
           ),
           SizedBox(height: 15,),
-          Text("Batch Wise Projects",style: TextStyle(fontSize: MediaQuery.of(context).size.height/33,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+          Text("Batch Wise Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
           SizedBox(height: 20,),
           BatchWiseProjects(),
           SizedBox(height: 20,),

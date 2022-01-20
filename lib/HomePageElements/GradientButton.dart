@@ -74,7 +74,7 @@ class _GradientButtonState extends State<GradientButton>
                 color: Colors.white,
                 height: 1.3,
                 fontFamily: "Metrisch-Bold",
-                fontSize: MediaQuery.of(context).size.height / 40),
+                fontSize: 16),
           ),
         ),
       ),

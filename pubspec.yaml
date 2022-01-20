@@ -21,6 +21,8 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   firebase_storage:
+  menu_button:
+  flutter_rating_bar:
 
 dev_dependencies:
   flutter_test:

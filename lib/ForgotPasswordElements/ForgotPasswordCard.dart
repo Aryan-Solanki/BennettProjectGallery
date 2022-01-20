@@ -18,8 +18,8 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
       elevation: 8,
       child: Container(
         padding: EdgeInsets.all(20),
-        width: MediaQuery.of(context).size.height/2.3,
-        height: MediaQuery.of(context).size.height/1.8,
+        width: 330,
+        height: 470,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,13 +27,13 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
             Text("Forgot Password",
                 style: TextStyle(
                     height: 1.3,
-                    fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/25)),
+                    fontFamily: "Metrisch-ExtraBold", fontSize: 25)),
             SizedBox(height: 15,),
             Container(
               child: Text(
                 "Please enter your email first.\nVerification link will be send",
                 style: TextStyle(
-                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black),
+                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15),
               ),
             ),
             SizedBox(height: 15,),
@@ -49,7 +49,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                 child: TextField(
                   style: TextStyle(
 
-                      fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                      fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
                   onChanged: (value) {
                     //Do something with the user input.
                   },
@@ -58,7 +58,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                     border: InputBorder.none,
                     hintStyle: TextStyle(
 
-                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
                     hintText: 'roll@bennett.edu.in',
                     // contentPadding:
                     // EdgeInsets.symmetric(horizontal: 20.0),
@@ -100,7 +100,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                   ),
                   child: Text("Already have an Account ?",
                       style: TextStyle(
-                          fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: MediaQuery.of(context).size.height/50)),
+                          fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: 13)),
                 ),
               ),
             ),
