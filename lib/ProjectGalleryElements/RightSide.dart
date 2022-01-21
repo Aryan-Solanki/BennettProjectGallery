@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:menu_button/menu_button.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'ProjectCard.dart';
 
@@ -50,48 +51,193 @@ class _RightSideState extends State<RightSide> {
         ),
       ),
     );
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      width: 800,
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return ResponsiveBuilder(
+      breakpoints: ScreenBreakpoints(
+          tablet: 700, desktop: 1140, watch: 541),
+      builder: (context, sizingInformation) {
+        // Check the sizing information here and return your UI
+        if (sizingInformation.deviceScreenType ==
+            DeviceScreenType.desktop) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            width: 800,
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                    ),
+                    MenuButton<String>(
+                      child: normalChildButton,
+                      items: keys,
+                      itemBuilder: (String value) => Container(
+                        height: 40,
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
+                        child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                      ),
+                      toggledChild: Container(
+                        child: normalChildButton,
+                      ),
+                      onItemSelected: (String value) {
+                        setState(() {
+                          selectedKey = value;
+                        });
+                      },
+                      onMenuButtonToggle: (bool isToggle) {
+                        print(isToggle);
+                      },
+                    )
+
+                  ],
+
+                ),
+                SizedBox(height: 40,),
+                ProjectCard(),
+
+              ],
+            ),
+          );
+        }
+        if (sizingInformation.deviceScreenType ==
+            DeviceScreenType.tablet) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            width: 660,
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                    ),
+                    MenuButton<String>(
+                      child: normalChildButton,
+                      items: keys,
+                      itemBuilder: (String value) => Container(
+                        height: 40,
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
+                        child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                      ),
+                      toggledChild: Container(
+                        child: normalChildButton,
+                      ),
+                      onItemSelected: (String value) {
+                        setState(() {
+                          selectedKey = value;
+                        });
+                      },
+                      onMenuButtonToggle: (bool isToggle) {
+                        print(isToggle);
+                      },
+                    )
+
+                  ],
+
+                ),
+                SizedBox(height: 40,),
+                ProjectCard(),
+
+              ],
+            ),
+          );
+        }
+        if (sizingInformation.deviceScreenType ==
+            DeviceScreenType.watch){
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Column(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                    ),
+                    SizedBox(height: 20,),
+                    MenuButton<String>(
+                      child: normalChildButton,
+                      items: keys,
+                      itemBuilder: (String value) => Container(
+                        height: 40,
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
+                        child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                      ),
+                      toggledChild: Container(
+                        child: normalChildButton,
+                      ),
+                      onItemSelected: (String value) {
+                        setState(() {
+                          selectedKey = value;
+                        });
+                      },
+                      onMenuButtonToggle: (bool isToggle) {
+                        print(isToggle);
+                      },
+                    )
+
+                  ],
+
+                ),
+                SizedBox(height: 20,),
+                ProjectCard(),
+
+              ],
+            ),
+          );
+        }
+
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          width: 500,
+          child: Column(
             children: [
-              Text(
-                "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                  ),
+                  MenuButton<String>(
+                    child: normalChildButton,
+                    items: keys,
+                    itemBuilder: (String value) => Container(
+                      height: 40,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
+                      child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                    ),
+                    toggledChild: Container(
+                      child: normalChildButton,
+                    ),
+                    onItemSelected: (String value) {
+                      setState(() {
+                        selectedKey = value;
+                      });
+                    },
+                    onMenuButtonToggle: (bool isToggle) {
+                      print(isToggle);
+                    },
+                  )
+
+                ],
+
               ),
-              MenuButton<String>(
-                child: normalChildButton,
-                items: keys,
-                itemBuilder: (String value) => Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                  child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
-                ),
-                toggledChild: Container(
-                  child: normalChildButton,
-                ),
-                onItemSelected: (String value) {
-                  setState(() {
-                    selectedKey = value;
-                  });
-                },
-                onMenuButtonToggle: (bool isToggle) {
-                  print(isToggle);
-                },
-              )
+              SizedBox(height: 40,),
+              ProjectCard(),
 
             ],
-
           ),
-          SizedBox(height: 40,),
-          ProjectCard(),
-
-        ],
-      ),
+        );
+      },
     );
   }
 }
