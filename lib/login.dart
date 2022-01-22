@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
       body: ResponsiveBuilder(
         breakpoints: ScreenBreakpoints(
             tablet: 550,
-            desktop: 790,
+            desktop: 800,
             watch: 300
         ),
         builder: (context, sizingInformation) {
@@ -27,80 +27,87 @@ class _LoginPageState extends State<LoginPage> {
             return Column(
               children: [
                 Header(current: "Sign In",),
-                SizedBox(height: 70,),
-                Container(
-                  padding:  EdgeInsets.only(left: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image(
-                            height: 100,
-                            image: AssetImage("assets/logo1.png",),
-                            fit: BoxFit.fill,
-                          ),
-                          SizedBox(height: 10,),
-                          Text("Welcome to the \nBennett University \nGallery Area",
-                              style: TextStyle(
-                                  height: 1.3,
-                                  fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/23)),
-                          SizedBox(height: 25,),
-                          Container(
-                            width: 250,
-                            child: Text(
-                              "We enjoy adapting our strategies to offer every client the best ",
-                              style: TextStyle(
-                                  fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
-                            ),
-                          ),
-                          SizedBox(height: 25,),
-                          Container(
-                            padding: EdgeInsets.only(bottom: 1),
-                            decoration: BoxDecoration(
-                              border: Border(bottom: BorderSide(width: 1.0, color: Colors.black),),
-                            ),
-                            child: Text("+91 7983 737272",
-                                style: TextStyle(
-                                    fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/30)),
-                          ),
-                          SizedBox(height: 10,),
-                          Container(
-                            padding: EdgeInsets.only(bottom: 1),
-                            decoration: BoxDecoration(
-                              border: Border(bottom: BorderSide(width: 1.0, color: Colors.black),),
-                            ),
-                            child: Text("+91 9827 475613",
-                                style: TextStyle(
-                                    fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/30)),
-                          ),
-                          SizedBox(height: 20,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.facebookF,size: 18,),
-                              SizedBox(width: 10,),
-                              FaIcon(FontAwesomeIcons.twitter,size: 18),
-                              SizedBox(width: 10,),
-                              FaIcon(FontAwesomeIcons.linkedinIn,size: 18),
-                            ],
-                          ),
-                          SizedBox(height: 130,)
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: SingleChildScrollView(
+                      child: Container(
+                        padding:  EdgeInsets.only(left: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 70,),
+                                Image(
+                                  height: 100,
+                                  image: AssetImage("assets/logo1.png",),
+                                  fit: BoxFit.fill,
+                                ),
+                                SizedBox(height: 10,),
+                                Text("Welcome to the \nBennett University \nGallery Area",
+                                    style: TextStyle(
+                                        height: 1.3,
+                                        fontFamily: "Metrisch-ExtraBold", fontSize: 30)),
+                                SizedBox(height: 25,),
+                                Container(
+                                  width: 250,
+                                  child: Text(
+                                    "We enjoy adapting our strategies to offer every client the best ",
+                                    style: TextStyle(
+                                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                                  ),
+                                ),
+                                SizedBox(height: 25,),
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 1),
+                                  decoration: BoxDecoration(
+                                    border: Border(bottom: BorderSide(width: 1.0, color: Colors.black),),
+                                  ),
+                                  child: Text("+91 7983 737272",
+                                      style: TextStyle(
+                                          fontFamily: "Metrisch-ExtraBold", fontSize: 23)),
+                                ),
+                                SizedBox(height: 10,),
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 1),
+                                  decoration: BoxDecoration(
+                                    border: Border(bottom: BorderSide(width: 1.0, color: Colors.black),),
+                                  ),
+                                  child: Text("+91 9827 475613",
+                                      style: TextStyle(
+                                          fontFamily: "Metrisch-ExtraBold", fontSize: 23)),
+                                ),
+                                SizedBox(height: 20,),
+                                Row(
+                                  children: [
+                                    FaIcon(FontAwesomeIcons.facebookF,size: 18,),
+                                    SizedBox(width: 10,),
+                                    FaIcon(FontAwesomeIcons.twitter,size: 18),
+                                    SizedBox(width: 10,),
+                                    FaIcon(FontAwesomeIcons.linkedinIn,size: 18),
+                                  ],
+                                ),
+                                SizedBox(height: 130,)
 
 
-                        ],
+                              ],
+                            ),
+                            Stack(
+                              alignment: Alignment.center,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container( height: 500,child: Image(image:AssetImage("assets/loginpageimg.png"))),
+                                LoginCard(),
+                              ],
+                            )
+
+                          ],
+                        ),
                       ),
-                      Stack(
-                        alignment: Alignment.center,
-                        clipBehavior: Clip.none,
-                        children: [
-                          Container( height: MediaQuery.of(context).size.height/1.4,child: Image(image:AssetImage("assets/loginpageimg.png"))),
-                          LoginCard(),
-                        ],
-                      )
-
-                    ],
+                    ),
                   ),
                 ),
               ],
@@ -136,16 +143,17 @@ class _LoginPageState extends State<LoginPage> {
                             Text("Bennett University \nGallery Area",textAlign: TextAlign.center,
                                 style: TextStyle(
                                     height: 1.3,
-                                    fontFamily: "Metrisch-ExtraBold", fontSize: MediaQuery.of(context).size.height/23)),
+                                    fontFamily: "Metrisch-ExtraBold", fontSize: 30)),
                             SizedBox(height: 25,),
                             Container(
                               width: 250,
                               child: Text(
                                 "We enjoy adapting our strategies to offer every client the best ",textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
+                                    fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
                               ),
                             ),
+                            SizedBox(height: 25,),
 
                             // SizedBox(height: 20,),
                             //
@@ -158,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.center,
                           clipBehavior: Clip.none,
                           children: [
-                            Container( height: MediaQuery.of(context).size.height/1.2,child: Image(fit: BoxFit.cover,image:AssetImage("assets/loginpageimg.png"))),
+                            Container( height: MediaQuery.of(context).size.height/1.2,child: Image(fit: BoxFit.fitWidth,image:AssetImage("assets/loginpageimg.png"))),
                             LoginCard(),
                           ],
                         ),

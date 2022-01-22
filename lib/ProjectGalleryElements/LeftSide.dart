@@ -2,6 +2,7 @@ import 'package:bennettprojectgallery/ProjectGalleryElements/batchwiseprojects.d
 import 'package:bennettprojectgallery/ProjectGalleryElements/categoriesButton.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/topprojects.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class LeftSide extends StatefulWidget {
 
@@ -16,176 +17,532 @@ bool button3hover=false;
 class _LeftSideState extends State<LeftSide> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 280,
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              color: Colors.grey.shade200,
-            ),
-            height: 45,
-            child: TextField(
-              style: TextStyle(
+    return ResponsiveBuilder(
+      breakpoints: ScreenBreakpoints(
+          tablet: 971, desktop: 1140, watch: 300),
+      builder: (context, sizingInformation) {
+        // Check the sizing information here and return your UI
+        if (sizingInformation.deviceScreenType ==
+            DeviceScreenType.desktop) {
+          return Container(
+            width: 250,
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      color: Color(0xfff3f5fe)
+                  ),
+                  height: 45,
+                  child: TextField(
+                    style: TextStyle(
 
-                  fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                suffixIcon: Icon(Icons.search,size: 22,color: Colors.black,),
+                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                    onChanged: (value) {
+                      //Do something with the user input.
+                    },
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.search,size: 22,color: Colors.black,),
 
-                border: InputBorder.none,
-                hintStyle: TextStyle(
+                      border: InputBorder.none,
+                      hintStyle: TextStyle(
 
-                    fontFamily: "Metrisch-Medium",height: 1.5, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54),
-                hintText: 'Search Project',
-                // contentPadding:
-                // EdgeInsets.symmetric(horizontal: 20.0),
-                // border: OutlineInputBorder(
-                //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                // ),
-              ),
-            ),
-          ),
-          SizedBox(height: 40,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
+                          fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                      hintText: 'Search Project',
+                      // contentPadding:
+                      // EdgeInsets.symmetric(horizontal: 20.0),
+                      // border: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      // ),
+                    ),
+                  ),
                 ),
-                width: 5,
-                height: 3,
-              ),
-              SizedBox(width: 10,),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
-                ),
-                width: 20,
-                height: 3,
-              ),
-              SizedBox(width: 10,),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
-                ),
-                width: 5,
-                height: 3,
-              )
-            ],
-          ),
-          SizedBox(height: 15,),
-          Text("Categories",style: TextStyle(fontSize: MediaQuery.of(context).size.height/33,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
-          SizedBox(height: 20,),
-          Container(
-            height: 180,
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return Column(
+                SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CategoriesButton(categoryName: "PYTHON",categoryQuantity: 213,),
-                    Divider(color: Colors.black12,thickness: 1,)
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 20,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    )
                   ],
-                );
-              },
+                ),
+                SizedBox(height: 15,),
+                Text("Categories",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+                SizedBox(height: 20,),
+                Container(
+                  height: 180,
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          CategoriesButton(categoryName: "PYTHON",categoryQuantity: 213,),
+                          Divider(color: Colors.black12,thickness: 1,)
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 20,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    )
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Text("Most Viewed Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+                SizedBox(height: 20,),
+                Container(
+                  height: 300,
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return TopProjects(projectName: "Computer Vision using Deep Learning and Machine Learning",madeBy: "Aryan Solanki",);
+                    },
+                  ),
+                ),
+                SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 20,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    )
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Text("Batch Wise Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+                SizedBox(height: 20,),
+                BatchWiseProjects(),
+                SizedBox(height: 20,),
+              ],
             ),
-          ),
-          SizedBox(height: 40,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          );
+        }
+        if (sizingInformation.deviceScreenType ==
+            DeviceScreenType.tablet) {
+          return Container(
+            width: 220,
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      color: Color(0xfff3f5fe)
+                  ),
+                  height: 45,
+                  child: TextField(
+                    style: TextStyle(
+
+                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                    onChanged: (value) {
+                      //Do something with the user input.
+                    },
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.search,size: 22,color: Colors.black,),
+
+                      border: InputBorder.none,
+                      hintStyle: TextStyle(
+
+                          fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                      hintText: 'Search Project',
+                      // contentPadding:
+                      // EdgeInsets.symmetric(horizontal: 20.0),
+                      // border: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      // ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 20,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    )
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Text("Categories",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+                SizedBox(height: 20,),
+                Container(
+                  height: 180,
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          CategoriesButton(categoryName: "PYTHON",categoryQuantity: 213,),
+                          Divider(color: Colors.black12,thickness: 1,)
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 20,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    )
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Text("Most Viewed Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+                SizedBox(height: 20,),
+                Container(
+                  height: 300,
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return TopProjects(projectName: "Computer Vision using Deep Learning and Machine Learning",madeBy: "Aryan Solanki",);
+                    },
+                  ),
+                ),
+                SizedBox(height: 40,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 20,
+                      height: 3,
+                    ),
+                    SizedBox(width: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.orange.shade400,
+                      ),
+                      width: 5,
+                      height: 3,
+                    )
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Text("Batch Wise Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+                SizedBox(height: 20,),
+                BatchWiseProjects(),
+                SizedBox(height: 20,),
+              ],
+            ),
+          );
+        }
+
+        return Container(
+            width: MediaQuery.of(context).size.width-40,
+            child: Column(
             children: [
               Container(
+                padding: EdgeInsets.only(left: 10),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    color: Color(0xfff3f5fe)
                 ),
-                width: 5,
-                height: 3,
+                height: 45,
+                child: TextField(
+                  style: TextStyle(
+
+                      fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                  onChanged: (value) {
+                    //Do something with the user input.
+                  },
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(Icons.search,size: 22,color: Colors.black,),
+
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(
+
+                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                    hintText: 'Search Project',
+                    // contentPadding:
+                    // EdgeInsets.symmetric(horizontal: 20.0),
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    // ),
+                  ),
+                ),
               ),
-              SizedBox(width: 10,),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
-                ),
-                width: 20,
-                height: 3,
+              SizedBox(height: 40,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 5,
+                    height: 3,
+                  ),
+                  SizedBox(width: 10,),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 20,
+                    height: 3,
+                  ),
+                  SizedBox(width: 10,),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 5,
+                    height: 3,
+                  )
+                ],
               ),
-              SizedBox(width: 10,),
+              SizedBox(height: 15,),
+              Text("Categories",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+              SizedBox(height: 20,),
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
+                height: 180,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        CategoriesButton(categoryName: "PYTHON",categoryQuantity: 213,),
+                        Divider(color: Colors.black12,thickness: 1,)
+                      ],
+                    );
+                  },
                 ),
-                width: 5,
-                height: 3,
-              )
+              ),
+              SizedBox(height: 40,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 5,
+                    height: 3,
+                  ),
+                  SizedBox(width: 10,),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 20,
+                    height: 3,
+                  ),
+                  SizedBox(width: 10,),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 5,
+                    height: 3,
+                  )
+                ],
+              ),
+              SizedBox(height: 15,),
+              Text("Most Viewed Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+              SizedBox(height: 20,),
+              Container(
+                height: 300,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return TopProjects(projectName: "Computer Vision using Deep Learning and Machine Learning",madeBy: "Aryan Solanki",);
+                  },
+                ),
+              ),
+              SizedBox(height: 40,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 5,
+                    height: 3,
+                  ),
+                  SizedBox(width: 10,),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 20,
+                    height: 3,
+                  ),
+                  SizedBox(width: 10,),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.orange.shade400,
+                    ),
+                    width: 5,
+                    height: 3,
+                  )
+                ],
+              ),
+              SizedBox(height: 15,),
+              Text("Batch Wise Projects",style: TextStyle(fontSize: 21,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
+              SizedBox(height: 20,),
+              BatchWiseProjects(),
+              SizedBox(height: 20,),
             ],
           ),
-          SizedBox(height: 15,),
-          Text("Most Viewed Projects",style: TextStyle(fontSize: MediaQuery.of(context).size.height/33,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
-          SizedBox(height: 20,),
-          Container(
-            height: 300,
-            child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return TopProjects(projectName: "Computer Vision using Deep Learning and Machine Learning",madeBy: "Aryan Solanki",);
-              },
-            ),
-          ),
-          SizedBox(height: 40,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
-                ),
-                width: 5,
-                height: 3,
-              ),
-              SizedBox(width: 10,),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
-                ),
-                width: 20,
-                height: 3,
-              ),
-              SizedBox(width: 10,),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.orange.shade400,
-                ),
-                width: 5,
-                height: 3,
-              )
-            ],
-          ),
-          SizedBox(height: 15,),
-          Text("Batch Wise Projects",style: TextStyle(fontSize: MediaQuery.of(context).size.height/33,color: Colors.black87,fontFamily: "Metrisch-Bold"),),
-          SizedBox(height: 20,),
-          BatchWiseProjects(),
-          SizedBox(height: 20,),
-        ],
-      ),
+        );
+      },
     );
   }
 

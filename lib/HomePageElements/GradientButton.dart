@@ -3,10 +3,12 @@ import 'package:flutter/animation.dart';
 
 class GradientButton extends StatefulWidget {
   final double buttonwidth;
+  final double buttonheight;
   final String title;
   final Function onPressed;
   const GradientButton({
     this.buttonwidth = 180,
+    this.buttonheight = 50,
     this.title = "Explore More",
     this.onPressed,
   });
@@ -56,7 +58,7 @@ class _GradientButtonState extends State<GradientButton>
         padding: EdgeInsets.all(0.0),
       ),
       child: AnimatedContainer(
-        height: 50,
+        height: widget.buttonheight,
         width: widget.buttonwidth,
         duration: Duration(milliseconds: 300),
         decoration: BoxDecoration(
@@ -74,7 +76,7 @@ class _GradientButtonState extends State<GradientButton>
                 color: Colors.white,
                 height: 1.3,
                 fontFamily: "Metrisch-Bold",
-                fontSize: MediaQuery.of(context).size.height / 40),
+                fontSize: 16),
           ),
         ),
       ),

@@ -40,7 +40,7 @@ class _CategoriesButtonState extends State<CategoriesButton> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.categoryName,style: TextStyle(fontSize: MediaQuery.of(context).size.height/45,color: hover==true?Colors.green:Colors.black87,fontFamily: "Metrisch-Bold"),),
+            Text(widget.categoryName,style: TextStyle(fontSize: 15,color: hover==true?Colors.green:Colors.black87,fontFamily: "Metrisch-Bold"),),
             AnimatedContainer(
               duration: Duration(milliseconds: 300),
               width: 35,
@@ -52,7 +52,7 @@ class _CategoriesButtonState extends State<CategoriesButton> {
               ),
               child: Center(
                 child: Text(
-                  widget.categoryQuantity.toString(),style: TextStyle(fontSize: MediaQuery.of(context).size.height/50,color: hover==true?Color(0xff3224e9):Colors.white),
+                  widget.categoryQuantity.toString(),style: TextStyle(fontSize:13,color: hover==true?Color(0xff3224e9):Colors.white),
                 ),
               ),
             )

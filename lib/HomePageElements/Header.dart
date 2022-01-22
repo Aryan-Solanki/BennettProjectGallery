@@ -28,7 +28,7 @@ class _HeaderState extends State<Header> {
       child: ResponsiveBuilder(
         breakpoints: ScreenBreakpoints(
             tablet: 550,
-            desktop: 790,
+            desktop: 800,
             watch: 300
         ),
         builder: (context, sizingInformation) {
