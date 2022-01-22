@@ -40,7 +40,7 @@ class _TopProjectsState extends State<TopProjects> {
 
         },
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MediaQuery.of(context).size.width>971?MainAxisAlignment.center:MainAxisAlignment.start,
           children: [
             Container(
               height: 80,
@@ -78,9 +78,9 @@ class _TopProjectsState extends State<TopProjects> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: 140,
+                      width: MediaQuery.of(context).size.width>971?140:MediaQuery.of(context).size.width-120,
                       child: Text(
-                        widget.projectName.toString(),maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color: hover==true?Colors.green:Colors.black87),
+                        widget.projectName.toString(),maxLines: MediaQuery.of(context).size.width>971?2:1,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color: hover==true?Colors.green:Colors.black87),
                       ),
                     ),
                     SizedBox(height: 8,),

@@ -20,7 +20,8 @@ class _RightSideState extends State<RightSide> {
     'Sort by latest',
   ];
 
-
+bool nextpagehover=false;
+int currentpagenumber=1;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +97,22 @@ class _RightSideState extends State<RightSide> {
 
                 ),
                 SizedBox(height: 40,),
-                ProjectCard(),
+                Container(
+                  height: 1300,
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 9,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.68,crossAxisSpacing: 20
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return ProjectCard();
+                    },
+                  ),
+                ),
+
+                SizedBox(height: 40,),
+
 
               ],
             ),
@@ -188,7 +204,43 @@ class _RightSideState extends State<RightSide> {
                 ),
                 SizedBox(height: 20,),
                 ProjectCard(),
+                Row(
+                  children: [
+                    TextButton(
+                      onHover: (x){
+                        if(x){
+                          setState(() {
+                            nextpagehover=true;
+                          });
 
+                        }
+                        else{
+                          setState(() {
+                            nextpagehover=false;
+                          });
+                        }
+                      },
+                      onPressed: (){
+
+                      },
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        width: 35,
+                        height: 25,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: nextpagehover==true?Color(0xff3224e9):Colors.white),
+                          borderRadius: BorderRadius.circular(5),
+                          color: nextpagehover==true?Colors.white:Color(0xff3224e9),
+                        ),
+                        child: Center(
+                          child: Text(
+                            currentpagenumber.toString(),style: TextStyle(fontSize:13,color: nextpagehover==true?Color(0xff3224e9):Colors.white),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
           );
