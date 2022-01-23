@@ -73,19 +73,19 @@ class _MyHomePageState extends State<MyHomePage> {
         onNotification: (v) {
           if (v is ScrollUpdateNotification) {
             if(v.metrics.axisDirection==AxisDirection.down || v.metrics.axisDirection==AxisDirection.up)
-            //only if scroll update notification is triggered
-            setState(() {
-              rateEight -= v.scrollDelta / 1;
-              rateSeven -= v.scrollDelta / 1.5;
-              rateSix -= v.scrollDelta / 2;
-              rateFivepointFive -= v.scrollDelta / 2.25;
-              rateFive -= v.scrollDelta / 2.5;
-              rateFour -= v.scrollDelta / 3;
-              rateThree -= v.scrollDelta / 3.5;
-              rateTwo -= v.scrollDelta / 4;
-              rateOne -= v.scrollDelta / 4.5;
-              rateZero -= v.scrollDelta / 50;
-            });
+              //only if scroll update notification is triggered
+              setState(() {
+                rateEight -= v.scrollDelta / 1;
+                rateSeven -= v.scrollDelta / 1.5;
+                rateSix -= v.scrollDelta / 2;
+                rateFivepointFive -= v.scrollDelta / 2.25;
+                rateFive -= v.scrollDelta / 2.5;
+                rateFour -= v.scrollDelta / 3;
+                rateThree -= v.scrollDelta / 3.5;
+                rateTwo -= v.scrollDelta / 4;
+                rateOne -= v.scrollDelta / 4.5;
+                rateZero -= v.scrollDelta / 50;
+              });
 
           }
         },
@@ -98,61 +98,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Stack(
                 children: <Widget>[
                   ParallaxWidget(top: rateZero, asset: "parallax0"),
-                  // Positioned(
-                  //   top: rateFour+470,
-                  //   left: 50,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       TextButton(
-                  //
-                  //         onPressed: () {},
-                  //         style: TextButton.styleFrom(
-                  //           shape: RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.circular(10.0),
-                  //           ),
-                  //           backgroundColor: Color(0xffa71932),
-                  //           primary: Colors.white,
-                  //           padding: EdgeInsets.all(0.0),
-                  //         ),
-                  //         child: Container(
-                  //           padding: EdgeInsets.symmetric(
-                  //               horizontal: 30, vertical: 8),
-                  //           child: Text(
-                  //             "Start Now",
-                  //             style: GoogleFonts.nunito(
-                  //                 fontSize: MediaQuery.of(context).size.height / 42, fontWeight: FontWeight.w800),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20,
-                  //       ),
-                  //       TextButton(
-                  //         onPressed: () {},
-                  //         style: TextButton.styleFrom(
-                  //           shape: RoundedRectangleBorder(
-                  //               borderRadius: BorderRadius.circular(10.0),
-                  //               side: BorderSide(color: Colors.black)),
-                  //           backgroundColor: Colors.transparent,
-                  //           primary: Colors.black87,
-                  //           padding: EdgeInsets.all(0.0),
-                  //         ),
-                  //         child: Container(
-                  //           padding: EdgeInsets.symmetric(
-                  //               horizontal: 30, vertical: 8),
-                  //           child: Text(
-                  //             "Start Now",
-                  //             style: GoogleFonts.nunito(
-                  //                 color: Colors.black,
-                  //                 fontSize: MediaQuery.of(context).size.height / 42,
-                  //                 fontWeight: FontWeight.w800),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                   ResponsiveBuilder(
                     breakpoints: ScreenBreakpoints(
                         tablet: 550, desktop: 790, watch: 300),
@@ -170,8 +115,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               style: TextStyle(
                                   fontFamily: "Metrisch-ExtraBold",
                                   fontSize:
-                                      MediaQuery.of(context).size.width / 33 +
-                                          5)),
+                                  MediaQuery.of(context).size.width / 33 +
+                                      5)),
                         );
                       }
 
@@ -309,13 +254,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.orange.shade400,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.orange.shade400,
+                                  ),
+                                  width: 10,
+                                  height: 2,
                                 ),
-                                width: 10,
-                                height: 2,
-                              ),
                                 SizedBox(width: 10,),
                                 Container(
                                   decoration: BoxDecoration(
@@ -340,9 +285,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text("How it works",
                                 style: TextStyle(
                                     fontFamily: "Metrisch-Bold",
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            25)),
+                                    fontSize:25)),
                             Container(
                               width: 400,
                               padding: EdgeInsets.only(top: 10, bottom: 40),
@@ -352,8 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 style: TextStyle(
                                     fontFamily: "Metrisch-Medium",
                                     height: 1.5,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 46,
+                                    fontSize:15,
                                     color: Colors.black54),
                               ),
                             ),
@@ -374,18 +316,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                     DeviceScreenType.tablet) {
                                   return Padding(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 20),
+                                      EdgeInsets.symmetric(horizontal: 20),
                                       child: Column(
                                         children: [
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                             children: [
                                               IconPalette(
                                                 icon: Icons.pie_chart_rounded,
                                                 title: "Projects Overview",
                                                 text:
-                                                    "Watch and learn from the Projects made by Bennett Achievers",
+                                                "Watch and learn from the Projects made by Bennett Achievers",
                                               ),
                                               SizedBox(
                                                 width: 10,
@@ -394,7 +336,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 icon: Icons.people_rounded,
                                                 title: "Community",
                                                 text:
-                                                    "Get to know your fellow Bennatians and learn from their Projects",
+                                                "Get to know your fellow Bennatians and learn from their Projects",
                                               ),
                                             ],
                                           ),
@@ -405,7 +347,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             icon: Icons.person_rounded,
                                             title: "DashBoard",
                                             text:
-                                                "Manage all your projects by tracking Activities in Dashboard",
+                                            "Manage all your projects by tracking Activities in Dashboard",
                                           ),
                                         ],
                                       ));
@@ -422,7 +364,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             icon: Icons.pie_chart_rounded,
                                             title: "Projects Overview",
                                             text:
-                                                "Watch and learn from the Projects made by Bennett Achievers",
+                                            "Watch and learn from the Projects made by Bennett Achievers",
                                           )),
                                     ),
                                     Padding(
@@ -435,7 +377,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             icon: Icons.people_rounded,
                                             title: "Community",
                                             text:
-                                                "Get to know your fellow Bennatians and learn from their Projects",
+                                            "Get to know your fellow Bennatians and learn from their Projects",
                                           )),
                                     ),
                                     Padding(
@@ -447,7 +389,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             icon: Icons.person_rounded,
                                             title: "DashBoard",
                                             text:
-                                                "Manage all your projects by tracking Activities in Dashboard",
+                                            "Manage all your projects by tracking Activities in Dashboard",
                                           )),
                                     ),
                                   ],
@@ -459,85 +401,81 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       ResponsiveBuilder(
                         breakpoints: ScreenBreakpoints(
-                            tablet: 550, desktop: 1100, watch: 300),
+                            tablet: 800, desktop: 1050, watch: 580),
                         builder: (context, sizingInformation) {
                           // Check the sizing information here and return your UI
                           if (sizingInformation.deviceScreenType ==
                               DeviceScreenType.desktop) {
                             return Container(
                               padding: EdgeInsets.only(top: 40),
-                              height: MediaQuery.of(context).size.width / 2.7,
-                              width: MediaQuery.of(context).size.width,
+                              height: 500,
                               color: Colors.white,
-                              child: Stack(
-                                clipBehavior: Clip.none,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Positioned(
-                                    left: -250,
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                              3.2,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.5,
-                                      decoration: BoxDecoration(
-                                        color: Colors.amber[400],
-                                        borderRadius:
-                                            BorderRadius.circular(400),
-                                      ),
+                                  Expanded(
+                                    child: Stack(
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        Positioned(
+                                          left: -250,
+                                          child: Container(
+                                            height: 343.75,
+                                            width: 730,
+                                            decoration: BoxDecoration(
+                                              color: Colors.amber[400],
+                                              borderRadius:
+                                              BorderRadius.circular(400),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 16,
+                                          left: 73,
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20.0)),
+                                            elevation: 5,
+                                            child: Container(
+                                              height:309,
+                                              width:550,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius.circular(20),
+                                              ),
+                                              clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                              child: Image.network(
+                                                "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        ProfileTile(
+                                          top: 31,
+                                          left:24.5,
+                                          title: "Students of Bennett University ",
+                                          subtitle: "Under Prof Aryan",
+                                          factor: MediaQuery.of(context).size.width /
+                                              1300,
+                                        ),
+                                        ProfileTile(
+                                          top: 275,
+                                          left:550,
+                                          title: "Students of Bennett University ",
+                                          subtitle: "Under Prof Aryan",
+                                          factor: MediaQuery.of(context).size.width /
+                                              1300,
+                                        ),
+
+                                      ],
                                     ),
                                   ),
-                                  Positioned(
-                                    top: MediaQuery.of(context).size.width / 65,
-                                    left:
-                                        MediaQuery.of(context).size.width / 15,
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                      elevation: 5,
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.width /
-                                                3.55,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        clipBehavior:
-                                            Clip.antiAliasWithSaveLayer,
-                                        child: Image.network(
-                                          "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  ProfileTile(
-                                    top: MediaQuery.of(context).size.width / 35,
-                                    left:
-                                        MediaQuery.of(context).size.width / 45,
-                                    title: "Students of Bennett University ",
-                                    subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width /
-                                        1300,
-                                  ),
-                                  ProfileTile(
-                                    top: MediaQuery.of(context).size.width / 4,
-                                    left:
-                                        MediaQuery.of(context).size.width / 2.1,
-                                    title: "Students of Bennett University ",
-                                    subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width /
-                                        1300,
-                                  ),
-                                  Positioned(
-                                    width: MediaQuery.of(context).size.width / 3,
-                                    top: MediaQuery.of(context).size.width / 30,
-                                    right: MediaQuery.of(context).size.width / 23,
+                                  Container(
+                                    width: 400,
+                                    padding: EdgeInsets.only(right: 50),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
@@ -578,10 +516,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           style: TextStyle(
                                               height: 1.3,
                                               fontFamily: "Metrisch-Bold",
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  25),
+                                              fontSize: 25),
                                         ),
                                         SizedBox(
                                           height: 15,
@@ -592,10 +527,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             style: TextStyle(
                                                 fontFamily: "Metrisch-Medium",
                                                 height: 1.5,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    46,
+                                                fontSize: 15,
                                                 color: Colors.black54),
                                           ),
                                         ),
@@ -607,7 +539,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           children: [
                                             Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -616,18 +548,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       begin: 0,
                                                       end: 270,
                                                       duration:
-                                                          Duration(seconds: 7),
+                                                      Duration(seconds: 7),
                                                       style: TextStyle(
                                                           color:
-                                                              Color(0xff101770),
+                                                          Color(0xff101770),
                                                           height: 1.3,
                                                           fontFamily:
-                                                              "Metrisch-Bold",
-                                                          fontSize: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height /
-                                                              15),
+                                                          "Metrisch-Bold",
+                                                          fontSize: 45),
                                                     ),
                                                     SizedBox(
                                                       width: 5,
@@ -638,12 +566,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           color: Colors.orange,
                                                           height: 1.3,
                                                           fontFamily:
-                                                              "Metrisch-Bold",
-                                                          fontSize: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height /
-                                                              25),
+                                                          "Metrisch-Bold",
+                                                          fontSize: 25),
                                                     )
                                                   ],
                                                 ),
@@ -651,25 +575,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   "PROJECTS MADE",
                                                   style: TextStyle(
                                                       fontFamily:
-                                                          "Metrisch-Medium",
+                                                      "Metrisch-Medium",
                                                       height: 1.3,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height /
-                                                              50,
+                                                      fontSize:14,
                                                       color: Colors.black),
                                                 )
                                               ],
                                             ),
                                             SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    13),
+                                                width: 30),
                                             Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   children: [
@@ -678,18 +595,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                                       begin: 0,
                                                       end: 90,
                                                       duration:
-                                                          Duration(seconds: 7),
+                                                      Duration(seconds: 7),
                                                       style: TextStyle(
                                                           color:
-                                                              Color(0xff101770),
+                                                          Color(0xff101770),
                                                           height: 1.3,
                                                           fontFamily:
-                                                              "Metrisch-Bold",
-                                                          fontSize: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height /
-                                                              15),
+                                                          "Metrisch-Bold",
+                                                          fontSize: 45),
                                                     ),
                                                     SizedBox(
                                                       width: 5,
@@ -700,12 +613,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           color: Colors.orange,
                                                           height: 1.3,
                                                           fontFamily:
-                                                              "Metrisch-Bold",
-                                                          fontSize: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height /
-                                                              25),
+                                                          "Metrisch-Bold",
+                                                          fontSize: 25),
                                                     )
                                                   ],
                                                 ),
@@ -713,13 +622,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   "ACHIEVEMENTS",
                                                   style: TextStyle(
                                                       fontFamily:
-                                                          "Metrisch-Medium",
+                                                      "Metrisch-Medium",
                                                       height: 1.3,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height /
-                                                              50,
+                                                      fontSize:14,
                                                       color: Colors.black),
                                                 )
                                               ],
@@ -742,99 +647,452 @@ class _MyHomePageState extends State<MyHomePage> {
                               DeviceScreenType.tablet) {
                             return Container(
                               padding: EdgeInsets.only(top: 40),
-                              height: MediaQuery.of(context).size.width / 2.4,
-                              width: MediaQuery.of(context).size.width,
+                              height: 970,
                               color: Colors.white,
-                              child: Stack(
-                                clipBehavior: Clip.none,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Positioned(
-                                    left: -250,
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                              3.1,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.3,
-                                      decoration: BoxDecoration(
-                                        color: Colors.amber[400],
-                                        borderRadius:
-                                            BorderRadius.circular(400),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: MediaQuery.of(context).size.width / 50,
-                                    left:
-                                        MediaQuery.of(context).size.width / 15,
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.width /
-                                              3.55,
-                                      width:
-                                          MediaQuery.of(context).size.width / 2,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      child: Image.network(
-                                        "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  ProfileTile(
-                                    top: MediaQuery.of(context).size.width / 35,
-                                    left:
-                                        MediaQuery.of(context).size.width / 45,
-                                    title: "Students of Bennett University ",
-                                    subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width /
-                                        1000,
-                                  ),
-                                  ProfileTile(
-                                    top: MediaQuery.of(context).size.width / 4,
-                                    left:
-                                        MediaQuery.of(context).size.width / 2.2,
-                                    title: "Students of Bennett University ",
-                                    subtitle: "Under Prof Aryan",
-                                    factor: MediaQuery.of(context).size.width /
-                                        1000,
-                                  ),
-                                  Positioned(
-                                    top: MediaQuery.of(context).size.width / 10,
-                                    right: 10,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                  Expanded(
+                                    child: Stack(
+                                      clipBehavior: Clip.none,
                                       children: [
+                                        Positioned(
+                                          left: -250,
+                                          child: Container(
+                                            height: 543.75,
+                                            width: 930,
+                                            decoration: BoxDecoration(
+                                              color: Colors.amber[400],
+                                              borderRadius:
+                                              BorderRadius.circular(400),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 16,
+                                          left: 100,
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20.0)),
+                                            elevation: 5,
+                                            child: Container(
+                                              height:509,
+                                              width:MediaQuery.of(context).size.width-200,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius.circular(20),
+                                              ),
+                                              clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                              child: Image.network(
+                                                "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        ProfileTile(
+                                          top: 31,
+                                          left:24.5,
+                                          title: "Students of Bennett University ",
+                                          subtitle: "Under Prof Aryan",
+                                          factor: 1,
+                                        ),
+                                        ProfileTile(
+                                          top: 475,
+                                          left: MediaQuery.of(context).size.width/1.4,
+                                          title: "Students of Bennett University ",
+                                          subtitle: "Under Prof Aryan",
+                                          factor: 1,
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 500,
+                                    padding: EdgeInsets.symmetric(horizontal: 20),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 10,
+                                              height: 2,
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 50,
+                                              height: 2,
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 10,
+                                              height: 2,
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
                                         Text(
-                                          "Project Showcase",
+                                          "Project Accomplished by Student of Bennett University",textAlign: TextAlign.center,
                                           style: TextStyle(
+                                              height: 1.3,
                                               fontFamily: "Metrisch-Bold",
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  25),
+                                              fontSize: 25),
                                         ),
                                         SizedBox(
                                           height: 15,
                                         ),
                                         Container(
-                                          width: 250,
                                           child: Text(
-                                            "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                            "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontFamily: "Metrisch-Medium",
                                                 height: 1.5,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    46,
+                                                fontSize: 15,
                                                 color: Colors.black54),
                                           ),
-                                        )
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Countup(
+                                                      softWrap: true,
+                                                      begin: 0,
+                                                      end: 270,
+                                                      duration:
+                                                      Duration(seconds: 7),
+                                                      style: TextStyle(
+                                                          color:
+                                                          Color(0xff101770),
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                          "Metrisch-Bold",
+                                                          fontSize: 45),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "+",
+                                                      style: TextStyle(
+                                                          color: Colors.orange,
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                          "Metrisch-Bold",
+                                                          fontSize: 25),
+                                                    )
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "PROJECTS MADE",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                      "Metrisch-Medium",
+                                                      height: 1.3,
+                                                      fontSize:14,
+                                                      color: Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(width: 30),
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Countup(
+                                                      softWrap: true,
+                                                      begin: 0,
+                                                      end: 90,
+                                                      duration:
+                                                      Duration(seconds: 7),
+                                                      style: TextStyle(
+                                                          color:
+                                                          Color(0xff101770),
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                          "Metrisch-Bold",
+                                                          fontSize: 45),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "+",
+                                                      style: TextStyle(
+                                                          color: Colors.orange,
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                          "Metrisch-Bold",
+                                                          fontSize: 25),
+                                                    )
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "ACHIEVEMENTS",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                      "Metrisch-Medium",
+                                                      height: 1.3,
+                                                      fontSize:14,
+                                                      color: Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        GradientButton(),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+
+                          if (sizingInformation.deviceScreenType ==
+                              DeviceScreenType.watch) {
+                            return Container(
+                              padding: EdgeInsets.only(top: 40),
+                              height: 770,
+                              color: Colors.white,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Stack(
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        Positioned(
+                                          left: -350,
+                                          child: Container(
+                                            height: 300.75,
+                                            width: 630,
+                                            decoration: BoxDecoration(
+                                              color: Colors.amber[400],
+                                              borderRadius:
+                                              BorderRadius.circular(400),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 16,
+                                          left: 50,
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(20.0)),
+                                            elevation: 5,
+                                            child: Container(
+                                              height:260,
+                                              width:MediaQuery.of(context).size.width-100,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius.circular(20),
+                                              ),
+                                              clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                              child: Image.network(
+                                                "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        ProfileTile(
+                                          top: 31,
+                                          left:24.5,
+                                          title: "Students of Bennett University ",
+                                          subtitle: "Under Prof Aryan",
+                                          factor: 1,
+                                        ),
+                                        ProfileTile(
+                                          top: 230,
+                                          left: MediaQuery.of(context).size.width-200,
+                                          title: "Students of Bennett University ",
+                                          subtitle: "Under Prof Aryan",
+                                          factor: 1,
+                                        ),
+
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 500,
+                                    padding: EdgeInsets.symmetric(horizontal: 20),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 10,
+                                              height: 2,
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 50,
+                                              height: 2,
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.orange.shade400,
+                                              ),
+                                              width: 10,
+                                              height: 2,
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Text(
+                                          "Project Accomplished by Student of Bennett University",textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              height: 1.3,
+                                              fontFamily: "Metrisch-Bold",
+                                              fontSize: 25),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: "Metrisch-Medium",
+                                                height: 1.5,
+                                                fontSize: 15,
+                                                color: Colors.black54),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text("270",style: TextStyle(
+                                                        color:
+                                                        Color(0xff101770),
+                                                        height: 1.3,
+                                                        fontFamily:
+                                                        "Metrisch-Bold",
+                                                        fontSize: 45),),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "+",
+                                                      style: TextStyle(
+                                                          color: Colors.orange,
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                          "Metrisch-Bold",
+                                                          fontSize: 25),
+                                                    )
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "PROJECTS MADE",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                      "Metrisch-Medium",
+                                                      height: 1.3,
+                                                      fontSize:14,
+                                                      color: Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(width: 30),
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text("90",style: TextStyle(
+                                                        color:
+                                                        Color(0xff101770),
+                                                        height: 1.3,
+                                                        fontFamily:
+                                                        "Metrisch-Bold",
+                                                        fontSize: 45),),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "+",
+                                                      style: TextStyle(
+                                                          color: Colors.orange,
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                          "Metrisch-Bold",
+                                                          fontSize: 25),
+                                                    )
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "ACHIEVEMENTS",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                      "Metrisch-Medium",
+                                                      height: 1.3,
+                                                      fontSize:14,
+                                                      color: Colors.black),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        GradientButton(),
                                       ],
                                     ),
                                   ),
@@ -845,96 +1103,232 @@ class _MyHomePageState extends State<MyHomePage> {
 
                           return Container(
                             padding: EdgeInsets.only(top: 40),
-                            height: MediaQuery.of(context).size.width / 1.07,
-                            width: MediaQuery.of(context).size.width,
+                            height: 770,
                             color: Colors.white,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              clipBehavior: Clip.none,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Positioned(
-                                  top: 0,
-                                  left: -100,
-                                  child: Container(
-                                    height:
-                                        MediaQuery.of(context).size.width / 2.3,
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    decoration: BoxDecoration(
-                                      color: Colors.amber[400],
-                                      borderRadius: BorderRadius.circular(400),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: MediaQuery.of(context).size.width / 30,
-                                  left: MediaQuery.of(context).size.width / 15,
-                                  child: Container(
-                                    height:
-                                        MediaQuery.of(context).size.width / 2.7,
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.5,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: Image.network(
-                                      "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                ProfileTile(
-                                  top: MediaQuery.of(context).size.width / 20,
-                                  left: MediaQuery.of(context).size.width / 45,
-                                  title: "Students of Bennett University ",
-                                  subtitle: "Under Prof Aryan",
-                                  factor:
-                                      MediaQuery.of(context).size.width / 700,
-                                ),
-                                ProfileTile(
-                                  top: MediaQuery.of(context).size.width / 3.15,
-                                  left:
-                                      MediaQuery.of(context).size.width / 1.75,
-                                  title: "Students of Bennett University ",
-                                  subtitle: "Under Prof Aryan",
-                                  factor:
-                                      MediaQuery.of(context).size.width / 700,
-                                ),
-                                Positioned(
-                                  top: MediaQuery.of(context).size.width / 1.85,
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          "Project Showcase",
-                                          style: TextStyle(
-                                              fontFamily: "Metrisch-Bold",
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  25),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Container(
-                                          width: 250,
-                                          child: Text(
-                                            "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University",
-                                            style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",
-                                                height: 1.5,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height /
-                                                    46,
-                                                color: Colors.black54),
+                                Expanded(
+                                  child: Stack(
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      Positioned(
+                                        left: -250,
+                                        child: Container(
+                                          height: 343.75,
+                                          width: 730,
+                                          decoration: BoxDecoration(
+                                            color: Colors.amber[400],
+                                            borderRadius:
+                                            BorderRadius.circular(400),
                                           ),
-                                        )
-                                      ],
-                                    ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 16,
+                                        left: 100,
+                                        child: Card(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(20.0)),
+                                          elevation: 5,
+                                          child: Container(
+                                            height:309,
+                                            width:MediaQuery.of(context).size.width-200,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(20),
+                                            ),
+                                            clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                            child: Image.network(
+                                              "https://www.bennett.edu.in/wp-content/uploads/2021/07/attrium-Where-students-sit-relax-and-discuss.jpg",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      ProfileTile(
+                                        top: 31,
+                                        left:24.5,
+                                        title: "Students of Bennett University ",
+                                        subtitle: "Under Prof Aryan",
+                                        factor: 1,
+                                      ),
+                                      ProfileTile(
+                                        top: 275,
+                                        left: MediaQuery.of(context).size.width/1.55,
+                                        title: "Students of Bennett University ",
+                                        subtitle: "Under Prof Aryan",
+                                        factor: 1,
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: 500,
+                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: Colors.orange.shade400,
+                                            ),
+                                            width: 10,
+                                            height: 2,
+                                          ),
+                                          SizedBox(width: 10,),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: Colors.orange.shade400,
+                                            ),
+                                            width: 50,
+                                            height: 2,
+                                          ),
+                                          SizedBox(width: 10,),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: Colors.orange.shade400,
+                                            ),
+                                            width: 10,
+                                            height: 2,
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Text(
+                                        "Project Accomplished by Student of Bennett University",textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            height: 1.3,
+                                            fontFamily: "Metrisch-Bold",
+                                            fontSize: 25),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontFamily: "Metrisch-Medium",
+                                              height: 1.5,
+                                              fontSize: 15,
+                                              color: Colors.black54),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Countup(
+                                                    softWrap: true,
+                                                    begin: 0,
+                                                    end: 270,
+                                                    duration:
+                                                    Duration(seconds: 7),
+                                                    style: TextStyle(
+                                                        color:
+                                                        Color(0xff101770),
+                                                        height: 1.3,
+                                                        fontFamily:
+                                                        "Metrisch-Bold",
+                                                        fontSize: 45),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    "+",
+                                                    style: TextStyle(
+                                                        color: Colors.orange,
+                                                        height: 1.3,
+                                                        fontFamily:
+                                                        "Metrisch-Bold",
+                                                        fontSize: 25),
+                                                  )
+                                                ],
+                                              ),
+                                              Text(
+                                                "PROJECTS MADE",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                    "Metrisch-Medium",
+                                                    height: 1.3,
+                                                    fontSize:14,
+                                                    color: Colors.black),
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                              width: 30),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Countup(
+                                                    softWrap: true,
+                                                    begin: 0,
+                                                    end: 90,
+                                                    duration:
+                                                    Duration(seconds: 7),
+                                                    style: TextStyle(
+                                                        color:
+                                                        Color(0xff101770),
+                                                        height: 1.3,
+                                                        fontFamily:
+                                                        "Metrisch-Bold",
+                                                        fontSize: 45),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    "+",
+                                                    style: TextStyle(
+                                                        color: Colors.orange,
+                                                        height: 1.3,
+                                                        fontFamily:
+                                                        "Metrisch-Bold",
+                                                        fontSize: 25),
+                                                  )
+                                                ],
+                                              ),
+                                              Text(
+                                                "ACHIEVEMENTS",
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                    "Metrisch-Medium",
+                                                    height: 1.3,
+                                                    fontSize:14,
+                                                    color: Colors.black),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      GradientButton(),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -943,7 +1337,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                       ),
                       Container(
-                        padding: EdgeInsets.only(bottom: 40),
+                        padding: EdgeInsets.only(bottom: 40,top: 50),
                         color: Color(0xffffffff),
                         width: double.infinity,
                         // padding: EdgeInsets.only(top: 40),
@@ -982,7 +1376,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             Text("\nBe in the Community",
                                 style:TextStyle(
-                                    fontFamily: "Metrisch-Bold", fontSize: MediaQuery.of(context).size.height/25)),
+                                    fontFamily: "Metrisch-Bold", fontSize: 25)),
                             SizedBox(
                               height: 5,
                             ),
@@ -992,47 +1386,47 @@ class _MyHomePageState extends State<MyHomePage> {
                                 style: TextStyle(
                                     fontFamily: "Metrisch-Medium",
                                     height: 1.3,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 46,
+                                    fontSize:15,
                                     color: Colors.black54)),
                             SizedBox(
                               height: 50,
                             ),
-                            ResponsiveBuilder(
-                              builder: (context, sizingInformation) {
-                                // Check the sizing information here and return your UI
-                                if (sizingInformation.deviceScreenType ==
-                                    DeviceScreenType.desktop) {
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ZoomInImage(
-                                        ImageLink:
-                                            "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
-                                      ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      ZoomInImage(
-                                          ImageLink:
-                                              "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      ZoomInImage(
-                                          ImageLink:
-                                              "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      ZoomInImage(
-                                          ImageLink:
-                                              "https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
-                                    ],
-                                  );
-                                }
-                                return ZoomInImage();
-                              },
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              height: 300,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ZoomInImage(
+                                    ImageLink:
+                                    "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
+                                  ),
+                                  SizedBox(
+                                    width: 40,
+                                  ),
+                                  ZoomInImage(
+                                      ImageLink:
+                                      "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
+                                  SizedBox(
+                                    width: 40,
+                                  ),
+                                  ZoomInImage(
+                                      ImageLink:
+                                      "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
+                                  SizedBox(
+                                    width: 40,
+                                  ),
+                                  ZoomInImage(
+                                      ImageLink:
+                                      "https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
+                                ],
+                              ),
+                            ),
+                          ),
+                            SizedBox(
+                              height: 50,
                             ),
                           ],
                         ),

@@ -107,17 +107,17 @@ class _IconPaletteState extends State<IconPalette> {
                                         ],
                                       );
                                     },
-                                    child: Icon(Icons.pie_chart_rounded,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
+                                    child: Icon(Icons.pie_chart_rounded,size:60,color: Colors.white,)))
                         ),
                         SizedBox(height: 20,),
                         Text("Projects Overview",style: TextStyle(
-                            fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/35,color: Colors.black)),
+                            fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
                         SizedBox(height: 20,),
                         Text("Watch and learn from the Projects made by Bennett Achievers",textAlign: widget.mobile==true?TextAlign.right:TextAlign.left,style: TextStyle(
-                            fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54)),
+                            fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15,color: Colors.black54)),
                         SizedBox(height: 20,),
                         Text("Learn More...",style: TextStyle(
-                            fontFamily: "Metrisch-Bold",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black)),
+                            fontFamily: "Metrisch-Bold",height: 1.3, fontSize: 15,color: Colors.black)),
                         Container(
                           height: 1.5,
                           width: 80,
@@ -192,17 +192,17 @@ class _IconPaletteState extends State<IconPalette> {
                                         ],
                                       );
                                     },
-                                    child: Icon(Icons.people_rounded,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
+                                    child: Icon(Icons.people_rounded,size:60,color: Colors.white,)))
                         ),
                         SizedBox(height: 20,),
                         Text("Community",style: TextStyle(
-                            fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/35,color: Colors.black)),
+                            fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
                         SizedBox(height: 20,),
                         Text("Get to know your fellow Bennatians and learn from their Projects",textAlign: widget.mobile==true?TextAlign.right:TextAlign.left,style: TextStyle(
-                            fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54)),
+                            fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15,color: Colors.black54)),
                         SizedBox(height: 20,),
                         Text("Learn More...",style: TextStyle(
-                            fontFamily: "Metrisch-Bold",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black)),
+                            fontFamily: "Metrisch-Bold",height: 1.3, fontSize: 15,color: Colors.black)),
                         Container(
                           height: 1.5,
                           width: 80,
@@ -277,17 +277,17 @@ class _IconPaletteState extends State<IconPalette> {
                                         ],
                                       );
                                     },
-                                    child: Icon(Icons.person_rounded,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
+                                    child: Icon(Icons.person_rounded,size: 60,color: Colors.white,)))
                         ),
                         SizedBox(height: 20,),
                         Text("DashBoard",style: TextStyle(
-                            fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/35,color: Colors.black)),
+                            fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
                         SizedBox(height: 20,),
                         Text("Manage all your projects by tracking Activities in Dashboard",textAlign: widget.mobile==true?TextAlign.right:TextAlign.left,style: TextStyle(
-                            fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54)),
+                            fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15,color: Colors.black54)),
                         SizedBox(height: 20,),
                         Text("Learn More...",style: TextStyle(
-                            fontFamily: "Metrisch-Bold",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black)),
+                            fontFamily: "Metrisch-Bold",height: 1.3, fontSize: 15,color: Colors.black)),
                         Container(
                           height: 1.5,
                           width: 80,
@@ -340,17 +340,17 @@ class _IconPaletteState extends State<IconPalette> {
                               ],
                             );
                           },
-                          child: Icon(widget.icon,size:MediaQuery.of(context).size.height/10,color: Colors.white,)))
+                          child: Icon(widget.icon,size:60,color: Colors.white,)))
                   ),
                   SizedBox(height: 20,),
                   Text(widget.title,style: TextStyle(
-                      fontFamily: "Metrisch-Bold",fontSize: MediaQuery.of(context).size.height/35,color: Colors.black)),
+                      fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
                   SizedBox(height: 20,),
                   Text(widget.text,textAlign: widget.mobile==true?TextAlign.right:TextAlign.left,style: TextStyle(
-                      fontFamily: "Metrisch-Medium",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black54)),
+                      fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15,color: Colors.black54)),
                   SizedBox(height: 20,),
                   Text("Learn More...",style: TextStyle(
-                      fontFamily: "Metrisch-Bold",height: 1.3, fontSize: MediaQuery.of(context).size.height/46,color: Colors.black)),
+                      fontFamily: "Metrisch-Bold",height: 1.3, fontSize: 15,color: Colors.black)),
                   Container(
                     height: 1.5,
                     width: 80,

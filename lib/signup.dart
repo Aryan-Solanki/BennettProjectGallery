@@ -123,7 +123,7 @@ class _SignUpState extends State<SignUp> {
                 child: SingleChildScrollView(
                   child: Container(
                     width: MediaQuery.of(context).size.width ,
-                    padding:  EdgeInsets.only(left: 20.0),
+                    padding:  EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,7 +167,7 @@ class _SignUpState extends State<SignUp> {
                           alignment: Alignment.center,
                           clipBehavior: Clip.none,
                           children: [
-                            Container( height: MediaQuery.of(context).size.height/1.2,child: Image(fit: BoxFit.fitWidth,image:AssetImage("assets/loginpageimg.png"))),
+                            Container( height: MediaQuery.of(context).size.height/1.2,child: Image(fit: BoxFit.cover,image:AssetImage("assets/loginpageimg.png"))),
                             SignUpCard(),
                           ],
                         ),
