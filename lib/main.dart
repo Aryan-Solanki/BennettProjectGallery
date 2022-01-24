@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bennettprojectgallery/HomePageElements/BlueBanner.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
+import 'package:bennettprojectgallery/HomePageElements/NoAnimationZoomInImage.dart';
 import 'package:bennettprojectgallery/featuredprojects.dart';
 import 'package:countup/countup.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -1391,7 +1392,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(
                               height: 50,
                             ),
-                          SingleChildScrollView(
+                            MediaQuery.of(context).size.width>580?SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -1424,7 +1425,40 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ],
                               ),
                             ),
-                          ),
+                          ):SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                height: 300,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    NoAnimationZoomInImage(
+                                      ImageLink:
+                                      "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
+                                    ),
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+                                    NoAnimationZoomInImage(
+                                        ImageLink:
+                                        "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+                                    NoAnimationZoomInImage(
+                                        ImageLink:
+                                        "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+                                    NoAnimationZoomInImage(
+                                        ImageLink:
+                                        "https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
+                                  ],
+                                ),
+                              ),
+                            ),
                             SizedBox(
                               height: 50,
                             ),

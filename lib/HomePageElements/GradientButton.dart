@@ -28,7 +28,7 @@ class _GradientButtonState extends State<GradientButton>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return MediaQuery.of(context).size.width>580?TextButton(
       onHover: (x) {
         if (x) {
           setState(() {
@@ -61,6 +61,40 @@ class _GradientButtonState extends State<GradientButton>
         height: widget.buttonheight,
         width: widget.buttonwidth,
         duration: Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          gradient: LinearGradient(
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.0, 0.0),
+              colors: colors),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+        child: Center(
+          child: Text(
+            widget.title,
+            style: TextStyle(
+                color: Colors.white,
+                height: 1.3,
+                fontFamily: "Metrisch-Bold",
+                fontSize: 16),
+          ),
+        ),
+      ),
+    ):TextButton(
+      onPressed: () {
+        widget.onPressed();
+      },
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        backgroundColor: Colors.white,
+        primary: Colors.black87,
+        padding: EdgeInsets.all(0.0),
+      ),
+      child: Container(
+        height: widget.buttonheight,
+        width: widget.buttonwidth,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
           gradient: LinearGradient(
