@@ -41,7 +41,8 @@ class _NonHoverFeaturedProductCardState extends State<NonHoverFeaturedProductCar
       child: Stack(
         children: [
           Container(
-            width: 350,
+            // padding: EdgeInsets.symmetric(horizontal: 20),
+            constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width>360?350:MediaQuery.of(context).size.width-40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -55,6 +56,7 @@ class _NonHoverFeaturedProductCardState extends State<NonHoverFeaturedProductCar
                   },
                   child: Container(
                     height: 250,
+                    constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width-10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Image(
@@ -65,8 +67,9 @@ class _NonHoverFeaturedProductCardState extends State<NonHoverFeaturedProductCar
                   ),
                 ),
                 SizedBox(height: 25,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width),
                   child: TextButton(
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.all(0),
@@ -77,29 +80,27 @@ class _NonHoverFeaturedProductCardState extends State<NonHoverFeaturedProductCar
                     },
 
                     child: Text(widget.title,style: TextStyle(
-                        height: 1.3,
+                        height: 1.3,overflow: TextOverflow.ellipsis,
                         fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
                   ),
                 ),
                 SizedBox(height: 10,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width),
                   child: Text(widget.description,maxLines: 2,overflow: TextOverflow.ellipsis,textAlign: TextAlign.left,style: TextStyle(
                       fontFamily: "Metrisch-Medium",height: 1.3, fontSize:15,color: Colors.black54)),
                 ),
                 SizedBox(height: 20,),
-                Padding(
+                Container(
                   padding:  EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Container(
-                    padding:  EdgeInsets.symmetric(horizontal: 20.0),
-                    width: 300,
-                    height: 1,
-                    color: Colors.black26,
-                  ),
+                  constraints: BoxConstraints( maxWidth: 300),
+                  height: 1,
+                  color: Colors.black26,
                 ),
                 SizedBox(height: 20,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       CircleAvatar(
@@ -116,8 +117,8 @@ class _NonHoverFeaturedProductCardState extends State<NonHoverFeaturedProductCar
                   ),
                 ),
                 SizedBox(height: 10,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(widget.date,style: TextStyle(
                       fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 13,color: Colors.black54)),
                 ),
