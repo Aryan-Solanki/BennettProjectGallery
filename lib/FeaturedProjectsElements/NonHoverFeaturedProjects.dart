@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FeaturedProductCard extends StatefulWidget {
+class NonHoverFeaturedProductCard extends StatefulWidget {
   final String title;
   final String imagelink;
   final String Category;
@@ -10,7 +10,7 @@ class FeaturedProductCard extends StatefulWidget {
   final String userprofilelink;
 
 
-  FeaturedProductCard({
+  NonHoverFeaturedProductCard({
     this.title,
     this.imagelink,
     this.Category,
@@ -21,17 +21,12 @@ class FeaturedProductCard extends StatefulWidget {
   });
 
   @override
-  _FeaturedProductCardState createState() => _FeaturedProductCardState();
+  _NonHoverFeaturedProductCardState createState() => _NonHoverFeaturedProductCardState();
 }
 
-Color argumentcolor=Color(0xff101770);
-Color buttonhovercolor=argumentcolor;
-Color texthovercolor=Colors.black;
-bool imagehover=false;
 
 
-
-class _FeaturedProductCardState extends State<FeaturedProductCard> {
+class _NonHoverFeaturedProductCardState extends State<NonHoverFeaturedProductCard> {
 
 
 
@@ -39,12 +34,15 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
   int i=0;
   @override
   Widget build(BuildContext context) {
+
+
     return Card(
       elevation: 8,
       child: Stack(
         children: [
           Container(
-            width: 350,
+            // padding: EdgeInsets.symmetric(horizontal: 20),
+            constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width>360?350:MediaQuery.of(context).size.width-40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,35 +54,22 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                   onPressed: (){
 
                   },
-                  onHover: (x){
-                    if(x){
-                      setState(() {
-                        imagehover=true;
-                      });
-                    }
-                    else{
-                      setState(() {
-                        imagehover=false;
-                      });
-                    }
-                  },
                   child: Container(
                     height: 250,
+                    constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width-10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
-                      child: ColorFiltered(
-                        colorFilter: imagehover==true?ColorFilter.mode(Colors.grey.shade400, BlendMode.modulate):ColorFilter.mode(Colors.white, BlendMode.modulate),
-                        child: Image(
-                            fit: BoxFit.cover,image: NetworkImage(
-                          widget.imagelink,
-                          )),
-                      ),
+                      child: Image(
+                         fit: BoxFit.cover,image: NetworkImage(
+                       widget.imagelink,
+                        )),
                     ),
                   ),
                 ),
                 SizedBox(height: 25,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width),
                   child: TextButton(
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.all(0),
@@ -93,43 +78,29 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                     onPressed: (){
 
                     },
-                    onHover: (x){
-                      if(x){
-                        setState(() {
-                         texthovercolor=Colors.green;
-                        });
-                      }
-                      else{
-                        setState(() {
-                          texthovercolor=Colors.black;
-                        });
-                      }
-                    },
 
                     child: Text(widget.title,style: TextStyle(
-                      height: 1.3,
-                        fontFamily: "Metrisch-Bold",fontSize: 18,color: texthovercolor)),
+                        height: 1.3,overflow: TextOverflow.ellipsis,
+                        fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
                   ),
                 ),
                 SizedBox(height: 10,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  constraints: BoxConstraints(maxWidth:MediaQuery.of(context).size.width),
                   child: Text(widget.description,maxLines: 2,overflow: TextOverflow.ellipsis,textAlign: TextAlign.left,style: TextStyle(
                       fontFamily: "Metrisch-Medium",height: 1.3, fontSize:15,color: Colors.black54)),
                 ),
                 SizedBox(height: 20,),
-                Padding(
+                Container(
                   padding:  EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Container(
-                    padding:  EdgeInsets.symmetric(horizontal: 20.0),
-                    width: 300,
-                    height: 1,
-                    color: Colors.black26,
-                  ),
+                  constraints: BoxConstraints( maxWidth: 300),
+                  height: 1,
+                  color: Colors.black26,
                 ),
                 SizedBox(height: 20,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       CircleAvatar(
@@ -138,16 +109,16 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
                       ),
                       SizedBox(width: 10,),
                       Text(widget.madeby,style: TextStyle(
-                        decorationThickness: 3,
-                        decorationColor: Colors.green,
+                          decorationThickness: 3,
+                          decorationColor: Colors.green,
                           decoration: TextDecoration.underline,
                           fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 13,color: Colors.green))
                     ],
                   ),
                 ),
                 SizedBox(height: 10,),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 20.0),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(widget.date,style: TextStyle(
                       fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 13,color: Colors.black54)),
                 ),
@@ -161,29 +132,17 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
             child: TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.all(0),
-                primary: buttonhovercolor,
+                primary: Color(0xff101770),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
               ),
-              onHover: (x){
-                if(x){
-                  setState(() {
-                    buttonhovercolor=Colors.white;
-                  });
-                }
-                else{
-                  setState(() {
-                    buttonhovercolor=argumentcolor;
-                  });
-                }
-              },
               onPressed: (){
 
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: buttonhovercolor,
+                  color: Color(0xff101770),
                   border: Border.all(
-                    color: argumentcolor,  // red as border color
+                    color: Color(0xff101770),  // red as border color
                   ),
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -191,7 +150,7 @@ class _FeaturedProductCardState extends State<FeaturedProductCard> {
 
                 child: Text(
                   "PYTHON",style: TextStyle(
-                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 12,color: buttonhovercolor==argumentcolor?Colors.white:argumentcolor),
+                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 12,color: Colors.white),
                 ),
               ),
             ),

@@ -101,7 +101,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               alignment: Alignment.center,
                               clipBehavior: Clip.none,
                               children: [
-                                Container( height: 500,child: Image(image:AssetImage("assets/loginpageimg.png"))),
+                                Container( height: MediaQuery.of(context).size.height/1.2,child: Image(fit: BoxFit.cover,image:AssetImage("assets/loginpageimg.png"))),
                                 ForgotPasswordCard(),
                               ],
                             )
@@ -124,7 +124,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 child: SingleChildScrollView(
                   child: Container(
                     width: MediaQuery.of(context).size.width ,
-                    padding:  EdgeInsets.only(left: 20.0),
+                    padding:  EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -1,6 +1,7 @@
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
 import 'package:bennettprojectgallery/projectgallery.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -352,20 +353,21 @@ class _HeaderState extends State<Header> {
           }
 
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 20,),
+            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
             width: MediaQuery.of(context).size.width,
             color: Color(0xff101770),
             // height: 50,
             child: Column(
               children: [
                 mobilemenu==true?AnimatedContainer(
-                  height: 335,
+                  alignment: Alignment.center,
+                  height: 345,
                   duration: Duration(milliseconds: 600),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(height: 20,),
+                        SizedBox(height: 13),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -376,13 +378,13 @@ class _HeaderState extends State<Header> {
                             FaIcon(FontAwesomeIcons.linkedinIn,size: 18,color: Colors.white),
                           ],
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 13,),
                         Container(
                           color: Colors.white60,
                           height: 1,
                           width: 300,
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 13,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
@@ -403,7 +405,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -426,7 +428,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
 
@@ -447,7 +449,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -470,7 +472,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
@@ -491,7 +493,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -514,7 +516,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height:6,),
                         TextButton(
                             onPressed: (){
 
@@ -535,7 +537,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -558,7 +560,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
 
@@ -579,7 +581,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -602,7 +604,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height:6,),
                         TextButton(
                             onPressed: (){
 
@@ -623,7 +625,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -646,7 +648,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
@@ -667,7 +669,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -695,13 +697,14 @@ class _HeaderState extends State<Header> {
                     ),
                   ),
                 ):AnimatedContainer(
+                  alignment: Alignment.bottomCenter,
                   height: 0,
                   duration: Duration(milliseconds: 600),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(height: 20,),
+                        SizedBox(height: 13),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -712,13 +715,13 @@ class _HeaderState extends State<Header> {
                             FaIcon(FontAwesomeIcons.linkedinIn,size: 18,color: Colors.white),
                           ],
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 13,),
                         Container(
                           color: Colors.white60,
                           height: 1,
                           width: 300,
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 13,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
@@ -739,7 +742,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -762,7 +765,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
 
@@ -783,7 +786,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -806,7 +809,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
@@ -827,7 +830,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -850,7 +853,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height:6,),
                         TextButton(
                             onPressed: (){
 
@@ -871,7 +874,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -894,7 +897,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
 
@@ -915,7 +918,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -938,7 +941,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height:6,),
                         TextButton(
                             onPressed: (){
 
@@ -959,7 +962,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -982,7 +985,7 @@ class _HeaderState extends State<Header> {
                               ],
                             )
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 6,),
                         TextButton(
                             onPressed: (){
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
@@ -1003,7 +1006,7 @@ class _HeaderState extends State<Header> {
                             },
                             style: TextButton.styleFrom(
                               primary: Color(0xff101770),
-                              // padding: EdgeInsets.all(0.0),
+                              padding: EdgeInsets.all(0.0),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

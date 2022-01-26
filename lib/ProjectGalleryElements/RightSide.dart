@@ -1,3 +1,4 @@
+import 'package:bennettprojectgallery/ProjectGalleryElements/NoHoverProjectCard.dart';
 import 'package:flutter/material.dart';
 import 'package:menu_button/menu_button.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -20,8 +21,7 @@ class _RightSideState extends State<RightSide> {
     'Sort by latest',
   ];
 
-bool nextpagehover=false;
-int currentpagenumber=1;
+  int cardnumber=9;
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +98,10 @@ int currentpagenumber=1;
                 ),
                 SizedBox(height: 40,),
                 Container(
-                  height: 1300,
+                  height: cardnumber*140.toDouble(),
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 9,
+                    itemCount: cardnumber,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.68,crossAxisSpacing: 20
                     ),
@@ -158,7 +158,19 @@ int currentpagenumber=1;
 
                 ),
                 SizedBox(height: 40,),
-                ProjectCard(),
+                Container(
+                  height: cardnumber*125.toDouble(),
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: cardnumber,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return NoHoverProjectCard();
+                    },
+                  ),
+                )
 
               ],
             ),
@@ -167,6 +179,7 @@ int currentpagenumber=1;
         if (sizingInformation.deviceScreenType ==
             DeviceScreenType.watch){
           return Container(
+            width: 250,
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Column(
               children: [
@@ -203,43 +216,18 @@ int currentpagenumber=1;
 
                 ),
                 SizedBox(height: 20,),
-                ProjectCard(),
-                Row(
-                  children: [
-                    TextButton(
-                      onHover: (x){
-                        if(x){
-                          setState(() {
-                            nextpagehover=true;
-                          });
-
-                        }
-                        else{
-                          setState(() {
-                            nextpagehover=false;
-                          });
-                        }
-                      },
-                      onPressed: (){
-
-                      },
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        width: 35,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: nextpagehover==true?Color(0xff3224e9):Colors.white),
-                          borderRadius: BorderRadius.circular(5),
-                          color: nextpagehover==true?Colors.white:Color(0xff3224e9),
-                        ),
-                        child: Center(
-                          child: Text(
-                            currentpagenumber.toString(),style: TextStyle(fontSize:13,color: nextpagehover==true?Color(0xff3224e9):Colors.white),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                Container(
+                  height: cardnumber*435.toDouble(),
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: cardnumber,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return NoHoverProjectCard();
+                    },
+                  ),
                 )
               ],
             ),
@@ -284,7 +272,19 @@ int currentpagenumber=1;
 
               ),
               SizedBox(height: 40,),
-              ProjectCard(),
+              Container(
+                height: cardnumber*125.toDouble(),
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: cardnumber,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return NoHoverProjectCard();
+                  },
+                ),
+              )
 
             ],
           ),
