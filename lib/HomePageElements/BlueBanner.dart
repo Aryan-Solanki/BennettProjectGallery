@@ -9,27 +9,26 @@ class BlueBanner extends StatefulWidget {
 class _BlueBannerState extends State<BlueBanner> {
   @override
   Widget build(BuildContext context) {
-    return MediaQuery.of(context).size.width>1100?Container(
-      height: 450,
-      width: MediaQuery.of(context).size.width ,
-      color: Color(0xff101770),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              "Learn",
-              style: TextStyle(
-                  fontFamily: "Metrisch-ExtraBold", color: Colors.white.withOpacity(0.1),fontSize: 180),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Card(
-                elevation: 8,
-                child: Stack(
-                  clipBehavior: Clip.none,
+    return MediaQuery.of(context).size.width > 1100
+        ? Container(
+            height: 450,
+            width: MediaQuery.of(context).size.width,
+            color: Color(0xff101770),
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 25,
+                  left: MediaQuery.of(context).size.width / 2 - 90,
+                  child: Text(
+                    "Learn",
+                    style: TextStyle(
+                        fontFamily: "Metrisch-ExtraBold",
+                        color: Colors.white.withOpacity(0.1),
+                        fontSize: 120),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Card(
                       elevation: 8,
@@ -184,24 +183,7 @@ class _BlueBannerState extends State<BlueBanner> {
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-
-
-        ],
-      ),
-    ):Container(
-      height: 930,
-      width: MediaQuery.of(context).size.width ,
-      color: Color(0xff101770),
-      child: Stack(
-        children: [
-          Center(
-            child: Text(
-              "Learn",
-              style: TextStyle(
-                  fontFamily: "Metrisch-ExtraBold",overflow: TextOverflow.visible ,color: Colors.white.withOpacity(0.1),fontSize: MediaQuery.of(context).size.width>390?140:95),
+              ],
             ),
           )
         : Container(
