@@ -211,46 +211,42 @@ class _BlueBannerState extends State<BlueBanner> {
                       SizedBox(
                         height: 30,
                       ),
-                      Positioned(
-                        top: 100,
-                        left: 70,
-                        child: Card(
-                          elevation: 8,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(5.0),
-                                child: Image(
-                                  height: 250,
-                                  width: 250,
-                                  image: NetworkImage(
-                                      "https://www.bennett.edu.in/wp-content/uploads/2021/07/MCE-LAB-Sharp-and-Innovative-Brains.jpg"),
-                                  fit: BoxFit.cover,
-                                ),
+                      Card(
+                        elevation: 8,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: Image(
+                                height: 250,
+                                width: 250,
+                                image: NetworkImage(
+                                    "https://www.bennett.edu.in/wp-content/uploads/2021/07/MCE-LAB-Sharp-and-Innovative-Brains.jpg"),
+                                fit: BoxFit.cover,
                               ),
-                              Positioned(
-                                right: -35,
-                                bottom: -35,
-                                child: Card(
-                                  elevation: 8,
-                                  child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    height: 150,
-                                    width: 100,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      child: Image(
-                                        image: NetworkImage(
-                                            "https://rukminim1.flixcart.com/image/416/416/kckud8w0/book/4/9/9/the-world-of-particles-original-imaftz8wwxnwaxru.jpeg?q=70"),
-                                        fit: BoxFit.fill,
-                                      ),
+                            ),
+                            Positioned(
+                              right: -35,
+                              bottom: -35,
+                              child: Card(
+                                elevation: 8,
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  height: 150,
+                                  width: 100,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    child: Image(
+                                      image: NetworkImage(
+                                          "https://rukminim1.flixcart.com/image/416/416/kckud8w0/book/4/9/9/the-world-of-particles-original-imaftz8wwxnwaxru.jpeg?q=70"),
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -320,46 +316,42 @@ class _BlueBannerState extends State<BlueBanner> {
                       SizedBox(
                         height: 50,
                       ),
-                      Positioned(
-                        top: 100,
-                        right: 70,
-                        child: Card(
-                          elevation: 8,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(5.0),
-                                child: Image(
-                                  height: 250,
-                                  width: 250,
-                                  image: NetworkImage(
-                                      "https://www.bennett.edu.in/wp-content/uploads/2021/07/CSE-LAB-learning-technology.jpg"),
-                                  fit: BoxFit.cover,
-                                ),
+                      Card(
+                        elevation: 8,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: Image(
+                                height: 250,
+                                width: 250,
+                                image: NetworkImage(
+                                    "https://www.bennett.edu.in/wp-content/uploads/2021/07/CSE-LAB-learning-technology.jpg"),
+                                fit: BoxFit.cover,
                               ),
-                              Positioned(
-                                bottom: -35,
-                                left: -35,
-                                child: Card(
-                                  elevation: 8,
-                                  child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    height: 150,
-                                    width: 100,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      child: Image(
-                                        image: NetworkImage(
-                                            "https://rukminim1.flixcart.com/image/416/416/kckud8w0/book/4/9/9/the-world-of-particles-original-imaftz8wwxnwaxru.jpeg?q=70"),
-                                        fit: BoxFit.fill,
-                                      ),
+                            ),
+                            Positioned(
+                              bottom: -35,
+                              left: -35,
+                              child: Card(
+                                elevation: 8,
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  height: 150,
+                                  width: 100,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    child: Image(
+                                      image: NetworkImage(
+                                          "https://rukminim1.flixcart.com/image/416/416/kckud8w0/book/4/9/9/the-world-of-particles-original-imaftz8wwxnwaxru.jpeg?q=70"),
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     ],
