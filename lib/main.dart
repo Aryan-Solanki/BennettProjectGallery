@@ -99,76 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Stack(
                 children: <Widget>[
                   ParallaxWidget(top: rateZero, asset: "parallax0"),
-                  ResponsiveBuilder(
-                    breakpoints: ScreenBreakpoints(
-                        tablet: 550, desktop: 790, watch: 300),
-                    builder: (context, sizingInformation) {
-                      // Check the sizing information here and return your UI
-                      if (sizingInformation.deviceScreenType ==
-                          DeviceScreenType.desktop) {
-                        return Align(
-                          // top: MediaQuery.of(context).size.height / 3.5 + rateFivepointFive,
-                          // left: 50,
-                          alignment: Alignment(-0.91, -0.4 + rateZero / 15),
-                          // widthFactor: 0,
-                          // heightFactor: 10,
-                          child: Text("Project Gallery",
-                              style: TextStyle(
-                                  fontFamily: "Metrisch-ExtraBold",
-                                  fontSize:
-                                  MediaQuery.of(context).size.width / 33 +
-                                      5)),
-                        );
-                      }
-
-                      return Center();
-                    },
-                  ),
-                  ResponsiveBuilder(
-                    breakpoints: ScreenBreakpoints(
-                        tablet: 550, desktop: 790, watch: 300),
-                    builder: (context, sizingInformation) {
-                      // Check the sizing information here and return your UI
-                      if (sizingInformation.deviceScreenType ==
-                          DeviceScreenType.desktop) {
-                        return Align(
-                          alignment: Alignment(-0.91, -0.23 + rateZero / 15),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 4,
-                            child: DefaultTextStyle(
-                              style: TextStyle(
-                                  height: 1.3,
-                                  fontSize: 15,
-                                  fontFamily: "Metrisch-Medium"),
-                              child: AnimatedTextKit(
-                                repeatForever: true,
-                                pause: Duration(milliseconds: 500),
-                                animatedTexts: [
-                                  TypewriterAnimatedText(
-                                      'An intricate showcase of all the projects made by students of Bennett',
-                                      speed: Duration(milliseconds: 100)),
-                                  TypewriterAnimatedText(
-                                      ' all the projects made by students of Bennett',
-                                      speed: Duration(milliseconds: 100)),
-                                  TypewriterAnimatedText(
-                                      'An intricate showcase ofade by students of Bennett',
-                                      speed: Duration(milliseconds: 100)),
-                                  TypewriterAnimatedText(
-                                      'An indshuabf made by students of Bennett',
-                                      speed: Duration(milliseconds: 100)),
-                                ],
-                                onTap: () {
-                                  print("Tap Event");
-                                },
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-
-                      return Center();
-                    },
-                  ),
                   ParallaxWidget(top: 20, asset: "parallax2"),
                   ParallaxWidget(top: rateFive, asset: "parallax1"),
                   ParallaxWidget(top: rateSeven, asset: "parallax3"),
@@ -180,71 +110,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: MediaQuery.of(context).size.height,
                         color: Colors.transparent,
                       ),
-                      ResponsiveBuilder(
-                        breakpoints: ScreenBreakpoints(
-                            tablet: 550, desktop: 790, watch: 300),
-                        builder: (context, sizingInformation) {
-                          // Check the sizing information here and return your UI
-                          if (sizingInformation.deviceScreenType !=
-                              DeviceScreenType.desktop) {
-                            return Column(
-                              children: [
-                                Container(
-                                  alignment: Alignment.center,
-                                  color: Color(0xfff5f6fb),
-                                  width: double.infinity,
-                                  padding: EdgeInsets.only(top: 40),
-                                  child: Text("Project Gallery",
-                                      style: TextStyle(
-                                          fontFamily: "Metrisch-ExtraBold",
-                                          fontSize: 27)),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 20),
-                                  alignment: Alignment.center,
-                                  color: Color(0xfff5f6fb),
-                                  width: double.infinity,
-                                  child: DefaultTextStyle(
-                                    style: TextStyle(
-                                        height: 1.3,
-                                        fontSize: 15,
-                                        fontFamily: "Metrisch-Medium"),
-                                    child: AnimatedTextKit(
-                                      repeatForever: true,
-                                      pause: Duration(milliseconds: 500),
-                                      animatedTexts: [
-                                        TypewriterAnimatedText(
-                                            'An intricate showcase of all the projects made by students of Bennett',
-                                            textAlign: TextAlign.center,
-                                            speed: Duration(milliseconds: 100)),
-                                        TypewriterAnimatedText(
-                                            ' all the projects made by students of Bennett',
-                                            textAlign: TextAlign.center,
-                                            speed: Duration(milliseconds: 100)),
-                                        TypewriterAnimatedText(
-                                            'An intricate showcase ofade by students of Bennett',
-                                            textAlign: TextAlign.center,
-                                            speed: Duration(milliseconds: 100)),
-                                        TypewriterAnimatedText(
-                                            'An indshuabf made by students of Bennett',
-                                            textAlign: TextAlign.center,
-                                            speed: Duration(milliseconds: 100)),
-                                      ],
-                                      onTap: () {
-                                        print("Tap Event");
-                                      },
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          }
-
-                          return Center();
-                        },
-                      ),
-
                       Container(
                         color: Color(0xfff5f6fb),
                         width: double.infinity,
@@ -1506,7 +1371,7 @@ class ParallaxWidget extends StatelessWidget {
         color: Colors.transparent,
         height: MediaQuery.of(context).size.height-60,
         width: MediaQuery.of(context).size.width,
-        child: Image.asset("assets/$asset.png", fit: BoxFit.cover),
+        child: Image.asset("assets/$asset.webp", fit: BoxFit.cover),
       ),
     );
   }
