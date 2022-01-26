@@ -285,7 +285,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                         child: Card(
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(20.0)),
+                                                  BorderRadius.circular(
+                                                      20.0)),
                                           elevation: 5,
                                           child: Container(
                                             height: 309,
@@ -309,9 +310,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                         title:
                                             "Students of Bennett University ",
                                         subtitle: "Under Prof Aryan",
-                                        factor:
-                                            MediaQuery.of(context).size.width /
-                                                1300,
+                                        factor: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            1300,
                                       ),
                                       ProfileTile(
                                         top: 275,
@@ -319,9 +321,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                         title:
                                             "Students of Bennett University ",
                                         subtitle: "Under Prof Aryan",
-                                        factor:
-                                            MediaQuery.of(context).size.width /
-                                                1300,
+                                        factor: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            1300,
                                       ),
                                     ],
                                   ),
@@ -330,7 +333,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   width: 400,
                                   padding: EdgeInsets.only(right: 50),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.end,
                                     children: [
                                       Row(
                                         mainAxisAlignment:
@@ -539,7 +543,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                         child: Card(
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(20.0)),
+                                                  BorderRadius.circular(
+                                                      20.0)),
                                           elevation: 5,
                                           child: Container(
                                             height: 509,
@@ -570,9 +575,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                       ProfileTile(
                                         top: 475,
-                                        left:
-                                            MediaQuery.of(context).size.width /
-                                                1.4,
+                                        left: MediaQuery.of(context)
+                                                .size
+                                                .width /
+                                            1.4,
                                         title:
                                             "Students of Bennett University ",
                                         subtitle: "Under Prof Aryan",
@@ -583,7 +589,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 Container(
                                   width: 500,
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -795,7 +802,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                         child: Card(
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(20.0)),
+                                                  BorderRadius.circular(
+                                                      20.0)),
                                           elevation: 5,
                                           child: Container(
                                             height: 260,
@@ -826,9 +834,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                       ProfileTile(
                                         top: 230,
-                                        left:
-                                            MediaQuery.of(context).size.width -
-                                                200,
+                                        left: MediaQuery.of(context)
+                                                .size
+                                                .width -
+                                            200,
                                         title:
                                             "Students of Bennett University ",
                                         subtitle: "Under Prof Aryan",
@@ -836,110 +845,89 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                     ],
                                   ),
-                                  ProfileTile(
-                                    top: 31,
-                                    left: 24.5,
-                                    title:
-                                    "Students of Bennett University ",
-                                    subtitle: "Under Prof Aryan",
-                                    factor: 1,
-                                  ),
-                                  ProfileTile(
-                                    top: 275,
-                                    left:
-                                    MediaQuery.of(context).size.width /
-                                        1.55,
-                                    title:
-                                    "Students of Bennett University ",
-                                    subtitle: "Under Prof Aryan",
-                                    factor: 1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 500,
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                ),
+                                Container(
+                                  width: 500,
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(5),
-                                          color: Colors.orange.shade400,
-                                        ),
-                                        width: 10,
-                                        height: 2,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(5),
-                                          color: Colors.orange.shade400,
-                                        ),
-                                        width: 50,
-                                        height: 2,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(5),
-                                          color: Colors.orange.shade400,
-                                        ),
-                                        width: 10,
-                                        height: 2,
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Project Accomplished by Student of Bennett University",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        height: 1.3,
-                                        fontFamily: "Metrisch-Bold",
-                                        fontSize: 25),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                    child: Text(
-                                      "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontFamily: "Metrisch-Medium",
-                                          height: 1.5,
-                                          fontSize: 15,
-                                          color: Colors.black54),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Row(
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.orange.shade400,
+                                            ),
+                                            width: 10,
+                                            height: 2,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.orange.shade400,
+                                            ),
+                                            width: 50,
+                                            height: 2,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.orange.shade400,
+                                            ),
+                                            width: 10,
+                                            height: 2,
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        "Project Accomplished by Student of Bennett University",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            height: 1.3,
+                                            fontFamily: "Metrisch-Bold",
+                                            fontSize: 25),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontFamily: "Metrisch-Medium",
+                                              height: 1.5,
+                                              fontSize: 15,
+                                              color: Colors.black54),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
@@ -968,33 +956,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 ],
                                               ),
                                               Text(
-                                                "+",
+                                                "PROJECTS MADE",
                                                 style: TextStyle(
-                                                    color: Colors.orange,
-                                                    height: 1.3,
                                                     fontFamily:
-                                                    "Metrisch-Bold",
-                                                    fontSize: 25),
+                                                        "Metrisch-Medium",
+                                                    height: 1.3,
+                                                    fontSize: 14,
+                                                    color: Colors.black),
                                               )
                                             ],
                                           ),
-                                          Text(
-                                            "PROJECTS MADE",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                "Metrisch-Medium",
-                                                height: 1.3,
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(width: 30),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
+                                          SizedBox(width: 30),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
@@ -1023,35 +998,26 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 ],
                                               ),
                                               Text(
-                                                "+",
+                                                "ACHIEVEMENTS",
                                                 style: TextStyle(
-                                                    color: Colors.orange,
-                                                    height: 1.3,
                                                     fontFamily:
-                                                    "Metrisch-Bold",
-                                                    fontSize: 25),
+                                                        "Metrisch-Medium",
+                                                    height: 1.3,
+                                                    fontSize: 14,
+                                                    color: Colors.black),
                                               )
                                             ],
                                           ),
-                                          Text(
-                                            "ACHIEVEMENTS",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                "Metrisch-Medium",
-                                                height: 1.3,
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          )
                                         ],
                                       ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      GradientButton(),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  GradientButton(),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         }
@@ -1109,15 +1075,18 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ProfileTile(
                                       top: 31,
                                       left: 24.5,
-                                      title: "Students of Bennett University ",
+                                      title:
+                                          "Students of Bennett University ",
                                       subtitle: "Under Prof Aryan",
                                       factor: 1,
                                     ),
                                     ProfileTile(
                                       top: 275,
-                                      left: MediaQuery.of(context).size.width /
-                                          1.55,
-                                      title: "Students of Bennett University ",
+                                      left:
+                                          MediaQuery.of(context).size.width /
+                                              1.55,
+                                      title:
+                                          "Students of Bennett University ",
                                       subtitle: "Under Prof Aryan",
                                       factor: 1,
                                     ),
@@ -1128,7 +1097,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 width: 500,
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.center,
                                   children: [
                                     Row(
                                       mainAxisAlignment:
@@ -1214,7 +1184,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   duration:
                                                       Duration(seconds: 7),
                                                   style: TextStyle(
-                                                      color: Color(0xff101770),
+                                                      color:
+                                                          Color(0xff101770),
                                                       height: 1.3,
                                                       fontFamily:
                                                           "Metrisch-Bold",
@@ -1237,7 +1208,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                             Text(
                                               "PROJECTS MADE",
                                               style: TextStyle(
-                                                  fontFamily: "Metrisch-Medium",
+                                                  fontFamily:
+                                                      "Metrisch-Medium",
                                                   height: 1.3,
                                                   fontSize: 14,
                                                   color: Colors.black),
@@ -1258,7 +1230,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   duration:
                                                       Duration(seconds: 7),
                                                   style: TextStyle(
-                                                      color: Color(0xff101770),
+                                                      color:
+                                                          Color(0xff101770),
                                                       height: 1.3,
                                                       fontFamily:
                                                           "Metrisch-Bold",
@@ -1281,7 +1254,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                             Text(
                                               "ACHIEVEMENTS",
                                               style: TextStyle(
-                                                  fontFamily: "Metrisch-Medium",
+                                                  fontFamily:
+                                                      "Metrisch-Medium",
                                                   height: 1.3,
                                                   fontSize: 14,
                                                   color: Colors.black),
