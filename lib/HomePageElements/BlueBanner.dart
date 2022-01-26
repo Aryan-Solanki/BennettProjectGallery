@@ -16,15 +16,13 @@ class _BlueBannerState extends State<BlueBanner> {
             color: Color(0xff101770),
             child: Stack(
               children: [
-                Positioned(
-                  bottom: 25,
-                  left: MediaQuery.of(context).size.width / 2 - 90,
+                Center(
                   child: Text(
                     "Learn",
                     style: TextStyle(
                         fontFamily: "Metrisch-ExtraBold",
                         color: Colors.white.withOpacity(0.1),
-                        fontSize: 120),
+                        fontSize: 180),
                   ),
                 ),
                 Row(
@@ -192,15 +190,11 @@ class _BlueBannerState extends State<BlueBanner> {
             color: Color(0xff101770),
             child: Stack(
               children: [
-                Positioned(
-                  bottom: 280,
-                  left: MediaQuery.of(context).size.width / 2 - 30,
+                Center(
                   child: Text(
                     "Learn",
                     style: TextStyle(
-                        fontFamily: "Metrisch-ExtraBold",
-                        color: Colors.white.withOpacity(0.1),
-                        fontSize: 150),
+                        fontFamily: "Metrisch-ExtraBold",overflow: TextOverflow.visible ,color: Colors.white.withOpacity(0.1),fontSize: MediaQuery.of(context).size.width>390?140:95),
                   ),
                 ),
                 Container(
