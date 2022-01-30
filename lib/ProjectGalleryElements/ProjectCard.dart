@@ -76,7 +76,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         "Aryan Singh Solanki",overflow: TextOverflow.ellipsis,textAlign: TextAlign.center,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: Colors.green),
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 20,),
 
                   ],
                 ),
