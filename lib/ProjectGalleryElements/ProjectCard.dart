@@ -1,4 +1,5 @@
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
+import 'package:bennettprojectgallery/project_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -18,7 +19,7 @@ class _ProjectCardState extends State<ProjectCard> {
         padding: EdgeInsets.all(0.0),
       ),
       onPressed: (){
-
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectDetail()));
       },
       onHover: (x){
         if(x){
@@ -75,7 +76,7 @@ class _ProjectCardState extends State<ProjectCard> {
                         "Aryan Singh Solanki",overflow: TextOverflow.ellipsis,textAlign: TextAlign.center,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: Colors.green),
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 20,),
 
                   ],
                 ),
