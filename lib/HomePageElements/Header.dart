@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Header extends StatefulWidget {
   final String current;
@@ -15,29 +16,31 @@ class Header extends StatefulWidget {
   @override
   _HeaderState createState() => _HeaderState();
 }
-String hover="";
-bool mobilemenu=false;
+
+String hover = "";
+bool mobilemenu = false;
 
 class _HeaderState extends State<Header> {
+  void _launchURL(_url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      color:Color(0xff101770),
+      color: Color(0xff101770),
       borderOnForeground: true,
       elevation: 3,
       margin: EdgeInsets.zero,
       child: ResponsiveBuilder(
-        breakpoints: ScreenBreakpoints(
-            tablet: 550,
-            desktop: 800,
-            watch: 300
-        ),
+        breakpoints: ScreenBreakpoints(tablet: 550, desktop: 800, watch: 300),
         builder: (context, sizingInformation) {
           // Check the sizing information here and return your UI
-          if (sizingInformation.deviceScreenType ==
-              DeviceScreenType.desktop) {
+          if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
             return Container(
-              padding: EdgeInsets.symmetric(horizontal: 20,),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
               width: MediaQuery.of(context).size.width,
               color: Color(0xff101770),
               height: 60,
@@ -45,22 +48,20 @@ class _HeaderState extends State<Header> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                      onPressed: (){
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => MyHomePage()));
                       },
-                      onHover: (x){
-                        if(x){
+                      onHover: (x) {
+                        if (x) {
                           setState(() {
-                            hover="Home";
+                            hover = "Home";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
                           });
                         }
-                        else{
-                          setState(() {
-                            hover="";
-                          });
-
-                        }
-
                       },
                       style: TextButton.styleFrom(
                         primary: Color(0xff101770),
@@ -72,39 +73,42 @@ class _HeaderState extends State<Header> {
                         children: [
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
-                              child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                          ),
+                              child: Text(
+                                "Home",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
                           AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current=="Home"?25:hover=="Home"?25:0,
+                            width: widget.current == "Home"
+                                ? 25
+                                : hover == "Home"
+                                    ? 25
+                                    : 0,
                             height: 2,
-
                           )
                         ],
-                      )
+                      )),
+                  SizedBox(
+                    width: 10,
                   ),
-                  SizedBox(width: 10,),
                   TextButton(
-                      onPressed: (){
-
-                      },
-                      onHover: (x){
-                        if(x){
+                      onPressed: () {},
+                      onHover: (x) {
+                        if (x) {
                           setState(() {
-                            hover="About";
+                            hover = "About";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
                           });
                         }
-                        else{
-                          setState(() {
-                            hover="";
-                          });
-
-                        }
-
                       },
                       style: TextButton.styleFrom(
                         primary: Color(0xff101770),
@@ -116,39 +120,45 @@ class _HeaderState extends State<Header> {
                         children: [
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
-                              child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                          ),
+                              child: Text(
+                                "About",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
                           AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current=="About"?25:hover=="About"?25:0,
+                            width: widget.current == "About"
+                                ? 25
+                                : hover == "About"
+                                    ? 25
+                                    : 0,
                             height: 2,
                           )
                         ],
-                      )
+                      )),
+                  SizedBox(
+                    width: 10,
                   ),
-                  SizedBox(width: 10,),
                   TextButton(
-                      onPressed: (){
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
-
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => ProjectGallery()));
                       },
-                      onHover: (x){
-                        if(x){
+                      onHover: (x) {
+                        if (x) {
                           setState(() {
-                            hover="Project Gallery";
+                            hover = "Project Gallery";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
                           });
                         }
-                        else{
-                          setState(() {
-                            hover="";
-                          });
-
-                        }
-
                       },
                       style: TextButton.styleFrom(
                         primary: Color(0xff101770),
@@ -160,38 +170,42 @@ class _HeaderState extends State<Header> {
                         children: [
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
-                              child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                          ),
+                              child: Text(
+                                "Project Gallery",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
                           AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current=="Project Gallery"?25:hover=="Project Gallery"?25:0,
+                            width: widget.current == "Project Gallery"
+                                ? 25
+                                : hover == "Project Gallery"
+                                    ? 25
+                                    : 0,
                             height: 2,
                           )
                         ],
-                      )
+                      )),
+                  SizedBox(
+                    width: 10,
                   ),
-                  SizedBox(width: 10,),
                   TextButton(
-                      onPressed: (){
-
-                      },
-                      onHover: (x){
-                        if(x){
+                      onPressed: () {},
+                      onHover: (x) {
+                        if (x) {
                           setState(() {
-                            hover="Achievers";
+                            hover = "Achievers";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
                           });
                         }
-                        else{
-                          setState(() {
-                            hover="";
-                          });
-
-                        }
-
                       },
                       style: TextButton.styleFrom(
                         primary: Color(0xff101770),
@@ -203,38 +217,44 @@ class _HeaderState extends State<Header> {
                         children: [
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
-                              child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                          ),
+                              child: Text(
+                                "Achievers",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
                           AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current=="Achievers"?25:hover=="Achievers"?25:0,
+                            width: widget.current == "Achievers"
+                                ? 25
+                                : hover == "Achievers"
+                                    ? 25
+                                    : 0,
                             height: 2,
                           )
                         ],
-                      )
+                      )),
+                  SizedBox(
+                    width: 10,
                   ),
-                  SizedBox(width: 10,),
                   TextButton(
-                      onPressed: (){
-
+                      onPressed: () {
+                        _launchURL("http://www.timesofbennett.com/");
                       },
-                      onHover: (x){
-                        if(x){
+                      onHover: (x) {
+                        if (x) {
                           setState(() {
-                            hover="Times of Bennett";
+                            hover = "Times of Bennett";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
                           });
                         }
-                        else{
-                          setState(() {
-                            hover="";
-                          });
-
-                        }
-
                       },
                       style: TextButton.styleFrom(
                         primary: Color(0xff101770),
@@ -246,38 +266,42 @@ class _HeaderState extends State<Header> {
                         children: [
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
-                              child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                          ),
+                              child: Text(
+                                "Times of Bennett",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
                           AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current=="Times of Bennett"?25:hover=="Times of Bennett"?25:0,
+                            width: widget.current == "Times of Bennett"
+                                ? 25
+                                : hover == "Times of Bennett"
+                                    ? 25
+                                    : 0,
                             height: 2,
                           )
                         ],
-                      )
+                      )),
+                  SizedBox(
+                    width: 10,
                   ),
-                  SizedBox(width: 10,),
                   TextButton(
-                      onPressed: (){
-
-                      },
-                      onHover: (x){
-                        if(x){
+                      onPressed: () {},
+                      onHover: (x) {
+                        if (x) {
                           setState(() {
-                            hover="Contact";
+                            hover = "Contact";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
                           });
                         }
-                        else{
-                          setState(() {
-                            hover="";
-                          });
-
-                        }
-
                       },
                       style: TextButton.styleFrom(
                         primary: Color(0xff101770),
@@ -289,38 +313,45 @@ class _HeaderState extends State<Header> {
                         children: [
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
-                              child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                          ),
+                              child: Text(
+                                "Contact",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
                           AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current=="Contact"?25:hover=="Contact"?25:0,
+                            width: widget.current == "Contact"
+                                ? 25
+                                : hover == "Contact"
+                                    ? 25
+                                    : 0,
                             height: 2,
                           )
                         ],
-                      )
+                      )),
+                  SizedBox(
+                    width: 10,
                   ),
-                  SizedBox(width: 10,),
                   TextButton(
-                      onPressed: (){
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginPage()));
                       },
-                      onHover: (x){
-                        if(x){
+                      onHover: (x) {
+                        if (x) {
                           setState(() {
-                            hover="Sign In";
+                            hover = "Sign In";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
                           });
                         }
-                        else{
-                          setState(() {
-                            hover="";
-                          });
-
-                        }
-
                       },
                       style: TextButton.styleFrom(
                         primary: Color(0xff101770),
@@ -332,708 +363,842 @@ class _HeaderState extends State<Header> {
                         children: [
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
-                              child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                          ),
+                              child: Text(
+                                "Sign In",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
                           AnimatedContainer(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current=="Sign In"?25:hover=="Sign In"?25:0,
+                            width: widget.current == "Sign In"
+                                ? 25
+                                : hover == "Sign In"
+                                    ? 25
+                                    : 0,
                             height: 2,
                           )
                         ],
-                      )
-                  ),
-
+                      )),
                 ],
               ),
             );
           }
 
           return Container(
-            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             width: MediaQuery.of(context).size.width,
             color: Color(0xff101770),
             // height: 50,
             child: Column(
               children: [
-                mobilemenu==true?AnimatedContainer(
-                  alignment: Alignment.center,
-                  height: 345,
-                  duration: Duration(milliseconds: 600),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 13),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FaIcon(FontAwesomeIcons.facebookF,size: 18,color: Colors.white,),
-                            SizedBox(width: 27,),
-                            FaIcon(FontAwesomeIcons.twitter,size: 18,color: Colors.white),
-                            SizedBox(width: 27,),
-                            FaIcon(FontAwesomeIcons.linkedinIn,size: 18,color: Colors.white),
-                          ],
-                        ),
-                        SizedBox(height: 13,),
-                        Container(
-                          color: Colors.white60,
-                          height: 1,
-                          width: 300,
-                        ),
-                        SizedBox(height: 13,),
-                        TextButton(
-                            onPressed: (){
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Home";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                mobilemenu == true
+                    ? AnimatedContainer(
+                        alignment: Alignment.center,
+                        height: 345,
+                        duration: Duration(milliseconds: 600),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 13),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.facebookF,
+                                    size: 18,
+                                    color: Colors.white,
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Home"?25:hover=="Home"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="About";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  SizedBox(
+                                    width: 27,
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="About"?25:hover=="About"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Project Gallery";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  FaIcon(FontAwesomeIcons.twitter,
+                                      size: 18, color: Colors.white),
+                                  SizedBox(
+                                    width: 27,
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Project Gallery"?25:hover=="Project Gallery"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height:6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Achievers";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  FaIcon(FontAwesomeIcons.linkedinIn,
+                                      size: 18, color: Colors.white),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 13,
+                              ),
+                              Container(
+                                color: Colors.white60,
+                                height: 1,
+                                width: 300,
+                              ),
+                              SizedBox(
+                                height: 13,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyHomePage()));
+                                  },
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Home";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Achievers"?25:hover=="Achievers"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Times of Bennett";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Home",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Home"
+                                            ? 25
+                                            : hover == "Home"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "About";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Times of Bennett"?25:hover=="Times of Bennett"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height:6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Contact";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "About",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "About"
+                                            ? 25
+                                            : hover == "About"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProjectGallery()));
+                                  },
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Project Gallery";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Contact"?25:hover=="Contact"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Sign In";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Project Gallery",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width:
+                                            widget.current == "Project Gallery"
+                                                ? 25
+                                                : hover == "Project Gallery"
+                                                    ? 25
+                                                    : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Achievers";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Sign In"?25:hover=="Sign In"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ):AnimatedContainer(
-                  alignment: Alignment.bottomCenter,
-                  height: 0,
-                  duration: Duration(milliseconds: 600),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 13),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FaIcon(FontAwesomeIcons.facebookF,size: 18,color: Colors.white,),
-                            SizedBox(width: 27,),
-                            FaIcon(FontAwesomeIcons.twitter,size: 18,color: Colors.white),
-                            SizedBox(width: 27,),
-                            FaIcon(FontAwesomeIcons.linkedinIn,size: 18,color: Colors.white),
-                          ],
-                        ),
-                        SizedBox(height: 13,),
-                        Container(
-                          color: Colors.white60,
-                          height: 1,
-                          width: 300,
-                        ),
-                        SizedBox(height: 13,),
-                        TextButton(
-                            onPressed: (){
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Home";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Home",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Achievers",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Achievers"
+                                            ? 25
+                                            : hover == "Achievers"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Times of Bennett";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Home"?25:hover=="Home"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="About";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("About",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Times of Bennett",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width:
+                                            widget.current == "Times of Bennett"
+                                                ? 25
+                                                : hover == "Times of Bennett"
+                                                    ? 25
+                                                    : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Contact";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="About"?25:hover=="About"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProjectGallery()));
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Project Gallery";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Project Gallery",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Contact",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Contact"
+                                            ? 25
+                                            : hover == "Contact"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
+                                  },
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Sign In";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Project Gallery"?25:hover=="Project Gallery"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Sign In",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Sign In"
+                                            ? 25
+                                            : hover == "Sign In"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                            ],
+                          ),
                         ),
-                        SizedBox(height:6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Achievers";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Achievers",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                      )
+                    : AnimatedContainer(
+                        alignment: Alignment.bottomCenter,
+                        height: 0,
+                        duration: Duration(milliseconds: 600),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 13),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.facebookF,
+                                    size: 18,
+                                    color: Colors.white,
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Achievers"?25:hover=="Achievers"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Times of Bennett";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Times of Bennett",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  SizedBox(
+                                    width: 27,
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Times of Bennett"?25:hover=="Times of Bennett"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height:6,),
-                        TextButton(
-                            onPressed: (){
-
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Contact";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Contact",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  FaIcon(FontAwesomeIcons.twitter,
+                                      size: 18, color: Colors.white),
+                                  SizedBox(
+                                    width: 27,
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Contact"?25:hover=="Contact"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
-                        ),
-                        SizedBox(height: 6,),
-                        TextButton(
-                            onPressed: (){
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
-                            },
-                            onHover: (x){
-                              if(x){
-                                setState(() {
-                                  hover="Sign In";
-                                });
-                              }
-                              else{
-                                setState(() {
-                                  hover="";
-                                });
-
-                              }
-
-                            },
-                            style: TextButton.styleFrom(
-                              primary: Color(0xff101770),
-                              padding: EdgeInsets.all(0.0),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.only(bottom: 5),
-                                    child: Text("Sign In",style: TextStyle(color: Colors.white,fontFamily: "Metrisch-Bold"),)
-                                ),
-                                AnimatedContainer(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.orange.shade400,
+                                  FaIcon(FontAwesomeIcons.linkedinIn,
+                                      size: 18, color: Colors.white),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 13,
+                              ),
+                              Container(
+                                color: Colors.white60,
+                                height: 1,
+                                width: 300,
+                              ),
+                              SizedBox(
+                                height: 13,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyHomePage()));
+                                  },
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Home";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
                                   ),
-                                  duration: Duration(milliseconds: 200),
-                                  width: widget.current=="Sign In"?25:hover=="Sign In"?25:0,
-                                  height: 2,
-
-                                )
-                              ],
-                            )
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Home",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Home"
+                                            ? 25
+                                            : hover == "Home"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "About";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "About",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "About"
+                                            ? 25
+                                            : hover == "About"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProjectGallery()));
+                                  },
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Project Gallery";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Project Gallery",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width:
+                                            widget.current == "Project Gallery"
+                                                ? 25
+                                                : hover == "Project Gallery"
+                                                    ? 25
+                                                    : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Achievers";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Achievers",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Achievers"
+                                            ? 25
+                                            : hover == "Achievers"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    print("Button Pressed");
+                                  },
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Times of Bennett";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Times of Bennett",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width:
+                                            widget.current == "Times of Bennett"
+                                                ? 25
+                                                : hover == "Times of Bennett"
+                                                    ? 25
+                                                    : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Contact";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Contact",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Contact"
+                                            ? 25
+                                            : hover == "Contact"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
+                                  },
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Sign In";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Sign In",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Sign In"
+                                            ? 25
+                                            : hover == "Sign In"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                            ],
+                          ),
                         ),
-
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
                 AnimatedContainer(
                   height: 50,
                   duration: Duration(seconds: 10),
@@ -1041,21 +1206,21 @@ class _HeaderState extends State<Header> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: (){
-                          if(mobilemenu==true){
-                            setState(() {
-                              mobilemenu=false;
-                            });
-
-                          }
-                          else{
-                            setState(() {
-                              mobilemenu=true;
-                            });
-                          }
-                        },
-                          child: Icon(Icons.menu,color: Colors.white,)
-                      )
+                          onPressed: () {
+                            if (mobilemenu == true) {
+                              setState(() {
+                                mobilemenu = false;
+                              });
+                            } else {
+                              setState(() {
+                                mobilemenu = true;
+                              });
+                            }
+                          },
+                          child: Icon(
+                            Icons.menu,
+                            color: Colors.white,
+                          ))
                     ],
                   ),
                 )

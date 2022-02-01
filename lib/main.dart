@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Parallax",
+      title: "Bennett Project Archive",
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
@@ -74,9 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
         onNotification: (v) {
           if (v is ScrollUpdateNotification) {
             if (v.metrics.axisDirection == AxisDirection.down ||
-                v.metrics.axisDirection == AxisDirection.up)
-
-              if(MediaQuery.of(context).size.width>900)
+                v.metrics.axisDirection ==
+                    AxisDirection.up) if (MediaQuery.of(context).size.width >
+                900)
               setState(() {
                 rateEight -= v.scrollDelta / 1;
                 rateSeven -= v.scrollDelta / 1.5;

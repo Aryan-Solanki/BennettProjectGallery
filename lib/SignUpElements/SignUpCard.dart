@@ -260,8 +260,7 @@ class _SignUpCardState extends State<SignUpCard> {
                             style: TextStyle(
                                 fontFamily: "Metrisch-Medium",
                                 color: Colors.black54,
-                                fontSize:
-                                13)),
+                                fontSize: 13)),
                       ),
                     ),
                   )

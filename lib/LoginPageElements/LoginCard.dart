@@ -5,6 +5,7 @@ import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginCard extends StatefulWidget {
   @override
@@ -66,7 +67,7 @@ class _LoginCardState extends State<LoginCard> {
                   style: TextStyle(
                       fontFamily: "Metrisch-Medium",
                       height: 1.5,
-                      fontSize:15,
+                      fontSize: 15,
                       color: Colors.black54),
                   onChanged: (value) {
                     email = value.trim();
@@ -139,9 +140,15 @@ class _LoginCardState extends State<LoginCard> {
                     auth
                         .signInWithEmailAndPassword(
                             email: email, password: password)
-                        .then((_) {
-                      print("SignIn Successfull");
-                    });
+                        .then((_) {});
+                    Fluttertoast.showToast(
+                        msg: "Login Successful",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
                   },
                 )),
             SizedBox(
@@ -223,7 +230,7 @@ class _LoginCardState extends State<LoginCard> {
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",
                           color: Colors.black54,
-                          fontSize:13)),
+                          fontSize: 13)),
                 ),
               ),
             ),
