@@ -13,16 +13,17 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Header(current: "Dash Board",),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            height: 500,
+            height: MediaQuery.of(context).size.height-60,
             child: Stack(
               children: [
                 Positioned(
                   right: 0,
+                    top: 0,
                     child: RightBoard()
                 )
               ],
