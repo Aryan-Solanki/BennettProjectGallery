@@ -1387,9 +1387,8 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           Container(
                                             height: num_of_reviews * 120,
                                             child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: 5,
+                                              physics: NeverScrollableScrollPhysics(),
+                                              itemCount: num_of_reviews.toInt(),
                                               itemBuilder: (context, index) {
                                                 return ProjectDetailsReview();
                                               },

@@ -1,3 +1,4 @@
+import 'package:bennettprojectgallery/DashBoard.dart';
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
 import 'package:bennettprojectgallery/projectgallery.dart';
@@ -291,11 +292,14 @@ class _HeaderState extends State<Header> {
                     width: 10,
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => DashBoard()));
+                      },
                       onHover: (x) {
                         if (x) {
                           setState(() {
-                            hover = "Contact";
+                            hover = "Dash Board";
                           });
                         } else {
                           setState(() {
@@ -314,7 +318,7 @@ class _HeaderState extends State<Header> {
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
                               child: Text(
-                                "Contact",
+                                "Dash Board",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Metrisch-Bold"),
@@ -325,9 +329,9 @@ class _HeaderState extends State<Header> {
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current == "Contact"
+                            width: widget.current == "Dash Board"
                                 ? 25
-                                : hover == "Contact"
+                                : hover == "Dash Board"
                                     ? 25
                                     : 0,
                             height: 2,
@@ -439,10 +443,8 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                MyHomePage()));
+                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                        builder: (context) => MyHomePage()));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -695,11 +697,14 @@ class _HeaderState extends State<Header> {
                                 height: 6,
                               ),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                        builder: (context) => DashBoard()));
+                                  },
                                   onHover: (x) {
                                     if (x) {
                                       setState(() {
-                                        hover = "Contact";
+                                        hover = "Dash Board";
                                       });
                                     } else {
                                       setState(() {
@@ -719,7 +724,7 @@ class _HeaderState extends State<Header> {
                                       Container(
                                           padding: EdgeInsets.only(bottom: 5),
                                           child: Text(
-                                            "Contact",
+                                            "Dash Board",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Metrisch-Bold"),
@@ -731,9 +736,9 @@ class _HeaderState extends State<Header> {
                                           color: Colors.orange.shade400,
                                         ),
                                         duration: Duration(milliseconds: 200),
-                                        width: widget.current == "Contact"
+                                        width: widget.current == "Dash Board"
                                             ? 25
-                                            : hover == "Contact"
+                                            : hover == "Dash Board"
                                                 ? 25
                                                 : 0,
                                         height: 2,
@@ -839,10 +844,8 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                MyHomePage()));
+                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                        builder: (context) => MyHomePage()));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -1097,11 +1100,14 @@ class _HeaderState extends State<Header> {
                                 height: 6,
                               ),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                        builder: (context) => DashBoard()));
+                                  },
                                   onHover: (x) {
                                     if (x) {
                                       setState(() {
-                                        hover = "Contact";
+                                        hover = "Dash Board";
                                       });
                                     } else {
                                       setState(() {
@@ -1121,7 +1127,7 @@ class _HeaderState extends State<Header> {
                                       Container(
                                           padding: EdgeInsets.only(bottom: 5),
                                           child: Text(
-                                            "Contact",
+                                            "Dash Board",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Metrisch-Bold"),
@@ -1133,9 +1139,9 @@ class _HeaderState extends State<Header> {
                                           color: Colors.orange.shade400,
                                         ),
                                         duration: Duration(milliseconds: 200),
-                                        width: widget.current == "Contact"
+                                        width: widget.current == "Dash Board"
                                             ? 25
-                                            : hover == "Contact"
+                                            : hover == "Dash Board"
                                                 ? 25
                                                 : 0,
                                         height: 2,
