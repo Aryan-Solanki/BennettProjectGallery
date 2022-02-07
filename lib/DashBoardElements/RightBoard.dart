@@ -52,10 +52,10 @@ class _RightBoardState extends State<RightBoard> {
         color: Color(0xffdadce4),
       ),
       padding: EdgeInsets.symmetric(horizontal: 20),
-      height: 300,
+      height: MediaQuery.of(context).size.width>530?300:600,
 
 
-      child: Row(
+      child: MediaQuery.of(context).size.width>530?Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -110,6 +110,176 @@ class _RightBoardState extends State<RightBoard> {
 
             ],
           ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+
+                child: Column(
+                  children: [
+                    Container(
+                      width: 250,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Course",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                              ),
+                              Text(
+                                "CSE",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Batch",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                              ),
+                              Text(
+                                "EB10",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 7,),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      width: 250,
+                      height: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.blue.shade700
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Project Review",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.white),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "23",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 16,color:Colors.white),
+                                      ),
+                                      SizedBox(height: 5,),
+                                      Text(
+                                        "Likes",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 7,),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "123",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 16,color:Colors.white),
+                                      ),
+                                      SizedBox(height: 5,),
+                                      Text(
+                                        "Reviews",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Image(image: AssetImage("graph.png"),height: 50,width: 50,)
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    GradientButton(
+                      buttonheight: 45,
+                      buttonwidth: 250,
+                      title: "Upload Project",
+                    )
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+      ):Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Profile",
+                  style: TextStyle(
+                      fontFamily: "Metrisch-Bold", fontSize: 25)),
+              SizedBox(height: 15,),
+              SizedBox(
+                height: 160,
+                width: 160,
+                child: Stack(
+                  fit: StackFit.expand,
+                  overflow: Overflow.visible,
+                  children: [
+                    CircleAvatar(
+                        foregroundImage: NetworkImage("https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")
+                    ),
+                    Positioned(
+                      right: 11,
+                      bottom: 7,
+                      child: InkWell(
+                        onTap: (){
+                          getImage();
+                        },
+                        child: Container(
+                          height: 33,
+                          width: 33,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white,width: 3),
+                              color: Color(0xff101770),
+                              shape: BoxShape.circle
+                          ),
+                          child: Icon(Icons.camera_alt_rounded,size: 14,color: Colors.white,),
+                        ),
+                      ),
+                    )
+
+                  ],
+                ),
+              ),
+              SizedBox(height: 15,),
+              Text("Aryan Solanki",style: TextStyle(
+                  fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
+              SizedBox(height: 6,),
+              Text(
+                "E20CSE157",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:Colors.black54),
+              ),
+
+
+            ],
+          ),
+          SizedBox(height: 20,),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

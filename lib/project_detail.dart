@@ -599,7 +599,12 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            height: num_of_reviews * 120,
+                                            height: MediaQuery.of(context)
+                                                        .size
+                                                        .width >
+                                                    380
+                                                ? num_of_reviews * 130
+                                                : num_of_reviews * 150,
                                             child: ListView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
@@ -856,14 +861,31 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Container(
-                                            padding: MediaQuery.of(context).size.width>600?EdgeInsets.all(50):EdgeInsets.all(20),
+                                            padding: MediaQuery.of(context)
+                                                        .size
+                                                        .width >
+                                                    600
+                                                ? EdgeInsets.all(50)
+                                                : EdgeInsets.all(20),
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
-                                                border: Border.all(
-                                                    color: Colors.black12)),
-                                            height: MediaQuery.of(context).size.width>600?550:400,
-                                            width: MediaQuery.of(context).size.width>600?400:350,
+                                                border:
+                                                    Border.all(
+                                                        color: Colors.black12)),
+                                            height:
+                                                MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        600
+                                                    ? 550
+                                                    : 400,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >
+                                                    600
+                                                ? 400
+                                                : 350,
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(5),
@@ -1385,9 +1407,15 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            height: num_of_reviews * 120,
+                                            height: MediaQuery.of(context)
+                                                        .size
+                                                        .width >
+                                                    380
+                                                ? num_of_reviews * 130
+                                                : num_of_reviews * 150,
                                             child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               itemCount: num_of_reviews.toInt(),
                                               itemBuilder: (context, index) {
                                                 return ProjectDetailsReview();
