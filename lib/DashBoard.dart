@@ -27,7 +27,7 @@ class _DashBoardState extends State<DashBoard> {
           Container(
             width: 1050,
             height: MediaQuery.of(context).size.height-60,
-            child: MediaQuery.of(context).size.width>530?Stack(
+            child: MediaQuery.of(context).size.width>645?Stack(
               clipBehavior: Clip.none,
               children: [
                 SingleChildScrollView(
@@ -35,7 +35,7 @@ class _DashBoardState extends State<DashBoard> {
                     left: 0,
                     top: 0,
                     child: Padding(
-                      padding: EdgeInsets.only(top: 300,right: 20,left: 20),
+                      padding: EdgeInsets.only(top: 200,right: 20,left: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -651,7 +651,7 @@ class _DashBoardState extends State<DashBoard> {
                             ),
 
                           ],
-                        ):Column(
+                        ):MediaQuery.of(context).size.width>335?Column(
                           children: [
                             Row(
                               children: [
@@ -810,6 +810,159 @@ class _DashBoardState extends State<DashBoard> {
                               ],
                             )
                           ],
+                        ):Container(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              TextButton(
+                                onPressed: (){
+                                  setState(() {
+                                    selected="zero";
+                                  });
+                                },
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.all(0.0),
+                                ),
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                  width: 140,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: selected=="zero"?null:Border.all(color:Colors.blue.shade700,width: 2),
+                                      color: selected=="zero"?Colors.blue.shade700:Colors.white
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Align(alignment: Alignment.topRight,child: Icon(Icons.circle,color: selected=="zero"?Colors.lightGreenAccent:Colors.brown,size: 10,)),
+                                      SizedBox(height: 3,),
+                                      Text(
+                                        "166",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 18,color:selected=="zero"?Colors.white:Colors.black),
+                                      ),
+                                      SizedBox(height: 10,),
+                                      Text(
+                                        "All",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="zero"?Colors.white:Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 15,),
+                              TextButton(
+                                onPressed: (){
+                                  setState(() {
+                                    selected="one";
+                                  });
+                                },
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.all(0.0),
+                                ),
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                  width: 140,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: selected=="one"?null:Border.all(color:Colors.blue.shade700,width: 2),
+                                      color: selected=="one"?Colors.blue.shade700:Colors.white
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Align(alignment: Alignment.topRight,child: Icon(Icons.circle,color: selected=="one"?Colors.lightGreenAccent:Colors.brown,size: 10,)),
+                                      SizedBox(height: 3,),
+                                      Text(
+                                        "124",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 18,color:selected=="one"?Colors.white:Colors.black),
+                                      ),
+                                      SizedBox(height: 10,),
+                                      Text(
+                                        "Accepted",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="one"?Colors.white:Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 15,),
+                              TextButton(
+                                onPressed: (){
+                                  setState(() {
+                                    selected="two";
+                                  });
+                                },
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.all(0.0),
+                                ),
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                  width: 140,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: selected=="two"?null:Border.all(color:Colors.blue.shade700,width: 2),
+                                      color: selected=="two"?Colors.blue.shade700:Colors.white
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Align(alignment: Alignment.topRight,child: Icon(Icons.circle,color: selected=="two"?Colors.lightGreenAccent:Colors.brown,size: 10,)),
+                                      SizedBox(height: 3,),
+                                      Text(
+                                        "47",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 18,color:selected=="two"?Colors.white:Colors.black),
+                                      ),
+                                      SizedBox(height: 10,),
+                                      Text(
+                                        "Rejected",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 15,),
+                              TextButton(
+                                onPressed: (){
+                                  setState(() {
+                                    selected="three";
+                                  });
+                                },
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.all(0.0),
+                                ),
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                  width: 140,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: selected=="three"?null:Border.all(color:Colors.blue.shade700,width: 2),
+                                      color: selected=="three"?Colors.blue.shade700:Colors.white
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Align(alignment: Alignment.topRight,child: Icon(Icons.circle,color: selected=="three"?Colors.lightGreenAccent:Colors.brown,size: 10,)),
+                                      SizedBox(height: 3,),
+                                      Text(
+                                        "102",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 18,color:selected=="three"?Colors.white:Colors.black),
+                                      ),
+                                      SizedBox(height: 10,),
+                                      Text(
+                                        "Rejected",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="three"?Colors.white:Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 15,),
                         Container(
