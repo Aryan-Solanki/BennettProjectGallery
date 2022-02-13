@@ -150,7 +150,7 @@ class _DashBoardState extends State<DashBoard> {
                                       ),
                                       SizedBox(height: 10,),
                                       Text(
-                                        "Rejected",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
+                                        "Pending",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
                                       ),
                                     ],
                                   ),
@@ -308,7 +308,7 @@ class _DashBoardState extends State<DashBoard> {
                                           ),
                                           SizedBox(height: 10,),
                                           Text(
-                                            "Rejected",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
+                                            "Pending",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
                                           ),
                                         ],
                                       ),
@@ -606,7 +606,7 @@ class _DashBoardState extends State<DashBoard> {
                                     ),
                                     SizedBox(height: 10,),
                                     Text(
-                                      "Rejected",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
+                                      "Pending",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
                                     ),
                                   ],
                                 ),
@@ -764,7 +764,7 @@ class _DashBoardState extends State<DashBoard> {
                                         ),
                                         SizedBox(height: 10,),
                                         Text(
-                                          "Rejected",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
+                                          "Pending",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
                                         ),
                                       ],
                                     ),
@@ -918,7 +918,7 @@ class _DashBoardState extends State<DashBoard> {
                                       ),
                                       SizedBox(height: 10,),
                                       Text(
-                                        "Rejected",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
+                                        "Pending",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:selected=="two"?Colors.white:Colors.black),
                                       ),
                                     ],
                                   ),
