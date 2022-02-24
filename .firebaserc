@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "bennettprojectarchive"
-  }
+    "default": "bennettprojectarchive",
+    "bennettprojectarchive": "bennettprojectarchive"
+  },
+  "targets": {}
 }
