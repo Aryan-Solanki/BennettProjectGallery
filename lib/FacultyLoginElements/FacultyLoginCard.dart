@@ -1,23 +1,22 @@
 import 'dart:async';
 
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
-import 'package:bennettprojectgallery/facultylogin.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
+import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginCard extends StatefulWidget {
+class FacultyLoginCard extends StatefulWidget {
   @override
-  _LoginCardState createState() => _LoginCardState();
+  _FacultyLoginCardState createState() => _FacultyLoginCardState();
 }
 
-class _LoginCardState extends State<LoginCard> {
+class _FacultyLoginCardState extends State<FacultyLoginCard> {
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
   bool Hoverdonthaveaccnt = false;
-  bool Facultysignin=false;
   String email = "";
   String password = "";
   final auth = FirebaseAuth.instance;
@@ -35,7 +34,7 @@ class _LoginCardState extends State<LoginCard> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Sign In",
+            Text("Faculty Sign In",
                 style: TextStyle(
                     height: 1.3,
                     fontFamily: "Metrisch-ExtraBold",
@@ -81,7 +80,7 @@ class _LoginCardState extends State<LoginCard> {
                         height: 1.5,
                         fontSize: 15,
                         color: Colors.black54),
-                    hintText: 'roll@bennett.edu.in',
+                    hintText: 'facultyroll@bennett.edu.in',
                     // contentPadding:
                     // EdgeInsets.symmetric(horizontal: 20.0),
                     // border: OutlineInputBorder(
@@ -141,7 +140,7 @@ class _LoginCardState extends State<LoginCard> {
                   onPressed: () {
                     auth
                         .signInWithEmailAndPassword(
-                            email: email, password: password)
+                        email: email, password: password)
                         .then((_) {});
                     Fluttertoast.showToast(
                         msg: "Login Successful",
@@ -156,94 +155,45 @@ class _LoginCardState extends State<LoginCard> {
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => SignUp()));
-                    },
-                    style: TextButton.styleFrom(
-                      primary: Colors.white,
-                    ),
-                    onHover: (x) {
-                      if (x) {
-                        setState(() {
-                          Hoverdonthaveaccnt = true;
-                        });
-                      } else {
-                        setState(() {
-                          Hoverdonthaveaccnt = false;
-                        });
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: 1),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                              width: 1.0,
-                              color: Hoverdonthaveaccnt == true
-                                  ? Colors.black54
-                                  : Colors.white),
-                        ),
-                      ),
-                      child: Text("Don't have a Account ?",
-                          style: TextStyle(
-                              fontFamily: "Metrisch-Medium",
-                              color: Colors.black54,
-                              fontSize: 13)),
+            Align(
+              alignment: Alignment.center,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
+                onHover: (x) {
+                  if (x) {
+                    setState(() {
+                      Hoverdonthaveaccnt = true;
+                    });
+                  } else {
+                    setState(() {
+                      Hoverdonthaveaccnt = false;
+                    });
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 1),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                          width: 1.0,
+                          color: Hoverdonthaveaccnt == true
+                              ? Colors.black54
+                              : Colors.white),
                     ),
                   ),
+                  child: Text("Student Login",
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          color: Colors.black54,
+                          fontSize: 13)),
                 ),
-                Text("/",
-                    style: TextStyle(
-                        fontFamily: "Metrisch-Medium",
-                        color: Colors.black54,
-                        fontSize: 13)),
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => FacultyLoginPage()));
-                    },
-                    style: TextButton.styleFrom(
-                      primary: Colors.white,
-                    ),
-                    onHover: (x) {
-                      if (x) {
-                        setState(() {
-                          Facultysignin = true;
-                        });
-                      } else {
-                        setState(() {
-                          Facultysignin = false;
-                        });
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: 1),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                              width: 1.0,
-                              color: Facultysignin == true
-                                  ? Colors.black54
-                                  : Colors.white),
-                        ),
-                      ),
-                      child: Text("Faculty Login",
-                          style: TextStyle(
-                              fontFamily: "Metrisch-Medium",
-                              color: Colors.black54,
-                              fontSize: 13)),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
             Align(
               alignment: Alignment.center,
@@ -285,7 +235,6 @@ class _LoginCardState extends State<LoginCard> {
                 ),
               ),
             ),
-
           ],
         ),
       ),

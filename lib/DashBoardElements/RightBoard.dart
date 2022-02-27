@@ -52,7 +52,7 @@ class _RightBoardState extends State<RightBoard> {
         ),
         color: Color(0xffdadce4),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.only(right: 20),
       height: MediaQuery.of(context).size.width>645?200:500,
 
 
@@ -60,22 +60,25 @@ class _RightBoardState extends State<RightBoard> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Stack(
             children: [
-              SizedBox(
-                height: 100,
-                width: 100,
+              Container(
+                decoration: BoxDecoration(
+                  image:  DecorationImage(fit: BoxFit.cover,image: NetworkImage("https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                  ),
+                ),
+
+                height: 200,
+                width: 200,
                 child: Stack(
                   fit: StackFit.expand,
                   overflow: Overflow.visible,
                   children: [
-                    CircleAvatar(
-                        foregroundImage: NetworkImage("https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")
-                    ),
                     Positioned(
-                      right: 11,
-                      bottom: 7,
+                      left: 11,
+                      top: 7,
                       child: InkWell(
                         onTap: (){
                           getImage();
@@ -97,12 +100,32 @@ class _RightBoardState extends State<RightBoard> {
                 ),
               ),
               SizedBox(height: 15,),
-              Text("Aryan Solanki",style: TextStyle(
-                  fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
-              SizedBox(height: 6,),
-              Text(
-                "E20CSE157",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:Colors.black54),
-              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                    ),
+                    color: Colors.white.withOpacity(0.55),
+                  ),
+                  width: 200,
+                  height: 45,
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Aryan Solanki",style: TextStyle(
+                          fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
+                      SizedBox(height: 5,),
+                      Text(
+                        "E20CSE157",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color:Colors.black54),
+                      ),
+
+                    ],
+                  ),
+                ),
+              )
 
 
             ],
@@ -137,10 +160,10 @@ class _RightBoardState extends State<RightBoard> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Course",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                                    "Batch",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
                                   ),
                                   Text(
-                                    "CSE",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                                    "2022",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
                                   ),
                                 ],
                               ),
@@ -149,7 +172,7 @@ class _RightBoardState extends State<RightBoard> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Batch",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                                    "Section",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
                                   ),
                                   Text(
                                     "EB10",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
@@ -310,10 +333,10 @@ class _RightBoardState extends State<RightBoard> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Course",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                                "Batch",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
                               ),
                               Text(
-                                "CSE",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                                "2022",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
                               ),
                             ],
                           ),
@@ -322,7 +345,7 @@ class _RightBoardState extends State<RightBoard> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Batch",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
+                                "Section",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
                               ),
                               Text(
                                 "EB10",maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color:Colors.black),
