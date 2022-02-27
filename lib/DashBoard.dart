@@ -1,6 +1,7 @@
 import 'package:bennettprojectgallery/DashBoardElements/RightBoard.dart';
 import 'package:bennettprojectgallery/FeaturedProjectsElements/NonHoverFeaturedProjects.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
+import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -8,14 +9,46 @@ import 'HomePageElements/Header.dart';
 import 'ProjectGalleryElements/NoHoverProjectCard.dart';
 
 class DashBoard extends StatefulWidget {
+  final String id;
+  DashBoard({this.id});
   @override
-  _DashBoardState createState() => _DashBoardState();
+  _DashBoardState createState() => _DashBoardState(id: this.id);
 }
 
 String selected = "zero";
 double num_of_reviews = 5;
 
 class _DashBoardState extends State<DashBoard> {
+  final String id;
+  _DashBoardState({this.id});
+
+  String batch = "";
+  String course = "";
+  String email = "";
+  String image = "";
+  String name = "";
+  String school = "";
+  String yog = "";
+
+  getProfileDetails() async {
+    UserServices _services = new UserServices();
+    var doc = await _services.getUserById(id);
+    batch = doc["batch"];
+    course = doc["course"];
+    email = doc["email"];
+    image = doc["image"];
+    name = doc["name"];
+    school = doc["school"];
+    yog = doc["yog"];
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getProfileDetails();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -949,13 +982,32 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ),
                       ),
-                      Positioned(right: 0, top: 0, child: RightBoard())
+                      Positioned(
+                          right: 0,
+                          top: 0,
+                          child: RightBoard(
+                              id: id,
+                              batch: batch,
+                              school: school,
+                              email: email,
+                              name: name,
+                              yog: yog,
+                              course: course,
+                              image: image))
                     ],
                   )
                 : SingleChildScrollView(
                     child: Column(
                       children: [
-                        RightBoard(),
+                        RightBoard(
+                            id: id,
+                            batch: batch,
+                            school: school,
+                            email: email,
+                            name: name,
+                            yog: yog,
+                            course: course,
+                            image: image),
                         Padding(
                           padding:
                               EdgeInsets.only(top: 20, right: 20, left: 20),

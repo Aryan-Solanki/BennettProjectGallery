@@ -18,7 +18,7 @@ class _LoginCardState extends State<LoginCard> {
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
   bool Hoverdonthaveaccnt = false;
-  bool Facultysignin=false;
+  bool Facultysignin = false;
   String email = "";
   String password = "";
   final auth = FirebaseAuth.instance;
@@ -144,17 +144,22 @@ class _LoginCardState extends State<LoginCard> {
                         .signInWithEmailAndPassword(
                             email: email, password: password)
                         .then((_) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => DashBoard()));
+                      String result = email.substring(0, email.indexOf('@'));
+
+                      Fluttertoast.showToast(
+                          msg: "Login Successful",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DashBoard(id: result)));
                     });
-                    Fluttertoast.showToast(
-                        msg: "Login Successful",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
                   },
                 )),
             SizedBox(
@@ -289,7 +294,6 @@ class _LoginCardState extends State<LoginCard> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
