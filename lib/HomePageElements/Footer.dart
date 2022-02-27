@@ -14,6 +14,7 @@ class _FooterState extends State<Footer> {
   Widget build(BuildContext context) {
     return MediaQuery.of(context).size.width > 1220
         ? Container(
+      padding: EdgeInsets.only(top: 100,right: 20,left: 20),
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/footerimg.png"), fit: BoxFit.fill),
@@ -419,6 +420,7 @@ class _FooterState extends State<Footer> {
           )
         : MediaQuery.of(context).size.width > 844
             ? Container(
+      padding: EdgeInsets.only(top: 100,right: 20,left: 20),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/footerimg.png"),
@@ -834,6 +836,7 @@ class _FooterState extends State<Footer> {
                 ),
               )
             : Container(
+      padding: EdgeInsets.only(top: 100,right: 20,left: 20),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/footerimg.png"),
@@ -865,6 +868,8 @@ class _FooterState extends State<Footer> {
                                         width: 330,
                                         child: Text(
                                             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur voluptatum.",
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 4,
                                             style: TextStyle(
                                                 fontFamily: "Metrisch-Medium",
                                                 height: 1.8,
