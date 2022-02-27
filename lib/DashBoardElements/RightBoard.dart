@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bennettprojectgallery/DashBoardElements/AddProjectDialog.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -215,6 +216,14 @@ class _RightBoardState extends State<RightBoard> {
                     ),
                     SizedBox(height: 10,),
                     GradientButton(
+                      onPressed: (){
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context){
+                              return AddProjectDialog();
+                            }
+                        );
+                      },
                       buttonheight: 45,
                       buttonwidth: 330,
                       title: "Upload Project",
@@ -378,6 +387,14 @@ class _RightBoardState extends State<RightBoard> {
                     ),
                     SizedBox(height: 10,),
                     GradientButton(
+                      onPressed: (){
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context){
+                              return AddProjectDialog();
+                            }
+                        );
+                      },
                       buttonheight: 45,
                       buttonwidth: 250,
                       title: "Upload Project",

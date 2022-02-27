@@ -3,8 +3,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ZoomInImage extends StatefulWidget {
   final String ImageLink;
+  final String Name;
+  final String Title;
   const ZoomInImage({
     this.ImageLink,
+    this.Name,
+    this.Title,
   });
 
 
@@ -55,153 +59,163 @@ class _ZoomInImageState extends State<ZoomInImage> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
+    return Column(
       children: [
-        MouseRegion(
-          onEnter: (x){
-            setState(() {
-              _controller.forward();
-            });
-          },
-          onExit: (x){
-            setState(() {
-              _controller.reverse();
-            });
-          },
-          child: Card(
-            elevation: 8,
-            child: Container(
-              transform: Matrix4(_animation.value,0,0,0,0,_animation.value,0,0,0,0,1,0,padding.value,padding.value,0,1),
-              clipBehavior: Clip.hardEdge,
-              padding: EdgeInsets.all(10),
-              width: 200,
-              height: 230,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(widget.ImageLink,),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 210,
-          left: 50,
-          child: InkWell(
-            onTap: (){
-
-            },
-              onHover: (x){
-                if(x){
-                  setState(() {
-                    isHover1=true;
-                  });
-                }
-                else{
-                  setState(() {
-                    isHover1=false;
-                  });
-                }
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            MouseRegion(
+              onEnter: (x){
+                setState(() {
+                  _controller.forward();
+                });
               },
-            child: AnimatedContainer(
-              height: 30,
-              width: 30,
-              duration: Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(35.0),
-                gradient:LinearGradient(
-                  begin:  FractionalOffset(0.0, 0.0),
-                  end:  FractionalOffset(1.0, 0.0),
-                  colors: colors,
+              onExit: (x){
+                setState(() {
+                  _controller.reverse();
+                });
+              },
+              child: Card(
+                elevation: 8,
+                child: Container(
+                  transform: Matrix4(_animation.value,0,0,0,0,_animation.value,0,0,0,0,1,0,padding.value,padding.value,0,1),
+                  clipBehavior: Clip.hardEdge,
+                  padding: EdgeInsets.all(10),
+                  width: 200,
+                  height: 230,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(widget.ImageLink,),
+                    ),
+                  ),
                 ),
               ),
-              margin: EdgeInsets.only(bottom: (isHover1) ? 5 : 0.0, top: (isHover1) ? 0 : 5),
-              child: Center(
-                  child:  FaIcon(FontAwesomeIcons.twitter,color: Colors.white,size: 15,)
-              ),
             ),
-          ),
-        ),
-        Positioned(
-          top: 210,
-          left: 89,
-          child: InkWell(
-            onTap: (){
+            Positioned(
+              top: 210,
+              left: 50,
+              child: InkWell(
+                onTap: (){
 
-            },
-            onHover: (x){
-              if(x){
-                setState(() {
-                  isHover2=true;
-                });
-              }
-              else{
-                setState(() {
-                  isHover2=false;
-                });
-              }
-            },
-            child: AnimatedContainer(
-              height: 30,
-              width: 30,
-              duration: Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(35.0),
-                gradient:LinearGradient(
-                  begin:  FractionalOffset(0.0, 0.0),
-                  end:  FractionalOffset(1.0, 0.0),
-                  colors: colors,
+                },
+                  onHover: (x){
+                    if(x){
+                      setState(() {
+                        isHover1=true;
+                      });
+                    }
+                    else{
+                      setState(() {
+                        isHover1=false;
+                      });
+                    }
+                  },
+                child: AnimatedContainer(
+                  height: 30,
+                  width: 30,
+                  duration: Duration(milliseconds: 300),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(35.0),
+                    gradient:LinearGradient(
+                      begin:  FractionalOffset(0.0, 0.0),
+                      end:  FractionalOffset(1.0, 0.0),
+                      colors: colors,
+                    ),
+                  ),
+                  margin: EdgeInsets.only(bottom: (isHover1) ? 5 : 0.0, top: (isHover1) ? 0 : 5),
+                  child: Center(
+                      child:  FaIcon(FontAwesomeIcons.twitter,color: Colors.white,size: 15,)
+                  ),
                 ),
               ),
-              margin: EdgeInsets.only(bottom: (isHover2) ? 5 : 0.0, top: (isHover2) ? 0 : 5),
-              child: Center(
-                  child:  FaIcon(FontAwesomeIcons.facebookF,color: Colors.white,size: 18,)
-              ),
             ),
-          ),
-        ),
-        Positioned(
-          top: 210,
-          right: 50,
-          child: InkWell(
-            onTap: (){
+            Positioned(
+              top: 210,
+              left: 89,
+              child: InkWell(
+                onTap: (){
 
-            },
-            onHover: (x){
-              if(x){
-                setState(() {
-                  isHover3=true;
-                });
-              }
-              else{
-                setState(() {
-                  isHover3=false;
-                });
-              }
-            },
-            child: AnimatedContainer(
-              height: 30,
-              width: 30,
-              duration: Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(35.0),
-                gradient:LinearGradient(
-                  begin:  FractionalOffset(0.0, 0.0),
-                  end:  FractionalOffset(1.0, 0.0),
-                  colors: colors,
+                },
+                onHover: (x){
+                  if(x){
+                    setState(() {
+                      isHover2=true;
+                    });
+                  }
+                  else{
+                    setState(() {
+                      isHover2=false;
+                    });
+                  }
+                },
+                child: AnimatedContainer(
+                  height: 30,
+                  width: 30,
+                  duration: Duration(milliseconds: 300),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(35.0),
+                    gradient:LinearGradient(
+                      begin:  FractionalOffset(0.0, 0.0),
+                      end:  FractionalOffset(1.0, 0.0),
+                      colors: colors,
+                    ),
+                  ),
+                  margin: EdgeInsets.only(bottom: (isHover2) ? 5 : 0.0, top: (isHover2) ? 0 : 5),
+                  child: Center(
+                      child:  FaIcon(FontAwesomeIcons.facebookF,color: Colors.white,size: 18,)
+                  ),
                 ),
               ),
-              margin: EdgeInsets.only(bottom: (isHover3) ? 5 : 0.0, top: (isHover3) ? 0 : 5),
-              child: Center(
-                  child:  FaIcon(FontAwesomeIcons.linkedinIn,color: Colors.white,size: 18,)
+            ),
+            Positioned(
+              top: 210,
+              right: 50,
+              child: InkWell(
+                onTap: (){
+
+                },
+                onHover: (x){
+                  if(x){
+                    setState(() {
+                      isHover3=true;
+                    });
+                  }
+                  else{
+                    setState(() {
+                      isHover3=false;
+                    });
+                  }
+                },
+                child: AnimatedContainer(
+                  height: 30,
+                  width: 30,
+                  duration: Duration(milliseconds: 300),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(35.0),
+                    gradient:LinearGradient(
+                      begin:  FractionalOffset(0.0, 0.0),
+                      end:  FractionalOffset(1.0, 0.0),
+                      colors: colors,
+                    ),
+                  ),
+                  margin: EdgeInsets.only(bottom: (isHover3) ? 5 : 0.0, top: (isHover3) ? 0 : 5),
+                  child: Center(
+                      child:  FaIcon(FontAwesomeIcons.linkedinIn,color: Colors.white,size: 18,)
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
 
+          ],
+        ),
+        SizedBox(height: 30,),
+        Text(widget.Name,style: TextStyle(
+            fontFamily: "Metrisch-Bold",fontSize: 18,color: Colors.black)),
+        SizedBox(height: 5,),
+        Text(widget.Title,style: TextStyle(
+            fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15,color: Colors.black54)),
       ],
     );
   }

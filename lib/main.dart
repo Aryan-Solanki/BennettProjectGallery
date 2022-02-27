@@ -1363,12 +1363,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Container(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 20),
-                                      height: 300,
+                                      height: 330,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           ZoomInImage(
+                                            Name: "Aryan Solanki",
+                                            Title: "General Manager",
                                             ImageLink:
                                                 "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
                                           ),
@@ -1376,18 +1378,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                             width: 40,
                                           ),
                                           ZoomInImage(
+                                              Name: "Aryan Solanki",
+                                              Title: "General Manager",
                                               ImageLink:
                                                   "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
                                           SizedBox(
                                             width: 40,
                                           ),
                                           ZoomInImage(
+                                              Name: "Aryan Solanki",
+                                              Title: "General Manager",
                                               ImageLink:
                                                   "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
                                           SizedBox(
                                             width: 40,
                                           ),
                                           ZoomInImage(
+                                              Name: "Aryan Solanki",
+                                              Title: "General Manager",
                                               ImageLink:
                                                   "https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
                                         ],
@@ -1399,12 +1407,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                     child: Container(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 20),
-                                      height: 300,
+                                      height: 330,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           NoAnimationZoomInImage(
+                                            Name: "Aryan Solanki",
+                                            Title: "General Manager",
                                             ImageLink:
                                                 "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
                                           ),
@@ -1412,18 +1422,24 @@ class _MyHomePageState extends State<MyHomePage> {
                                             width: 40,
                                           ),
                                           NoAnimationZoomInImage(
+                                              Name: "Aryan Solanki",
+                                              Title: "General Manager",
                                               ImageLink:
                                                   "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
                                           SizedBox(
                                             width: 40,
                                           ),
                                           NoAnimationZoomInImage(
+                                              Name: "Aryan Solanki",
+                                              Title: "General Manager",
                                               ImageLink:
                                                   "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
                                           SizedBox(
                                             width: 40,
                                           ),
                                           NoAnimationZoomInImage(
+                                              Name: "Aryan Solanki",
+                                              Title: "General Manager",
                                               ImageLink:
                                                   "https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
                                         ],
