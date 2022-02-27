@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bennettprojectgallery/DashBoard.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:bennettprojectgallery/signup.dart';
@@ -140,7 +141,10 @@ class _LoginCardState extends State<LoginCard> {
                     auth
                         .signInWithEmailAndPassword(
                             email: email, password: password)
-                        .then((_) {});
+                        .then((_) {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => DashBoard()));
+                    });
                     Fluttertoast.showToast(
                         msg: "Login Successful",
                         toastLength: Toast.LENGTH_LONG,
