@@ -33,14 +33,15 @@ class _DashBoardState extends State<DashBoard> {
   getProfileDetails() async {
     UserServices _services = new UserServices();
     var doc = await _services.getUserById(id);
-    batch = doc["batch"];
-    course = doc["course"];
-    email = doc["email"];
-    image = doc["image"];
-    name = doc["name"];
-    school = doc["school"];
-    yog = doc["yog"];
-    setState(() {});
+    setState(() {
+      batch = doc["batch"];
+      course = doc["course"];
+      email = doc["email"];
+      image = doc["image"];
+      name = doc["name"];
+      school = doc["school"];
+      yog = doc["yog"].toString();
+    });
   }
 
   @override

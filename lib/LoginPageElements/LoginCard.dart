@@ -144,7 +144,8 @@ class _LoginCardState extends State<LoginCard> {
                         .signInWithEmailAndPassword(
                             email: email, password: password)
                         .then((_) {
-                      String result = email.substring(0, email.indexOf('@'));
+                      String result =
+                          email.substring(0, email.indexOf('@')).toUpperCase();
 
                       Fluttertoast.showToast(
                           msg: "Login Successful",
