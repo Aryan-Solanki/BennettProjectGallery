@@ -10,45 +10,34 @@ import 'ProjectGalleryElements/NoHoverProjectCard.dart';
 
 class DashBoard extends StatefulWidget {
   final String id;
-  DashBoard({this.id});
+  final String batch;
+  final String course;
+  final String email;
+  final String image;
+  final String name;
+  final String school;
+  final String yog;
+  DashBoard({this.id,this.batch,this.course,this.email,this.image,this.name,this.school,this.yog});
   @override
-  _DashBoardState createState() => _DashBoardState(id: this.id);
+  _DashBoardState createState() => _DashBoardState(id: this.id,batch:this.batch,course: this.course,email: this.email,image: this.image,name: this.name,school: this.school,yog: this.yog,);
 }
+
 
 String selected = "zero";
 double num_of_reviews = 5;
 
 class _DashBoardState extends State<DashBoard> {
   final String id;
-  _DashBoardState({this.id});
+  final String batch;
+  final String course;
+  final String email;
+  final String image;
+  final String name;
+  final String school;
+  final String yog;
+  _DashBoardState({this.id,this.batch,this.course,this.email,this.image,this.name,this.school,this.yog});
 
-  String batch = "";
-  String course = "";
-  String email = "";
-  String image = "";
-  String name = "";
-  String school = "";
-  String yog = "";
 
-  getProfileDetails() async {
-    UserServices _services = new UserServices();
-    var doc = await _services.getUserById(id);
-    setState(() {
-      batch = doc["batch"];
-      course = doc["course"];
-      email = doc["email"];
-      image = doc["image"];
-      name = doc["name"];
-      school = doc["school"];
-      yog = doc["yog"].toString();
-    });
-  }
-
-  @override
-  void initState() {
-    getProfileDetails();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

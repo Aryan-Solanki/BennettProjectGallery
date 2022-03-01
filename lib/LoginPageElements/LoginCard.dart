@@ -4,6 +4,7 @@ import 'package:bennettprojectgallery/DashBoard.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/facultylogin.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
+import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -143,9 +144,23 @@ class _LoginCardState extends State<LoginCard> {
                     auth
                         .signInWithEmailAndPassword(
                             email: email, password: password)
-                        .then((_) {
+                        .then((_) async{
                       String result =
                           email.substring(0, email.indexOf('@')).toUpperCase();
+                      UserServices _services = new UserServices();
+                      var doc = await _services.getUserById(result);
+                      String batch = doc["batch"];
+                      String course = doc["course"];
+                      String email1 = doc["email"];
+                      String image = doc["image"];
+                      String name = doc["name"];
+                      String school = doc["school"];
+                      String yog = doc["yog"].toString();
+                      print("hiiiiiiiiiiiiiiiii");
+                      print(batch);
+                      print(course);
+                      print(email1);
+
 
                       Fluttertoast.showToast(
                           msg: "Login Successful",
@@ -159,7 +174,7 @@ class _LoginCardState extends State<LoginCard> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DashBoard(id: result)));
+                              builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
                     });
                   },
                 )),

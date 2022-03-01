@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RightBoard extends StatefulWidget {
+
   final String batch;
   final String course;
   final String email;
@@ -16,6 +17,7 @@ class RightBoard extends StatefulWidget {
   final String school;
   final String yog;
 
+
   RightBoard(
       {this.batch,
       this.course,
@@ -24,7 +26,8 @@ class RightBoard extends StatefulWidget {
       this.image,
       this.name,
       this.school,
-      this.yog});
+      this.yog,
+      });
 
   @override
   _RightBoardState createState() => _RightBoardState(
@@ -62,7 +65,6 @@ class _RightBoardState extends State<RightBoard> {
       this.name,
       this.school,
       this.yog});
-
   // Future<void> uploadStatusImage() async {
   //   FirebaseStorage storage = FirebaseStorage.instance;
   //   final Reference postImageRef = storage.ref().child("Post Images");
@@ -374,6 +376,8 @@ class _RightBoardState extends State<RightBoard> {
                           ),
                           GradientButton(
                             onPressed: () {
+                              print(batch);
+                              print(email);
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
