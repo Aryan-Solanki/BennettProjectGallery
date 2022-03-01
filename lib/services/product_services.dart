@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
+class Project {
   CollectionReference studentData =
       FirebaseFirestore.instance.collection('studentData');
   DocumentReference mainscreen = FirebaseFirestore.instance

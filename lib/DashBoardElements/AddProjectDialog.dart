@@ -28,6 +28,21 @@ File sampleImage3;
 Image image3;
 
 class _AddProjectDialogState extends State<AddProjectDialog> {
+  String Title = "";
+  String Description = "";
+  String ProjectLink = "";
+  String DatasetLink = "";
+  String ReportLink = "";
+
+  var Structure = {
+    "LikeCount": 0,
+    "ProjectDetails": {},
+    "Reviews": {},
+    "StudentIdList": [],
+    "title": "",
+    "viewCount": 0,
+  };
+
   void uploadImage({@required Function(html.File file) onSelected}) {
     InputElement uploadInput = FileUploadInputElement()
       ..accept = 'image/*'; //it will upload only image
@@ -291,7 +306,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           fontSize: 15,
                           color: Colors.black),
                       onChanged: (value) {
-                        //Do something with the user input.
+                        Title = value;
                       },
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -325,7 +340,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           fontSize: 15,
                           color: Colors.black),
                       onChanged: (value) {
-                        //Do something with the user input.
+                        Description = value;
                       },
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -359,7 +374,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           fontSize: 15,
                           color: Colors.black),
                       onChanged: (value) {
-                        //Do something with the user input.
+                        ProjectLink = value;
                       },
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -393,7 +408,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           fontSize: 15,
                           color: Colors.black),
                       onChanged: (value) {
-                        //Do something with the user input.
+                        DatasetLink = value;
                       },
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -427,7 +442,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           fontSize: 15,
                           color: Colors.black),
                       onChanged: (value) {
-                        //Do something with the user input.
+                        ReportLink = value;
                       },
                       decoration: InputDecoration(
                         border: InputBorder.none,

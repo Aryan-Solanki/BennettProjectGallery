@@ -19,8 +19,6 @@ class UserServices {
     await _firestore.collection(collectionStudent).doc(id).update(values);
   }
 
-  //get user data by User id
-
   Future<DocumentSnapshot> getUserById(String id) async {
     var result = await _firestore.collection(collectionStudent).doc(id).get();
     return result;
