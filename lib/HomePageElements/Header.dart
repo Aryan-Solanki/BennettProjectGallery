@@ -30,28 +30,28 @@ class _HeaderState extends State<Header> {
   void _launchURL(_url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
-  String batch="";
-  String course="";
-  String email1 ="";
-  String image ="";
+
+  String batch = "";
+  String course = "";
+  String email1 = "";
+  String image = "";
   String name = "";
   String school = "";
   String yog = "";
   String result = "";
 
-  void getinfo() async{
-    String email= auth.currentUser.email;
-    result =
-    email.substring(0, email.indexOf('@')).toUpperCase();
+  void getinfo() async {
+    String email = auth.currentUser.email;
+    result = email.substring(0, email.indexOf('@')).toUpperCase();
     UserServices _services = new UserServices();
     var doc = await _services.getUserById(result);
-     batch = doc["batch"];
-     course = doc["course"];
-     email1 = doc["email"];
-     image = doc["image"];
-     name = doc["name"];
-     school = doc["school"];
-     yog = doc["yog"].toString();
+    batch = doc["batch"];
+    course = doc["course"];
+    email1 = doc["email"];
+    image = doc["image"];
+    name = doc["name"];
+    school = doc["school"];
+    yog = doc["yog"].toString();
   }
 
   @override
@@ -328,15 +328,27 @@ class _HeaderState extends State<Header> {
                   TextButton(
                       onPressed: () {
                         print("shnssssssssssss");
-                        name==""?Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => LoginPage())):
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
+                        name == ""
+                            ? Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()))
+                            : Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => DashBoard(
+                                          id: result,
+                                          batch: batch,
+                                          course: course,
+                                          email: email1,
+                                          image: image,
+                                          name: name,
+                                          school: school,
+                                          yog: yog,
+                                        )));
                       },
                       onHover: (x) {
                         if (x) {
                           setState(() {
-                            hover = "Dash Board";
+                            hover = "Dashboard";
                           });
                         } else {
                           setState(() {
@@ -355,7 +367,7 @@ class _HeaderState extends State<Header> {
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
                               child: Text(
-                                "Dash Board",
+                                "Dashboard",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Metrisch-Bold"),
@@ -366,9 +378,9 @@ class _HeaderState extends State<Header> {
                               color: Colors.orange.shade400,
                             ),
                             duration: Duration(milliseconds: 200),
-                            width: widget.current == "Dash Board"
+                            width: widget.current == "Dashboard"
                                 ? 25
-                                : hover == "Dash Board"
+                                : hover == "Dashboard"
                                     ? 25
                                     : 0,
                             height: 2,
@@ -480,8 +492,10 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => MyHomePage()));
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyHomePage()));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -735,15 +749,28 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    name==""?Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => LoginPage())):
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
+                                    name == ""
+                                        ? Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()))
+                                        : Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
+                                                builder: (context) => DashBoard(
+                                                      id: result,
+                                                      batch: batch,
+                                                      course: course,
+                                                      email: email1,
+                                                      image: image,
+                                                      name: name,
+                                                      school: school,
+                                                      yog: yog,
+                                                    )));
                                   },
                                   onHover: (x) {
                                     if (x) {
                                       setState(() {
-                                        hover = "Dash Board";
+                                        hover = "Dashboard";
                                       });
                                     } else {
                                       setState(() {
@@ -763,7 +790,7 @@ class _HeaderState extends State<Header> {
                                       Container(
                                           padding: EdgeInsets.only(bottom: 5),
                                           child: Text(
-                                            "Dash Board",
+                                            "Dashboard",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Metrisch-Bold"),
@@ -775,9 +802,9 @@ class _HeaderState extends State<Header> {
                                           color: Colors.orange.shade400,
                                         ),
                                         duration: Duration(milliseconds: 200),
-                                        width: widget.current == "Dash Board"
+                                        width: widget.current == "Dashboard"
                                             ? 25
-                                            : hover == "Dash Board"
+                                            : hover == "Dashboard"
                                                 ? 25
                                                 : 0,
                                         height: 2,
@@ -883,8 +910,10 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => MyHomePage()));
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyHomePage()));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -1140,15 +1169,28 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    name==""?Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => LoginPage())):
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
+                                    name == ""
+                                        ? Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()))
+                                        : Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
+                                                builder: (context) => DashBoard(
+                                                      id: result,
+                                                      batch: batch,
+                                                      course: course,
+                                                      email: email1,
+                                                      image: image,
+                                                      name: name,
+                                                      school: school,
+                                                      yog: yog,
+                                                    )));
                                   },
                                   onHover: (x) {
                                     if (x) {
                                       setState(() {
-                                        hover = "Dash Board";
+                                        hover = "Dashboard";
                                       });
                                     } else {
                                       setState(() {
@@ -1168,7 +1210,7 @@ class _HeaderState extends State<Header> {
                                       Container(
                                           padding: EdgeInsets.only(bottom: 5),
                                           child: Text(
-                                            "Dash Board",
+                                            "Dashboard",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontFamily: "Metrisch-Bold"),
@@ -1180,9 +1222,9 @@ class _HeaderState extends State<Header> {
                                           color: Colors.orange.shade400,
                                         ),
                                         duration: Duration(milliseconds: 200),
-                                        width: widget.current == "Dash Board"
+                                        width: widget.current == "Dashboard"
                                             ? 25
-                                            : hover == "Dash Board"
+                                            : hover == "Dashboard"
                                                 ? 25
                                                 : 0,
                                         height: 2,

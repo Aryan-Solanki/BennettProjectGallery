@@ -17,11 +17,27 @@ class DashBoard extends StatefulWidget {
   final String name;
   final String school;
   final String yog;
-  DashBoard({this.id,this.batch,this.course,this.email,this.image,this.name,this.school,this.yog});
+  DashBoard(
+      {this.id,
+      this.batch,
+      this.course,
+      this.email,
+      this.image,
+      this.name,
+      this.school,
+      this.yog});
   @override
-  _DashBoardState createState() => _DashBoardState(id: this.id,batch:this.batch,course: this.course,email: this.email,image: this.image,name: this.name,school: this.school,yog: this.yog,);
+  _DashBoardState createState() => _DashBoardState(
+        id: this.id,
+        batch: this.batch,
+        course: this.course,
+        email: this.email,
+        image: this.image,
+        name: this.name,
+        school: this.school,
+        yog: this.yog,
+      );
 }
-
 
 String selected = "zero";
 double num_of_reviews = 5;
@@ -35,9 +51,15 @@ class _DashBoardState extends State<DashBoard> {
   final String name;
   final String school;
   final String yog;
-  _DashBoardState({this.id,this.batch,this.course,this.email,this.image,this.name,this.school,this.yog});
-
-
+  _DashBoardState(
+      {this.id,
+      this.batch,
+      this.course,
+      this.email,
+      this.image,
+      this.name,
+      this.school,
+      this.yog});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +68,7 @@ class _DashBoardState extends State<DashBoard> {
       body: Column(
         children: [
           Header(
-            current: "Dash Board",
+            current: "Dashboard",
           ),
           Container(
             width: 1050,
