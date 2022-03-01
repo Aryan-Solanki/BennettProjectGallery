@@ -8,12 +8,20 @@ import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginCard extends StatefulWidget {
   @override
   _LoginCardState createState() => _LoginCardState();
 }
+bool loading=false;
+
+const spinkit = SpinKitThreeInOut(
+  color: Colors.white,
+  size: 20.0,
+);
+
 
 class _LoginCardState extends State<LoginCard> {
   final myController = TextEditingController();
@@ -137,14 +145,19 @@ class _LoginCardState extends State<LoginCard> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: GradientButton(
+                child: loading==false?GradientButton(
                   title: "Sign In",
                   buttonwidth: 300,
                   onPressed: () {
+                    setState(() {
+                      loading=true;
+                    });
+
                     auth
                         .signInWithEmailAndPassword(
                             email: email, password: password)
                         .then((_) async{
+
                       String result =
                           email.substring(0, email.indexOf('@')).toUpperCase();
                       UserServices _services = new UserServices();
@@ -175,8 +188,23 @@ class _LoginCardState extends State<LoginCard> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
+                      loading=false;
                     });
                   },
+                ):Container(
+                  height: 50,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    gradient: LinearGradient(
+                        begin: const FractionalOffset(0.0, 0.0),
+                        end: const FractionalOffset(1.0, 0.0),
+                        colors: colors),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                  child: Center(
+                    child: spinkit,
+                  ),
                 )),
             SizedBox(
               height: 10,
