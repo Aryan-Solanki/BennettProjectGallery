@@ -46,7 +46,7 @@ class _DashBoardState extends State<DashBoard> {
       body: Column(
         children: [
           Header(
-            current: "Dashboard",
+            current: "Dash Board",
           ),
           Container(
             width: 1050,

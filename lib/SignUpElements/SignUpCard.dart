@@ -4,6 +4,7 @@ import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../login.dart';
 
@@ -12,12 +13,18 @@ class SignUpCard extends StatefulWidget {
   _SignUpCardState createState() => _SignUpCardState();
 }
 
+const spinkit = SpinKitThreeInOut(
+  color: Colors.white,
+  size: 20.0,
+);
+
 class _SignUpCardState extends State<SignUpCard> {
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
   bool Hoveralreadyhaveaccnt = false;
   String emailId = "";
   String password = "";
+  bool loading=false;
   final auth = FirebaseAuth.instance;
   Timer timer;
   User user;
@@ -167,17 +174,32 @@ class _SignUpCardState extends State<SignUpCard> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: GradientButton(
+                child: loading==false?GradientButton(
                   title: "Send Verification",
                   buttonwidth: 300,
                   onPressed: () async {
                     setState(() {
                       verificationSent = true;
+                      loading=true;
                     });
                     createverifyUser();
                     // UserCredential userCredential =
                     //     await FirebaseAuth.instance.signInAnonymously();
                   },
+                ):Container(
+                  height: 50,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    gradient: LinearGradient(
+                        begin: const FractionalOffset(0.0, 0.0),
+                        end: const FractionalOffset(1.0, 0.0),
+                        colors: colors),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                  child: Center(
+                    child: spinkit,
+                  ),
                 )),
             SizedBox(
               height: 10,
@@ -227,6 +249,7 @@ class _SignUpCardState extends State<SignUpCard> {
                     alignment: Alignment.center,
                     child: TextButton(
                       onPressed: () {
+                        loading=false;
                         // Navigator.of(context).pushReplacement(MaterialPageRoute(
                         //     builder: (context) => ForgotPassword()));
                         user.delete().then((value) => () {});

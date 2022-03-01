@@ -1,7 +1,11 @@
 import 'package:bennettprojectgallery/DashBoard.dart';
+import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
+import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
 import 'package:bennettprojectgallery/projectgallery.dart';
+import 'package:bennettprojectgallery/services/user_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,10 +24,40 @@ class Header extends StatefulWidget {
 
 String hover = "";
 bool mobilemenu = false;
+final auth = FirebaseAuth.instance;
 
 class _HeaderState extends State<Header> {
   void _launchURL(_url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';
+  }
+  String batch="";
+  String course="";
+  String email1 ="";
+  String image ="";
+  String name = "";
+  String school = "";
+  String yog = "";
+  String result = "";
+
+  void getinfo() async{
+    String email= auth.currentUser.email;
+    result =
+    email.substring(0, email.indexOf('@')).toUpperCase();
+    UserServices _services = new UserServices();
+    var doc = await _services.getUserById(result);
+     batch = doc["batch"];
+     course = doc["course"];
+     email1 = doc["email"];
+     image = doc["image"];
+     name = doc["name"];
+     school = doc["school"];
+     yog = doc["yog"].toString();
+  }
+
+  @override
+  void initState() {
+    getinfo();
+    super.initState();
   }
 
   @override
@@ -293,8 +327,11 @@ class _HeaderState extends State<Header> {
                   ),
                   TextButton(
                       onPressed: () {
+                        print("shnssssssssssss");
+                        name==""?Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginPage())):
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => DashBoard()));
+                            builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
                       },
                       onHover: (x) {
                         if (x) {
@@ -698,8 +735,10 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
+                                    name==""?Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                        builder: (context) => LoginPage())):
                                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => DashBoard()));
+                                        builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -1101,8 +1140,10 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
+                                    name==""?Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                        builder: (context) => LoginPage())):
                                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                        builder: (context) => DashBoard()));
+                                        builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
                                   },
                                   onHover: (x) {
                                     if (x) {
