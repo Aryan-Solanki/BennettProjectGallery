@@ -12,11 +12,12 @@ class User {
       .doc("JmEmXY3ZoYp71gznVp5I");
 
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserInfo(id) async {
-    var document =
-        await FirebaseFirestore.instance.collection("studentData").doc(id).get();
+    var document = await FirebaseFirestore.instance
+        .collection("studentData")
+        .doc(id)
+        .get();
     return document;
   }
-
 
   //
   // Product getProductSeeMore(document) {

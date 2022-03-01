@@ -21,11 +21,12 @@ dependencies:
   url_launcher: any
   fluttertoast: any
   firebase_auth:
+  firebase:
   cloud_firestore:
   firebase_storage:
   menu_button:
   flutter_rating_bar:
-  image_picker: ^0.8.4+6
+  image_picker: ^0.8.4+4
 
 dev_dependencies:
   flutter_test:

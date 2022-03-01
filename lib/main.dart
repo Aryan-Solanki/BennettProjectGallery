@@ -23,11 +23,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: FirebaseOptions(
-      apiKey: "AIzaSyAEIYggOFQByKpPDY6b-lhqo-Z7YRiJpQ0",
-      appId: "1:162710403477:web:5905ae37bf1411843c1e9c",
-      messagingSenderId: "162710403477",
-      projectId: "bennettprojectarchive",
-    ),
+        apiKey: "AIzaSyAEIYggOFQByKpPDY6b-lhqo-Z7YRiJpQ0",
+        appId: "1:162710403477:web:5905ae37bf1411843c1e9c",
+        messagingSenderId: "162710403477",
+        projectId: "bennettprojectarchive",
+        storageBucket: "bennettprojectarchive.appspot.com/"),
   );
   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft])
       .then((_) {
