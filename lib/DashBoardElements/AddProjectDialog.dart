@@ -33,6 +33,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   String ProjectLink = "";
   String DatasetLink = "";
   String ReportLink = "";
+  String VideoLink = "";
 
   var Structure = {
     "LikeCount": 0,
@@ -84,7 +85,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
         }
       }
       String url = downloadUrl.toString();
-      print("download url : $url");
+      return url;
     } on FirebaseException catch (e) {
       print(e);
     }
@@ -218,7 +219,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             )
                           : TextButton(
                               onPressed: () {
-                                getImage1();
+                                getImage2();
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor: Colors.transparent,
@@ -267,7 +268,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             )
                           : TextButton(
                               onPressed: () {
-                                getImage1();
+                                getImage3();
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor: Colors.transparent,
@@ -463,13 +464,78 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                   SizedBox(
                     height: 15,
                   ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    height: 45,
+                    child: TextField(
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          height: 1.5,
+                          fontSize: 15,
+                          color: Colors.black),
+                      onChanged: (value) {
+                        VideoLink = value;
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            fontFamily: "Metrisch-Medium",
+                            height: 1.5,
+                            fontSize: 15,
+                            color: Colors.black),
+                        hintText: 'Video Link',
+                        // contentPadding:
+                        // EdgeInsets.symmetric(horizontal: 20.0),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        // ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   GradientButton(
                     title: "Add Project",
                     buttonheight: 45,
-                    onPressed: () {
-                      uploadImageToFirebase(sampleImage1);
-                      uploadImageToFirebase(sampleImage2);
-                      uploadImageToFirebase(sampleImage3);
+                    onPressed: () async {
+                      CollectionReference project =
+                          FirebaseFirestore.instance.collection('project');
+
+                      List listImageLinks = [];
+
+                      await listImageLinks
+                          .add(uploadImageToFirebase(sampleImage1));
+                      await listImageLinks
+                          .add(uploadImageToFirebase(sampleImage2));
+                      await listImageLinks
+                          .add(uploadImageToFirebase(sampleImage3));
+
+                      var Structure = {
+                        "LikeCount": 0,
+                        "ProjectDetails": {
+                          "ProjectLink": ProjectLink,
+                          "DatasetLink": DatasetLink,
+                          "Description": Description,
+                          "ReportLink": ReportLink,
+                          "VideoLink": VideoLink,
+                        },
+                        "images": listImageLinks,
+                        "Reviews": [],
+                        "StudentIdList": [],
+                        "title": Title,
+                        "viewCount": 0,
+                      };
+
+                      while (true) {
+                        if (listImageLinks.length != 0) {
+                          project.add(Structure);
+                          break;
+                        }
+                      }
                     },
                   )
                 ],
