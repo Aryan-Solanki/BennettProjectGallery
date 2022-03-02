@@ -35,7 +35,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   String ReportLink = "";
   String VideoLink = "";
 
-  };
   bool image1selected = false;
   bool image2selected = false;
   bool image3selected = false;
