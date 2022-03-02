@@ -35,14 +35,10 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   String ReportLink = "";
   String VideoLink = "";
 
-  var Structure = {
-    "LikeCount": 0,
-    "ProjectDetails": {},
-    "Reviews": {},
-    "StudentIdList": [],
-    "title": "",
-    "viewCount": 0,
   };
+  bool image1selected = false;
+  bool image2selected = false;
+  bool image3selected = false;
 
   void uploadImage({@required Function(html.File file) onSelected}) {
     InputElement uploadInput = FileUploadInputElement()
@@ -92,6 +88,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   }
 
   Future getImage1() async {
+    image1selected = true;
     uploadImage(onSelected: (file) {
       if (file != null) {
         setState(() {
@@ -102,6 +99,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   }
 
   Future getImage2() async {
+    image2selected = false;
     uploadImage(onSelected: (file) {
       if (file != null) {
         setState(() {
@@ -112,6 +110,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   }
 
   Future getImage3() async {
+    image3selected = true;
     uploadImage(onSelected: (file) {
       if (file != null) {
         setState(() {
@@ -507,12 +506,20 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
                       List listImageLinks = [];
 
-                      await listImageLinks
-                          .add(uploadImageToFirebase(sampleImage1));
-                      await listImageLinks
-                          .add(uploadImageToFirebase(sampleImage2));
-                      await listImageLinks
-                          .add(uploadImageToFirebase(sampleImage3));
+                      if (image1selected) {
+                        await listImageLinks
+                            .add(uploadImageToFirebase(sampleImage1));
+                      }
+
+                      if (image2selected) {
+                        await listImageLinks
+                            .add(uploadImageToFirebase(sampleImage2));
+                      }
+
+                      if (image3selected) {
+                        await listImageLinks
+                            .add(uploadImageToFirebase(sampleImage3));
+                      }
 
                       var Structure = {
                         "LikeCount": 0,
