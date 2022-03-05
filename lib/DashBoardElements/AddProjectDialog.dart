@@ -1,5 +1,6 @@
 import 'dart:html' as html;
 import 'dart:html';
+import 'dart:convert';
 import 'dart:io' as io;
 import 'dart:math';
 
@@ -12,8 +13,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as fb;
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:menu_button/menu_button.dart';
+import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/util/multi_select_list_type.dart';
+
+class Animal {
+  final int id;
+  final String name;
+
+  Animal({
+    this.id,
+    this.name,
+  });
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+      text: newValue.text.toUpperCase(),
+      selection: newValue.selection,
+    );
+  }
+}
 
 class AddProjectDialog extends StatefulWidget {
   final String id;
@@ -39,7 +66,35 @@ File sampleImage3;
 Image image3;
 String imageLink3 = "";
 
+String selectedKey="1";
+
 class _AddProjectDialogState extends State<AddProjectDialog> {
+  List<String> keys = <String>[
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+  ];
+
+  List<int> value = [2];
+  List<dynamic> _selectedAnimals=[];
+
+  static List<Animal> _animals = [
+    Animal(id: 1, name: "Lion"),
+    Animal(id: 2, name: "Flamingo"),
+    Animal(id: 3, name: "Hippo"),
+    Animal(id: 4, name: "Lion"),
+    Animal(id: 5, name: "Flamingo"),
+    Animal(id: 6, name: "Hippo"),
+    Animal(id: 7, name: "Lion"),
+    Animal(id: 8, name: "Flamingo"),
+    Animal(id: 9, name: "Hippo"),
+    Animal(id: 10, name: "Lion"),
+    Animal(id: 11, name: "Flamingo"),
+    Animal(id: 12, name: "Hippo"),
+  ];
+
   final String id;
   final String name;
   final String yog;
@@ -148,9 +203,39 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
+    final Widget normalChildButton = Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.transparent),
+        color: Color(0xfff3f5fe),
+      ),
+
+      width: 60,
+      height: 40,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 11),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Flexible(
+              child: Text(selectedKey, overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+            ),
+            const SizedBox(
+              width: 12,
+              height: 17,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
     return Dialog(
         child: Container(
             padding: EdgeInsets.all(20),
@@ -351,6 +436,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                   SizedBox(
                     height: 15,
                   ),
+
                   Container(
                     padding: EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
@@ -385,6 +471,143 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                   SizedBox(
                     height: 15,
                   ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    height: 45,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Text("* Team Members",style: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              height: 1.5,
+                              fontSize: 15,
+                              color: Colors.black),),
+                        ),
+                        MenuButton<String>(
+                          scrollPhysics: PageScrollPhysics(),
+                          child: normalChildButton,
+                          items: keys,
+                          itemBuilder: (String value) => Container(
+                            height: 40,
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
+                            child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                          ),
+                          toggledChild: Container(
+                            child: normalChildButton,
+                          ),
+                          onItemSelected: (String value) {
+                            setState(() {
+                              selectedKey = value;
+                            });
+                          },
+                          onMenuButtonToggle: (bool isToggle) {
+                            print(isToggle);
+                          },
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    height: int.parse(selectedKey).toDouble()*60,
+                    child: ListView.builder(
+                      itemCount: int.parse(selectedKey),
+                      itemBuilder: (context, index) {
+                        return index==0?Container(
+                          alignment: Alignment.centerLeft,
+                          margin: EdgeInsets.only(bottom: 15),
+                          padding: EdgeInsets.only(left: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                              color: Color(0xfff3f5fe)),
+                          height: 45,
+                          child: Text(
+                            "E20CSE157",
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Medium",
+                                height: 1.5,
+                                fontSize: 15,
+                                color: Colors.black),
+                          ),
+                        ):Container(
+                          margin: EdgeInsets.only(bottom: 15),
+                          padding: EdgeInsets.only(left: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                              color: Color(0xfff3f5fe)),
+                          height: 45,
+                          child: TextField(
+                            inputFormatters: [
+                              UpperCaseTextFormatter(),
+                            ],
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Medium",
+                                height: 1.5,
+                                fontSize: 15,
+                                color: Colors.black),
+                            onChanged: (value) {
+                              ProjectLink = value;
+                            },
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintStyle: TextStyle(
+                                  fontFamily: "Metrisch-Medium",
+                                  height: 1.5,
+                                  fontSize: 15,
+                                  color: Colors.black),
+                              hintText: '* Member ${index+1} Enrollment Number',
+                              // contentPadding:
+                              // EdgeInsets.symmetric(horizontal: 20.0),
+                              // border: OutlineInputBorder(
+                              //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                              // ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    height: 90,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "* Select Categories",
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              height: 1.5,
+                              fontSize: 15,
+                              color: Colors.black),
+                        ),
+                        MultiSelectChipField<Animal>(
+                          showHeader: false,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Color(0xfff3f5fe))
+                          ),
+                          items: _animals.map((e) => MultiSelectItem(e, e.name)).toList(),
+                          icon: Icon(Icons.check,size: 10,),
+                          onTap: (values) {
+                            _selectedAnimals = values;
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 15,),
                   Container(
                     padding: EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
@@ -515,58 +738,49 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                     title: "Add Project",
                     buttonheight: 45,
                     onPressed: () async {
-                      CollectionReference project =
-                          FirebaseFirestore.instance.collection('project');
-
-                      UserServices userServices = UserServices();
-
-                      var Structure = {
-                        "LikeCount": 0,
-                        "ProjectDetails": {
-                          "ProjectLink": ProjectLink,
-                          "DatasetLink": DatasetLink,
-                          "Description": Description,
-                          "ReportLink": ReportLink,
-                          "VideoLink": VideoLink,
-                        },
-                        "images": listImageLinks,
-                        "Reviews": [],
-                        "StudentIdList": [
-                          {id: name}
-                        ],
-                        "yog": yog,
-                        "title": Title,
-                        "status": "Pending",
-                        "viewCount": 0,
-                      };
-
-                      String generateRandomString(int len) {
-                        var r = Random();
-                        const _chars =
-                            'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-                        return List.generate(len,
-                            (index) => _chars[r.nextInt(_chars.length)]).join();
-                      }
-
-                      while (true) {
-                        if (listImageLinks.length != 0) {
-                          String uploadID =
-                              DateTime.now().millisecondsSinceEpoch.toString() +
-                                  "_$id" +
-                                  "_${generateRandomString(5)}";
-                          project.doc(uploadID).set(Structure);
-
-                          UserServices _service = UserServices();
-
-                          var user = await _service.getUserById(id);
-                          List<dynamic> oldProjects = user["projects"];
-                          oldProjects.add(uploadID);
-                          userServices.updateUserData(id, {
-                            "projects": oldProjects,
-                          });
-                          break;
-                        }
-                      }
+                      print(_selectedAnimals);
+                      // CollectionReference project =
+                      //     FirebaseFirestore.instance.collection('project');
+                      //
+                      // List listImageLinks = [];
+                      //
+                      // if (image1selected) {
+                      //   await listImageLinks
+                      //       .add(uploadImageToFirebase(sampleImage1));
+                      // }
+                      //
+                      // if (image2selected) {
+                      //   await listImageLinks
+                      //       .add(uploadImageToFirebase(sampleImage2));
+                      // }
+                      //
+                      // if (image3selected) {
+                      //   await listImageLinks
+                      //       .add(uploadImageToFirebase(sampleImage3));
+                      // }
+                      //
+                      // var Structure = {
+                      //   "LikeCount": 0,
+                      //   "ProjectDetails": {
+                      //     "ProjectLink": ProjectLink,
+                      //     "DatasetLink": DatasetLink,
+                      //     "Description": Description,
+                      //     "ReportLink": ReportLink,
+                      //     "VideoLink": VideoLink,
+                      //   },
+                      //   "images": listImageLinks,
+                      //   "Reviews": [],
+                      //   "StudentIdList": [],
+                      //   "title": Title,
+                      //   "viewCount": 0,
+                      // };
+                      //
+                      // while (true) {
+                      //   if (listImageLinks.length != 0) {
+                      //     project.add(Structure);
+                      //     break;
+                      //   }
+                      // }
                     },
                   )
                 ],
