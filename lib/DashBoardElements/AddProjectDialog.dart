@@ -559,7 +559,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           UserServices _service = UserServices();
 
                           var user = await _service.getUserById(id);
-                          List<String> oldProjects = user["projects"];
+                          List<dynamic> oldProjects = user["projects"];
                           oldProjects.add(uploadID);
                           userServices.updateUserData(id, {
                             "projects": oldProjects,
