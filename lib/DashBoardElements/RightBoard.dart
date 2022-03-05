@@ -634,7 +634,7 @@ class _RightBoardState extends State<RightBoard> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AddProjectDialog(
-                                        batch: batch, id: id);
+                                        batch: batch, id: id, name: name);
                                   });
                             },
                             buttonheight: 45,
