@@ -1,9 +1,11 @@
+import 'dart:collection';
 import 'dart:html' as html;
 import 'dart:html';
 import 'dart:convert';
 import 'dart:io' as io;
 import 'dart:math';
 
+import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:flutter/painting.dart';
 // import 'package:image_whisperer/image_whisperer.dart';
@@ -22,11 +24,11 @@ import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 
-class Animal {
+class CategoryClass {
   final int id;
   final String name;
 
-  Animal({
+  CategoryClass({
     this.id,
     this.name,
   });
@@ -34,7 +36,8 @@ class Animal {
 
 class UpperCaseTextFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     return TextEditingValue(
       text: newValue.text.toUpperCase(),
       selection: newValue.selection,
@@ -46,12 +49,13 @@ class AddProjectDialog extends StatefulWidget {
   final String id;
   final String name;
   final String yog;
+  final List<dynamic> categoryList;
 
-  AddProjectDialog({this.id, this.yog, this.name});
+  AddProjectDialog({this.id, this.yog, this.name, this.categoryList});
 
   @override
-  _AddProjectDialogState createState() =>
-      _AddProjectDialogState(yog: yog, id: id, name: name);
+  _AddProjectDialogState createState() => _AddProjectDialogState(
+      yog: yog, id: id, name: name, categoryList: categoryList);
 }
 
 File sampleImage1;
@@ -66,7 +70,7 @@ File sampleImage3;
 Image image3;
 String imageLink3 = "";
 
-String selectedKey="1";
+String selectedKey = "1";
 
 class _AddProjectDialogState extends State<AddProjectDialog> {
   List<String> keys = <String>[
@@ -78,28 +82,17 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   ];
 
   List<int> value = [2];
-  List<dynamic> _selectedAnimals=[];
+  List<dynamic> _selectedCategories = [];
+  String TempStudent = "";
 
-  static List<Animal> _animals = [
-    Animal(id: 1, name: "Lion"),
-    Animal(id: 2, name: "Flamingo"),
-    Animal(id: 3, name: "Hippo"),
-    Animal(id: 4, name: "Lion"),
-    Animal(id: 5, name: "Flamingo"),
-    Animal(id: 6, name: "Hippo"),
-    Animal(id: 7, name: "Lion"),
-    Animal(id: 8, name: "Flamingo"),
-    Animal(id: 9, name: "Hippo"),
-    Animal(id: 10, name: "Lion"),
-    Animal(id: 11, name: "Flamingo"),
-    Animal(id: 12, name: "Hippo"),
-  ];
+  static List<CategoryClass> _catList = [];
 
   final String id;
   final String name;
   final String yog;
+  final List<dynamic> categoryList;
 
-  _AddProjectDialogState({this.id, this.yog, this.name});
+  _AddProjectDialogState({this.id, this.yog, this.name, this.categoryList});
 
   String Title = "";
   String Description = "";
@@ -112,7 +105,14 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   bool image2selected = false;
   bool image3selected = false;
 
+  String student2;
+  String student3;
+  String student4;
+  String student5;
+
   List listImageLinks = [];
+
+  List listStudents = [];
 
   void uploadImage({@required Function(html.File file) onSelected}) {
     InputElement uploadInput = FileUploadInputElement()
@@ -203,14 +203,34 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
       }
     });
   }
+
+  GetAllCategories() {
+    setState(() {
+      for (int i = 0; i < categoryList.length; i++) {
+        _catList.add(CategoryClass(id: i, name: categoryList[i]));
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    GetAllCategories();
+    listStudents.add(id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    String errorString = "";
+    for (int i = 0; i < categoryList.length; i++) {
+      _catList.add(CategoryClass(id: i, name: categoryList[i]));
+    }
+
     final Widget normalChildButton = Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.transparent),
         color: Color(0xfff3f5fe),
       ),
-
       width: 60,
       height: 40,
       child: Padding(
@@ -219,7 +239,15 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Flexible(
-              child: Text(selectedKey, overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+              child: Text(
+                selectedKey,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontFamily: "Metrisch-Medium",
+                    height: 1.5,
+                    fontSize: 15,
+                    color: Colors.black54),
+              ),
             ),
             const SizedBox(
               width: 12,
@@ -436,7 +464,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                   SizedBox(
                     height: 15,
                   ),
-
                   Container(
                     padding: EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
@@ -481,11 +508,14 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          child: Text("* Team Members",style: TextStyle(
-                              fontFamily: "Metrisch-Medium",
-                              height: 1.5,
-                              fontSize: 15,
-                              color: Colors.black),),
+                          child: Text(
+                            "* Team Members",
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Medium",
+                                height: 1.5,
+                                fontSize: 15,
+                                color: Colors.black),
+                          ),
                         ),
                         MenuButton<String>(
                           scrollPhysics: PageScrollPhysics(),
@@ -494,8 +524,16 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           itemBuilder: (String value) => Container(
                             height: 40,
                             alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                            child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 16),
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                  fontFamily: "Metrisch-Medium",
+                                  height: 1.5,
+                                  fontSize: 15,
+                                  color: Colors.black54),
+                            ),
                           ),
                           toggledChild: Container(
                             child: normalChildButton,
@@ -509,7 +547,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             print(isToggle);
                           },
                         ),
-
                       ],
                     ),
                   ),
@@ -517,61 +554,74 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                     height: 15,
                   ),
                   Container(
-                    height: int.parse(selectedKey).toDouble()*60,
+                    height: int.parse(selectedKey).toDouble() * 60,
                     child: ListView.builder(
                       itemCount: int.parse(selectedKey),
                       itemBuilder: (context, index) {
-                        return index==0?Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.only(bottom: 15),
-                          padding: EdgeInsets.only(left: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              color: Color(0xfff3f5fe)),
-                          height: 45,
-                          child: Text(
-                            "E20CSE157",
-                            style: TextStyle(
-                                fontFamily: "Metrisch-Medium",
-                                height: 1.5,
-                                fontSize: 15,
-                                color: Colors.black),
-                          ),
-                        ):Container(
-                          margin: EdgeInsets.only(bottom: 15),
-                          padding: EdgeInsets.only(left: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              color: Color(0xfff3f5fe)),
-                          height: 45,
-                          child: TextField(
-                            inputFormatters: [
-                              UpperCaseTextFormatter(),
-                            ],
-                            style: TextStyle(
-                                fontFamily: "Metrisch-Medium",
-                                height: 1.5,
-                                fontSize: 15,
-                                color: Colors.black),
-                            onChanged: (value) {
-                              ProjectLink = value;
-                            },
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintStyle: TextStyle(
-                                  fontFamily: "Metrisch-Medium",
-                                  height: 1.5,
-                                  fontSize: 15,
-                                  color: Colors.black),
-                              hintText: '* Member ${index+1} Enrollment Number',
-                              // contentPadding:
-                              // EdgeInsets.symmetric(horizontal: 20.0),
-                              // border: OutlineInputBorder(
-                              //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              // ),
-                            ),
-                          ),
-                        );
+                        return index == 0
+                            ? Container(
+                                alignment: Alignment.centerLeft,
+                                margin: EdgeInsets.only(bottom: 15),
+                                padding: EdgeInsets.only(left: 10),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
+                                    color: Color(0xfff3f5fe)),
+                                height: 45,
+                                child: Text(
+                                  id,
+                                  style: TextStyle(
+                                      fontFamily: "Metrisch-Medium",
+                                      height: 1.5,
+                                      fontSize: 15,
+                                      color: Colors.black),
+                                ),
+                              )
+                            : Container(
+                                margin: EdgeInsets.only(bottom: 15),
+                                padding: EdgeInsets.only(left: 10),
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
+                                    color: Color(0xfff3f5fe)),
+                                height: 45,
+                                child: TextField(
+                                  inputFormatters: [
+                                    UpperCaseTextFormatter(),
+                                  ],
+                                  style: TextStyle(
+                                      fontFamily: "Metrisch-Medium",
+                                      height: 1.5,
+                                      fontSize: 15,
+                                      color: Colors.black),
+                                  onChanged: (value) {
+                                    if (index == 1) {
+                                      student2 = value;
+                                    } else if (index == 2) {
+                                      student3 = value;
+                                    } else if (index == 3) {
+                                      student4 = value;
+                                    } else if (index == 4) {
+                                      student5 = value;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                        fontFamily: "Metrisch-Medium",
+                                        height: 1.5,
+                                        fontSize: 15,
+                                        color: Colors.black),
+                                    hintText:
+                                        '* Member ${index + 1} Enrollment Number',
+                                    // contentPadding:
+                                    // EdgeInsets.symmetric(horizontal: 20.0),
+                                    // border: OutlineInputBorder(
+                                    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                    // ),
+                                  ),
+                                ),
+                              );
                       },
                     ),
                   ),
@@ -593,21 +643,27 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                               fontSize: 15,
                               color: Colors.black),
                         ),
-                        MultiSelectChipField<Animal>(
+                        MultiSelectChipField<CategoryClass>(
                           showHeader: false,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xfff3f5fe))
+                              border: Border.all(color: Color(0xfff3f5fe))),
+                          items: _catList
+                              .map((e) => MultiSelectItem(e, e.name))
+                              .toList(),
+                          icon: Icon(
+                            Icons.check,
+                            size: 10,
                           ),
-                          items: _animals.map((e) => MultiSelectItem(e, e.name)).toList(),
-                          icon: Icon(Icons.check,size: 10,),
                           onTap: (values) {
-                            _selectedAnimals = values;
+                            _selectedCategories = values;
                           },
                         )
                       ],
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     padding: EdgeInsets.only(left: 10),
                     decoration: BoxDecoration(
@@ -738,12 +794,44 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                     title: "Add Project",
                     buttonheight: 45,
                     onPressed: () async {
-                      print(_selectedAnimals);
-                      // CollectionReference project =
-                      //     FirebaseFirestore.instance.collection('project');
-                      //
+                      List<String> ListCategories = [];
+
+                      for (int i = 0; i < _selectedCategories.length; i++) {
+                        ListCategories.add(_selectedCategories[i].name);
+                      }
+
+                      List studentDicList = [];
+
+                      CollectionReference project =
+                          FirebaseFirestore.instance.collection('project');
+
+                      List stud = [id, student2, student3, student4, student5];
+                      List listFinalStudents = [];
+
+                      for (int i = 0; i < stud.length; i++) {
+                        if (stud[i] != null) {
+                          listFinalStudents.add(stud[i]);
+                        }
+                      }
+
+                      UserServices _services_user = UserServices();
+
+                      for (int i = 0; i < listFinalStudents.length; i++) {
+                        try {
+                          var tempStudent = await _services_user
+                              .getUserById(listFinalStudents[i]);
+                          var strucDic = {
+                            "id": listFinalStudents[i],
+                            "name": tempStudent["name"],
+                          };
+                          studentDicList.add(strucDic);
+                        } catch (e) {
+                          errorString = "Student Not Found";
+                        }
+                      }
+
                       // List listImageLinks = [];
-                      //
+
                       // if (image1selected) {
                       //   await listImageLinks
                       //       .add(uploadImageToFirebase(sampleImage1));
@@ -758,29 +846,53 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       //   await listImageLinks
                       //       .add(uploadImageToFirebase(sampleImage3));
                       // }
-                      //
-                      // var Structure = {
-                      //   "LikeCount": 0,
-                      //   "ProjectDetails": {
-                      //     "ProjectLink": ProjectLink,
-                      //     "DatasetLink": DatasetLink,
-                      //     "Description": Description,
-                      //     "ReportLink": ReportLink,
-                      //     "VideoLink": VideoLink,
-                      //   },
-                      //   "images": listImageLinks,
-                      //   "Reviews": [],
-                      //   "StudentIdList": [],
-                      //   "title": Title,
-                      //   "viewCount": 0,
-                      // };
-                      //
-                      // while (true) {
-                      //   if (listImageLinks.length != 0) {
-                      //     project.add(Structure);
-                      //     break;
-                      //   }
-                      // }
+
+                      var Structure = {
+                        "LikeCount": 0,
+                        "ProjectDetails": {
+                          "Categories": ListCategories,
+                          "ProjectLink": ProjectLink,
+                          "DatasetLink": DatasetLink,
+                          "Description": Description,
+                          "ReportLink": ReportLink,
+                          "VideoLink": VideoLink,
+                        },
+                        "images": listImageLinks,
+                        "Reviews": [],
+                        "StudentIdList": studentDicList,
+                        "title": Title,
+                        "viewCount": 0,
+                      };
+
+                      String generateRandomString(int len) {
+                        var r = Random();
+                        const _chars =
+                            'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+                        return List.generate(len,
+                            (index) => _chars[r.nextInt(_chars.length)]).join();
+                      }
+
+                      UserServices userServices = UserServices();
+
+                      while (true) {
+                        if (listImageLinks.length != 0) {
+                          String uploadID =
+                              DateTime.now().millisecondsSinceEpoch.toString() +
+                                  "_$id" +
+                                  "_${generateRandomString(5)}";
+                          project.doc(uploadID).set(Structure);
+
+                          UserServices _service = UserServices();
+
+                          var user = await _service.getUserById(id);
+                          List<dynamic> oldProjects = user["projects"];
+                          oldProjects.add(uploadID);
+                          userServices.updateUserData(id, {
+                            "projects": oldProjects,
+                          });
+                          break;
+                        }
+                      }
                     },
                   )
                 ],

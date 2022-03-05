@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:bennettprojectgallery/DashBoardElements/AddProjectDialog.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
+import 'package:bennettprojectgallery/services/project_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -81,6 +83,20 @@ class _RightBoardState extends State<RightBoard> {
     sampleImage = imageFile;
     image = Image.file(sampleImage);
     // uploadStatusImage();
+  }
+
+  List<dynamic> categoryList = [];
+
+  Future<void> getAllCategories() async {
+    ProjectServices _services = ProjectServices();
+    DocumentSnapshot cat = await _services.mainscreen.get();
+    categoryList = await cat["categoryList"];
+  }
+
+  @override
+  void initState() {
+    getAllCategories();
+    super.initState();
   }
 
   @override
@@ -380,7 +396,10 @@ class _RightBoardState extends State<RightBoard> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AddProjectDialog(
-                                        yog: yog, id: id, name: name);
+                                        yog: yog,
+                                        id: id,
+                                        name: name,
+                                        categoryList: categoryList);
                                     ;
                                   });
                             },
@@ -636,7 +655,10 @@ class _RightBoardState extends State<RightBoard> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AddProjectDialog(
-                                        yog: yog, id: id, name: name);
+                                        yog: yog,
+                                        id: id,
+                                        name: name,
+                                        categoryList: categoryList);
                                   });
                             },
                             buttonheight: 45,

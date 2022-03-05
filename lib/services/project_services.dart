@@ -3,6 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ProjectServices {
   CollectionReference studentData =
       FirebaseFirestore.instance.collection('project');
+
+  DocumentReference mainscreen = FirebaseFirestore.instance
+      .collection('ProjectCategories')
+      .doc("Categories");
 }
 
 //
