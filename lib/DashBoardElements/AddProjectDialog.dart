@@ -14,8 +14,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class AddProjectDialog extends StatefulWidget {
+  final String id;
+  final String batch;
+
+  AddProjectDialog({this.id, this.batch});
+
   @override
-  _AddProjectDialogState createState() => _AddProjectDialogState();
+  _AddProjectDialogState createState() =>
+      _AddProjectDialogState(batch: batch, id: id);
 }
 
 File sampleImage1;
@@ -31,6 +37,11 @@ Image image3;
 String imageLink3 = "";
 
 class _AddProjectDialogState extends State<AddProjectDialog> {
+  final String id;
+  final String batch;
+
+  _AddProjectDialogState({this.id, this.batch});
+
   String Title = "";
   String Description = "";
   String ProjectLink = "";
@@ -514,7 +525,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         },
                         "images": listImageLinks,
                         "Reviews": [],
-                        "StudentIdList": [],
+                        "StudentIdList": [id],
                         "title": Title,
                         "status": "Pending",
                         "viewCount": 0,
