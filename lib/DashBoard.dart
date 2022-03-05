@@ -17,6 +17,7 @@ class DashBoard extends StatefulWidget {
   final String name;
   final String school;
   final String yog;
+  final List<dynamic> projectList;
   DashBoard(
       {this.id,
       this.batch,
@@ -25,18 +26,19 @@ class DashBoard extends StatefulWidget {
       this.image,
       this.name,
       this.school,
-      this.yog});
+      this.yog,
+      this.projectList});
   @override
   _DashBoardState createState() => _DashBoardState(
-        id: this.id,
-        batch: this.batch,
-        course: this.course,
-        email: this.email,
-        image: this.image,
-        name: this.name,
-        school: this.school,
-        yog: this.yog,
-      );
+      id: this.id,
+      batch: this.batch,
+      course: this.course,
+      email: this.email,
+      image: this.image,
+      name: this.name,
+      school: this.school,
+      yog: this.yog,
+      projectList: this.projectList);
 }
 
 String selected = "zero";
@@ -51,6 +53,7 @@ class _DashBoardState extends State<DashBoard> {
   final String name;
   final String school;
   final String yog;
+  final List<dynamic> projectList;
   _DashBoardState(
       {this.id,
       this.batch,
@@ -59,7 +62,23 @@ class _DashBoardState extends State<DashBoard> {
       this.image,
       this.name,
       this.school,
-      this.yog});
+      this.yog,
+      this.projectList});
+
+  List<dynamic> projectListupdated = [];
+
+  UserServices _services = UserServices();
+
+  getUserProjects() async {
+    var user = await _services.getUserById(id);
+    projectListupdated = user["projects"];
+  }
+
+  @override
+  void initState() {
+    getUserProjects();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -818,7 +837,7 @@ class _DashBoardState extends State<DashBoard> {
                                   height: 400,
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 5,
+                                    itemCount: projectList.length,
                                     itemBuilder:
                                         (BuildContext ctxt, int index) {
                                       return Container(

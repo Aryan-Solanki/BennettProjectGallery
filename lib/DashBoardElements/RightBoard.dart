@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RightBoard extends StatefulWidget {
-
   final String batch;
   final String course;
   final String email;
@@ -17,17 +16,16 @@ class RightBoard extends StatefulWidget {
   final String school;
   final String yog;
 
-
-  RightBoard(
-      {this.batch,
-      this.course,
-      this.email,
-      this.id,
-      this.image,
-      this.name,
-      this.school,
-      this.yog,
-      });
+  RightBoard({
+    this.batch,
+    this.course,
+    this.email,
+    this.id,
+    this.image,
+    this.name,
+    this.school,
+    this.yog,
+  });
 
   @override
   _RightBoardState createState() => _RightBoardState(
@@ -381,7 +379,9 @@ class _RightBoardState extends State<RightBoard> {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return AddProjectDialog();
+                                    return AddProjectDialog(
+                                        yog: yog, id: id, name: name);
+                                    ;
                                   });
                             },
                             buttonheight: 45,
@@ -635,7 +635,8 @@ class _RightBoardState extends State<RightBoard> {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return AddProjectDialog();
+                                    return AddProjectDialog(
+                                        yog: yog, id: id, name: name);
                                   });
                             },
                             buttonheight: 45,

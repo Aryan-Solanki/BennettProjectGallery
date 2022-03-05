@@ -2,7 +2,9 @@ import 'dart:html' as html;
 import 'dart:html';
 import 'dart:convert';
 import 'dart:io' as io;
+import 'dart:math';
 
+import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:flutter/painting.dart';
 // import 'package:image_whisperer/image_whisperer.dart';
 
@@ -41,18 +43,28 @@ class UpperCaseTextFormatter extends TextInputFormatter {
 }
 
 class AddProjectDialog extends StatefulWidget {
+  final String id;
+  final String name;
+  final String yog;
+
+  AddProjectDialog({this.id, this.yog, this.name});
+
   @override
-  _AddProjectDialogState createState() => _AddProjectDialogState();
+  _AddProjectDialogState createState() =>
+      _AddProjectDialogState(yog: yog, id: id, name: name);
 }
 
 File sampleImage1;
 Image image1;
+String imageLink1 = "";
 
 File sampleImage2;
 Image image2;
+String imageLink2 = "";
 
 File sampleImage3;
 Image image3;
+String imageLink3 = "";
 
 String selectedKey="1";
 
@@ -83,6 +95,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
     Animal(id: 12, name: "Hippo"),
   ];
 
+  final String id;
+  final String name;
+  final String yog;
+
+  _AddProjectDialogState({this.id, this.yog, this.name});
 
   String Title = "";
   String Description = "";
@@ -94,6 +111,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   bool image1selected = false;
   bool image2selected = false;
   bool image3selected = false;
+
+  List listImageLinks = [];
 
   void uploadImage({@required Function(html.File file) onSelected}) {
     InputElement uploadInput = FileUploadInputElement()
@@ -110,7 +129,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
     //selected image
   }
 
-  Future<void> uploadImageToFirebase(var image) async {
+  Future<String> uploadImageToFirebase(var image) async {
     final dateTime = DateTime.now();
     final path = 'projectImages/$dateTime';
     try {
@@ -148,17 +167,23 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
       if (file != null) {
         setState(() {
           sampleImage1 = file;
+          uploadImageToFirebase(sampleImage1)
+              .then((value) => {listImageLinks.add(value)});
         });
       }
     });
   }
 
   Future getImage2() async {
-    image2selected = false;
+    image2selected = true;
     uploadImage(onSelected: (file) {
       if (file != null) {
         setState(() {
           sampleImage2 = file;
+          if (image2selected) {
+            uploadImageToFirebase(sampleImage2)
+                .then((value) => {listImageLinks.add(value)});
+          }
         });
       }
     });
@@ -170,6 +195,10 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
       if (file != null) {
         setState(() {
           sampleImage3 = file;
+          if (image3selected) {
+            uploadImageToFirebase(sampleImage2)
+                .then((value) => {listImageLinks.add(value)});
+          }
         });
       }
     });
@@ -401,11 +430,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             fontSize: 15,
                             color: Colors.black),
                         hintText: '* Title',
-                        // contentPadding:
-                        // EdgeInsets.symmetric(horizontal: 20.0),
-                        // border: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        // ),
                       ),
                     ),
                   ),
@@ -675,11 +699,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             fontSize: 15,
                             color: Colors.black),
                         hintText: 'Report Link',
-                        // contentPadding:
-                        // EdgeInsets.symmetric(horizontal: 20.0),
-                        // border: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        // ),
                       ),
                     ),
                   ),
@@ -709,11 +728,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             fontSize: 15,
                             color: Colors.black),
                         hintText: 'Video Link',
-                        // contentPadding:
-                        // EdgeInsets.symmetric(horizontal: 20.0),
-                        // border: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                        // ),
                       ),
                     ),
                   ),
@@ -724,7 +738,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                     title: "Add Project",
                     buttonheight: 45,
                     onPressed: () async {
-                      print(_animals);
+                      print(_selectedAnimals);
                       // CollectionReference project =
                       //     FirebaseFirestore.instance.collection('project');
                       //

@@ -39,6 +39,7 @@ class _HeaderState extends State<Header> {
   String school = "";
   String yog = "";
   String result = "";
+  List<dynamic> projectList = [];
 
   void getinfo() async {
     String email = auth.currentUser.email;
@@ -52,6 +53,7 @@ class _HeaderState extends State<Header> {
     name = doc["name"];
     school = doc["school"];
     yog = doc["yog"].toString();
+    projectList = doc["projects"];
   }
 
   @override
@@ -343,6 +345,7 @@ class _HeaderState extends State<Header> {
                                           name: name,
                                           school: school,
                                           yog: yog,
+                                          projectList: projectList,
                                         )));
                       },
                       onHover: (x) {
