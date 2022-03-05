@@ -18,13 +18,13 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 class AddProjectDialog extends StatefulWidget {
   final String id;
   final String name;
-  final String batch;
+  final String yog;
 
-  AddProjectDialog({this.id, this.batch, this.name});
+  AddProjectDialog({this.id, this.yog, this.name});
 
   @override
   _AddProjectDialogState createState() =>
-      _AddProjectDialogState(batch: batch, id: id, name: name);
+      _AddProjectDialogState(yog: yog, id: id, name: name);
 }
 
 File sampleImage1;
@@ -42,9 +42,9 @@ String imageLink3 = "";
 class _AddProjectDialogState extends State<AddProjectDialog> {
   final String id;
   final String name;
-  final String batch;
+  final String yog;
 
-  _AddProjectDialogState({this.id, this.batch, this.name});
+  _AddProjectDialogState({this.id, this.yog, this.name});
 
   String Title = "";
   String Description = "";
@@ -534,6 +534,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         "StudentIdList": [
                           {id: name}
                         ],
+                        "yog": yog,
                         "title": Title,
                         "status": "Pending",
                         "viewCount": 0,
