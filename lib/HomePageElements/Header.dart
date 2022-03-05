@@ -53,7 +53,7 @@ class _HeaderState extends State<Header> {
     name = doc["name"];
     school = doc["school"];
     yog = doc["yog"].toString();
-    projectList = doc["projectList"];
+    projectList = doc["projects"];
   }
 
   @override
