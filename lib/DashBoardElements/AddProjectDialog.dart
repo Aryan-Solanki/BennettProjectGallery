@@ -1,7 +1,9 @@
 import 'dart:html' as html;
 import 'dart:html';
 import 'dart:io' as io;
+import 'dart:math';
 
+import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:flutter/painting.dart';
 // import 'package:image_whisperer/image_whisperer.dart';
 
@@ -512,9 +514,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                   GradientButton(
                     title: "Add Project",
                     buttonheight: 45,
-                    onPressed: () {
+                    onPressed: () async {
                       CollectionReference project =
                           FirebaseFirestore.instance.collection('project');
+
+                      UserServices userServices = UserServices();
 
                       var Structure = {
                         "LikeCount": 0,
@@ -535,9 +539,30 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         "viewCount": 0,
                       };
 
+                      String generateRandomString(int len) {
+                        var r = Random();
+                        const _chars =
+                            'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+                        return List.generate(len,
+                            (index) => _chars[r.nextInt(_chars.length)]).join();
+                      }
+
                       while (true) {
                         if (listImageLinks.length != 0) {
-                          project.add(Structure);
+                          String uploadID =
+                              DateTime.now().millisecondsSinceEpoch.toString() +
+                                  "_$id" +
+                                  "_${generateRandomString(5)}";
+                          project.doc(uploadID).set(Structure);
+
+                          UserServices _service = UserServices();
+
+                          var user = await _service.getUserById(id);
+                          List<String> oldProjects = user["projects"];
+                          oldProjects.add(uploadID);
+                          userServices.updateUserData(id, {
+                            "projects": oldProjects,
+                          });
                           break;
                         }
                       }
