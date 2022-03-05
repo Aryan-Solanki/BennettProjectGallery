@@ -15,13 +15,13 @@ class LoginCard extends StatefulWidget {
   @override
   _LoginCardState createState() => _LoginCardState();
 }
-bool loading=false;
+
+bool loading = false;
 
 const spinkit = SpinKitThreeInOut(
   color: Colors.white,
   size: 20.0,
 );
-
 
 class _LoginCardState extends State<LoginCard> {
   final myController = TextEditingController();
@@ -145,67 +145,78 @@ class _LoginCardState extends State<LoginCard> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: loading==false?GradientButton(
-                  title: "Sign In",
-                  buttonwidth: 300,
-                  onPressed: () {
-                    setState(() {
-                      loading=true;
-                    });
+                child: loading == false
+                    ? GradientButton(
+                        title: "Sign In",
+                        buttonwidth: 300,
+                        onPressed: () {
+                          setState(() {
+                            loading = true;
+                          });
 
-                    auth
-                        .signInWithEmailAndPassword(
-                            email: email, password: password)
-                        .then((_) async{
+                          auth
+                              .signInWithEmailAndPassword(
+                                  email: email, password: password)
+                              .then((_) async {
+                            String result = email
+                                .substring(0, email.indexOf('@'))
+                                .toUpperCase();
+                            UserServices _services = new UserServices();
+                            var doc = await _services.getUserById(result);
+                            String batch = doc["batch"];
+                            String course = doc["course"];
+                            String email1 = doc["email"];
+                            String image = doc["image"];
+                            String name = doc["name"];
+                            String school = doc["school"];
+                            String yog = doc["yog"].toString();
+                            List<dynamic> projectList = doc["projects"];
+                            print(batch);
+                            print(course);
+                            print(email1);
 
-                      String result =
-                          email.substring(0, email.indexOf('@')).toUpperCase();
-                      UserServices _services = new UserServices();
-                      var doc = await _services.getUserById(result);
-                      String batch = doc["batch"];
-                      String course = doc["course"];
-                      String email1 = doc["email"];
-                      String image = doc["image"];
-                      String name = doc["name"];
-                      String school = doc["school"];
-                      String yog = doc["yog"].toString();
-                      print("hiiiiiiiiiiiiiiiii");
-                      print(batch);
-                      print(course);
-                      print(email1);
+                            Fluttertoast.showToast(
+                                msg: "Login Successful",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
 
-
-                      Fluttertoast.showToast(
-                          msg: "Login Successful",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DashBoard(id: result,batch:batch,course: course,email: email1,image: image,name: name,school: school,yog: yog,)));
-                      loading=false;
-                    });
-                  },
-                ):Container(
-                  height: 50,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    gradient: LinearGradient(
-                        begin: const FractionalOffset(0.0, 0.0),
-                        end: const FractionalOffset(1.0, 0.0),
-                        colors: colors),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-                  child: Center(
-                    child: spinkit,
-                  ),
-                )),
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard(
+                                        id: result,
+                                        batch: batch,
+                                        course: course,
+                                        email: email1,
+                                        image: image,
+                                        name: name,
+                                        school: school,
+                                        yog: yog,
+                                        projectList: projectList)));
+                            loading = false;
+                          });
+                        },
+                      )
+                    : Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          gradient: LinearGradient(
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 0.0),
+                              colors: colors),
+                        ),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                        child: Center(
+                          child: spinkit,
+                        ),
+                      )),
             SizedBox(
               height: 10,
             ),
