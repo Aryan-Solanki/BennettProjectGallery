@@ -23,6 +23,7 @@ import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
 import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
+import 'package:textfield_search/textfield_search.dart';
 
 class CategoryClass {
   final int id;
@@ -113,6 +114,17 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   List listImageLinks = [];
 
   List listStudents = [];
+
+  String label = "Some Label";
+  List<String> dummyList = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  List<String> studentList = ['student 1', 'student 2', 'student 3', 'student 4', 'student 5'];
+
+  TextEditingController profnameController = TextEditingController();
+  TextEditingController studnameController1 = TextEditingController();
+  TextEditingController studnameController2 = TextEditingController();
+  TextEditingController studnameController3 = TextEditingController();
+  TextEditingController studnameController4 = TextEditingController();
+  TextEditingController studnameController5 = TextEditingController();
 
   void uploadImage({@required Function(html.File file) onSelected}) {
     InputElement uploadInput = FileUploadInputElement()
@@ -504,6 +516,28 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         color: Color(0xfff3f5fe)),
                     height: 45,
+                    child: TextFieldSearch(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              height: 1.5,
+                              fontSize: 15,
+                              color: Colors.black),
+                          hintText: '* Professor Name',
+                        ),
+                        initialList: dummyList, label: label, controller: profnameController
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    height: 45,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -569,7 +603,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                     color: Color(0xfff3f5fe)),
                                 height: 45,
                                 child: Text(
-                                  id,
+                                  name,
                                   style: TextStyle(
                                       fontFamily: "Metrisch-Medium",
                                       height: 1.5,
@@ -585,41 +619,17 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                         BorderRadius.all(Radius.circular(5.0)),
                                     color: Color(0xfff3f5fe)),
                                 height: 45,
-                                child: TextField(
-                                  inputFormatters: [
-                                    UpperCaseTextFormatter(),
-                                  ],
-                                  style: TextStyle(
-                                      fontFamily: "Metrisch-Medium",
-                                      height: 1.5,
-                                      fontSize: 15,
-                                      color: Colors.black),
-                                  onChanged: (value) {
-                                    if (index == 1) {
-                                      student2 = value;
-                                    } else if (index == 2) {
-                                      student3 = value;
-                                    } else if (index == 3) {
-                                      student4 = value;
-                                    } else if (index == 4) {
-                                      student5 = value;
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintStyle: TextStyle(
-                                        fontFamily: "Metrisch-Medium",
-                                        height: 1.5,
-                                        fontSize: 15,
-                                        color: Colors.black),
-                                    hintText:
-                                        '* Member ${index + 1} Enrollment Number',
-                                    // contentPadding:
-                                    // EdgeInsets.symmetric(horizontal: 20.0),
-                                    // border: OutlineInputBorder(
-                                    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                    // ),
-                                  ),
+                                child: TextFieldSearch(
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintStyle: TextStyle(
+                                          fontFamily: "Metrisch-Medium",
+                                          height: 1.5,
+                                          fontSize: 15,
+                                          color: Colors.black),
+                                      hintText: '* Member ${index+1} Name',
+                                    ),
+                                    initialList: studentList, label: label, controller: index==1?studnameController1:index==2?studnameController2:index==3?studnameController3:index==4?studnameController4:studnameController5,
                                 ),
                               );
                       },
