@@ -298,7 +298,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                   ),
                   Row(
                     children: [
-                      image1 == null
+                      imageLink1 == ""
                           ? TextButton(
                               onPressed: () {
                                 getImage1();
@@ -338,8 +338,10 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                   color: Color(0xfff3f5fe),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1"),
+                                    image: imageLink1 == ""
+                                        ? NetworkImage(
+                                            "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")
+                                        : NetworkImage(imageLink1),
                                   ),
                                 ),
                               ),
@@ -347,7 +349,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       SizedBox(
                         width: 15,
                       ),
-                      image2 == null
+                      imageLink2 == ""
                           ? TextButton(
                               onPressed: () {
                                 getImage2();
@@ -387,8 +389,10 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                   color: Color(0xfff3f5fe),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1"),
+                                    image: imageLink2 == ""
+                                        ? NetworkImage(
+                                            "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")
+                                        : NetworkImage(imageLink2),
                                   ),
                                 ),
                               ),
@@ -396,7 +400,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       SizedBox(
                         width: 15,
                       ),
-                      image3 == null
+                      imageLink3 == ""
                           ? TextButton(
                               onPressed: () {
                                 getImage3();
@@ -436,8 +440,10 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                   color: Color(0xfff3f5fe),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1"),
+                                    image: imageLink3 == ""
+                                        ? NetworkImage(
+                                            "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")
+                                        : NetworkImage(imageLink3),
                                   ),
                                 ),
                               ),
