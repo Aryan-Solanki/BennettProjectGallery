@@ -43,7 +43,9 @@ class _LeftSideState extends State<LeftSide> {
                       //Do something with the user input.
                     },
                     decoration: InputDecoration(
-                      suffixIcon: Icon(Icons.search,size: 22,color: Colors.black,),
+                      suffixIcon: InkWell(onTap: (){
+
+                      },child: Icon(Icons.search,size: 22,color: Colors.black,)),
 
                       border: InputBorder.none,
                       hintStyle: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/NoHoverProjectCard.dart';
 import 'package:flutter/material.dart';
 import 'package:menu_button/menu_button.dart';
@@ -22,6 +23,9 @@ class _RightSideState extends State<RightSide> {
   ];
 
   int cardnumber=9;
+
+  bool searched=false;
+  String seachcategory="Python";
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +72,10 @@ class _RightSideState extends State<RightSide> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    searched==false?Text(
                       "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                    ):Text(
+                      'Showing 1–9 of "${seachcategory}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
                     ),
                     MenuButton<String>(
                       child: normalChildButton,
@@ -110,8 +116,9 @@ class _RightSideState extends State<RightSide> {
                     },
                   ),
                 ),
-
-                SizedBox(height: 40,),
+                GradientButton(
+                  title: "Load More",
+                ),
 
 
               ],
@@ -159,7 +166,7 @@ class _RightSideState extends State<RightSide> {
                 ),
                 SizedBox(height: 40,),
                 Container(
-                  height: cardnumber*125.toDouble(),
+                  height: cardnumber*130.toDouble(),
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: cardnumber,
@@ -170,7 +177,10 @@ class _RightSideState extends State<RightSide> {
                       return NoHoverProjectCard();
                     },
                   ),
-                )
+                ),
+                GradientButton(
+                  title: "Load More",
+                ),
 
               ],
             ),
@@ -217,7 +227,7 @@ class _RightSideState extends State<RightSide> {
                 ),
                 SizedBox(height: 20,),
                 Container(
-                  height: cardnumber*435.toDouble(),
+                  height: cardnumber*445.toDouble(),
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: cardnumber,
@@ -228,7 +238,11 @@ class _RightSideState extends State<RightSide> {
                       return NoHoverProjectCard();
                     },
                   ),
-                )
+                ),
+                GradientButton(
+                  title: "Load More",
+                ),
+
               ],
             ),
           );
@@ -273,7 +287,7 @@ class _RightSideState extends State<RightSide> {
               ),
               SizedBox(height: 40,),
               Container(
-                height: cardnumber*125.toDouble(),
+                height: cardnumber*240.toDouble(),
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: cardnumber,
@@ -284,7 +298,10 @@ class _RightSideState extends State<RightSide> {
                     return NoHoverProjectCard();
                   },
                 ),
-              )
+              ),
+              GradientButton(
+                title: "Load More",
+              ),
 
             ],
           ),
