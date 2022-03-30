@@ -1,14 +1,8 @@
-import 'dart:collection';
 import 'dart:html' as html;
 import 'dart:html';
-import 'dart:convert';
-import 'dart:io' as io;
 import 'dart:math';
 
-import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
-import 'package:flutter/painting.dart';
-// import 'package:image_whisperer/image_whisperer.dart';
 
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,13 +10,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:menu_button/menu_button.dart';
 import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
-import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:textfield_search/textfield_search.dart';
 
 class CategoryClass {
@@ -51,12 +41,30 @@ class AddProjectDialog extends StatefulWidget {
   final String name;
   final String yog;
   final List<dynamic> categoryList;
+  final List<dynamic> professorList;
+  final List<dynamic> studentList;
+  final Map studentDict;
 
-  AddProjectDialog({this.id, this.yog, this.name, this.categoryList});
+  AddProjectDialog({
+    this.id,
+    this.yog,
+    this.name,
+    this.categoryList,
+    @required this.professorList,
+    @required this.studentList,
+    this.studentDict,
+  });
 
   @override
   _AddProjectDialogState createState() => _AddProjectDialogState(
-      yog: yog, id: id, name: name, categoryList: categoryList);
+        yog: yog,
+        id: id,
+        name: name,
+        categoryList: categoryList,
+        professorList: professorList,
+        studentList: studentList,
+        studentDict: studentDict,
+      );
 }
 
 File sampleImage1;
@@ -92,8 +100,19 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   final String name;
   final String yog;
   final List<dynamic> categoryList;
+  final List<dynamic> professorList;
+  final List<dynamic> studentList;
+  final Map studentDict;
 
-  _AddProjectDialogState({this.id, this.yog, this.name, this.categoryList});
+  _AddProjectDialogState({
+    this.id,
+    this.yog,
+    this.name,
+    this.categoryList,
+    this.professorList,
+    this.studentList,
+    this.studentDict,
+  });
 
   String Title = "";
   String Description = "";
@@ -101,30 +120,61 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   String DatasetLink = "";
   String ReportLink = "";
   String VideoLink = "";
+  String SelectedProfessor = "";
 
   bool image1selected = false;
   bool image2selected = false;
   bool image3selected = false;
 
-  String student2;
-  String student3;
-  String student4;
-  String student5;
+  String student2 = "";
+  String student3 = "";
+  String student4 = "";
+  String student5 = "";
 
   List listImageLinks = [];
 
   List listStudents = [];
 
   String label = "Some Label";
-  List<String> dummyList = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-  List<String> studentList = ['student 1', 'student 2', 'student 3', 'student 4', 'student 5'];
+  // List<String> dummyList = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
   TextEditingController profnameController = TextEditingController();
-  TextEditingController studnameController1 = TextEditingController();
   TextEditingController studnameController2 = TextEditingController();
   TextEditingController studnameController3 = TextEditingController();
   TextEditingController studnameController4 = TextEditingController();
   TextEditingController studnameController5 = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    profnameController.dispose();
+    studnameController2.dispose();
+    studnameController3.dispose();
+    studnameController4.dispose();
+    studnameController5.dispose();
+    super.dispose();
+  }
+
+  _profNameListener() {
+    SelectedProfessor = profnameController.text;
+  }
+
+  _stud2NameListener() {
+    student2 = studnameController2.text;
+  }
+
+  _stud3NameListener() {
+    student3 = studnameController3.text;
+  }
+
+  _stud4NameListener() {
+    student4 = studnameController4.text;
+  }
+
+  _stud5NameListener() {
+    student5 = studnameController5.text;
+  }
 
   void uploadImage({@required Function(html.File file) onSelected}) {
     InputElement uploadInput = FileUploadInputElement()
@@ -228,6 +278,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   void initState() {
     GetAllCategories();
     listStudents.add(id);
+    profnameController.addListener(_profNameListener);
+    studnameController2.addListener(_stud2NameListener);
+    studnameController3.addListener(_stud3NameListener);
+    studnameController4.addListener(_stud4NameListener);
+    studnameController5.addListener(_stud5NameListener);
     super.initState();
   }
 
@@ -532,8 +587,14 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                               color: Colors.black),
                           hintText: '* Professor Name',
                         ),
-                        initialList: dummyList, label: label, controller: profnameController
-                    ),
+                        initialList: professorList,
+                        label: label,
+                        // getSelectedValue: (valu e) {
+                        //   // SelectedProfessor =
+                        //   //     value.replaceAll(RegExp('\\(.*?\\)'), '');
+                        //   print("Selected Professor : $SelectedProfessor");
+                        // },
+                        controller: profnameController),
                   ),
                   SizedBox(
                     height: 15,
@@ -626,16 +687,39 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                     color: Color(0xfff3f5fe)),
                                 height: 45,
                                 child: TextFieldSearch(
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintStyle: TextStyle(
-                                          fontFamily: "Metrisch-Medium",
-                                          height: 1.5,
-                                          fontSize: 15,
-                                          color: Colors.black),
-                                      hintText: '* Member ${index+1} Name',
-                                    ),
-                                    initialList: studentList, label: label, controller: index==1?studnameController1:index==2?studnameController2:index==3?studnameController3:index==4?studnameController4:studnameController5,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                        fontFamily: "Metrisch-Medium",
+                                        height: 1.5,
+                                        fontSize: 15,
+                                        color: Colors.black),
+                                    hintText: '* Member ${index + 1} Name',
+                                  ),
+                                  initialList: studentList,
+                                  label: label,
+                                  // getSelectedValue: (value) {
+                                  //   if (index == 1) {
+                                  //     student2 = value;
+                                  //   } else if (index == 2) {
+                                  //     student3 = value;
+                                  //   } else if (index == 3) {
+                                  //     student4 = value;
+                                  //   } else if (index == 4) {
+                                  //     student4 = value;
+                                  //   } else {
+                                  //     student5 = value;
+                                  //   }
+                                  // },
+                                  controller: index == 1
+                                      ? studnameController2
+                                      : index == 2
+                                          ? studnameController3
+                                          : index == 3
+                                              ? studnameController4
+                                              : index == 4
+                                                  ? studnameController5
+                                                  : studnameController5,
                                 ),
                               );
                       },
@@ -821,11 +905,32 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       CollectionReference project =
                           FirebaseFirestore.instance.collection('project');
 
-                      List stud = [id, student2, student3, student4, student5];
+                      var var1 = studnameController2.text == ""
+                          ? studnameController2.text
+                          : studnameController2.text
+                              .split("(")[1]
+                              .split(")")[0];
+
+                      List stud = [
+                        id,
+                        student2 == ""
+                            ? student2
+                            : student2.split("(")[1].split(")")[0],
+                        student3 == ""
+                            ? student3
+                            : student3.split("(")[1].split(")")[0],
+                        student4 == ""
+                            ? student4
+                            : student4.split("(")[1].split(")")[0],
+                        student5 == ""
+                            ? student5
+                            : student5.split("(")[1].split(")")[0],
+                      ];
+
                       List listFinalStudents = [];
 
                       for (int i = 0; i < stud.length; i++) {
-                        if (stud[i] != null) {
+                        if (stud[i] != "") {
                           listFinalStudents.add(stud[i]);
                         }
                       }
@@ -834,11 +939,12 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
                       for (int i = 0; i < listFinalStudents.length; i++) {
                         try {
-                          var tempStudent = await _services_user
-                              .getUserById(listFinalStudents[i]);
+                          var tempStudent = studentDict[listFinalStudents[i]];
                           var strucDic = {
                             "id": listFinalStudents[i],
                             "name": tempStudent["name"],
+                            "batch": tempStudent["batch"],
+                            "yog": tempStudent["yog"]
                           };
                           studentDicList.add(strucDic);
                         } catch (e) {
@@ -852,7 +958,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       //   await listImageLinks
                       //       .add(uploadImageToFirebase(sampleImage1));
                       // }
-                      //
+
                       // if (image2selected) {
                       //   await listImageLinks
                       //       .add(uploadImageToFirebase(sampleImage2));
@@ -863,6 +969,12 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       //       .add(uploadImageToFirebase(sampleImage3));
                       // }
 
+                      var profID = SelectedProfessor.split("(")[1]
+                          .split(")")[0]
+                          .toUpperCase();
+                      var profName =
+                          SelectedProfessor.split(RegExp('\\(.*?\\)'))[0];
+
                       var Structure = {
                         "LikeCount": 0,
                         "ProjectDetails": {
@@ -872,6 +984,10 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           "Description": Description,
                           "ReportLink": ReportLink,
                           "VideoLink": VideoLink,
+                        },
+                        "ProfessorDetails": {
+                          "id": profID,
+                          "name": profName,
                         },
                         "images": listImageLinks,
                         "Reviews": [],
@@ -900,15 +1016,19 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
                           UserServices _service = UserServices();
 
-                          var user = await _service.getUserById(id);
-                          List<dynamic> oldProjects = user["projects"];
-                          oldProjects.add(uploadID);
-                          userServices.updateUserData(id, {
-                            "projects": oldProjects,
-                          });
+                          for (int i = 0; i < studentDicList.length; i++) {
+                            var studentId = studentDicList[i]["id"];
+                            var user = await _service.getUserById(studentId);
+                            List<dynamic> oldProjects = user["projects"];
+                            oldProjects.add(uploadID);
+                            userServices.updateUserData(studentId, {
+                              "projects": oldProjects,
+                            });
+                          }
                           break;
                         }
                       }
+                      Navigator.pop(context);
                     },
                   )
                 ],

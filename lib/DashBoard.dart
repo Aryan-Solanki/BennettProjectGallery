@@ -1,5 +1,4 @@
 import 'package:bennettprojectgallery/DashBoardElements/RightBoard.dart';
-import 'package:bennettprojectgallery/FeaturedProjectsElements/NonHoverFeaturedProjects.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,7 @@ class DashBoard extends StatefulWidget {
   final String school;
   final String yog;
   final List<dynamic> projectList;
+
   DashBoard(
       {this.id,
       this.batch,

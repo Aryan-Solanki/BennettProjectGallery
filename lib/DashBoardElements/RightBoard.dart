@@ -93,9 +93,53 @@ class _RightBoardState extends State<RightBoard> {
     categoryList = await cat["categoryList"];
   }
 
+  var studentDict = {};
+  List<String> studentList1 = [];
+  List<String> professorList1 = [];
+
+  Future<void> getAllProfessors() async {
+    ProjectServices _services = ProjectServices();
+    // setState(() async {
+    QuerySnapshot querySnapshot = await _services.professorCol.get();
+
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      var a = querySnapshot.docs[i];
+      String name = a.get("name");
+      String email = a.id;
+      professorList1.add(name + " (${email.toLowerCase()}) ");
+    }
+    // });
+  }
+
+  Future<void> getAllStudents() async {
+    ProjectServices _services = ProjectServices();
+    // setState(() async {
+    QuerySnapshot querySnapshot = await _services.studentCol.get();
+
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      var a = querySnapshot.docs[i];
+      String name = a.get("name");
+      String batch = a.get("batch");
+      String course = a.get("course");
+      String school = a.get("school");
+      String yog = a.get("yog").toString();
+      studentList1.add(name + " " + "(${a.id})");
+      studentDict[a.id] = {
+        "name": name,
+        "batch": batch,
+        "course": course,
+        "school": school,
+        "yog": yog
+      };
+    }
+    // });
+  }
+
   @override
   void initState() {
     getAllCategories();
+    getAllProfessors();
+    getAllStudents();
     super.initState();
   }
 
@@ -399,7 +443,10 @@ class _RightBoardState extends State<RightBoard> {
                                         yog: yog,
                                         id: id,
                                         name: name,
-                                        categoryList: categoryList);
+                                        categoryList: categoryList,
+                                        professorList: professorList1,
+                                        studentList: studentList1,
+                                        studentDict: studentDict);
                                     ;
                                   });
                             },
@@ -658,7 +705,10 @@ class _RightBoardState extends State<RightBoard> {
                                         yog: yog,
                                         id: id,
                                         name: name,
-                                        categoryList: categoryList);
+                                        categoryList: categoryList,
+                                        professorList: professorList1,
+                                        studentList: studentList1,
+                                        studentDict: studentDict);
                                   });
                             },
                             buttonheight: 45,

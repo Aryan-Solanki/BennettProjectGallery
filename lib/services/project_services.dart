@@ -7,6 +7,12 @@ class ProjectServices {
   DocumentReference mainscreen = FirebaseFirestore.instance
       .collection('ProjectCategories')
       .doc("Categories");
+
+  CollectionReference professorCol =
+      FirebaseFirestore.instance.collection('facultyDatabase');
+
+  CollectionReference studentCol =
+  FirebaseFirestore.instance.collection('studentDatabase');
 }
 
 //

@@ -1,5 +1,4 @@
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
-import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
 import 'package:bennettprojectgallery/SignUpElements/SignUpCard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
