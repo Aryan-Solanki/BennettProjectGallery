@@ -1,3 +1,4 @@
+import 'package:bennettprojectgallery/HomePageElements/Footer.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
 import 'package:flutter/material.dart';
@@ -21,60 +22,66 @@ class _ProjectGalleryState extends State<ProjectGallery> {
           Header(current: "Project Gallery",),
           Expanded(
             child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 50,horizontal: 20),
-                child: ResponsiveBuilder(
-                  breakpoints: ScreenBreakpoints(
-                      tablet: 550, desktop: 971, watch: 300),
-                  builder: (context, sizingInformation) {
-                    // Check the sizing information here and return your UI
-                    if (sizingInformation.deviceScreenType ==
-                        DeviceScreenType.desktop) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 50,horizontal: 20),
+                    child: ResponsiveBuilder(
+                      breakpoints: ScreenBreakpoints(
+                          tablet: 550, desktop: 971, watch: 300),
+                      builder: (context, sizingInformation) {
+                        // Check the sizing information here and return your UI
+                        if (sizingInformation.deviceScreenType ==
+                            DeviceScreenType.desktop) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                        children: [
-                          LeftSide(),
-                          SizedBox(width: 50,),
-                          RightSide(),
-                        ],
-                      );
-                    }
-                    if (sizingInformation.deviceScreenType ==
-                        DeviceScreenType.tablet) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
                             children: [
-                              RightSide(),
-                              SizedBox(height: 80,),
                               LeftSide(),
+                              SizedBox(width: 50,),
+                              RightSide(),
                             ],
-                          ),
-                        ],
-                      );
-                    }
+                          );
+                        }
+                        if (sizingInformation.deviceScreenType ==
+                            DeviceScreenType.tablet) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                children: [
+                                  RightSide(),
+                                  SizedBox(height: 80,),
+                                  LeftSide(),
+                                ],
+                              ),
+                            ],
+                          );
+                        }
 
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RightSide(),
-                            SizedBox(height: 80,),
-                            LeftSide(),
+                            Column(
+                              children: [
+                                RightSide(),
+                                SizedBox(height: 80,),
+                                LeftSide(),
+                              ],
+                            ),
                           ],
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  ),
+                  Footer()
+                ],
               ),
             ),
-          )
+          ),
+
         ],
       ),
     );
