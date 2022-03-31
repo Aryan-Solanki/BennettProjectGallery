@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class LeftSide extends StatefulWidget {
+  final bool isSearchPage;
+  LeftSide({this.isSearchPage = false});
+
   @override
   _LeftSideState createState() => _LeftSideState();
 }
@@ -19,7 +22,6 @@ class _LeftSideState extends State<LeftSide> {
   AlgoliaQuery algoliaQuery;
   Algolia algolia;
 
-
   List<AlgoliaObjectSnapshot> _results = [];
   void algo(String val) async {
     AlgoliaQuery query =
@@ -28,6 +30,7 @@ class _LeftSideState extends State<LeftSide> {
     _results = snap.hits;
     setState(() {
       print(snap.nbHits);
+      print(snap.hits);
     });
   }
 
@@ -64,9 +67,13 @@ class _LeftSideState extends State<LeftSide> {
                       //Do something with the user input.
                     },
                     decoration: InputDecoration(
-                      suffixIcon: InkWell(onTap: (){
-
-                      },child: Icon(Icons.search,size: 22,color: Colors.black,)),
+                      suffixIcon: InkWell(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.search,
+                            size: 22,
+                            color: Colors.black,
+                          )),
 
                       border: InputBorder.none,
                       hintStyle: TextStyle(
