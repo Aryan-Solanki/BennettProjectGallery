@@ -952,23 +952,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         }
                       }
 
-                      // List listImageLinks = [];
-
-                      // if (image1selected) {
-                      //   await listImageLinks
-                      //       .add(uploadImageToFirebase(sampleImage1));
-                      // }
-
-                      // if (image2selected) {
-                      //   await listImageLinks
-                      //       .add(uploadImageToFirebase(sampleImage2));
-                      // }
-                      //
-                      // if (image3selected) {
-                      //   await listImageLinks
-                      //       .add(uploadImageToFirebase(sampleImage3));
-                      // }
-
                       var profID = SelectedProfessor.split("(")[1]
                           .split(")")[0]
                           .toUpperCase();

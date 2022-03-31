@@ -1,17 +1,18 @@
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../login.dart';
 
 class ForgotPasswordCard extends StatefulWidget {
-
   @override
   _ForgotPasswordCardState createState() => _ForgotPasswordCardState();
 }
 
 class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
   final myController = TextEditingController();
-  bool Hoveralreadyhaveaccnt=false;
+  bool Hoveralreadyhaveaccnt = false;
+  String _email;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,16 +28,21 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
             Text("Forgot Password",
                 style: TextStyle(
                     height: 1.3,
-                    fontFamily: "Metrisch-ExtraBold", fontSize: 25)),
-            SizedBox(height: 15,),
+                    fontFamily: "Metrisch-ExtraBold",
+                    fontSize: 25)),
+            SizedBox(
+              height: 15,
+            ),
             Container(
               child: Text(
                 "Please enter your email first.\nVerification link will be send",
                 style: TextStyle(
-                    fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15),
+                    fontFamily: "Metrisch-Medium", height: 1.3, fontSize: 15),
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -48,17 +54,20 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                 height: 40,
                 child: TextField(
                   style: TextStyle(
-
-                      fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                      fontFamily: "Metrisch-Medium",
+                      height: 1.5,
+                      fontSize: 15,
+                      color: Colors.black54),
                   onChanged: (value) {
-                    //Do something with the user input.
+                    _email = value;
                   },
                   decoration: InputDecoration(
-
                     border: InputBorder.none,
                     hintStyle: TextStyle(
-
-                        fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),
+                        fontFamily: "Metrisch-Medium",
+                        height: 1.5,
+                        fontSize: 15,
+                        color: Colors.black54),
                     hintText: 'roll@bennett.edu.in',
                     // contentPadding:
                     // EdgeInsets.symmetric(horizontal: 20.0),
@@ -69,38 +78,59 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                 ),
               ),
             ),
-            SizedBox(height: 15,),
-            Align(alignment: Alignment.center,child: GradientButton(title: "Send Verification",buttonwidth: 300,)),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 15,
+            ),
+            Align(
+                alignment: Alignment.center,
+                child: GradientButton(
+                  title: "Send Verification",
+                  buttonwidth: 300,
+                  onPressed: () {
+                    FirebaseAuth auth;
+                    auth.sendPasswordResetEmail(email: _email);
+                  },
+                )),
+            SizedBox(
+              height: 10,
+            ),
             Align(
               alignment: Alignment.center,
               child: TextButton(
-                onPressed: (){
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
                 ),
-                onHover: (x){
-                  if(x){
+                onHover: (x) {
+                  if (x) {
                     setState(() {
-                      Hoveralreadyhaveaccnt=true;
+                      Hoveralreadyhaveaccnt = true;
                     });
-                  }
-                  else{
+                  } else {
                     setState(() {
-                      Hoveralreadyhaveaccnt=false;
+                      Hoveralreadyhaveaccnt = false;
                     });
                   }
                 },
                 child: Container(
                   padding: EdgeInsets.only(bottom: 1),
                   decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(width: 1.0, color: Hoveralreadyhaveaccnt==true?Colors.black54:Colors.white),),
+                    border: Border(
+                      bottom: BorderSide(
+                          width: 1.0,
+                          color: Hoveralreadyhaveaccnt == true
+                              ? Colors.black54
+                              : Colors.white),
+                    ),
                   ),
                   child: Text("Already have an Account ?",
                       style: TextStyle(
-                          fontFamily: "Metrisch-Medium",color: Colors.black54 ,fontSize: 13)),
+                          fontFamily: "Metrisch-Medium",
+                          color: Colors.black54,
+                          fontSize: 13)),
                 ),
               ),
             ),
