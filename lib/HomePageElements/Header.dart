@@ -1,3 +1,4 @@
+import 'package:bennettprojectgallery/AdminDashBoard.dart';
 import 'package:bennettprojectgallery/DashBoard.dart';
 import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
 import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
@@ -336,7 +337,7 @@ class _HeaderState extends State<Header> {
                                     builder: (context) => LoginPage()))
                             : Navigator.of(context)
                                 .pushReplacement(MaterialPageRoute(
-                                    builder: (context) => DashBoard(
+                                    builder: (context) => AdminDashBoard(
                                           id: result,
                                           batch: batch,
                                           course: course,
@@ -759,7 +760,7 @@ class _HeaderState extends State<Header> {
                                                     LoginPage()))
                                         : Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
-                                                builder: (context) => DashBoard(
+                                                builder: (context) => AdminDashBoard(
                                                       id: result,
                                                       batch: batch,
                                                       course: course,
@@ -1179,7 +1180,7 @@ class _HeaderState extends State<Header> {
                                                     LoginPage()))
                                         : Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
-                                                builder: (context) => DashBoard(
+                                                builder: (context) => AdminDashBoard(
                                                       id: result,
                                                       batch: batch,
                                                       course: course,
