@@ -13,8 +13,14 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
   final myController = TextEditingController();
   bool Hoveralreadyhaveaccnt = false;
   String _email;
+  FirebaseAuth auth;
   @override
   Widget build(BuildContext context) {
+    Future resetPassword() async {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _email.trim());
+      print("Password Reset Email Sent");
+    }
+
     return Card(
       elevation: 8,
       child: Container(
@@ -87,8 +93,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                   title: "Send Verification",
                   buttonwidth: 300,
                   onPressed: () {
-                    FirebaseAuth auth;
-                    auth.sendPasswordResetEmail(email: _email);
+                    resetPassword();
                   },
                 )),
             SizedBox(
