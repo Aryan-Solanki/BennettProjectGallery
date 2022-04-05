@@ -2,29 +2,66 @@ import 'dart:async';
 
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
-import 'package:bennettprojectgallery/login.dart';
-import 'package:bennettprojectgallery/signup.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../FacultySignUp.dart';
+import '../facultylogin.dart';
+import '../login.dart';
 
-class FacultyLoginCard extends StatefulWidget {
+class FacultySignUpCard extends StatefulWidget {
   @override
-  _FacultyLoginCardState createState() => _FacultyLoginCardState();
+  _FacultySignUpCardState createState() => _FacultySignUpCardState();
 }
 
-class _FacultyLoginCardState extends State<FacultyLoginCard> {
+const spinkit = SpinKitThreeInOut(
+  color: Colors.white,
+  size: 20.0,
+);
+
+class _FacultySignUpCardState extends State<FacultySignUpCard> {
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
-  bool Hoverdonthaveaccnt = false;
-  bool studentlogin=false;
-  String email = "";
+  bool Hoveralreadyhaveaccnt = false;
+  String emailId = "";
   String password = "";
+  bool loading=false;
   final auth = FirebaseAuth.instance;
   Timer timer;
   User user;
+  Future<void> checkEmailVerified() async {
+    user = auth.currentUser;
+    await user.reload();
+    if (user.emailVerified) {
+      // user.delete().then((value) => (){
+      //   auth.createUserWithEmailAndPassword(email: emailId, password: password).then((_){
+      //     print("User Successfully Verified")
+      //   });
+      // });
+      timer.cancel();
+      print("Email Verified");
+    }
+  }
+
+  createverifyUser() {
+    auth
+        .createUserWithEmailAndPassword(email: emailId, password: password)
+        .then((_) async {
+      user = FirebaseAuth.instance.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification().then((value) => () {
+          timer = Timer.periodic(Duration(seconds: 5), (timer) {
+            checkEmailVerified();
+          });
+        });
+      }
+      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+      //     builder: (context) => VerifyScreen()));
+    });
+  }
+
+  bool verificationSent = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -37,7 +74,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Faculty Sign In",
+            Text("Faculty Sign Up",
                 style: TextStyle(
                     height: 1.3,
                     fontFamily: "Metrisch-ExtraBold",
@@ -47,7 +84,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
             ),
             Container(
               child: Text(
-                "Please enter your credentials first.\nWo'nt be shared publicly.",
+                "Please enter your email first.\nVerification link will be send",
                 style: TextStyle(
                     fontFamily: "Metrisch-Medium",
                     height: 1.3,
@@ -74,7 +111,8 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                       fontSize: 15,
                       color: Colors.black54),
                   onChanged: (value) {
-                    email = value.trim();
+                    emailId = value.trim();
+                    ;
                   },
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -83,7 +121,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                         height: 1.5,
                         fontSize: 15,
                         color: Colors.black54),
-                    hintText: 'facultyroll@bennett.edu.in',
+                    hintText: 'roll@bennett.edu.in',
                     // contentPadding:
                     // EdgeInsets.symmetric(horizontal: 20.0),
                     // border: OutlineInputBorder(
@@ -137,125 +175,85 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: GradientButton(
-                  title: "Sign In",
+                child: loading==false?GradientButton(
+                  title: "Send Verification",
                   buttonwidth: 300,
-                  onPressed: () {
-                    auth
-                        .signInWithEmailAndPassword(
-                        email: email, password: password)
-                        .then((_) {});
-                    Fluttertoast.showToast(
-                        msg: "Login Successful",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
+                  onPressed: () async {
+                    setState(() {
+                      verificationSent = true;
+                      loading=true;
+                    });
+                    createverifyUser();
+                    // UserCredential userCredential =
+                    //     await FirebaseAuth.instance.signInAnonymously();
                   },
+                ):Container(
+                  height: 50,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    gradient: LinearGradient(
+                        begin: const FractionalOffset(0.0, 0.0),
+                        end: const FractionalOffset(1.0, 0.0),
+                        colors: colors),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                  child: Center(
+                    child: spinkit,
+                  ),
                 )),
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => FacultySignUp()));
-                    },
-                    style: TextButton.styleFrom(
-                      primary: Colors.white,
-                    ),
-                    onHover: (x) {
-                      if (x) {
-                        setState(() {
-                          Hoverdonthaveaccnt = true;
-                        });
-                      } else {
-                        setState(() {
-                          Hoverdonthaveaccnt = false;
-                        });
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: 1),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                              width: 1.0,
-                              color: Hoverdonthaveaccnt == true
-                                  ? Colors.black54
-                                  : Colors.white),
-                        ),
-                      ),
-                      child: Text("Don't have a Account ?",
-                          style: TextStyle(
-                              fontFamily: "Metrisch-Medium",
-                              color: Colors.black54,
-                              fontSize: 13)),
-                    ),
-                  ),
-                ),
-                Text("/",
-                    style: TextStyle(
-                        fontFamily: "Metrisch-Medium",
-                        color: Colors.black54,
-                        fontSize: 13)),
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => LoginPage()));
-                    },
-                    style: TextButton.styleFrom(
-                      primary: Colors.white,
-                    ),
-                    onHover: (x) {
-                      if (x) {
-                        setState(() {
-                          studentlogin = true;
-                        });
-                      } else {
-                        setState(() {
-                          studentlogin = false;
-                        });
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: 1),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                              width: 1.0,
-                              color: studentlogin == true
-                                  ? Colors.black54
-                                  : Colors.white),
-                        ),
-                      ),
-                      child: Text("Student Login",
-                          style: TextStyle(
-                              fontFamily: "Metrisch-Medium",
-                              color: Colors.black54,
-                              fontSize: 13)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-
-
             Align(
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => ForgotPassword()));
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => FacultyLoginPage()));
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
+                onHover: (x) {
+                  if (x) {
+                    setState(() {
+                      Hoveralreadyhaveaccnt = true;
+                    });
+                  } else {
+                    setState(() {
+                      Hoveralreadyhaveaccnt = false;
+                    });
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 1),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                          width: 1.0,
+                          color: Hoveralreadyhaveaccnt == true
+                              ? Colors.black54
+                              : Colors.white),
+                    ),
+                  ),
+                  child: Text("Already have an Account ?",
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          color: Colors.black54,
+                          fontSize: 13)),
+                ),
+              ),
+            ),
+            verificationSent
+                ? Align(
+              alignment: Alignment.center,
+              child: TextButton(
+                onPressed: () {
+                  loading=false;
+                  // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  //     builder: (context) => ForgotPassword()));
+                  user.delete().then((value) => () {});
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
@@ -282,14 +280,15 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                               : Colors.white),
                     ),
                   ),
-                  child: Text("Forgot Password",
+                  child: Text("Resend Verification",
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",
                           color: Colors.black54,
                           fontSize: 13)),
                 ),
               ),
-            ),
+            )
+                : Center(),
           ],
         ),
       ),
