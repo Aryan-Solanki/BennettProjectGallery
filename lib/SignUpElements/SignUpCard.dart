@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
+import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -28,6 +29,15 @@ class _SignUpCardState extends State<SignUpCard> {
   final auth = FirebaseAuth.instance;
   Timer timer;
   User user;
+  ProjectServices _services = ProjectServices();
+  var collectionRef;
+
+  @override
+  void initState() {
+    collectionRef = _services.studentCol;
+    super.initState();
+  }
+
   Future<void> checkEmailVerified() async {
     user = auth.currentUser;
     await user.reload();
@@ -42,27 +52,46 @@ class _SignUpCardState extends State<SignUpCard> {
     }
   }
 
-  createverifyUser() {
-    auth
-        .createUserWithEmailAndPassword(email: emailId, password: password)
-        .then((_) async {
-      user = FirebaseAuth.instance.currentUser;
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification().then((value) => () {
-              timer = Timer.periodic(Duration(seconds: 5), (timer) {
-                checkEmailVerified();
+  createverifyUser() async {
+    try {
+      await auth
+          .createUserWithEmailAndPassword(email: emailId, password: password)
+          .then((_) async {
+        user = FirebaseAuth.instance.currentUser;
+        if (user != null && !user.emailVerified) {
+          await user.sendEmailVerification().then((value) => () {
+                timer = Timer.periodic(Duration(seconds: 5), (timer) {
+                  checkEmailVerified();
+                });
               });
-            });
-      }
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     builder: (context) => VerifyScreen()));
-    });
+        }
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+        //     builder: (context) => VerifyScreen()));
+      });
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   bool verificationSent = false;
 
   @override
   Widget build(BuildContext context) {
+    Future<bool> checkIfDocExists(String docId) async {
+      try {
+        var doc = await collectionRef.doc(docId).get();
+        return doc.exists;
+      } catch (e) {
+        print(e);
+        return false;
+      }
+    }
+
+    Future<bool> checkIfdocumentExists(String email) async {
+      bool docExists = await checkIfDocExists(email);
+      return docExists;
+    }
+
     return Card(
       elevation: 8,
       child: Container(
@@ -183,7 +212,35 @@ class _SignUpCardState extends State<SignUpCard> {
                             verificationSent = true;
                             loading = true;
                           });
-                          createverifyUser();
+                          try {
+                            String result = emailId
+                                .substring(0, emailId.indexOf('@'))
+                                .toUpperCase();
+                            bool check = await checkIfdocumentExists(result);
+                            if (check) {
+                              try {
+                                await createverifyUser();
+                                loading = false;
+                                //TODO: Verification Mail Sent Toast
+                              } on FirebaseAuthException catch (e) {
+                                print('Failed with error code: ${e.code}');
+                                print(e.message);
+                                // TODO: Raise Error
+                              } catch (e) {
+                                print("Normal Error $e");
+                                //TODO: Raise Error
+                              }
+                            } else {
+                              print("Student not found in database");
+                              //TODO: Raise Error
+                            }
+                          } catch (e) {
+                            print("Email Invalid");
+                            //TODO: Raise Error
+                          }
+                          setState(() {
+                            loading = false;
+                          });
                           // UserCredential userCredential =
                           //     await FirebaseAuth.instance.signInAnonymously();
                         },

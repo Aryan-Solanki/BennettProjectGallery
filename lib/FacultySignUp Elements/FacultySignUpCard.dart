@@ -231,12 +231,15 @@ class _FacultySignUpCardState extends State<FacultySignUpCard> {
                                 print("Normal Error $e");
                                 //TODO: Raise Error
                               }
+                            } else {
+                              print("Faculty not found in database");
+                              //TODO: Raise Error
                             }
                           } catch (e) {
                             print("Email Invalid");
-                            loading = false;
                             //TODO: Raise Error
                           }
+                          loading = false;
                           // UserCredential userCredential =
                           //     await FirebaseAuth.instance.signInAnonymously();
                         },

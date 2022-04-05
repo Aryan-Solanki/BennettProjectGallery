@@ -62,6 +62,36 @@ class _LoginCardState extends State<LoginCard> {
     super.initState();
   }
 
+  Future<void> checkEmailVerified() async {
+    user = auth.currentUser;
+    await user.reload();
+    if (user.emailVerified) {
+      // user.delete().then((value) => (){
+      //   auth.createUserWithEmailAndPassword(email: emailId, password: password).then((_){
+      //     print("User Successfully Verified")
+      //   });
+      // });
+      timer.cancel();
+      print("Email Verified");
+    }
+  }
+
+  createverifyUser() async {
+    try {
+      user = FirebaseAuth.instance.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification().then((value) => () {
+              timer = Timer.periodic(Duration(seconds: 5), (timer) {
+                checkEmailVerified();
+              });
+            });
+      }
+      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Future<bool> checkIfDocExists(String docId) async {
@@ -197,7 +227,7 @@ class _LoginCardState extends State<LoginCard> {
                         title: "Sign In",
                         buttonwidth: 300,
                         onPressed: () async {
-                          errors=[];
+                          errors = [];
                           try {
                             String result = email
                                 .substring(0, email.indexOf('@'))
@@ -214,42 +244,53 @@ class _LoginCardState extends State<LoginCard> {
                                     .signInWithEmailAndPassword(
                                         email: email, password: password)
                                     .then((_) async {
-                                  UserServices _services = new UserServices();
-                                  var doc = await _services.getUserById(result);
-                                  String batch = doc["batch"];
-                                  String course = doc["course"];
-                                  String email1 = doc["email"];
-                                  String image = doc["image"];
-                                  String name = doc["name"];
-                                  String school = doc["school"];
-                                  String yog = doc["yog"].toString();
-                                  List<dynamic> projectList = doc["projects"];
-                                  print(batch);
-                                  print(course);
-                                  print(email1);
+                                  bool emailVerified = true;
+                                  if (emailVerified) {
+                                    UserServices _services = new UserServices();
+                                    var doc =
+                                        await _services.getUserById(result);
+                                    String batch = doc["batch"];
+                                    String course = doc["course"];
+                                    String email1 = doc["email"];
+                                    String image = doc["image"];
+                                    String name = doc["name"];
+                                    String school = doc["school"];
+                                    String yog = doc["yog"].toString();
+                                    List<dynamic> projectList = doc["projects"];
+                                    print(batch);
+                                    print(course);
+                                    print(email1);
 
-                                  Fluttertoast.showToast(
-                                      msg: "Login Successful",
-                                      toastLength: Toast.LENGTH_LONG,
-                                      gravity: ToastGravity.CENTER,
-                                      timeInSecForIosWeb: 3,
-                                      backgroundColor: Colors.red,
-                                      textColor: Colors.white,
-                                      fontSize: 16.0);
+                                    Fluttertoast.showToast(
+                                        msg: "Login Successful",
+                                        toastLength: Toast.LENGTH_LONG,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 3,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
 
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DashBoard(
-                                              id: result,
-                                              batch: batch,
-                                              course: course,
-                                              email: email1,
-                                              image: image,
-                                              name: name,
-                                              school: school,
-                                              yog: yog,
-                                              projectList: projectList)));
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DashBoard(
+                                                id: result,
+                                                batch: batch,
+                                                course: course,
+                                                email: email1,
+                                                image: image,
+                                                name: name,
+                                                school: school,
+                                                yog: yog,
+                                                projectList: projectList)));
+                                  } else {
+                                    FirebaseAuth.instance.signOut();
+                                    print("Email not yet verified");
+                                    createverifyUser();
+                                    setState(() {
+                                      addError(error: "Email Not Verified");
+                                    });
+                                  }
                                   loading = false;
                                 });
                               } on FirebaseAuthException catch (e) {
@@ -265,8 +306,7 @@ class _LoginCardState extends State<LoginCard> {
                                   setState(() {
                                     addError(error: kFirebaseNetworkError);
                                   });
-                                }
-                                else {
+                                } else {
                                   setState(() {
                                     addError(error: ksomethingerror);
                                   });
@@ -319,8 +359,16 @@ class _LoginCardState extends State<LoginCard> {
                   alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => SignUp()));
+                      Fluttertoast.showToast(
+                          msg: "Facility Not Available",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 3,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      // Navigator.of(context).pushReplacement(
+                      //     MaterialPageRoute(builder: (context) => SignUp()));
                     },
                     style: TextButton.styleFrom(
                       primary: Colors.white,
