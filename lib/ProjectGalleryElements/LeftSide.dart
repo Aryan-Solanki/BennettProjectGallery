@@ -39,6 +39,7 @@ class _LeftSideState extends State<LeftSide> {
     algolia = Application.algolia;
     super.initState();
   }
+  String searchedvalue="";
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +65,14 @@ class _LeftSideState extends State<LeftSide> {
                         fontSize: 15,
                         color: Colors.black54),
                     onChanged: (value) {
+                      searchedvalue=value;
                       //Do something with the user input.
                     },
                     decoration: InputDecoration(
                       suffixIcon: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            print(searchedvalue);
+                          },
                           child: Icon(
                             Icons.search,
                             size: 22,
