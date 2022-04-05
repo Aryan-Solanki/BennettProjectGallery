@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bennettprojectgallery/AdminDashBoard.dart';
+import 'package:bennettprojectgallery/FacultySignUp%20Elements/FacultySignUpCard.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:bennettprojectgallery/login.dart';
@@ -21,6 +22,7 @@ class FacultyLoginCard extends StatefulWidget {
 
 class _FacultyLoginCardState extends State<FacultyLoginCard> {
   List<String> errors = [];
+  bool loading = false;
 
   void addError({String error}) {
     setState(() {
@@ -183,12 +185,15 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: GradientButton(
+                child: loading==false?GradientButton(
                     title: "Sign In",
                     buttonwidth: 300,
                     onPressed: () async {
                       errors = [];
                       bool check = await checkIfdocumentExists(email);
+                      setState(() {
+                        loading = true;
+                      });
 
                       if (check) {
                         try {
@@ -247,8 +252,24 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                         });
                         //TODO: Raise Error
                       }
+                      loading = false;
                       print(errors);
-                    })),
+                    }):Container(
+                  height: 50,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.0),
+                    gradient: LinearGradient(
+                        begin: const FractionalOffset(0.0, 0.0),
+                        end: const FractionalOffset(1.0, 0.0),
+                        colors: colors),
+                  ),
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                  child: Center(
+                    child: spinkit,
+                  ),
+                )),
             SizedBox(
               height: 10,
             ),
@@ -345,7 +366,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => ForgotPassword()));
                 },
                 style: TextButton.styleFrom(

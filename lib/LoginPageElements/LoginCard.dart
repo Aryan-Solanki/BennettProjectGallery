@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../errors.dart';
 import '../form_error.dart';
 
 class LoginCard extends StatefulWidget {
@@ -196,6 +197,7 @@ class _LoginCardState extends State<LoginCard> {
                         title: "Sign In",
                         buttonwidth: 300,
                         onPressed: () async {
+                          errors=[];
                           try {
                             String result = email
                                 .substring(0, email.indexOf('@'))
@@ -251,20 +253,45 @@ class _LoginCardState extends State<LoginCard> {
                                   loading = false;
                                 });
                               } on FirebaseAuthException catch (e) {
+                                if (e.code == 'user-not-found') {
+                                  setState(() {
+                                    addError(error: kUserNotFoundError);
+                                  });
+                                } else if (e.code == 'wrong-password') {
+                                  setState(() {
+                                    addError(error: kPassWrongError);
+                                  });
+                                } else if (e.code == 'network-request-failed') {
+                                  setState(() {
+                                    addError(error: kFirebaseNetworkError);
+                                  });
+                                }
+                                else {
+                                  setState(() {
+                                    addError(error: ksomethingerror);
+                                  });
+                                }
                                 print('Failed with error code: ${e.code}');
                                 print(e.message);
                                 // TODO: Raise Error
                               } catch (e) {
-                                print("Normal Error $e");
+                                print("Something Went Wrong");
                                 //TODO: Raise Error
                               }
                             } else {
+                              setState(() {
+                                addError(error: "Student Id Not Found");
+                              });
                               print("Cannot find id in student database");
                               //TODO: Raise Error
                             }
                           } catch (e) {
+                            setState(() {
+                              addError(error: "Enter Valid Email Id");
+                            });
                             print("Please enter valid email id");
                           }
+                          loading = false;
                         },
                       )
                     : Container(
@@ -283,10 +310,6 @@ class _LoginCardState extends State<LoginCard> {
                           child: spinkit,
                         ),
                       )),
-            SizedBox(
-              height: 10,
-            ),
-            FormError(errors: errors),
             SizedBox(
               height: 10,
             ),
@@ -383,7 +406,7 @@ class _LoginCardState extends State<LoginCard> {
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => ForgotPassword()));
                 },
                 style: TextButton.styleFrom(
