@@ -13,7 +13,10 @@ class FormError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-          errors.length, (index) => formErrorText(error: errors[index])),
+          errors.length, (index) => Padding(
+            padding:  EdgeInsets.only(bottom: 8),
+            child: formErrorText(error: errors[index]),
+          )),
     );
   }
 
