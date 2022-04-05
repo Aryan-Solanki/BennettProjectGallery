@@ -41,6 +41,7 @@ class _HeaderState extends State<Header> {
   String yog = "";
   String result = "";
   List<dynamic> projectList = [];
+  bool islogin;
 
   void getinfo() async {
     String email = auth.currentUser.email;
@@ -59,8 +60,16 @@ class _HeaderState extends State<Header> {
 
   @override
   void initState() {
+    islogin = FirebaseAuth.instance.currentUser != null;
     getinfo();
     super.initState();
+  }
+
+  void logoutandlogin()async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => LoginPage()));
+
   }
 
   @override
@@ -395,9 +404,10 @@ class _HeaderState extends State<Header> {
                     width: 10,
                   ),
                   TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => LoginPage()));
+                      onPressed: () async {
+
+                        islogin==false?Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginPage())):logoutandlogin();
                       },
                       onHover: (x) {
                         if (x) {
@@ -421,7 +431,7 @@ class _HeaderState extends State<Header> {
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
                               child: Text(
-                                "Sign In",
+                                islogin==false?"Sign In":"Sign Out",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Metrisch-Bold"),
