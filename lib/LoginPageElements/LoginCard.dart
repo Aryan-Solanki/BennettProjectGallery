@@ -11,12 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../form_error.dart';
+
 class LoginCard extends StatefulWidget {
   @override
   _LoginCardState createState() => _LoginCardState();
 }
 
 bool loading = false;
+List<String> errors = [];
+
 
 const spinkit = SpinKitThreeInOut(
   color: Colors.white,
@@ -24,6 +28,21 @@ const spinkit = SpinKitThreeInOut(
 );
 
 class _LoginCardState extends State<LoginCard> {
+
+  void addError({String error}) {
+    if (!errors.contains(error))
+      setState(() {
+        errors.add(error);
+      });
+  }
+
+  void removeError({String error}) {
+    if (errors.contains(error))
+      setState(() {
+        errors.remove(error);
+      });
+  }
+
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
   bool Hoverdonthaveaccnt = false;
@@ -149,56 +168,61 @@ class _LoginCardState extends State<LoginCard> {
                     ? GradientButton(
                         title: "Sign In",
                         buttonwidth: 300,
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {
                             loading = true;
                           });
 
-                          auth
-                              .signInWithEmailAndPassword(
-                                  email: email, password: password)
-                              .then((_) async {
-                            String result = email
-                                .substring(0, email.indexOf('@'))
-                                .toUpperCase();
-                            UserServices _services = new UserServices();
-                            var doc = await _services.getUserById(result);
-                            String batch = doc["batch"];
-                            String course = doc["course"];
-                            String email1 = doc["email"];
-                            String image = doc["image"];
-                            String name = doc["name"];
-                            String school = doc["school"];
-                            String yog = doc["yog"].toString();
-                            List<dynamic> projectList = doc["projects"];
-                            print(batch);
-                            print(course);
-                            print(email1);
+                          try{
+                            await auth
+                                .signInWithEmailAndPassword(
+                                email: email, password: password)
+                                .then((_) async {
+                              String result = email
+                                  .substring(0, email.indexOf('@'))
+                                  .toUpperCase();
+                              UserServices _services = new UserServices();
+                              var doc = await _services.getUserById(result);
+                              String batch = doc["batch"];
+                              String course = doc["course"];
+                              String email1 = doc["email"];
+                              String image = doc["image"];
+                              String name = doc["name"];
+                              String school = doc["school"];
+                              String yog = doc["yog"].toString();
+                              List<dynamic> projectList = doc["projects"];
+                              print(batch);
+                              print(course);
+                              print(email1);
 
-                            Fluttertoast.showToast(
-                                msg: "Login Successful",
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 3,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
+                              Fluttertoast.showToast(
+                                  msg: "Login Successful",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 3,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
 
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DashBoard(
-                                        id: result,
-                                        batch: batch,
-                                        course: course,
-                                        email: email1,
-                                        image: image,
-                                        name: name,
-                                        school: school,
-                                        yog: yog,
-                                        projectList: projectList)));
-                            loading = false;
-                          });
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DashBoard(
+                                          id: result,
+                                          batch: batch,
+                                          course: course,
+                                          email: email1,
+                                          image: image,
+                                          name: name,
+                                          school: school,
+                                          yog: yog,
+                                          projectList: projectList)));
+                              loading = false;
+                            });
+
+                          }catch(e){
+
+                          }
                         },
                       )
                     : Container(
@@ -217,6 +241,10 @@ class _LoginCardState extends State<LoginCard> {
                           child: spinkit,
                         ),
                       )),
+            SizedBox(
+              height: 10,
+            ),
+            FormError(errors: errors),
             SizedBox(
               height: 10,
             ),
