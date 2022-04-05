@@ -4,6 +4,8 @@ import 'package:bennettprojectgallery/DashBoard.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/facultylogin.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
+import 'package:bennettprojectgallery/services/faculty_service.dart';
+import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,14 +23,12 @@ class LoginCard extends StatefulWidget {
 bool loading = false;
 List<String> errors = [];
 
-
 const spinkit = SpinKitThreeInOut(
   color: Colors.white,
   size: 20.0,
 );
 
 class _LoginCardState extends State<LoginCard> {
-
   void addError({String error}) {
     if (!errors.contains(error))
       setState(() {
@@ -52,8 +52,31 @@ class _LoginCardState extends State<LoginCard> {
   final auth = FirebaseAuth.instance;
   Timer timer;
   User user;
+  ProjectServices _services = ProjectServices();
+  var collectionRef;
+
+  @override
+  void initState() {
+    collectionRef = _services.studentCol;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future<bool> checkIfDocExists(String docId) async {
+      try {
+        var doc = await collectionRef.doc(docId).get();
+        return doc.exists;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    Future<bool> checkIfdocumentExists(String email) async {
+      bool docExists = await checkIfDocExists(email);
+      return docExists;
+    }
+
     return Card(
       elevation: 8,
       child: Container(
@@ -169,59 +192,70 @@ class _LoginCardState extends State<LoginCard> {
                         title: "Sign In",
                         buttonwidth: 300,
                         onPressed: () async {
+                          String result = email
+                              .substring(0, email.indexOf('@'))
+                              .toUpperCase();
                           setState(() {
                             loading = true;
                           });
 
-                          try{
-                            await auth
-                                .signInWithEmailAndPassword(
-                                email: email, password: password)
-                                .then((_) async {
-                              String result = email
-                                  .substring(0, email.indexOf('@'))
-                                  .toUpperCase();
-                              UserServices _services = new UserServices();
-                              var doc = await _services.getUserById(result);
-                              String batch = doc["batch"];
-                              String course = doc["course"];
-                              String email1 = doc["email"];
-                              String image = doc["image"];
-                              String name = doc["name"];
-                              String school = doc["school"];
-                              String yog = doc["yog"].toString();
-                              List<dynamic> projectList = doc["projects"];
-                              print(batch);
-                              print(course);
-                              print(email1);
+                          bool check = await checkIfdocumentExists(result);
 
-                              Fluttertoast.showToast(
-                                  msg: "Login Successful",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 3,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
+                          if (check) {
+                            try {
+                              await auth
+                                  .signInWithEmailAndPassword(
+                                      email: email, password: password)
+                                  .then((_) async {
+                                UserServices _services = new UserServices();
+                                var doc = await _services.getUserById(result);
+                                String batch = doc["batch"];
+                                String course = doc["course"];
+                                String email1 = doc["email"];
+                                String image = doc["image"];
+                                String name = doc["name"];
+                                String school = doc["school"];
+                                String yog = doc["yog"].toString();
+                                List<dynamic> projectList = doc["projects"];
+                                print(batch);
+                                print(course);
+                                print(email1);
 
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DashBoard(
-                                          id: result,
-                                          batch: batch,
-                                          course: course,
-                                          email: email1,
-                                          image: image,
-                                          name: name,
-                                          school: school,
-                                          yog: yog,
-                                          projectList: projectList)));
-                              loading = false;
-                            });
+                                Fluttertoast.showToast(
+                                    msg: "Login Successful",
+                                    toastLength: Toast.LENGTH_LONG,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 3,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
 
-                          }catch(e){
-
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DashBoard(
+                                            id: result,
+                                            batch: batch,
+                                            course: course,
+                                            email: email1,
+                                            image: image,
+                                            name: name,
+                                            school: school,
+                                            yog: yog,
+                                            projectList: projectList)));
+                                loading = false;
+                              });
+                            } on FirebaseAuthException catch (e) {
+                              print('Failed with error code: ${e.code}');
+                              print(e.message);
+                              // TODO: Raise Error
+                            } catch (e) {
+                              print("Normal Error $e");
+                              //TODO: Raise Error
+                            }
+                          } else {
+                            print("Cannot find id in faculty database");
+                            //TODO: Raise Error
                           }
                         },
                       )
