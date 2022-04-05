@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../errors.dart';
 import '../form_error.dart';
 import '../login.dart';
 
@@ -32,20 +33,42 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
   Widget build(BuildContext context) {
     Future resetPassword() async {
       try{
-        await FirebaseAuth.instance.sendPasswordResetEmail(email: _email.trim());
-        print("Password Reset Email Sent");
-        Navigator.of(context)
-            .pop();
-        Fluttertoast.showToast(
-            msg: "Password Reset Mail Sent Successful",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 3,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      }
-      catch(e){
+        String result = _email
+            .substring(0, _email.indexOf('@'))
+            .toUpperCase();
+
+        try{
+          await FirebaseAuth.instance.sendPasswordResetEmail(email: _email.trim());
+          print("Password Reset Email Sent");
+          Navigator.of(context)
+              .pop();
+          Fluttertoast.showToast(
+              msg: "Password Reset Mail Sent Successful",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 3,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        on FirebaseAuthException catch (e) {
+          if (e.code == 'user-not-found') {
+            setState(() {
+              addError(error: kUserNotFoundError);
+            });
+          } else{
+            setState(() {
+              addError(error: kFirebaseNetworkError);
+            });
+          }
+          print('Failed with error code: ${e.code}');
+          print(e.message);
+          // TODO: Raise Error
+        }
+        catch(e){
+          addError(error: "Enter Valid Email");
+        }
+      } catch(e){
         addError(error: "Enter Valid Email");
       }
 
@@ -140,8 +163,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.of(context).pop();
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
