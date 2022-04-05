@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
+import 'package:bennettprojectgallery/services/faculty_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -25,10 +26,19 @@ class _FacultySignUpCardState extends State<FacultySignUpCard> {
   bool Hoveralreadyhaveaccnt = false;
   String emailId = "";
   String password = "";
-  bool loading=false;
+  bool loading = false;
   final auth = FirebaseAuth.instance;
   Timer timer;
   User user;
+  FacultyServices _services = FacultyServices();
+  var collectionRef;
+
+  @override
+  void initState() {
+    collectionRef = _services.facultyData;
+    super.initState();
+  }
+
   Future<void> checkEmailVerified() async {
     user = auth.currentUser;
     await user.reload();
@@ -43,27 +53,46 @@ class _FacultySignUpCardState extends State<FacultySignUpCard> {
     }
   }
 
-  createverifyUser() {
-    auth
-        .createUserWithEmailAndPassword(email: emailId, password: password)
-        .then((_) async {
-      user = FirebaseAuth.instance.currentUser;
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification().then((value) => () {
-          timer = Timer.periodic(Duration(seconds: 5), (timer) {
-            checkEmailVerified();
-          });
-        });
-      }
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //     builder: (context) => VerifyScreen()));
-    });
+  createverifyUser() async {
+    try {
+      await auth
+          .createUserWithEmailAndPassword(email: emailId, password: password)
+          .then((_) async {
+        user = FirebaseAuth.instance.currentUser;
+        if (user != null && !user.emailVerified) {
+          await user.sendEmailVerification().then((value) => () {
+                timer = Timer.periodic(Duration(seconds: 5), (timer) {
+                  checkEmailVerified();
+                });
+              });
+        }
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+        //     builder: (context) => VerifyScreen()));
+      });
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   bool verificationSent = false;
 
   @override
   Widget build(BuildContext context) {
+    Future<bool> checkIfDocExists(String docId) async {
+      try {
+        var doc = await collectionRef.doc(docId).get();
+        return doc.exists;
+      } catch (e) {
+        print(e);
+        return false;
+      }
+    }
+
+    Future<bool> checkIfdocumentExists(String email) async {
+      bool docExists = await checkIfDocExists(email);
+      return docExists;
+    }
+
     return Card(
       elevation: 8,
       child: Container(
@@ -121,7 +150,7 @@ class _FacultySignUpCardState extends State<FacultySignUpCard> {
                         height: 1.5,
                         fontSize: 15,
                         color: Colors.black54),
-                    hintText: 'roll@bennett.edu.in',
+                    hintText: 'facultyid@bennett.edu.in',
                     // contentPadding:
                     // EdgeInsets.symmetric(horizontal: 20.0),
                     // border: OutlineInputBorder(
@@ -175,33 +204,59 @@ class _FacultySignUpCardState extends State<FacultySignUpCard> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: loading==false?GradientButton(
-                  title: "Send Verification",
-                  buttonwidth: 300,
-                  onPressed: () async {
-                    setState(() {
-                      verificationSent = true;
-                      loading=true;
-                    });
-                    createverifyUser();
-                    // UserCredential userCredential =
-                    //     await FirebaseAuth.instance.signInAnonymously();
-                  },
-                ):Container(
-                  height: 50,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    gradient: LinearGradient(
-                        begin: const FractionalOffset(0.0, 0.0),
-                        end: const FractionalOffset(1.0, 0.0),
-                        colors: colors),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-                  child: Center(
-                    child: spinkit,
-                  ),
-                )),
+                child: loading == false
+                    ? GradientButton(
+                        title: "Send Verification",
+                        buttonwidth: 300,
+                        onPressed: () async {
+                          setState(() {
+                            verificationSent = true;
+                            loading = true;
+                          });
+                          try {
+                            String result = emailId
+                                .substring(0, emailId.indexOf('@'))
+                                .toUpperCase();
+                            bool check = await checkIfdocumentExists(emailId);
+                            if (check) {
+                              try {
+                                await createverifyUser();
+                                loading = false;
+                                //TODO: Verification Mail Sent Toast
+                              } on FirebaseAuthException catch (e) {
+                                print('Failed with error code: ${e.code}');
+                                print(e.message);
+                                // TODO: Raise Error
+                              } catch (e) {
+                                print("Normal Error $e");
+                                //TODO: Raise Error
+                              }
+                            }
+                          } catch (e) {
+                            print("Email Invalid");
+                            loading = false;
+                            //TODO: Raise Error
+                          }
+                          // UserCredential userCredential =
+                          //     await FirebaseAuth.instance.signInAnonymously();
+                        },
+                      )
+                    : Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          gradient: LinearGradient(
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 0.0),
+                              colors: colors),
+                        ),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                        child: Center(
+                          child: spinkit,
+                        ),
+                      )),
             SizedBox(
               height: 10,
             ),
@@ -209,8 +264,8 @@ class _FacultySignUpCardState extends State<FacultySignUpCard> {
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => FacultyLoginPage()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => FacultyLoginPage()));
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
@@ -247,47 +302,47 @@ class _FacultySignUpCardState extends State<FacultySignUpCard> {
             ),
             verificationSent
                 ? Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: () {
-                  loading=false;
-                  // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  //     builder: (context) => ForgotPassword()));
-                  user.delete().then((value) => () {});
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                ),
-                onHover: (x) {
-                  if (x) {
-                    setState(() {
-                      Hoverforgotpass = true;
-                    });
-                  } else {
-                    setState(() {
-                      Hoverforgotpass = false;
-                    });
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 1),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                          width: 1.0,
-                          color: Hoverforgotpass == true
-                              ? Colors.black54
-                              : Colors.white),
+                    alignment: Alignment.center,
+                    child: TextButton(
+                      onPressed: () {
+                        loading = false;
+                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        //     builder: (context) => ForgotPassword()));
+                        user.delete().then((value) => () {});
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                      ),
+                      onHover: (x) {
+                        if (x) {
+                          setState(() {
+                            Hoverforgotpass = true;
+                          });
+                        } else {
+                          setState(() {
+                            Hoverforgotpass = false;
+                          });
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(bottom: 1),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                                width: 1.0,
+                                color: Hoverforgotpass == true
+                                    ? Colors.black54
+                                    : Colors.white),
+                          ),
+                        ),
+                        child: Text("Resend Verification",
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Medium",
+                                color: Colors.black54,
+                                fontSize: 13)),
+                      ),
                     ),
-                  ),
-                  child: Text("Resend Verification",
-                      style: TextStyle(
-                          fontFamily: "Metrisch-Medium",
-                          color: Colors.black54,
-                          fontSize: 13)),
-                ),
-              ),
-            )
+                  )
                 : Center(),
           ],
         ),

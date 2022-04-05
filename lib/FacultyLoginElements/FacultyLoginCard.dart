@@ -33,10 +33,11 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
       errors.remove(error);
     });
   }
+
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
   bool Hoverdonthaveaccnt = false;
-  bool studentlogin=false;
+  bool studentlogin = false;
   String email = "";
   String password = "";
   final auth = FirebaseAuth.instance;
@@ -195,19 +196,27 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                               .signInWithEmailAndPassword(
                                   email: email, password: password)
                               .then((_) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AdminDashBoard()));
+                            bool emailVerified =
+                                FirebaseAuth.instance.currentUser.emailVerified;
 
-                            Fluttertoast.showToast(
-                                msg: "Login Successful",
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
+                            if (emailVerified) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AdminDashBoard()));
+                              Fluttertoast.showToast(
+                                  msg: "Login Successful",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            } else {
+                              FirebaseAuth.instance.signOut();
+                              print("Email not yet verified");
+                              // TODO: Raise Error Email Not Verified
+                            }
                           });
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
@@ -222,8 +231,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                             setState(() {
                               addError(error: kFirebaseNetworkError);
                             });
-                          }
-                          else {
+                          } else {
                             setState(() {
                               addError(error: ksomethingerror);
                             });
@@ -232,8 +240,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                           print(e.message);
                           // TODO: Raise Error
                         }
-                      }
-                      else {
+                      } else {
                         print("Cannot find id in faculty database");
                         setState(() {
                           addError(error: "Faculty Id Not Found");
@@ -251,8 +258,8 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                   alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => FacultySignUp()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => FacultySignUp()));
                     },
                     style: TextButton.styleFrom(
                       primary: Colors.white,
@@ -334,9 +341,6 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                 ),
               ],
             ),
-
-
-
             Align(
               alignment: Alignment.center,
               child: TextButton(
