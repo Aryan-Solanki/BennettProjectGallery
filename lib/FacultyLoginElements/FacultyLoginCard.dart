@@ -10,6 +10,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../FacultySignUp.dart';
+
 class FacultyLoginCard extends StatefulWidget {
   @override
   _FacultyLoginCardState createState() => _FacultyLoginCardState();
@@ -19,6 +21,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
   bool Hoverdonthaveaccnt = false;
+  bool studentlogin=false;
   String email = "";
   String password = "";
   final auth = FirebaseAuth.instance;
@@ -202,46 +205,98 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
             SizedBox(
               height: 10,
             ),
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => LoginPage()));
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                ),
-                onHover: (x) {
-                  if (x) {
-                    setState(() {
-                      Hoverdonthaveaccnt = true;
-                    });
-                  } else {
-                    setState(() {
-                      Hoverdonthaveaccnt = false;
-                    });
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 1),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                          width: 1.0,
-                          color: Hoverdonthaveaccnt == true
-                              ? Colors.black54
-                              : Colors.white),
+            Row(
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => FacultySignUp()));
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                    ),
+                    onHover: (x) {
+                      if (x) {
+                        setState(() {
+                          Hoverdonthaveaccnt = true;
+                        });
+                      } else {
+                        setState(() {
+                          Hoverdonthaveaccnt = false;
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(bottom: 1),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                              width: 1.0,
+                              color: Hoverdonthaveaccnt == true
+                                  ? Colors.black54
+                                  : Colors.white),
+                        ),
+                      ),
+                      child: Text("Don't have a Account ?",
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              color: Colors.black54,
+                              fontSize: 13)),
                     ),
                   ),
-                  child: Text("Student Login",
-                      style: TextStyle(
-                          fontFamily: "Metrisch-Medium",
-                          color: Colors.black54,
-                          fontSize: 13)),
                 ),
-              ),
+                Text("/",
+                    style: TextStyle(
+                        fontFamily: "Metrisch-Medium",
+                        color: Colors.black54,
+                        fontSize: 13)),
+                Align(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                    ),
+                    onHover: (x) {
+                      if (x) {
+                        setState(() {
+                          studentlogin = true;
+                        });
+                      } else {
+                        setState(() {
+                          studentlogin = false;
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(bottom: 1),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                              width: 1.0,
+                              color: studentlogin == true
+                                  ? Colors.black54
+                                  : Colors.white),
+                        ),
+                      ),
+                      child: Text("Student Login",
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              color: Colors.black54,
+                              fontSize: 13)),
+                    ),
+                  ),
+                ),
+              ],
             ),
+
+
+
             Align(
               alignment: Alignment.center,
               child: TextButton(

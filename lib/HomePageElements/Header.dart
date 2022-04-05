@@ -9,6 +9,7 @@ import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,6 +42,7 @@ class _HeaderState extends State<Header> {
   String yog = "";
   String result = "";
   List<dynamic> projectList = [];
+  bool islogin;
 
   void getinfo() async {
     String email = auth.currentUser.email;
@@ -59,8 +61,24 @@ class _HeaderState extends State<Header> {
 
   @override
   void initState() {
+    islogin = FirebaseAuth.instance.currentUser != null;
     getinfo();
     super.initState();
+  }
+
+  void logoutandlogin()async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => LoginPage()));
+    Fluttertoast.showToast(
+        msg: "Logout Successful",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 3,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+
   }
 
   @override
@@ -395,9 +413,10 @@ class _HeaderState extends State<Header> {
                     width: 10,
                   ),
                   TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => LoginPage()));
+                      onPressed: () async {
+
+                        islogin==false?Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginPage())):logoutandlogin();
                       },
                       onHover: (x) {
                         if (x) {
@@ -421,7 +440,7 @@ class _HeaderState extends State<Header> {
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
                               child: Text(
-                                "Sign In",
+                                islogin==false?"Sign In":"Sign Out",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Metrisch-Bold"),
