@@ -196,70 +196,74 @@ class _LoginCardState extends State<LoginCard> {
                         title: "Sign In",
                         buttonwidth: 300,
                         onPressed: () async {
-                          String result = email
-                              .substring(0, email.indexOf('@'))
-                              .toUpperCase();
-                          setState(() {
-                            loading = true;
-                          });
+                          try {
+                            String result = email
+                                .substring(0, email.indexOf('@'))
+                                .toUpperCase();
+                            setState(() {
+                              loading = true;
+                            });
 
-                          bool check = await checkIfdocumentExists(result);
+                            bool check = await checkIfdocumentExists(result);
 
-                          if (check) {
-                            try {
-                              await auth
-                                  .signInWithEmailAndPassword(
-                                      email: email, password: password)
-                                  .then((_) async {
-                                UserServices _services = new UserServices();
-                                var doc = await _services.getUserById(result);
-                                String batch = doc["batch"];
-                                String course = doc["course"];
-                                String email1 = doc["email"];
-                                String image = doc["image"];
-                                String name = doc["name"];
-                                String school = doc["school"];
-                                String yog = doc["yog"].toString();
-                                List<dynamic> projectList = doc["projects"];
-                                print(batch);
-                                print(course);
-                                print(email1);
+                            if (check) {
+                              try {
+                                await auth
+                                    .signInWithEmailAndPassword(
+                                        email: email, password: password)
+                                    .then((_) async {
+                                  UserServices _services = new UserServices();
+                                  var doc = await _services.getUserById(result);
+                                  String batch = doc["batch"];
+                                  String course = doc["course"];
+                                  String email1 = doc["email"];
+                                  String image = doc["image"];
+                                  String name = doc["name"];
+                                  String school = doc["school"];
+                                  String yog = doc["yog"].toString();
+                                  List<dynamic> projectList = doc["projects"];
+                                  print(batch);
+                                  print(course);
+                                  print(email1);
 
-                                Fluttertoast.showToast(
-                                    msg: "Login Successful",
-                                    toastLength: Toast.LENGTH_LONG,
-                                    gravity: ToastGravity.CENTER,
-                                    timeInSecForIosWeb: 3,
-                                    backgroundColor: Colors.red,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0);
+                                  Fluttertoast.showToast(
+                                      msg: "Login Successful",
+                                      toastLength: Toast.LENGTH_LONG,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 3,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
 
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DashBoard(
-                                            id: result,
-                                            batch: batch,
-                                            course: course,
-                                            email: email1,
-                                            image: image,
-                                            name: name,
-                                            school: school,
-                                            yog: yog,
-                                            projectList: projectList)));
-                                loading = false;
-                              });
-                            } on FirebaseAuthException catch (e) {
-                              print('Failed with error code: ${e.code}');
-                              print(e.message);
-                              // TODO: Raise Error
-                            } catch (e) {
-                              print("Normal Error $e");
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DashBoard(
+                                              id: result,
+                                              batch: batch,
+                                              course: course,
+                                              email: email1,
+                                              image: image,
+                                              name: name,
+                                              school: school,
+                                              yog: yog,
+                                              projectList: projectList)));
+                                  loading = false;
+                                });
+                              } on FirebaseAuthException catch (e) {
+                                print('Failed with error code: ${e.code}');
+                                print(e.message);
+                                // TODO: Raise Error
+                              } catch (e) {
+                                print("Normal Error $e");
+                                //TODO: Raise Error
+                              }
+                            } else {
+                              print("Cannot find id in student database");
                               //TODO: Raise Error
                             }
-                          } else {
-                            print("Cannot find id in faculty database");
-                            //TODO: Raise Error
+                          } catch (e) {
+                            print("Please enter valid email id");
                           }
                         },
                       )
