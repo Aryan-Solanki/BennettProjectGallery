@@ -1,7 +1,9 @@
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import '../form_error.dart';
 import '../login.dart';
 
 class ForgotPasswordCard extends StatefulWidget {
@@ -10,6 +12,18 @@ class ForgotPasswordCard extends StatefulWidget {
 }
 
 class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
+  List<String> errors = [];
+  void addError({String error}) {
+    setState(() {
+      errors.add(error);
+    });
+  }
+
+  void removeError({String error}) {
+    setState(() {
+      errors.remove(error);
+    });
+  }
   final myController = TextEditingController();
   bool Hoveralreadyhaveaccnt = false;
   String _email;
@@ -17,9 +31,27 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
   @override
   Widget build(BuildContext context) {
     Future resetPassword() async {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: _email.trim());
-      print("Password Reset Email Sent");
+      try{
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: _email.trim());
+        print("Password Reset Email Sent");
+        Navigator.of(context)
+            .pop();
+        Fluttertoast.showToast(
+            msg: "Password Reset Mail Sent Successful",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+      catch(e){
+        addError(error: "Enter Valid Email");
+      }
+
+
     }
+
 
     return Card(
       elevation: 8,
@@ -85,7 +117,11 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 7.5,
+            ),
+            FormError(errors: errors),
+            SizedBox(
+              height: 7.5,
             ),
             Align(
                 alignment: Alignment.center,
@@ -93,6 +129,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                   title: "Send Verification",
                   buttonwidth: 300,
                   onPressed: () {
+                    errors=[];
                     resetPassword();
                   },
                 )),

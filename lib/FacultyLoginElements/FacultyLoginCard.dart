@@ -341,7 +341,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
               alignment: Alignment.center,
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => ForgotPassword()));
                 },
                 style: TextButton.styleFrom(
