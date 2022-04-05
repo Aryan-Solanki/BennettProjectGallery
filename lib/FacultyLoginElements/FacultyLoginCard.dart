@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:bennettprojectgallery/AdminDashBoard.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:bennettprojectgallery/login.dart';
+import 'package:bennettprojectgallery/services/faculty_service.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +27,32 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
   final auth = FirebaseAuth.instance;
   Timer timer;
   User user;
+  FacultyServices _services = FacultyServices();
+  var collectionRef;
+
+  @override
+  void initState() {
+    collectionRef = _services.facultyData;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future<bool> checkIfDocExists(String docId) async {
+      try {
+        var doc = await collectionRef.doc(docId).get();
+        return doc.exists;
+      } catch (e) {
+        print(e);
+        return false;
+      }
+    }
+
+    Future<bool> checkIfdocumentExists(String email) async {
+      bool docExists = await checkIfDocExists(email);
+      return docExists;
+    }
+
     return Card(
       elevation: 8,
       child: Container(
@@ -74,7 +100,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                       fontSize: 15,
                       color: Colors.black54),
                   onChanged: (value) {
-                    email = value.trim();
+                    email = value.trim().toUpperCase();
                   },
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -138,23 +164,44 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
             Align(
                 alignment: Alignment.center,
                 child: GradientButton(
-                  title: "Sign In",
-                  buttonwidth: 300,
-                  onPressed: () {
-                    auth
-                        .signInWithEmailAndPassword(
-                        email: email, password: password)
-                        .then((_) {});
-                    Fluttertoast.showToast(
-                        msg: "Login Successful",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  },
-                )),
+                    title: "Sign In",
+                    buttonwidth: 300,
+                    onPressed: () async {
+                      bool check = await checkIfdocumentExists(email);
+
+                      if (check) {
+                        try {
+                          await auth
+                              .signInWithEmailAndPassword(
+                                  email: email, password: password)
+                              .then((_) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminDashBoard()));
+
+                            Fluttertoast.showToast(
+                                msg: "Login Successful",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          });
+                        } on FirebaseAuthException catch (e) {
+                          print('Failed with error code: ${e.code}');
+                          print(e.message);
+                          // TODO: Raise Error
+                        } catch (e) {
+                          print("Normal Error $e");
+                          //TODO: Raise Error
+                        }
+                      } else {
+                        print("Cannot find id in faculty database");
+                        //TODO: Raise Error
+                      }
+                    })),
             SizedBox(
               height: 10,
             ),
