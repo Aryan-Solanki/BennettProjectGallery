@@ -185,91 +185,92 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
             ),
             Align(
                 alignment: Alignment.center,
-                child: loading==false?GradientButton(
-                    title: "Sign In",
-                    buttonwidth: 300,
-                    onPressed: () async {
-                      errors = [];
-                      bool check = await checkIfdocumentExists(email);
-                      setState(() {
-                        loading = true;
-                      });
-
-                      if (check) {
-                        try {
-                          await auth
-                              .signInWithEmailAndPassword(
-                                  email: email, password: password)
-                              .then((_) {
-                            bool emailVerified =
-                                FirebaseAuth.instance.currentUser.emailVerified;
-
-                            if (emailVerified) {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AdminDashBoard()));
-                              Fluttertoast.showToast(
-                                  msg: "Login Successful",
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.CENTER,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
-                            } else {
-                              FirebaseAuth.instance.signOut();
-                              print("Email not yet verified");
-                              // TODO: Raise Error Email Not Verified
-                            }
+                child: loading == false
+                    ? GradientButton(
+                        title: "Sign In",
+                        buttonwidth: 300,
+                        onPressed: () async {
+                          errors = [];
+                          bool check = await checkIfdocumentExists(email);
+                          setState(() {
+                            loading = true;
                           });
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            setState(() {
-                              addError(error: kUserNotFoundError);
-                            });
-                          } else if (e.code == 'wrong-password') {
-                            setState(() {
-                              addError(error: kPassWrongError);
-                            });
-                          } else if (e.code == 'network-request-failed') {
-                            setState(() {
-                              addError(error: kFirebaseNetworkError);
-                            });
+
+                          if (check) {
+                            try {
+                              await auth
+                                  .signInWithEmailAndPassword(
+                                      email: email, password: password)
+                                  .then((_) {
+                                bool emailVerified = true;
+                                if (emailVerified) {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AdminDashBoard()));
+                                  Fluttertoast.showToast(
+                                      msg: "Login Successful",
+                                      toastLength: Toast.LENGTH_LONG,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                } else {
+                                  FirebaseAuth.instance.signOut();
+                                  print("Email not yet verified");
+                                  // TODO: Raise Error Email Not Verified
+                                }
+                              });
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'user-not-found') {
+                                setState(() {
+                                  addError(error: kUserNotFoundError);
+                                });
+                              } else if (e.code == 'wrong-password') {
+                                setState(() {
+                                  addError(error: kPassWrongError);
+                                });
+                              } else if (e.code == 'network-request-failed') {
+                                setState(() {
+                                  addError(error: kFirebaseNetworkError);
+                                });
+                              } else {
+                                setState(() {
+                                  addError(error: ksomethingerror);
+                                });
+                              }
+                              print('Failed with error code: ${e.code}');
+                              print(e.message);
+                              // TODO: Raise Error
+                            }
                           } else {
+                            print("Cannot find id in faculty database");
                             setState(() {
-                              addError(error: ksomethingerror);
+                              addError(error: "Faculty Id Not Found");
                             });
+                            //TODO: Raise Error
                           }
-                          print('Failed with error code: ${e.code}');
-                          print(e.message);
-                          // TODO: Raise Error
-                        }
-                      } else {
-                        print("Cannot find id in faculty database");
-                        setState(() {
-                          addError(error: "Faculty Id Not Found");
-                        });
-                        //TODO: Raise Error
-                      }
-                      loading = false;
-                      print(errors);
-                    }):Container(
-                  height: 50,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    gradient: LinearGradient(
-                        begin: const FractionalOffset(0.0, 0.0),
-                        end: const FractionalOffset(1.0, 0.0),
-                        colors: colors),
-                  ),
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-                  child: Center(
-                    child: spinkit,
-                  ),
-                )),
+                          loading = false;
+                          print(errors);
+                        })
+                    : Container(
+                        height: 50,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          gradient: LinearGradient(
+                              begin: const FractionalOffset(0.0, 0.0),
+                              end: const FractionalOffset(1.0, 0.0),
+                              colors: colors),
+                        ),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                        child: Center(
+                          child: spinkit,
+                        ),
+                      )),
             SizedBox(
               height: 10,
             ),
@@ -279,8 +280,16 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                   alignment: Alignment.center,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => FacultySignUp()));
+                      Fluttertoast.showToast(
+                          msg: "Facility Not Available",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      //     builder: (context) => FacultySignUp()));
                     },
                     style: TextButton.styleFrom(
                       primary: Colors.white,
