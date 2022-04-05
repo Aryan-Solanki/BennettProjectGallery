@@ -66,10 +66,10 @@ class _HeaderState extends State<Header> {
     super.initState();
   }
 
-  void logoutandlogin()async{
+  void logoutandlogin() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => LoginPage()));
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
     Fluttertoast.showToast(
         msg: "Logout Successful",
         toastLength: Toast.LENGTH_LONG,
@@ -78,7 +78,6 @@ class _HeaderState extends State<Header> {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-
   }
 
   @override
@@ -348,14 +347,13 @@ class _HeaderState extends State<Header> {
                   ),
                   TextButton(
                       onPressed: () {
-                        print("shnssssssssssss");
-                        name == ""
+                        !islogin
                             ? Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()))
                             : Navigator.of(context)
                                 .pushReplacement(MaterialPageRoute(
-                                    builder: (context) => AdminDashBoard(
+                                    builder: (context) => DashBoard(
                                           id: result,
                                           batch: batch,
                                           course: course,
@@ -414,9 +412,11 @@ class _HeaderState extends State<Header> {
                   ),
                   TextButton(
                       onPressed: () async {
-
-                        islogin==false?Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => LoginPage())):logoutandlogin();
+                        islogin == false
+                            ? Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()))
+                            : logoutandlogin();
                       },
                       onHover: (x) {
                         if (x) {
@@ -440,7 +440,7 @@ class _HeaderState extends State<Header> {
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
                               child: Text(
-                                islogin==false?"Sign In":"Sign Out",
+                                islogin == false ? "Sign In" : "Sign Out",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Metrisch-Bold"),
@@ -777,9 +777,10 @@ class _HeaderState extends State<Header> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     LoginPage()))
-                                        : Navigator.of(context)
-                                            .pushReplacement(MaterialPageRoute(
-                                                builder: (context) => AdminDashBoard(
+                                        : Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AdminDashBoard(
                                                       id: result,
                                                       batch: batch,
                                                       course: course,
@@ -1197,9 +1198,10 @@ class _HeaderState extends State<Header> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     LoginPage()))
-                                        : Navigator.of(context)
-                                            .pushReplacement(MaterialPageRoute(
-                                                builder: (context) => AdminDashBoard(
+                                        : Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AdminDashBoard(
                                                       id: result,
                                                       batch: batch,
                                                       course: course,
