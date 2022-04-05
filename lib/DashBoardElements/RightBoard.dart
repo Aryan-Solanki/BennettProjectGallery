@@ -434,8 +434,6 @@ class _RightBoardState extends State<RightBoard> {
                           ),
                           GradientButton(
                             onPressed: () {
-                              print(batch);
-                              print(email);
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
