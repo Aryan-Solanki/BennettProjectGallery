@@ -930,6 +930,9 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                       if((selectedKey=="2" || student2=="") || (selectedKey=="3" || student2=="" || student3=="") || (selectedKey=="4" || student2=="" || student3=="" || student4=="") || (selectedKey=="5" || student2=="" || student3=="" || student4=="" || student5=="")){
                         addError(error: "Fill Team Members Field");
                       }
+                      if(_selectedCategories.isEmpty){
+                        addError(error: "Fill Categories Field");
+                      }
                       if(errors.isEmpty){
                         List<String> ListCategories = [];
 
