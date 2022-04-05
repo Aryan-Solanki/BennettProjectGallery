@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+  flutter_svg:
   google_fonts: ^2.1.1
   responsive_builder: ^0.2.0+2
   change_app_package_name: ^1.0.0

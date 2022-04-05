@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../FacultySignUp.dart';
+import '../errors.dart';
+import '../form_error.dart';
 
 class FacultyLoginCard extends StatefulWidget {
   @override
@@ -18,6 +20,19 @@ class FacultyLoginCard extends StatefulWidget {
 }
 
 class _FacultyLoginCardState extends State<FacultyLoginCard> {
+  List<String> errors = [];
+
+  void addError({String error}) {
+    setState(() {
+      errors.add(error);
+    });
+  }
+
+  void removeError({String error}) {
+    setState(() {
+      errors.remove(error);
+    });
+  }
   final myController = TextEditingController();
   bool Hoverforgotpass = false;
   bool Hoverdonthaveaccnt = false;
@@ -159,7 +174,11 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 7.5,
+            ),
+            FormError(errors: errors),
+            SizedBox(
+              height: 7.5,
             ),
             Align(
                 alignment: Alignment.center,
@@ -167,6 +186,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                     title: "Sign In",
                     buttonwidth: 300,
                     onPressed: () async {
+                      errors = [];
                       bool check = await checkIfdocumentExists(email);
 
                       if (check) {
@@ -190,17 +210,37 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                                 fontSize: 16.0);
                           });
                         } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            setState(() {
+                              addError(error: kUserNotFoundError);
+                            });
+                          } else if (e.code == 'wrong-password') {
+                            setState(() {
+                              addError(error: kPassWrongError);
+                            });
+                          } else if (e.code == 'network-request-failed') {
+                            setState(() {
+                              addError(error: kFirebaseNetworkError);
+                            });
+                          }
+                          else {
+                            setState(() {
+                              addError(error: ksomethingerror);
+                            });
+                          }
                           print('Failed with error code: ${e.code}');
                           print(e.message);
                           // TODO: Raise Error
-                        } catch (e) {
-                          print("Normal Error $e");
-                          //TODO: Raise Error
                         }
-                      } else {
+                      }
+                      else {
                         print("Cannot find id in faculty database");
+                        setState(() {
+                          addError(error: "Faculty Id Not Found");
+                        });
                         //TODO: Raise Error
                       }
+                      print(errors);
                     })),
             SizedBox(
               height: 10,

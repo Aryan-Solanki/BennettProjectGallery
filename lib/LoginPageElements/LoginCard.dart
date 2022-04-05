@@ -160,7 +160,11 @@ class _LoginCardState extends State<LoginCard> {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 7.5,
+            ),
+            FormError(errors: errors),
+            SizedBox(
+              height: 7.5,
             ),
             Align(
                 alignment: Alignment.center,
