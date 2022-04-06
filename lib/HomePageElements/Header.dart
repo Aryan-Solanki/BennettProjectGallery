@@ -5,7 +5,9 @@ import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
 import 'package:bennettprojectgallery/projectgallery.dart';
+import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,10 +61,19 @@ class _HeaderState extends State<Header> {
     projectList = doc["projects"];
   }
 
+  List<dynamic> categoriesname = [];
+
+  Future<void> getAllCategories() async {
+    ProjectServices _services = ProjectServices();
+    DocumentSnapshot cat = await _services.mainscreen.get();
+    categoriesname = await cat["categoryList"];
+  }
+
   @override
   void initState() {
     islogin = FirebaseAuth.instance.currentUser != null;
     getinfo();
+    getAllCategories();
     super.initState();
   }
 
@@ -202,7 +213,8 @@ class _HeaderState extends State<Header> {
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => ProjectGallery()));
+                            builder: (context) => ProjectGallery(
+                                categoriesname: categoriesname)));
                       },
                       onHover: (x) {
                         if (x) {

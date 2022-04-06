@@ -3,6 +3,8 @@ import 'package:bennettprojectgallery/HomePageElements/Footer.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
 import 'package:bennettprojectgallery/services/algoliaService.dart';
+import 'package:bennettprojectgallery/services/project_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:menu_button/menu_button.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -16,20 +18,24 @@ import 'ProjectGalleryElements/categoriesButton.dart';
 import 'ProjectGalleryElements/topprojects.dart';
 
 class ProjectGallery extends StatefulWidget {
-
+  final List<dynamic> categoriesname;
+  ProjectGallery({this.categoriesname});
   @override
-  _ProjectGalleryState createState() => _ProjectGalleryState();
+  _ProjectGalleryState createState() =>
+      _ProjectGalleryState(categoriesname: categoriesname);
 }
 
 class _ProjectGalleryState extends State<ProjectGallery> {
-
   AlgoliaQuery algoliaQuery;
   Algolia algolia;
+
+  final List<dynamic> categoriesname;
+  _ProjectGalleryState({this.categoriesname});
 
   List<AlgoliaObjectSnapshot> _results = [];
   void algo(String val) async {
     AlgoliaQuery query =
-    algolia.instance.index("project").query(val).setHitsPerPage(9);
+        algolia.instance.index("project").query(val).setHitsPerPage(9);
     AlgoliaQuerySnapshot snap = await query.getObjects();
     _results = snap.hits;
     setState(() {
@@ -44,10 +50,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     super.initState();
   }
 
-  bool hover = false;
-
-
-  String searchedvalue="";
+  String searchedvalue = "";
   List<String> keys = <String>[
     'Default sorting',
     'Sort by popularity',
@@ -55,18 +58,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     'Sort by latest',
   ];
 
-  List<String> categoriesname = <String>[
-    'Python',
-    'Artificial Intelligence',
-    'C++',
-    'HTML',
-  ];
+  int cardnumber = 9;
 
-  int cardnumber=9;
-
-  bool searched=false;
+  bool searched = false;
   @override
   Widget build(BuildContext context) {
+    double catheight = (30 * categoriesname.length) as double;
 
     final Widget normalChildButton = Container(
       color: Color(0xfff3f5fe),
@@ -78,7 +75,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Flexible(
-              child: Text(selectedKey, overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+              child: Text(
+                selectedKey,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontFamily: "Metrisch-Medium",
+                    height: 1.5,
+                    fontSize: 15,
+                    color: Colors.black54),
+              ),
             ),
             const SizedBox(
               width: 12,
@@ -99,13 +104,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Header(current: "Project Gallery",),
+          Header(
+            current: "Project Gallery",
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 50,horizontal: 20),
+                    padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                     child: ResponsiveBuilder(
                       breakpoints: ScreenBreakpoints(
                           tablet: 550, desktop: 971, watch: 300),
@@ -116,13 +123,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
-
                             children: [
                               ResponsiveBuilder(
-                                breakpoints: ScreenBreakpoints(tablet: 971, desktop: 1140, watch: 300),
+                                breakpoints: ScreenBreakpoints(
+                                    tablet: 971, desktop: 1140, watch: 300),
                                 builder: (context, sizingInformation) {
                                   // Check the sizing information here and return your UI
-                                  if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                                  if (sizingInformation.deviceScreenType ==
+                                      DeviceScreenType.desktop) {
                                     return Container(
                                       width: 250,
                                       child: Column(
@@ -130,7 +138,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           Container(
                                             padding: EdgeInsets.only(left: 10),
                                             decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.0)),
                                                 color: Color(0xfff3f5fe)),
                                             height: 45,
                                             child: TextField(
@@ -140,14 +149,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   fontSize: 15,
                                                   color: Colors.black54),
                                               onChanged: (value) {
-                                                searchedvalue=value;
+                                                searchedvalue = value;
                                                 //Do something with the user input.
                                               },
                                               decoration: InputDecoration(
                                                 suffixIcon: InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        searched=true;
+                                                        searched = true;
                                                       });
                                                     },
                                                     child: Icon(
@@ -158,7 +167,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                 border: InputBorder.none,
                                                 hintStyle: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
                                                     height: 1.5,
                                                     fontSize: 15,
                                                     color: Colors.black54),
@@ -179,11 +189,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -194,7 +206,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -205,7 +218,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -227,11 +241,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 20,
                                           ),
                                           Container(
-                                            height: 180,
+                                            height: catheight,
                                             child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
-                                              itemCount: 4,
+                                              itemCount: categoriesname.length,
                                               itemBuilder: (context, index) {
                                                 return Column(
                                                   children: [
@@ -317,11 +332,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -332,7 +349,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -343,7 +361,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -367,13 +386,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           Container(
                                             height: 300,
                                             child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               itemCount: 3,
                                               itemBuilder: (context, index) {
                                                 return TopProjects(
                                                   projectName:
-                                                  "Computer Vision using Deep Learning and Machine Learning",
+                                                      "Computer Vision using Deep Learning and Machine Learning",
                                                   madeBy: "Aryan Solanki",
                                                 );
                                               },
@@ -383,11 +403,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -398,7 +420,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -409,7 +432,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -438,7 +462,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                       ),
                                     );
                                   }
-                                  if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+                                  if (sizingInformation.deviceScreenType ==
+                                      DeviceScreenType.tablet) {
                                     return Container(
                                       width: 220,
                                       child: Column(
@@ -446,7 +471,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           Container(
                                             padding: EdgeInsets.only(left: 10),
                                             decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.0)),
                                                 color: Color(0xfff3f5fe)),
                                             height: 45,
                                             child: TextField(
@@ -462,7 +488,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 suffixIcon: InkWell(
                                                   onTap: () {
                                                     setState(() {
-                                                      searched=true;
+                                                      searched = true;
                                                     });
                                                   },
                                                   child: Icon(
@@ -474,7 +500,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                 border: InputBorder.none,
                                                 hintStyle: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
                                                     height: 1.5,
                                                     fontSize: 15,
                                                     color: Colors.black54),
@@ -491,11 +518,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -506,7 +535,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -517,7 +547,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -541,14 +572,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           Container(
                                             height: 180,
                                             child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               itemCount: 4,
                                               itemBuilder: (context, index) {
                                                 return Column(
                                                   children: [
                                                     CategoriesButton(
-                                                      categoryName: "PYTHON",
+                                                      categoryName:
+                                                          categoriesname[index],
                                                       categoryQuantity: 213,
                                                     ),
                                                     Divider(
@@ -564,11 +597,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -579,7 +614,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -590,7 +626,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -614,13 +651,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           Container(
                                             height: 300,
                                             child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               itemCount: 3,
                                               itemBuilder: (context, index) {
                                                 return TopProjects(
                                                   projectName:
-                                                  "Computer Vision using Deep Learning and Machine Learning",
+                                                      "Computer Vision using Deep Learning and Machine Learning",
                                                   madeBy: "Aryan Solanki",
                                                 );
                                               },
@@ -630,11 +668,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -645,7 +685,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -656,7 +697,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -687,13 +729,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                   }
 
                                   return Container(
-                                    width: MediaQuery.of(context).size.width - 40,
+                                    width:
+                                        MediaQuery.of(context).size.width - 40,
                                     child: Column(
                                       children: [
                                         Container(
                                           padding: EdgeInsets.only(left: 10),
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(5.0)),
                                               color: Color(0xfff3f5fe)),
                                           height: 45,
                                           child: TextField(
@@ -705,11 +749,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             onChanged: (value) {
                                               //Do something with the user input.
                                             },
+                                            onSubmitted: (value) {},
                                             decoration: InputDecoration(
                                               suffixIcon: InkWell(
                                                 onTap: () {
                                                   setState(() {
-                                                    searched=true;
+                                                    searched = true;
                                                   });
                                                 },
                                                 child: Icon(
@@ -738,11 +783,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           height: 40,
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 5,
@@ -753,7 +800,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 20,
@@ -764,7 +812,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 5,
@@ -788,7 +837,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                         Container(
                                           height: 180,
                                           child: ListView.builder(
-                                            physics: NeverScrollableScrollPhysics(),
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount: 4,
                                             itemBuilder: (context, index) {
@@ -811,11 +861,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           height: 40,
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 5,
@@ -826,7 +878,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 20,
@@ -837,7 +890,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 5,
@@ -861,13 +915,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                         Container(
                                           height: 300,
                                           child: ListView.builder(
-                                            physics: NeverScrollableScrollPhysics(),
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount: 3,
                                             itemBuilder: (context, index) {
                                               return TopProjects(
                                                 projectName:
-                                                "Computer Vision using Deep Learning and Machine Learning",
+                                                    "Computer Vision using Deep Learning and Machine Learning",
                                                 madeBy: "Aryan Solanki",
                                               );
                                             },
@@ -877,11 +932,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           height: 40,
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 5,
@@ -892,7 +949,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 20,
@@ -903,7 +961,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(5),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                                 color: Colors.orange.shade400,
                                               ),
                                               width: 5,
@@ -933,7 +992,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                   );
                                 },
                               ),
-                              SizedBox(width: 50,),
+                              SizedBox(
+                                width: 50,
+                              ),
                               ResponsiveBuilder(
                                 breakpoints: ScreenBreakpoints(
                                     tablet: 700, desktop: 1140, watch: 541),
@@ -942,27 +1003,59 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                   if (sizingInformation.deviceScreenType ==
                                       DeviceScreenType.desktop) {
                                     return Container(
-                                      padding: EdgeInsets.symmetric(vertical: 10),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
                                       width: 800,
                                       child: Column(
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              searched==false?Text(
-                                                "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                              ):Text(
-                                                'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                              ),
+                                              searched == false
+                                                  ? Text(
+                                                      "Showing 1–9 of 12 results",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    )
+                                                  : Text(
+                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                               MenuButton<String>(
                                                 child: normalChildButton,
                                                 items: keys,
-                                                itemBuilder: (String value) => Container(
+                                                itemBuilder: (String value) =>
+                                                    Container(
                                                   height: 40,
-                                                  alignment: Alignment.centerLeft,
-                                                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                  child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 0.0,
+                                                      horizontal: 16),
+                                                  child: Text(
+                                                    value,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                  ),
                                                 ),
                                                 toggledChild: Container(
                                                   child: normalChildButton,
@@ -972,24 +1065,31 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     selectedKey = value;
                                                   });
                                                 },
-                                                onMenuButtonToggle: (bool isToggle) {
+                                                onMenuButtonToggle:
+                                                    (bool isToggle) {
                                                   print(isToggle);
                                                 },
                                               )
-
                                             ],
-
                                           ),
-                                          SizedBox(height: 40,),
+                                          SizedBox(
+                                            height: 40,
+                                          ),
                                           Container(
-                                            height: cardnumber*140.toDouble(),
+                                            height: cardnumber * 140.toDouble(),
                                             child: GridView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               itemCount: cardnumber,
-                                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.68,crossAxisSpacing: 20
-                                              ),
-                                              itemBuilder: (BuildContext context, int index) {
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 3,
+                                                      mainAxisSpacing: 40,
+                                                      childAspectRatio: 0.68,
+                                                      crossAxisSpacing: 20),
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
                                                 return ProjectCard();
                                               },
                                             ),
@@ -997,8 +1097,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           GradientButton(
                                             title: "Load More",
                                           ),
-
-
                                         ],
                                       ),
                                     );
@@ -1006,27 +1104,59 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                   if (sizingInformation.deviceScreenType ==
                                       DeviceScreenType.tablet) {
                                     return Container(
-                                      padding: EdgeInsets.symmetric(vertical: 10),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
                                       width: 660,
                                       child: Column(
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              searched==false?Text(
-                                                "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                              ):Text(
-                                                'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                              ),
+                                              searched == false
+                                                  ? Text(
+                                                      "Showing 1–9 of 12 results",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    )
+                                                  : Text(
+                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                               MenuButton<String>(
                                                 child: normalChildButton,
                                                 items: keys,
-                                                itemBuilder: (String value) => Container(
+                                                itemBuilder: (String value) =>
+                                                    Container(
                                                   height: 40,
-                                                  alignment: Alignment.centerLeft,
-                                                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                  child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 0.0,
+                                                      horizontal: 16),
+                                                  child: Text(
+                                                    value,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                  ),
                                                 ),
                                                 toggledChild: Container(
                                                   child: normalChildButton,
@@ -1036,24 +1166,31 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     selectedKey = value;
                                                   });
                                                 },
-                                                onMenuButtonToggle: (bool isToggle) {
+                                                onMenuButtonToggle:
+                                                    (bool isToggle) {
                                                   print(isToggle);
                                                 },
                                               )
-
                                             ],
-
                                           ),
-                                          SizedBox(height: 40,),
+                                          SizedBox(
+                                            height: 40,
+                                          ),
                                           Container(
-                                            height: cardnumber*130.toDouble(),
+                                            height: cardnumber * 130.toDouble(),
                                             child: GridView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               itemCount: cardnumber,
-                                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                              ),
-                                              itemBuilder: (BuildContext context, int index) {
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 3,
+                                                      mainAxisSpacing: 40,
+                                                      childAspectRatio: 0.63,
+                                                      crossAxisSpacing: 20),
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
                                                 return NoHoverProjectCard();
                                               },
                                             ),
@@ -1061,35 +1198,67 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           GradientButton(
                                             title: "Load More",
                                           ),
-
                                         ],
                                       ),
                                     );
                                   }
                                   if (sizingInformation.deviceScreenType ==
-                                      DeviceScreenType.watch){
+                                      DeviceScreenType.watch) {
                                     return Container(
                                       width: 250,
-                                      padding: EdgeInsets.symmetric(vertical: 10),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
                                       child: Column(
                                         children: [
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
-                                              searched==false?Text(
-                                                "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                              ):Text(
-                                                'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                                              searched == false
+                                                  ? Text(
+                                                      "Showing 1–9 of 12 results",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    )
+                                                  : Text(
+                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
+                                              SizedBox(
+                                                height: 20,
                                               ),
-                                              SizedBox(height: 20,),
                                               MenuButton<String>(
                                                 child: normalChildButton,
                                                 items: keys,
-                                                itemBuilder: (String value) => Container(
+                                                itemBuilder: (String value) =>
+                                                    Container(
                                                   height: 40,
-                                                  alignment: Alignment.centerLeft,
-                                                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                  child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 0.0,
+                                                      horizontal: 16),
+                                                  child: Text(
+                                                    value,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                  ),
                                                 ),
                                                 toggledChild: Container(
                                                   child: normalChildButton,
@@ -1099,24 +1268,31 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     selectedKey = value;
                                                   });
                                                 },
-                                                onMenuButtonToggle: (bool isToggle) {
+                                                onMenuButtonToggle:
+                                                    (bool isToggle) {
                                                   print(isToggle);
                                                 },
                                               )
-
                                             ],
-
                                           ),
-                                          SizedBox(height: 20,),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
                                           Container(
-                                            height: cardnumber*445.toDouble(),
+                                            height: cardnumber * 445.toDouble(),
                                             child: GridView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               itemCount: cardnumber,
-                                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 1,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                              ),
-                                              itemBuilder: (BuildContext context, int index) {
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 1,
+                                                      mainAxisSpacing: 40,
+                                                      childAspectRatio: 0.63,
+                                                      crossAxisSpacing: 20),
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
                                                 return NoHoverProjectCard();
                                               },
                                             ),
@@ -1124,7 +1300,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           GradientButton(
                                             title: "Load More",
                                           ),
-
                                         ],
                                       ),
                                     );
@@ -1136,22 +1311,50 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                     child: Column(
                                       children: [
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            searched==false?Text(
-                                              "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                            ):Text(
-                                              'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                            ),
+                                            searched == false
+                                                ? Text(
+                                                    "Showing 1–9 of 12 results",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                  )
+                                                : Text(
+                                                    'Showing 1–9 of "${searchedvalue}"',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                  ),
                                             MenuButton<String>(
                                               child: normalChildButton,
                                               items: keys,
-                                              itemBuilder: (String value) => Container(
+                                              itemBuilder: (String value) =>
+                                                  Container(
                                                 height: 40,
                                                 alignment: Alignment.centerLeft,
-                                                padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                child: Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
+                                                      height: 1.5,
+                                                      fontSize: 15,
+                                                      color: Colors.black54),
+                                                ),
                                               ),
                                               toggledChild: Container(
                                                 child: normalChildButton,
@@ -1161,24 +1364,30 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   selectedKey = value;
                                                 });
                                               },
-                                              onMenuButtonToggle: (bool isToggle) {
+                                              onMenuButtonToggle:
+                                                  (bool isToggle) {
                                                 print(isToggle);
                                               },
                                             )
-
                                           ],
-
                                         ),
-                                        SizedBox(height: 40,),
+                                        SizedBox(
+                                          height: 40,
+                                        ),
                                         Container(
-                                          height: cardnumber*240.toDouble(),
+                                          height: cardnumber * 240.toDouble(),
                                           child: GridView.builder(
-                                            physics: NeverScrollableScrollPhysics(),
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
                                             itemCount: cardnumber,
-                                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                            ),
-                                            itemBuilder: (BuildContext context, int index) {
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 2,
+                                                    mainAxisSpacing: 40,
+                                                    childAspectRatio: 0.63,
+                                                    crossAxisSpacing: 20),
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
                                               return NoHoverProjectCard();
                                             },
                                           ),
@@ -1186,7 +1395,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                         GradientButton(
                                           title: "Load More",
                                         ),
-
                                       ],
                                     ),
                                   );
@@ -1210,54 +1418,99 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                       if (sizingInformation.deviceScreenType ==
                                           DeviceScreenType.desktop) {
                                         return Container(
-                                          padding: EdgeInsets.symmetric(vertical: 10),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10),
                                           width: 800,
                                           child: Column(
                                             children: [
                                               Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                  searched==false?Text(
-                                                    "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                  ):Text(
-                                                    'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                  ),
+                                                  searched == false
+                                                      ? Text(
+                                                          "Showing 1–9 of 12 results",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        )
+                                                      : Text(
+                                                          'Showing 1–9 of "${searchedvalue}"',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        ),
                                                   MenuButton<String>(
                                                     child: normalChildButton,
                                                     items: keys,
-                                                    itemBuilder: (String value) => Container(
+                                                    itemBuilder:
+                                                        (String value) =>
+                                                            Container(
                                                       height: 40,
-                                                      alignment: Alignment.centerLeft,
-                                                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                      child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 0.0,
+                                                          horizontal: 16),
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
                                                     ),
                                                     toggledChild: Container(
                                                       child: normalChildButton,
                                                     ),
-                                                    onItemSelected: (String value) {
+                                                    onItemSelected:
+                                                        (String value) {
                                                       setState(() {
                                                         selectedKey = value;
                                                       });
                                                     },
-                                                    onMenuButtonToggle: (bool isToggle) {
+                                                    onMenuButtonToggle:
+                                                        (bool isToggle) {
                                                       print(isToggle);
                                                     },
                                                   )
-
                                                 ],
-
                                               ),
-                                              SizedBox(height: 40,),
+                                              SizedBox(
+                                                height: 40,
+                                              ),
                                               Container(
-                                                height: cardnumber*140.toDouble(),
+                                                height:
+                                                    cardnumber * 140.toDouble(),
                                                 child: GridView.builder(
-                                                  physics: NeverScrollableScrollPhysics(),
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
                                                   itemCount: cardnumber,
-                                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.68,crossAxisSpacing: 20
-                                                  ),
-                                                  itemBuilder: (BuildContext context, int index) {
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisCount: 3,
+                                                          mainAxisSpacing: 40,
+                                                          childAspectRatio:
+                                                              0.68,
+                                                          crossAxisSpacing: 20),
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
                                                     return ProjectCard();
                                                   },
                                                 ),
@@ -1265,8 +1518,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               GradientButton(
                                                 title: "Load More",
                                               ),
-
-
                                             ],
                                           ),
                                         );
@@ -1274,54 +1525,99 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                       if (sizingInformation.deviceScreenType ==
                                           DeviceScreenType.tablet) {
                                         return Container(
-                                          padding: EdgeInsets.symmetric(vertical: 10),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10),
                                           width: 660,
                                           child: Column(
                                             children: [
                                               Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                  searched==false?Text(
-                                                    "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                  ):Text(
-                                                    'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                  ),
+                                                  searched == false
+                                                      ? Text(
+                                                          "Showing 1–9 of 12 results",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        )
+                                                      : Text(
+                                                          'Showing 1–9 of "${searchedvalue}"',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        ),
                                                   MenuButton<String>(
                                                     child: normalChildButton,
                                                     items: keys,
-                                                    itemBuilder: (String value) => Container(
+                                                    itemBuilder:
+                                                        (String value) =>
+                                                            Container(
                                                       height: 40,
-                                                      alignment: Alignment.centerLeft,
-                                                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                      child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 0.0,
+                                                          horizontal: 16),
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
                                                     ),
                                                     toggledChild: Container(
                                                       child: normalChildButton,
                                                     ),
-                                                    onItemSelected: (String value) {
+                                                    onItemSelected:
+                                                        (String value) {
                                                       setState(() {
                                                         selectedKey = value;
                                                       });
                                                     },
-                                                    onMenuButtonToggle: (bool isToggle) {
+                                                    onMenuButtonToggle:
+                                                        (bool isToggle) {
                                                       print(isToggle);
                                                     },
                                                   )
-
                                                 ],
-
                                               ),
-                                              SizedBox(height: 40,),
+                                              SizedBox(
+                                                height: 40,
+                                              ),
                                               Container(
-                                                height: cardnumber*130.toDouble(),
+                                                height:
+                                                    cardnumber * 130.toDouble(),
                                                 child: GridView.builder(
-                                                  physics: NeverScrollableScrollPhysics(),
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
                                                   itemCount: cardnumber,
-                                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                                  ),
-                                                  itemBuilder: (BuildContext context, int index) {
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisCount: 3,
+                                                          mainAxisSpacing: 40,
+                                                          childAspectRatio:
+                                                              0.63,
+                                                          crossAxisSpacing: 20),
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
                                                     return NoHoverProjectCard();
                                                   },
                                                 ),
@@ -1329,62 +1625,106 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               GradientButton(
                                                 title: "Load More",
                                               ),
-
                                             ],
                                           ),
                                         );
                                       }
                                       if (sizingInformation.deviceScreenType ==
-                                          DeviceScreenType.watch){
+                                          DeviceScreenType.watch) {
                                         return Container(
                                           width: 250,
-                                          padding: EdgeInsets.symmetric(vertical: 10),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: Column(
                                             children: [
                                               Column(
-                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
                                                 children: [
-                                                  searched==false?Text(
-                                                    "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                  ):Text(
-                                                    'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                                                  searched == false
+                                                      ? Text(
+                                                          "Showing 1–9 of 12 results",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        )
+                                                      : Text(
+                                                          'Showing 1–9 of "${searchedvalue}"',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        ),
+                                                  SizedBox(
+                                                    height: 20,
                                                   ),
-                                                  SizedBox(height: 20,),
                                                   MenuButton<String>(
                                                     child: normalChildButton,
                                                     items: keys,
-                                                    itemBuilder: (String value) => Container(
+                                                    itemBuilder:
+                                                        (String value) =>
+                                                            Container(
                                                       height: 40,
-                                                      alignment: Alignment.centerLeft,
-                                                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                      child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 0.0,
+                                                          horizontal: 16),
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
                                                     ),
                                                     toggledChild: Container(
                                                       child: normalChildButton,
                                                     ),
-                                                    onItemSelected: (String value) {
+                                                    onItemSelected:
+                                                        (String value) {
                                                       setState(() {
                                                         selectedKey = value;
                                                       });
                                                     },
-                                                    onMenuButtonToggle: (bool isToggle) {
+                                                    onMenuButtonToggle:
+                                                        (bool isToggle) {
                                                       print(isToggle);
                                                     },
                                                   )
-
                                                 ],
-
                                               ),
-                                              SizedBox(height: 20,),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
                                               Container(
-                                                height: cardnumber*445.toDouble(),
+                                                height:
+                                                    cardnumber * 445.toDouble(),
                                                 child: GridView.builder(
-                                                  physics: NeverScrollableScrollPhysics(),
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
                                                   itemCount: cardnumber,
-                                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 1,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                                  ),
-                                                  itemBuilder: (BuildContext context, int index) {
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisCount: 1,
+                                                          mainAxisSpacing: 40,
+                                                          childAspectRatio:
+                                                              0.63,
+                                                          crossAxisSpacing: 20),
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
                                                     return NoHoverProjectCard();
                                                   },
                                                 ),
@@ -1392,61 +1732,103 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               GradientButton(
                                                 title: "Load More",
                                               ),
-
                                             ],
                                           ),
                                         );
                                       }
 
                                       return Container(
-                                        padding: EdgeInsets.symmetric(vertical: 10),
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 10),
                                         width: 500,
                                         child: Column(
                                           children: [
                                             Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                searched==false?Text(
-                                                  "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                ):Text(
-                                                  'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                ),
+                                                searched == false
+                                                    ? Text(
+                                                        "Showing 1–9 of 12 results",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    : Text(
+                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
                                                   items: keys,
-                                                  itemBuilder: (String value) => Container(
+                                                  itemBuilder: (String value) =>
+                                                      Container(
                                                     height: 40,
-                                                    alignment: Alignment.centerLeft,
-                                                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                    child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                    child: Text(
+                                                      value,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                                   ),
                                                   toggledChild: Container(
                                                     child: normalChildButton,
                                                   ),
-                                                  onItemSelected: (String value) {
+                                                  onItemSelected:
+                                                      (String value) {
                                                     setState(() {
                                                       selectedKey = value;
                                                     });
                                                   },
-                                                  onMenuButtonToggle: (bool isToggle) {
+                                                  onMenuButtonToggle:
+                                                      (bool isToggle) {
                                                     print(isToggle);
                                                   },
                                                 )
-
                                               ],
-
                                             ),
-                                            SizedBox(height: 40,),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
                                             Container(
-                                              height: cardnumber*240.toDouble(),
+                                              height:
+                                                  cardnumber * 240.toDouble(),
                                               child: GridView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 itemCount: cardnumber,
-                                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 2,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                                ),
-                                                itemBuilder: (BuildContext context, int index) {
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 2,
+                                                        mainAxisSpacing: 40,
+                                                        childAspectRatio: 0.63,
+                                                        crossAxisSpacing: 20),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
                                                   return NoHoverProjectCard();
                                                 },
                                               ),
@@ -1454,43 +1836,51 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             GradientButton(
                                               title: "Load More",
                                             ),
-
                                           ],
                                         ),
                                       );
                                     },
                                   ),
-                                  SizedBox(height: 80,),
+                                  SizedBox(
+                                    height: 80,
+                                  ),
                                   ResponsiveBuilder(
-                                    breakpoints: ScreenBreakpoints(tablet: 971, desktop: 1140, watch: 300),
+                                    breakpoints: ScreenBreakpoints(
+                                        tablet: 971, desktop: 1140, watch: 300),
                                     builder: (context, sizingInformation) {
                                       // Check the sizing information here and return your UI
-                                      if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                                      if (sizingInformation.deviceScreenType ==
+                                          DeviceScreenType.desktop) {
                                         return Container(
                                           width: 250,
                                           child: Column(
                                             children: [
                                               Container(
-                                                padding: EdgeInsets.only(left: 10),
+                                                padding:
+                                                    EdgeInsets.only(left: 10),
                                                 decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                5.0)),
                                                     color: Color(0xfff3f5fe)),
                                                 height: 45,
                                                 child: TextField(
                                                   style: TextStyle(
-                                                      fontFamily: "Metrisch-Medium",
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
                                                       height: 1.5,
                                                       fontSize: 15,
                                                       color: Colors.black54),
                                                   onChanged: (value) {
-                                                    searchedvalue=value;
+                                                    searchedvalue = value;
                                                     //Do something with the user input.
                                                   },
                                                   decoration: InputDecoration(
                                                     suffixIcon: InkWell(
                                                         onTap: () {
                                                           setState(() {
-                                                            searched=true;
+                                                            searched = true;
                                                           });
                                                         },
                                                         child: Icon(
@@ -1501,7 +1891,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                     border: InputBorder.none,
                                                     hintStyle: TextStyle(
-                                                        fontFamily: "Metrisch-Medium",
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
                                                         height: 1.5,
                                                         fontSize: 15,
                                                         color: Colors.black54),
@@ -1522,12 +1913,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1537,8 +1932,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 20,
                                                     height: 3,
@@ -1548,8 +1946,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1564,7 +1965,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 style: TextStyle(
                                                     fontSize: 21,
                                                     color: Colors.black87,
-                                                    fontFamily: "Metrisch-Bold"),
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
                                               ),
                                               SizedBox(
                                                 height: 20,
@@ -1572,14 +1974,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               Container(
                                                 height: 180,
                                                 child: ListView.builder(
-                                                  physics: NeverScrollableScrollPhysics(),
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
                                                   itemCount: 4,
-                                                  itemBuilder: (context, index) {
+                                                  itemBuilder:
+                                                      (context, index) {
                                                     return Column(
                                                       children: [
                                                         CategoriesButton(
-                                                          categoryName: "PYTHON",
+                                                          categoryName:
+                                                              "PYTHON",
                                                           categoryQuantity: 213,
                                                         ),
                                                         Divider(
@@ -1595,12 +2000,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1610,8 +2019,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 20,
                                                     height: 3,
@@ -1621,8 +2033,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1637,7 +2052,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 style: TextStyle(
                                                     fontSize: 21,
                                                     color: Colors.black87,
-                                                    fontFamily: "Metrisch-Bold"),
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
                                               ),
                                               SizedBox(
                                                 height: 20,
@@ -1645,13 +2061,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               Container(
                                                 height: 300,
                                                 child: ListView.builder(
-                                                  physics: NeverScrollableScrollPhysics(),
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
                                                   itemCount: 3,
-                                                  itemBuilder: (context, index) {
+                                                  itemBuilder:
+                                                      (context, index) {
                                                     return TopProjects(
                                                       projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
+                                                          "Computer Vision using Deep Learning and Machine Learning",
                                                       madeBy: "Aryan Solanki",
                                                     );
                                                   },
@@ -1661,12 +2079,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1676,8 +2098,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 20,
                                                     height: 3,
@@ -1687,8 +2112,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1703,7 +2131,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 style: TextStyle(
                                                     fontSize: 21,
                                                     color: Colors.black87,
-                                                    fontFamily: "Metrisch-Bold"),
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
                                               ),
                                               SizedBox(
                                                 height: 20,
@@ -1716,32 +2145,38 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                         );
                                       }
-                                      if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+                                      if (sizingInformation.deviceScreenType ==
+                                          DeviceScreenType.tablet) {
                                         return Container(
                                           width: 220,
                                           child: Column(
                                             children: [
                                               Container(
-                                                padding: EdgeInsets.only(left: 10),
+                                                padding:
+                                                    EdgeInsets.only(left: 10),
                                                 decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                5.0)),
                                                     color: Color(0xfff3f5fe)),
                                                 height: 45,
                                                 child: TextField(
                                                   style: TextStyle(
-                                                      fontFamily: "Metrisch-Medium",
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
                                                       height: 1.5,
                                                       fontSize: 15,
                                                       color: Colors.black54),
                                                   onChanged: (value) {
-                                                    searchedvalue=value;
+                                                    searchedvalue = value;
                                                     //Do something with the user input.
                                                   },
                                                   decoration: InputDecoration(
                                                     suffixIcon: InkWell(
                                                       onTap: () {
                                                         setState(() {
-                                                          searched=true;
+                                                          searched = true;
                                                         });
                                                       },
                                                       child: Icon(
@@ -1753,7 +2188,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                     border: InputBorder.none,
                                                     hintStyle: TextStyle(
-                                                        fontFamily: "Metrisch-Medium",
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
                                                         height: 1.5,
                                                         fontSize: 15,
                                                         color: Colors.black54),
@@ -1770,12 +2206,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1785,8 +2225,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 20,
                                                     height: 3,
@@ -1796,8 +2239,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1812,7 +2258,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 style: TextStyle(
                                                     fontSize: 21,
                                                     color: Colors.black87,
-                                                    fontFamily: "Metrisch-Bold"),
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
                                               ),
                                               SizedBox(
                                                 height: 20,
@@ -1820,14 +2267,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               Container(
                                                 height: 180,
                                                 child: ListView.builder(
-                                                  physics: NeverScrollableScrollPhysics(),
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
                                                   itemCount: 4,
-                                                  itemBuilder: (context, index) {
+                                                  itemBuilder:
+                                                      (context, index) {
                                                     return Column(
                                                       children: [
                                                         CategoriesButton(
-                                                          categoryName: "PYTHON",
+                                                          categoryName:
+                                                              "PYTHON",
                                                           categoryQuantity: 213,
                                                         ),
                                                         Divider(
@@ -1843,12 +2293,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1858,8 +2312,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 20,
                                                     height: 3,
@@ -1869,8 +2326,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1885,7 +2345,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 style: TextStyle(
                                                     fontSize: 21,
                                                     color: Colors.black87,
-                                                    fontFamily: "Metrisch-Bold"),
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
                                               ),
                                               SizedBox(
                                                 height: 20,
@@ -1893,13 +2354,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               Container(
                                                 height: 300,
                                                 child: ListView.builder(
-                                                  physics: NeverScrollableScrollPhysics(),
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
                                                   itemCount: 3,
-                                                  itemBuilder: (context, index) {
+                                                  itemBuilder:
+                                                      (context, index) {
                                                     return TopProjects(
                                                       projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
+                                                          "Computer Vision using Deep Learning and Machine Learning",
                                                       madeBy: "Aryan Solanki",
                                                     );
                                                   },
@@ -1909,12 +2372,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1924,8 +2391,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 20,
                                                     height: 3,
@@ -1935,8 +2405,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      color: Colors.orange.shade400,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
                                                     ),
                                                     width: 5,
                                                     height: 3,
@@ -1951,7 +2424,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 style: TextStyle(
                                                     fontSize: 21,
                                                     color: Colors.black87,
-                                                    fontFamily: "Metrisch-Bold"),
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
                                               ),
                                               SizedBox(
                                                 height: 20,
@@ -1966,30 +2440,36 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                       }
 
                                       return Container(
-                                        width: MediaQuery.of(context).size.width - 40,
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                40,
                                         child: Column(
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.only(left: 10),
+                                              padding:
+                                                  EdgeInsets.only(left: 10),
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.0)),
                                                   color: Color(0xfff3f5fe)),
                                               height: 45,
                                               child: TextField(
                                                 style: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
                                                     height: 1.5,
                                                     fontSize: 15,
                                                     color: Colors.black54),
                                                 onChanged: (value) {
-                                                  searchedvalue=value;
+                                                  searchedvalue = value;
                                                   //Do something with the user input.
                                                 },
                                                 decoration: InputDecoration(
                                                   suffixIcon: InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        searched=true;
+                                                        searched = true;
                                                       });
                                                     },
                                                     child: Icon(
@@ -2001,7 +2481,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                   border: InputBorder.none,
                                                   hintStyle: TextStyle(
-                                                      fontFamily: "Metrisch-Medium",
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
                                                       height: 1.5,
                                                       fontSize: 15,
                                                       color: Colors.black54),
@@ -2018,12 +2499,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2033,8 +2518,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2044,8 +2532,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2068,7 +2559,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             Container(
                                               height: 180,
                                               child: ListView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
                                                 itemCount: 4,
                                                 itemBuilder: (context, index) {
@@ -2091,12 +2583,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2106,8 +2602,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2117,8 +2616,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2141,13 +2643,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             Container(
                                               height: 300,
                                               child: ListView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
                                                 itemCount: 3,
                                                 itemBuilder: (context, index) {
                                                   return TopProjects(
                                                     projectName:
-                                                    "Computer Vision using Deep Learning and Machine Learning",
+                                                        "Computer Vision using Deep Learning and Machine Learning",
                                                     madeBy: "Aryan Solanki",
                                                   );
                                                 },
@@ -2157,12 +2660,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2172,8 +2679,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2183,8 +2693,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2219,7 +2732,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                           );
                         }
 
-
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -2233,54 +2745,97 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                     if (sizingInformation.deviceScreenType ==
                                         DeviceScreenType.desktop) {
                                       return Container(
-                                        padding: EdgeInsets.symmetric(vertical: 10),
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 10),
                                         width: 800,
                                         child: Column(
                                           children: [
                                             Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                searched==false?Text(
-                                                  "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                ):Text(
-                                                  'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                ),
+                                                searched == false
+                                                    ? Text(
+                                                        "Showing 1–9 of 12 results",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    : Text(
+                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
                                                   items: keys,
-                                                  itemBuilder: (String value) => Container(
+                                                  itemBuilder: (String value) =>
+                                                      Container(
                                                     height: 40,
-                                                    alignment: Alignment.centerLeft,
-                                                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                    child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                    child: Text(
+                                                      value,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                                   ),
                                                   toggledChild: Container(
                                                     child: normalChildButton,
                                                   ),
-                                                  onItemSelected: (String value) {
+                                                  onItemSelected:
+                                                      (String value) {
                                                     setState(() {
                                                       selectedKey = value;
                                                     });
                                                   },
-                                                  onMenuButtonToggle: (bool isToggle) {
+                                                  onMenuButtonToggle:
+                                                      (bool isToggle) {
                                                     print(isToggle);
                                                   },
                                                 )
-
                                               ],
-
                                             ),
-                                            SizedBox(height: 40,),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
                                             Container(
-                                              height: cardnumber*140.toDouble(),
+                                              height:
+                                                  cardnumber * 140.toDouble(),
                                               child: GridView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 itemCount: cardnumber,
-                                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.68,crossAxisSpacing: 20
-                                                ),
-                                                itemBuilder: (BuildContext context, int index) {
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 3,
+                                                        mainAxisSpacing: 40,
+                                                        childAspectRatio: 0.68,
+                                                        crossAxisSpacing: 20),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
                                                   return ProjectCard();
                                                 },
                                               ),
@@ -2288,8 +2843,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             GradientButton(
                                               title: "Load More",
                                             ),
-
-
                                           ],
                                         ),
                                       );
@@ -2297,54 +2850,97 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                     if (sizingInformation.deviceScreenType ==
                                         DeviceScreenType.tablet) {
                                       return Container(
-                                        padding: EdgeInsets.symmetric(vertical: 10),
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 10),
                                         width: 660,
                                         child: Column(
                                           children: [
                                             Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                searched==false?Text(
-                                                  "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                ):Text(
-                                                  'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                ),
+                                                searched == false
+                                                    ? Text(
+                                                        "Showing 1–9 of 12 results",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    : Text(
+                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
                                                   items: keys,
-                                                  itemBuilder: (String value) => Container(
+                                                  itemBuilder: (String value) =>
+                                                      Container(
                                                     height: 40,
-                                                    alignment: Alignment.centerLeft,
-                                                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                    child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                    child: Text(
+                                                      value,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                                   ),
                                                   toggledChild: Container(
                                                     child: normalChildButton,
                                                   ),
-                                                  onItemSelected: (String value) {
+                                                  onItemSelected:
+                                                      (String value) {
                                                     setState(() {
                                                       selectedKey = value;
                                                     });
                                                   },
-                                                  onMenuButtonToggle: (bool isToggle) {
+                                                  onMenuButtonToggle:
+                                                      (bool isToggle) {
                                                     print(isToggle);
                                                   },
                                                 )
-
                                               ],
-
                                             ),
-                                            SizedBox(height: 40,),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
                                             Container(
-                                              height: cardnumber*130.toDouble(),
+                                              height:
+                                                  cardnumber * 130.toDouble(),
                                               child: GridView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 itemCount: cardnumber,
-                                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                                ),
-                                                itemBuilder: (BuildContext context, int index) {
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 3,
+                                                        mainAxisSpacing: 40,
+                                                        childAspectRatio: 0.63,
+                                                        crossAxisSpacing: 20),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
                                                   return NoHoverProjectCard();
                                                 },
                                               ),
@@ -2352,62 +2948,104 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             GradientButton(
                                               title: "Load More",
                                             ),
-
                                           ],
                                         ),
                                       );
                                     }
                                     if (sizingInformation.deviceScreenType ==
-                                        DeviceScreenType.watch){
+                                        DeviceScreenType.watch) {
                                       return Container(
                                         width: 250,
-                                        padding: EdgeInsets.symmetric(vertical: 10),
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 10),
                                         child: Column(
                                           children: [
                                             Column(
-                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
                                               children: [
-                                                searched==false?Text(
-                                                  "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                                ):Text(
-                                                  'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                                                searched == false
+                                                    ? Text(
+                                                        "Showing 1–9 of 12 results",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    : Text(
+                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
+                                                SizedBox(
+                                                  height: 20,
                                                 ),
-                                                SizedBox(height: 20,),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
                                                   items: keys,
-                                                  itemBuilder: (String value) => Container(
+                                                  itemBuilder: (String value) =>
+                                                      Container(
                                                     height: 40,
-                                                    alignment: Alignment.centerLeft,
-                                                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                    child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                    child: Text(
+                                                      value,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                                   ),
                                                   toggledChild: Container(
                                                     child: normalChildButton,
                                                   ),
-                                                  onItemSelected: (String value) {
+                                                  onItemSelected:
+                                                      (String value) {
                                                     setState(() {
                                                       selectedKey = value;
                                                     });
                                                   },
-                                                  onMenuButtonToggle: (bool isToggle) {
+                                                  onMenuButtonToggle:
+                                                      (bool isToggle) {
                                                     print(isToggle);
                                                   },
                                                 )
-
                                               ],
-
                                             ),
-                                            SizedBox(height: 20,),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
                                             Container(
-                                              height: cardnumber*445.toDouble(),
+                                              height:
+                                                  cardnumber * 445.toDouble(),
                                               child: GridView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 itemCount: cardnumber,
-                                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 1,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                                ),
-                                                itemBuilder: (BuildContext context, int index) {
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 1,
+                                                        mainAxisSpacing: 40,
+                                                        childAspectRatio: 0.63,
+                                                        crossAxisSpacing: 20),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
                                                   return NoHoverProjectCard();
                                                 },
                                               ),
@@ -2415,34 +3053,65 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             GradientButton(
                                               title: "Load More",
                                             ),
-
                                           ],
                                         ),
                                       );
                                     }
 
                                     return Container(
-                                      padding: EdgeInsets.symmetric(vertical: 10),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
                                       width: 500,
                                       child: Column(
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              searched==false?Text(
-                                                "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                              ):Text(
-                                                'Showing 1–9 of "${searchedvalue}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                                              ),
+                                              searched == false
+                                                  ? Text(
+                                                      "Showing 1–9 of 12 results",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    )
+                                                  : Text(
+                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                               MenuButton<String>(
                                                 child: normalChildButton,
                                                 items: keys,
-                                                itemBuilder: (String value) => Container(
+                                                itemBuilder: (String value) =>
+                                                    Container(
                                                   height: 40,
-                                                  alignment: Alignment.centerLeft,
-                                                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                                                  child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 0.0,
+                                                      horizontal: 16),
+                                                  child: Text(
+                                                    value,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                  ),
                                                 ),
                                                 toggledChild: Container(
                                                   child: normalChildButton,
@@ -2452,24 +3121,31 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     selectedKey = value;
                                                   });
                                                 },
-                                                onMenuButtonToggle: (bool isToggle) {
+                                                onMenuButtonToggle:
+                                                    (bool isToggle) {
                                                   print(isToggle);
                                                 },
                                               )
-
                                             ],
-
                                           ),
-                                          SizedBox(height: 40,),
+                                          SizedBox(
+                                            height: 40,
+                                          ),
                                           Container(
-                                            height: cardnumber*240.toDouble(),
+                                            height: cardnumber * 240.toDouble(),
                                             child: GridView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               itemCount: cardnumber,
-                                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                                              ),
-                                              itemBuilder: (BuildContext context, int index) {
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 2,
+                                                      mainAxisSpacing: 40,
+                                                      childAspectRatio: 0.63,
+                                                      crossAxisSpacing: 20),
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
                                                 return NoHoverProjectCard();
                                               },
                                             ),
@@ -2477,43 +3153,50 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           GradientButton(
                                             title: "Load More",
                                           ),
-
                                         ],
                                       ),
                                     );
                                   },
                                 ),
-                                SizedBox(height: 80,),
+                                SizedBox(
+                                  height: 80,
+                                ),
                                 ResponsiveBuilder(
-                                  breakpoints: ScreenBreakpoints(tablet: 971, desktop: 1140, watch: 300),
+                                  breakpoints: ScreenBreakpoints(
+                                      tablet: 971, desktop: 1140, watch: 300),
                                   builder: (context, sizingInformation) {
                                     // Check the sizing information here and return your UI
-                                    if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                                    if (sizingInformation.deviceScreenType ==
+                                        DeviceScreenType.desktop) {
                                       return Container(
                                         width: 250,
                                         child: Column(
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.only(left: 10),
+                                              padding:
+                                                  EdgeInsets.only(left: 10),
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.0)),
                                                   color: Color(0xfff3f5fe)),
                                               height: 45,
                                               child: TextField(
                                                 style: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
                                                     height: 1.5,
                                                     fontSize: 15,
                                                     color: Colors.black54),
                                                 onChanged: (value) {
-                                                  searchedvalue=value;
+                                                  searchedvalue = value;
                                                   //Do something with the user input.
                                                 },
                                                 decoration: InputDecoration(
                                                   suffixIcon: InkWell(
                                                       onTap: () {
                                                         setState(() {
-                                                          searched=true;
+                                                          searched = true;
                                                         });
                                                       },
                                                       child: Icon(
@@ -2524,7 +3207,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                   border: InputBorder.none,
                                                   hintStyle: TextStyle(
-                                                      fontFamily: "Metrisch-Medium",
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
                                                       height: 1.5,
                                                       fontSize: 15,
                                                       color: Colors.black54),
@@ -2545,12 +3229,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2560,8 +3248,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2571,8 +3262,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2595,7 +3289,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             Container(
                                               height: 180,
                                               child: ListView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
                                                 itemCount: 4,
                                                 itemBuilder: (context, index) {
@@ -2618,12 +3313,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2633,8 +3332,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2644,8 +3346,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2668,13 +3373,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             Container(
                                               height: 300,
                                               child: ListView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
                                                 itemCount: 3,
                                                 itemBuilder: (context, index) {
                                                   return TopProjects(
                                                     projectName:
-                                                    "Computer Vision using Deep Learning and Machine Learning",
+                                                        "Computer Vision using Deep Learning and Machine Learning",
                                                     madeBy: "Aryan Solanki",
                                                   );
                                                 },
@@ -2684,12 +3390,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2699,8 +3409,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2710,8 +3423,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2739,32 +3455,37 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                         ),
                                       );
                                     }
-                                    if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+                                    if (sizingInformation.deviceScreenType ==
+                                        DeviceScreenType.tablet) {
                                       return Container(
                                         width: 220,
                                         child: Column(
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.only(left: 10),
+                                              padding:
+                                                  EdgeInsets.only(left: 10),
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.0)),
                                                   color: Color(0xfff3f5fe)),
                                               height: 45,
                                               child: TextField(
                                                 style: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
                                                     height: 1.5,
                                                     fontSize: 15,
                                                     color: Colors.black54),
                                                 onChanged: (value) {
-                                                  searchedvalue=value;
+                                                  searchedvalue = value;
                                                   //Do something with the user input.
                                                 },
                                                 decoration: InputDecoration(
                                                   suffixIcon: InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        searched=true;
+                                                        searched = true;
                                                       });
                                                     },
                                                     child: Icon(
@@ -2776,7 +3497,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                   border: InputBorder.none,
                                                   hintStyle: TextStyle(
-                                                      fontFamily: "Metrisch-Medium",
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
                                                       height: 1.5,
                                                       fontSize: 15,
                                                       color: Colors.black54),
@@ -2793,12 +3515,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2808,8 +3534,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2819,8 +3548,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2843,7 +3575,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             Container(
                                               height: 180,
                                               child: ListView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
                                                 itemCount: 4,
                                                 itemBuilder: (context, index) {
@@ -2866,12 +3599,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2881,8 +3618,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2892,8 +3632,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2916,13 +3659,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             Container(
                                               height: 300,
                                               child: ListView.builder(
-                                                physics: NeverScrollableScrollPhysics(),
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
                                                 itemCount: 3,
                                                 itemBuilder: (context, index) {
                                                   return TopProjects(
                                                     projectName:
-                                                    "Computer Vision using Deep Learning and Machine Learning",
+                                                        "Computer Vision using Deep Learning and Machine Learning",
                                                     madeBy: "Aryan Solanki",
                                                   );
                                                 },
@@ -2932,12 +3676,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2947,8 +3695,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 20,
                                                   height: 3,
@@ -2958,8 +3709,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(5),
-                                                    color: Colors.orange.shade400,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
                                                   ),
                                                   width: 5,
                                                   height: 3,
@@ -2989,13 +3743,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                     }
 
                                     return Container(
-                                      width: MediaQuery.of(context).size.width - 40,
+                                      width: MediaQuery.of(context).size.width -
+                                          40,
                                       child: Column(
                                         children: [
                                           Container(
                                             padding: EdgeInsets.only(left: 10),
                                             decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.0)),
                                                 color: Color(0xfff3f5fe)),
                                             height: 45,
                                             child: TextField(
@@ -3005,14 +3761,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   fontSize: 15,
                                                   color: Colors.black54),
                                               onChanged: (value) {
-                                                searchedvalue=value;
+                                                searchedvalue = value;
                                                 //Do something with the user input.
                                               },
                                               decoration: InputDecoration(
                                                 suffixIcon: InkWell(
                                                   onTap: () {
                                                     setState(() {
-                                                      searched=true;
+                                                      searched = true;
                                                     });
                                                   },
                                                   child: Icon(
@@ -3024,7 +3780,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
                                                 border: InputBorder.none,
                                                 hintStyle: TextStyle(
-                                                    fontFamily: "Metrisch-Medium",
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
                                                     height: 1.5,
                                                     fontSize: 15,
                                                     color: Colors.black54),
@@ -3041,11 +3798,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -3056,7 +3815,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -3067,7 +3827,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -3091,7 +3852,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           Container(
                                             height: 180,
                                             child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               itemCount: 4,
                                               itemBuilder: (context, index) {
@@ -3114,11 +3876,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -3129,7 +3893,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -3140,7 +3905,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -3164,13 +3930,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           Container(
                                             height: 300,
                                             child: ListView.builder(
-                                              physics: NeverScrollableScrollPhysics(),
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
                                               itemCount: 3,
                                               itemBuilder: (context, index) {
                                                 return TopProjects(
                                                   projectName:
-                                                  "Computer Vision using Deep Learning and Machine Learning",
+                                                      "Computer Vision using Deep Learning and Machine Learning",
                                                   madeBy: "Aryan Solanki",
                                                 );
                                               },
@@ -3180,11 +3947,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -3195,7 +3964,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 20,
@@ -3206,7 +3976,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
                                                   color: Colors.orange.shade400,
                                                 ),
                                                 width: 5,
@@ -3248,7 +4019,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
               ),
             ),
           ),
-
         ],
       ),
     );
