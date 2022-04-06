@@ -685,6 +685,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             onChanged: (value) {
                                               //Do something with the user input.
                                             },
+                                            onSubmitted: (value) {},
                                             decoration: InputDecoration(
                                               suffixIcon: InkWell(
                                                 onTap: () {
