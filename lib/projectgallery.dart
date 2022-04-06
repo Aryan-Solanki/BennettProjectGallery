@@ -1172,7 +1172,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ? Container(
                                             height: 300,
                                               width: 300,
-                                              child: Lottie.network("https://assets9.lottiefiles.com/packages/lf20_x62chJ.json",frameRate: FrameRate.max,)
+                                              child: Lottie.asset('assets/loading.json',frameRate: FrameRate.max),
                                           )
                                               : Container(
                                                   height: ProjectList.length *
