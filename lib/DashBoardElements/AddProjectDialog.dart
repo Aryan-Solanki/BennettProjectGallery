@@ -10,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:menu_button/menu_button.dart';
 import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
@@ -39,9 +40,6 @@ class UpperCaseTextFormatter extends TextInputFormatter {
 }
 
 class AddProjectDialog extends StatefulWidget {
-
-
-
   final String id;
   final String name;
   final String yog;
@@ -100,6 +98,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
       errors.remove(error);
     });
   }
+
   List<String> keys = <String>[
     '1',
     '2',
@@ -916,24 +915,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                     title: "Add Project",
                     buttonheight: 45,
                     onPressed: () async {
-                      errors=[];
-                      if(Title==""){
-                        addError(error: "Fill Title Field");
-                      }
-                      if(Description==""){
-                        addError(error: "Fill Description Field");
-
-                      }
-                      if(SelectedProfessor==""){
-                        addError(error: "Fill Professor Name Field");
-                      }
-                      if((selectedKey=="2" || student2=="") || (selectedKey=="3" || student2=="" || student3=="") || (selectedKey=="4" || student2=="" || student3=="" || student4=="") || (selectedKey=="5" || student2=="" || student3=="" || student4=="" || student5=="")){
-                        addError(error: "Fill Team Members Field");
-                      }
-                      if(_selectedCategories.isEmpty){
-                        addError(error: "Fill Categories Field");
-                      }
-                      if(errors.isEmpty){
+                      errors = [];
+                      if (errors.isEmpty) {
                         List<String> ListCategories = [];
 
                         for (int i = 0; i < _selectedCategories.length; i++) {
@@ -943,13 +926,13 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         List studentDicList = [];
 
                         CollectionReference project =
-                        FirebaseFirestore.instance.collection('project');
+                            FirebaseFirestore.instance.collection('project');
 
                         var var1 = studnameController2.text == ""
                             ? studnameController2.text
                             : studnameController2.text
-                            .split("(")[1]
-                            .split(")")[0];
+                                .split("(")[1]
+                                .split(")")[0];
 
                         List stud = [
                           id,
@@ -975,86 +958,109 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           }
                         }
 
-                        UserServices _services_user = UserServices();
-
-                        for (int i = 0; i < listFinalStudents.length; i++) {
-                          try {
-                            var tempStudent = studentDict[listFinalStudents[i]];
-                            var strucDic = {
-                              "id": listFinalStudents[i],
-                              "name": tempStudent["name"],
-                              "batch": tempStudent["batch"],
-                              "yog": tempStudent["yog"]
-                            };
-                            studentDicList.add(strucDic);
-                          } catch (e) {
-                            errorString = "Student Not Found";
-                          }
+                        if (Title == "") {
+                          addError(error: "Fill Title Field");
+                        }
+                        if (Description == "") {
+                          addError(error: "Fill Description Field");
+                        }
+                        if (SelectedProfessor == "") {
+                          addError(error: "Fill Professor Name Field");
+                        }
+                        if (listFinalStudents.length !=
+                            int.parse(selectedKey)) {
+                          addError(error: "Fill Team Members Field");
+                        }
+                        if (_selectedCategories.isEmpty) {
+                          addError(error: "Fill Categories Field");
                         }
 
-                        var profID = SelectedProfessor.split("(")[1]
-                            .split(")")[0]
-                            .toUpperCase();
-                        var profName =
-                        SelectedProfessor.split(RegExp('\\(.*?\\)'))[0];
+                        if (errors.isEmpty) {
+                          UserServices _services_user = UserServices();
 
-                        var Structure = {
-                          "LikeCount": 0,
-                          "ProjectDetails": {
-                            "Categories": ListCategories,
-                            "ProjectLink": ProjectLink,
-                            "DatasetLink": DatasetLink,
-                            "Description": Description,
-                            "ReportLink": ReportLink,
-                            "VideoLink": VideoLink,
-                          },
-                          "ProfessorDetails": {
-                            "id": profID,
-                            "name": profName,
-                          },
-                          "images": listImageLinks,
-                          "Reviews": [],
-                          "StudentIdList": studentDicList,
-                          "title": Title,
-                          "viewCount": 0,
-                        };
-
-                        String generateRandomString(int len) {
-                          var r = Random();
-                          const _chars =
-                              'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-                          return List.generate(len,
-                                  (index) => _chars[r.nextInt(_chars.length)]).join();
-                        }
-
-                        UserServices userServices = UserServices();
-
-                        while (true) {
-                          if (listImageLinks.length != 0) {
-                            String uploadID =
-                                DateTime.now().millisecondsSinceEpoch.toString() +
-                                    "_$id" +
-                                    "_${generateRandomString(5)}";
-                            project.doc(uploadID).set(Structure);
-
-                            UserServices _service = UserServices();
-
-                            for (int i = 0; i < studentDicList.length; i++) {
-                              var studentId = studentDicList[i]["id"];
-                              var user = await _service.getUserById(studentId);
-                              List<dynamic> oldProjects = user["projects"];
-                              oldProjects.add(uploadID);
-                              userServices.updateUserData(studentId, {
-                                "projects": oldProjects,
-                              });
+                          for (int i = 0; i < listFinalStudents.length; i++) {
+                            try {
+                              var tempStudent =
+                                  studentDict[listFinalStudents[i]];
+                              var strucDic = {
+                                "id": listFinalStudents[i],
+                                "name": tempStudent["name"],
+                                "batch": tempStudent["batch"],
+                                "yog": tempStudent["yog"]
+                              };
+                              studentDicList.add(strucDic);
+                            } catch (e) {
+                              errorString = "Student Not Found";
                             }
-                            break;
                           }
+
+                          var profID = SelectedProfessor.split("(")[1]
+                              .split(")")[0]
+                              .toUpperCase();
+                          var profName =
+                              SelectedProfessor.split(RegExp('\\(.*?\\)'))[0];
+
+                          var dtnow = DateTime.now();
+
+                          var Structure = {
+                            "LikeCount": 0,
+                            "ProjectDetails": {
+                              "Categories": ListCategories,
+                              "ProjectLink": ProjectLink,
+                              "DatasetLink": DatasetLink,
+                              "Description": Description,
+                              "ReportLink": ReportLink,
+                              "VideoLink": VideoLink,
+                            },
+                            "ProfessorDetails": {
+                              "id": profID,
+                              "name": profName,
+                            },
+                            "images": listImageLinks,
+                            "Reviews": [],
+                            "StudentIdList": studentDicList,
+                            "title": Title,
+                            "viewCount": 0,
+                            "datetime": dtnow
+                          };
+
+                          String generateRandomString(int len) {
+                            var r = Random();
+                            const _chars =
+                                'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+                            return List.generate(len,
+                                    (index) => _chars[r.nextInt(_chars.length)])
+                                .join();
+                          }
+
+                          UserServices userServices = UserServices();
+
+                          while (true) {
+                            if (listImageLinks.length != 0) {
+                              String uploadID =
+                                  dtnow.millisecondsSinceEpoch.toString() +
+                                      "_$id" +
+                                      "_${generateRandomString(5)}";
+                              project.doc(uploadID).set(Structure);
+
+                              UserServices _service = UserServices();
+
+                              for (int i = 0; i < studentDicList.length; i++) {
+                                var studentId = studentDicList[i]["id"];
+                                var user =
+                                    await _service.getUserById(studentId);
+                                List<dynamic> oldProjects = user["projects"];
+                                oldProjects.add(uploadID);
+                                userServices.updateUserData(studentId, {
+                                  "projects": oldProjects,
+                                });
+                              }
+                              break;
+                            }
+                          }
+                          Navigator.pop(context);
                         }
-                        Navigator.pop(context);
                       }
-
-
                     },
                   )
                 ],
