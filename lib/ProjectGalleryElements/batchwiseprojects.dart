@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 class BatchWiseProjects extends StatefulWidget {
 
+  final Function(String) notifyParent;
+
+  BatchWiseProjects({this.notifyParent});
+
   @override
   _BatchWiseProjectsState createState() => _BatchWiseProjectsState();
 }
@@ -29,7 +33,6 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 padding: EdgeInsets.all(0.0),
               ),
               onPressed: (){
-
               },
               onHover: (x){
                 if(x){
@@ -68,7 +71,8 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 padding: EdgeInsets.all(0.0),
               ),
               onPressed: (){
-
+                print("hijedwcasfwes");
+                widget.notifyParent("Batch of 2016");
               },
               onHover: (x){
                 if(x){
@@ -279,6 +283,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
             padding: EdgeInsets.all(0.0),
           ),
           onPressed: (){
+            print("hijedwcasfwes");
 
           },
           onHover: (x){
@@ -518,7 +523,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 padding: EdgeInsets.all(0.0),
               ),
               onPressed: (){
-
+                print("hijedwcasfwes");
               },
               onHover: (x){
                 if(x){
@@ -765,6 +770,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                 padding: EdgeInsets.all(0.0),
               ),
               onPressed: (){
+                print("hijedwcasfwes");
 
               },
               onHover: (x){

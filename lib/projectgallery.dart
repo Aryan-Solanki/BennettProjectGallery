@@ -29,6 +29,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   AlgoliaQuery algoliaQuery;
   Algolia algolia;
 
+  refresh(String x){
+    print(x);
+  }
+
+
   final List<dynamic> categoriesname;
   _ProjectGalleryState({this.categoriesname});
 
@@ -63,7 +68,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   bool searched = false;
   @override
   Widget build(BuildContext context) {
-    double catheight = (30 * categoriesname.length) as double;
+    double catheight = (40 * categoriesname.length) as double;
 
     final Widget normalChildButton = Container(
       color: Color(0xfff3f5fe),
@@ -181,7 +186,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 // ),
                                               ),
                                               onSubmitted: (query) {
-                                                algo(query);
+                                                setState(() {
+                                                  searched = true;
+                                                  searchedvalue = query;
+                                                  algo(query);
+                                                });
+
                                               },
                                             ),
                                           ),
@@ -250,65 +260,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               itemBuilder: (context, index) {
                                                 return Column(
                                                   children: [
-                                                    // Container(
-                                                    //   child: TextButton(
-                                                    //     onHover: (x) {
-                                                    //       if (x) {
-                                                    //         setState(() {
-                                                    //           hover = true;
-                                                    //         });
-                                                    //       } else {
-                                                    //         setState(() {
-                                                    //           hover = false;
-                                                    //         });
-                                                    //       }
-                                                    //     },
-                                                    //     style: TextButton.styleFrom(
-                                                    //       backgroundColor: Colors.transparent,
-                                                    //       primary: Colors.white,
-                                                    //       padding: EdgeInsets.all(0.0),
-                                                    //     ),
-                                                    //     onPressed: () {
-                                                    //       setState(() {
-                                                    //         print(categoriesname[index]);
-                                                    //         searched=true;
-                                                    //         searchedvalue=categoriesname[index];
-                                                    //       });
-                                                    //
-                                                    //     },
-                                                    //     child: Row(
-                                                    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    //       children: [
-                                                    //         Text(
-                                                    //           "widget.categoryName",
-                                                    //           style: TextStyle(
-                                                    //               fontSize: 15,
-                                                    //               color: hover == true ? Colors.green : Colors.black87,
-                                                    //               fontFamily: "Metrisch-Bold"),
-                                                    //         ),
-                                                    //         AnimatedContainer(
-                                                    //           duration: Duration(milliseconds: 300),
-                                                    //           width: 35,
-                                                    //           height: 25,
-                                                    //           decoration: BoxDecoration(
-                                                    //             border: Border.all(
-                                                    //                 color: hover == true ? Color(0xff3224e9) : Colors.white),
-                                                    //             borderRadius: BorderRadius.circular(5),
-                                                    //             color: hover == true ? Colors.white : Color(0xff3224e9),
-                                                    //           ),
-                                                    //           child: Center(
-                                                    //             child: Text(
-                                                    //               213.toString(),
-                                                    //               style: TextStyle(
-                                                    //                   fontSize: 13,
-                                                    //                   color: hover == true ? Color(0xff3224e9) : Colors.white),
-                                                    //             ),
-                                                    //           ),
-                                                    //         )
-                                                    //       ],
-                                                    //     ),
-                                                    //   ),
-                                                    // ),
                                                     CategoriesButton(
                                                       onPressed: (){
                                                         setState(() {
@@ -454,7 +405,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          BatchWiseProjects(),
+                                          BatchWiseProjects(notifyParent: refresh),
                                           SizedBox(
                                             height: 20,
                                           ),
@@ -482,7 +433,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   fontSize: 15,
                                                   color: Colors.black54),
                                               onChanged: (value) {
+                                                searchedvalue = value;
                                                 //Do something with the user input.
+                                              },
+                                              onSubmitted: (query) {
+                                                setState(() {
+                                                  searched = true;
+                                                  searchedvalue = query;
+                                                  algo(query);
+                                                });
+
                                               },
                                               decoration: InputDecoration(
                                                 suffixIcon: InkWell(
@@ -570,16 +530,22 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 20,
                                           ),
                                           Container(
-                                            height: 180,
+                                            height: catheight,
                                             child: ListView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
-                                              itemCount: 4,
+                                              itemCount: categoriesname.length,
                                               itemBuilder: (context, index) {
                                                 return Column(
                                                   children: [
                                                     CategoriesButton(
+                                                      onPressed: (){
+                                                        setState(() {
+                                                          searched=true;
+                                                          searchedvalue=categoriesname[index];
+                                                        });
+                                                      },
                                                       categoryName:
                                                           categoriesname[index],
                                                       categoryQuantity: 213,
@@ -749,7 +715,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             onChanged: (value) {
                                               //Do something with the user input.
                                             },
-                                            onSubmitted: (value) {},
+                                            onSubmitted: (query) {
+                                              setState(() {
+                                                searched = true;
+                                                searchedvalue = query;
+                                                algo(query);
+                                              });
+
+                                            },
                                             decoration: InputDecoration(
                                               suffixIcon: InkWell(
                                                 onTap: () {
@@ -763,6 +736,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   color: Colors.black,
                                                 ),
                                               ),
+
 
                                               border: InputBorder.none,
                                               hintStyle: TextStyle(
@@ -835,17 +809,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           height: 20,
                                         ),
                                         Container(
-                                          height: 180,
+                                          height: catheight,
                                           child: ListView.builder(
                                             physics:
                                                 NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
-                                            itemCount: 4,
+                                            itemCount: categoriesname.length,
                                             itemBuilder: (context, index) {
                                               return Column(
                                                 children: [
                                                   CategoriesButton(
-                                                    categoryName: "PYTHON",
+                                                    onPressed: (){
+                                                      setState(() {
+                                                        searched=true;
+                                                        searchedvalue=categoriesname[index];
+                                                      });
+                                                    },
+                                                    categoryName: categoriesname[index],
                                                     categoryQuantity: 213,
                                                   ),
                                                   Divider(
@@ -1905,7 +1885,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     // ),
                                                   ),
                                                   onSubmitted: (query) {
-                                                    algo(query);
+                                                    setState(() {
+                                                      searched = true;
+                                                      searchedvalue = query;
+                                                      algo(query);
+                                                    });
+
                                                   },
                                                 ),
                                               ),
@@ -1972,19 +1957,25 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 20,
                                               ),
                                               Container(
-                                                height: 180,
+                                                height: catheight,
                                                 child: ListView.builder(
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
-                                                  itemCount: 4,
+                                                  itemCount: categoriesname.length,
                                                   itemBuilder:
                                                       (context, index) {
                                                     return Column(
                                                       children: [
                                                         CategoriesButton(
+                                                          onPressed: (){
+                                                            setState(() {
+                                                              searched=true;
+                                                              searchedvalue=categoriesname[index];
+                                                            });
+                                                          },
                                                           categoryName:
-                                                              "PYTHON",
+                                                              categoriesname[index],
                                                           categoryQuantity: 213,
                                                         ),
                                                         Divider(
@@ -2162,6 +2153,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     color: Color(0xfff3f5fe)),
                                                 height: 45,
                                                 child: TextField(
+                                                  onSubmitted: (query) {
+                                                    setState(() {
+                                                      searched = true;
+                                                      searchedvalue = query;
+                                                      algo(query);
+                                                    });
+
+                                                  },
                                                   style: TextStyle(
                                                       fontFamily:
                                                           "Metrisch-Medium",
@@ -2187,6 +2186,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     ),
 
                                                     border: InputBorder.none,
+
                                                     hintStyle: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -2265,19 +2265,25 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 20,
                                               ),
                                               Container(
-                                                height: 180,
+                                                height: catheight,
                                                 child: ListView.builder(
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
-                                                  itemCount: 4,
+                                                  itemCount: categoriesname.length,
                                                   itemBuilder:
                                                       (context, index) {
                                                     return Column(
                                                       children: [
                                                         CategoriesButton(
+                                                          onPressed: (){
+                                                            setState(() {
+                                                              searched=true;
+                                                              searchedvalue=categoriesname[index];
+                                                            });
+                                                          },
                                                           categoryName:
-                                                              "PYTHON",
+                                                              categoriesname[index],
                                                           categoryQuantity: 213,
                                                         ),
                                                         Divider(
@@ -2455,6 +2461,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   color: Color(0xfff3f5fe)),
                                               height: 45,
                                               child: TextField(
+                                                onSubmitted: (query) {
+                                                  setState(() {
+                                                    searched = true;
+                                                    searchedvalue = query;
+                                                    algo(query);
+                                                  });
+
+                                                },
                                                 style: TextStyle(
                                                     fontFamily:
                                                         "Metrisch-Medium",
@@ -2557,17 +2571,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 20,
                                             ),
                                             Container(
-                                              height: 180,
+                                              height: catheight,
                                               child: ListView.builder(
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
-                                                itemCount: 4,
+                                                itemCount: categoriesname.length,
                                                 itemBuilder: (context, index) {
                                                   return Column(
                                                     children: [
                                                       CategoriesButton(
-                                                        categoryName: "PYTHON",
+                                                        onPressed: (){
+                                                          setState(() {
+                                                            searched=true;
+                                                            searchedvalue=categoriesname[index];
+                                                          });
+                                                        },
+                                                        categoryName: categoriesname[index],
                                                         categoryQuantity: 213,
                                                       ),
                                                       Divider(
@@ -3221,7 +3241,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   // ),
                                                 ),
                                                 onSubmitted: (query) {
-                                                  algo(query);
+                                                  setState(() {
+                                                    searched = true;
+                                                    searchedvalue = query;
+                                                    algo(query);
+                                                  });
+
                                                 },
                                               ),
                                             ),
@@ -3287,17 +3312,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 20,
                                             ),
                                             Container(
-                                              height: 180,
+                                              height: catheight,
                                               child: ListView.builder(
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
-                                                itemCount: 4,
+                                                itemCount: categoriesname.length,
                                                 itemBuilder: (context, index) {
                                                   return Column(
                                                     children: [
                                                       CategoriesButton(
-                                                        categoryName: "PYTHON",
+                                                        onPressed: (){
+                                                          setState(() {
+                                                            searched=true;
+                                                            searchedvalue=categoriesname[index];
+                                                          });
+                                                        },
+                                                        categoryName: categoriesname[index],
                                                         categoryQuantity: 213,
                                                       ),
                                                       Divider(
@@ -3471,6 +3502,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   color: Color(0xfff3f5fe)),
                                               height: 45,
                                               child: TextField(
+                                                onSubmitted: (query) {
+                                                  setState(() {
+                                                    searched = true;
+                                                    searchedvalue = query;
+                                                    algo(query);
+                                                  });
+
+                                                },
                                                 style: TextStyle(
                                                     fontFamily:
                                                         "Metrisch-Medium",
@@ -3573,17 +3612,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 20,
                                             ),
                                             Container(
-                                              height: 180,
+                                              height: catheight,
                                               child: ListView.builder(
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
-                                                itemCount: 4,
+                                                itemCount: categoriesname.length,
                                                 itemBuilder: (context, index) {
                                                   return Column(
                                                     children: [
                                                       CategoriesButton(
-                                                        categoryName: "PYTHON",
+                                                        onPressed: (){
+                                                          setState(() {
+                                                            searched=true;
+                                                            searchedvalue=categoriesname[index];
+                                                          });
+                                                        },
+                                                        categoryName: categoriesname[index],
                                                         categoryQuantity: 213,
                                                       ),
                                                       Divider(
@@ -3755,6 +3800,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 color: Color(0xfff3f5fe)),
                                             height: 45,
                                             child: TextField(
+                                              onSubmitted: (query) {
+                                                setState(() {
+                                                  searched = true;
+                                                  searchedvalue = query;
+                                                  algo(query);
+                                                });
+
+                                              },
                                               style: TextStyle(
                                                   fontFamily: "Metrisch-Medium",
                                                   height: 1.5,
@@ -3850,17 +3903,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 20,
                                           ),
                                           Container(
-                                            height: 180,
+                                            height: catheight,
                                             child: ListView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
-                                              itemCount: 4,
+                                              itemCount: categoriesname.length,
                                               itemBuilder: (context, index) {
                                                 return Column(
                                                   children: [
                                                     CategoriesButton(
-                                                      categoryName: "PYTHON",
+                                                      onPressed: (){
+                                                        setState(() {
+                                                          searched=true;
+                                                          searchedvalue=categoriesname[index];
+                                                        });
+                                                      },
+                                                      categoryName: categoriesname[index],
                                                       categoryQuantity: 213,
                                                     ),
                                                     Divider(
