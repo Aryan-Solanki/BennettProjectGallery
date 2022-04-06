@@ -32,6 +32,7 @@ dependencies:
   multi_select_flutter: ^4.0.0
   algolia: ^1.0.1
   textfield_search:
+  lottie:
 
 dev_dependencies:
   flutter_test:
