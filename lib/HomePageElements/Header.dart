@@ -633,7 +633,10 @@ class _HeaderState extends State<Header> {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ProjectGallery()));
+                                                ProjectGallery(
+                                                  categoriesname:
+                                                      categoriesname,
+                                                )));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -1052,7 +1055,10 @@ class _HeaderState extends State<Header> {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ProjectGallery()));
+                                                ProjectGallery(
+                                                  categoriesname:
+                                                      categoriesname,
+                                                )));
                                   },
                                   onHover: (x) {
                                     if (x) {

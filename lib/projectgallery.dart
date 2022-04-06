@@ -2,6 +2,7 @@ import 'package:algolia/algolia.dart';
 import 'package:bennettprojectgallery/HomePageElements/Footer.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
+import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:bennettprojectgallery/services/algoliaService.dart';
 import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,40 +20,138 @@ import 'ProjectGalleryElements/topprojects.dart';
 
 class ProjectGallery extends StatefulWidget {
   final List<dynamic> categoriesname;
-  final bool isOnSearchState;
-  ProjectGallery({@required this.categoriesname, this.isOnSearchState = false});
+  final String searchTerm;
+  ProjectGallery({@required this.categoriesname, this.searchTerm = ""});
   @override
   _ProjectGalleryState createState() =>
       _ProjectGalleryState(categoriesname: categoriesname);
 }
 
 class _ProjectGalleryState extends State<ProjectGallery> {
+  //////////////////////////////////////////////////////////////////////////////
+
+  List<Project> ProjectList = [];
+  List<dynamic> keys = [];
+
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List<DocumentSnapshot> _projects = [];
+  bool _loadingProducts = true;
+  int _perpage = 9;
+  DocumentSnapshot _lastDocument;
+  bool _gettingMoreProducts = false;
+  bool _moreProductsAvailable = true;
+
+  _getProducts() async {
+    Query q =
+        _firestore.collection("project").orderBy("datetime").limit(_perpage);
+    setState(() {
+      _loadingProducts = true;
+    });
+    QuerySnapshot querySnapshot = await q.get();
+    _projects = querySnapshot.docs;
+    for (var project in _projects) {
+      ProjectList.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"].toString(),
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          Description: project["ProjectDetails"]["Description"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          viewCount: project["viewCount"],
+          timestamp: project["datetime"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+    }
+    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    setState(() {
+      _loadingProducts = false;
+    });
+  }
+
+  getMoreProducts() async {
+    if (_moreProductsAvailable == false) {
+      return;
+    }
+
+    if (_gettingMoreProducts == true) {
+      return;
+    }
+
+    _gettingMoreProducts = true;
+
+    Query q = _firestore
+        .collection("project")
+        .orderBy("datetime")
+        .startAfter([_lastDocument.get("datetime")]).limit(_perpage);
+    QuerySnapshot querySnapshot = await q.get();
+
+    if (querySnapshot.docs.length < _perpage) {
+      _moreProductsAvailable = false;
+    }
+
+    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    _projects = querySnapshot.docs;
+    for (var project in _projects) {
+      ProjectList.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"],
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          Description: project["ProjectDetails"]["Description"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          viewCount: project["viewCount"],
+          timestamp: project["datetime"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+    }
+    setState(() {});
+    _gettingMoreProducts = false;
+  }
+  //////////////////////////////////////////////////////////////////////////////
+
   AlgoliaQuery algoliaQuery;
   Algolia algolia;
 
   final List<dynamic> categoriesname;
   _ProjectGalleryState({this.categoriesname});
 
-  List<AlgoliaObjectSnapshot> _results = [];
-  void algo(String val) async {
-    AlgoliaQuery query =
-        algolia.instance.index("project").query(val).setHitsPerPage(9);
-    AlgoliaQuerySnapshot snap = await query.getObjects();
-    _results = snap.hits;
-    setState(() {
-      print(snap.nbHits);
-      print(snap.hits);
-    });
+  Future<List<AlgoliaObjectSnapshot>> _searchalgolia(String input) async {
+    AlgoliaQuery query = algolia.instance.index("project").query(input);
+    AlgoliaQuerySnapshot querySnap = await query.getObjects();
+    List<AlgoliaObjectSnapshot> results = querySnap.hits;
+    return results;
   }
 
   @override
   void initState() {
     algolia = Application.algolia;
+    if (widget.searchTerm == "") {
+      _getProducts();
+    } else {
+      _searchalgolia(widget.searchTerm);
+    }
     super.initState();
   }
 
   String searchedvalue = "";
-  List<String> keys = <String>[
+
+  List<String> sortkeys = <String>[
     'Default sorting',
     'Sort by popularity',
     'Sort by rating',
@@ -62,6 +161,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   int cardnumber = 9;
 
   bool searched = false;
+
   @override
   Widget build(BuildContext context) {
     double catheight = (30 * categoriesname.length) as double;
@@ -182,7 +282,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 // ),
                                               ),
                                               onSubmitted: (query) {
-                                                algo(query);
+                                                _searchalgolia(query);
                                               },
                                             ),
                                           ),
@@ -1041,7 +1141,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     ),
                                               MenuButton<String>(
                                                 child: normalChildButton,
-                                                items: keys,
+                                                items: sortkeys,
                                                 itemBuilder: (String value) =>
                                                     Container(
                                                   height: 40,
@@ -1079,27 +1179,45 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           SizedBox(
                                             height: 40,
                                           ),
-                                          Container(
-                                            height: cardnumber * 140.toDouble(),
-                                            child: GridView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: cardnumber,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 3,
-                                                      mainAxisSpacing: 40,
-                                                      childAspectRatio: 0.68,
-                                                      crossAxisSpacing: 20),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return ProjectCard();
-                                              },
-                                            ),
-                                          ),
+                                          _loadingProducts == true
+                                              ? Container(
+                                                  child: Text("Loading..."),
+                                                  // REPLACE THIS WITH LOADING
+                                                )
+                                              : Container(
+                                                  height: ProjectList.length *
+                                                      140.toDouble(),
+                                                  child: GridView.builder(
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    itemCount:
+                                                        ProjectList.length,
+                                                    gridDelegate:
+                                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 3,
+                                                            mainAxisSpacing: 40,
+                                                            childAspectRatio:
+                                                                0.68,
+                                                            crossAxisSpacing:
+                                                                20),
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return ProjectCard(
+                                                          project: ProjectList[
+                                                              index]);
+                                                    },
+                                                  ),
+                                                ),
                                           GradientButton(
                                             title: "Load More",
+                                            onPressed: () {
+                                              if (widget.searchTerm == "") {
+                                                getMoreProducts();
+                                              } else {
+                                                //TODO: Get more products from algolia
+                                              }
+                                            },
                                           ),
                                         ],
                                       ),
@@ -1142,7 +1260,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     ),
                                               MenuButton<String>(
                                                 child: normalChildButton,
-                                                items: keys,
+                                                items: sortkeys,
                                                 itemBuilder: (String value) =>
                                                     Container(
                                                   height: 40,
@@ -1201,6 +1319,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                           GradientButton(
                                             title: "Load More",
+                                            onPressed: () {
+                                              if (widget.searchTerm == "") {
+                                                getMoreProducts();
+                                              } else {
+                                                //TODO: Get more products from algolia
+                                              }
+                                            },
                                           ),
                                         ],
                                       ),
@@ -1244,7 +1369,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               MenuButton<String>(
                                                 child: normalChildButton,
-                                                items: keys,
+                                                items: sortkeys,
                                                 itemBuilder: (String value) =>
                                                     Container(
                                                   height: 40,
@@ -1303,6 +1428,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                           GradientButton(
                                             title: "Load More",
+                                            onPressed: () {
+                                              if (widget.searchTerm == "") {
+                                                getMoreProducts();
+                                              } else {
+                                                //TODO: Get more products from algolia
+                                              }
+                                            },
                                           ),
                                         ],
                                       ),
@@ -1341,7 +1473,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                             MenuButton<String>(
                                               child: normalChildButton,
-                                              items: keys,
+                                              items: sortkeys,
                                               itemBuilder: (String value) =>
                                                   Container(
                                                 height: 40,
@@ -1398,6 +1530,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                         ),
                                         GradientButton(
                                           title: "Load More",
+                                          onPressed: () {
+                                            if (widget.searchTerm == "") {
+                                              getMoreProducts();
+                                            } else {
+                                              //TODO: Get more products from algolia
+                                            }
+                                          },
                                         ),
                                       ],
                                     ),
@@ -1457,7 +1596,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         ),
                                                   MenuButton<String>(
                                                     child: normalChildButton,
-                                                    items: keys,
+                                                    items: sortkeys,
                                                     itemBuilder:
                                                         (String value) =>
                                                             Container(
@@ -1521,6 +1660,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               GradientButton(
                                                 title: "Load More",
+                                                onPressed: () {
+                                                  if (widget.searchTerm == "") {
+                                                    getMoreProducts();
+                                                  } else {
+                                                    //TODO: Get more products from algolia
+                                                  }
+                                                },
                                               ),
                                             ],
                                           ),
@@ -1564,7 +1710,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         ),
                                                   MenuButton<String>(
                                                     child: normalChildButton,
-                                                    items: keys,
+                                                    items: sortkeys,
                                                     itemBuilder:
                                                         (String value) =>
                                                             Container(
@@ -1628,6 +1774,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               GradientButton(
                                                 title: "Load More",
+                                                onPressed: () {
+                                                  if (widget.searchTerm == "") {
+                                                    getMoreProducts();
+                                                  } else {
+                                                    //TODO: Get more products from algolia
+                                                  }
+                                                },
                                               ),
                                             ],
                                           ),
@@ -1671,7 +1824,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   ),
                                                   MenuButton<String>(
                                                     child: normalChildButton,
-                                                    items: keys,
+                                                    items: sortkeys,
                                                     itemBuilder:
                                                         (String value) =>
                                                             Container(
@@ -1735,6 +1888,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               GradientButton(
                                                 title: "Load More",
+                                                onPressed: () {
+                                                  if (widget.searchTerm == "") {
+                                                    getMoreProducts();
+                                                  } else {
+                                                    //TODO: Get more products from algolia
+                                                  }
+                                                },
                                               ),
                                             ],
                                           ),
@@ -1766,7 +1926,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                 Colors.black54),
                                                       )
                                                     : Text(
-                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        'Showing 1–9 of "$searchedvalue"',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Metrisch-Medium",
@@ -1777,7 +1937,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       ),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
-                                                  items: keys,
+                                                  items: sortkeys,
                                                   itemBuilder: (String value) =>
                                                       Container(
                                                     height: 40,
@@ -1839,6 +1999,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             GradientButton(
                                               title: "Load More",
+                                              onPressed: () {
+                                                if (widget.searchTerm == "") {
+                                                  getMoreProducts();
+                                                } else {
+                                                  //TODO: Get more products from algolia
+                                                }
+                                              },
                                             ),
                                           ],
                                         ),
@@ -1909,7 +2076,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     // ),
                                                   ),
                                                   onSubmitted: (query) {
-                                                    algo(query);
+                                                    _searchalgolia(query);
                                                   },
                                                 ),
                                               ),
@@ -2773,7 +2940,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                 Colors.black54),
                                                       )
                                                     : Text(
-                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        'Showing 1–9 of "$searchedvalue"',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Metrisch-Medium",
@@ -2784,7 +2951,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       ),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
-                                                  items: keys,
+                                                  items: sortkeys,
                                                   itemBuilder: (String value) =>
                                                       Container(
                                                     height: 40,
@@ -2846,6 +3013,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             GradientButton(
                                               title: "Load More",
+                                              onPressed: () {
+                                                if (widget.searchTerm == "") {
+                                                  getMoreProducts();
+                                                } else {
+                                                  //TODO: Get more products from algolia
+                                                }
+                                              },
                                             ),
                                           ],
                                         ),
@@ -2889,7 +3063,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       ),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
-                                                  items: keys,
+                                                  items: sortkeys,
                                                   itemBuilder: (String value) =>
                                                       Container(
                                                     height: 40,
@@ -2951,6 +3125,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             GradientButton(
                                               title: "Load More",
+                                              onPressed: () {
+                                                if (widget.searchTerm == "") {
+                                                  getMoreProducts();
+                                                } else {
+                                                  //TODO: Get more products from algolia
+                                                }
+                                              },
                                             ),
                                           ],
                                         ),
@@ -2994,7 +3175,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 ),
                                                 MenuButton<String>(
                                                   child: normalChildButton,
-                                                  items: keys,
+                                                  items: sortkeys,
                                                   itemBuilder: (String value) =>
                                                       Container(
                                                     height: 40,
@@ -3056,6 +3237,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             ),
                                             GradientButton(
                                               title: "Load More",
+                                              onPressed: () {
+                                                if (widget.searchTerm == "") {
+                                                  getMoreProducts();
+                                                } else {
+                                                  //TODO: Get more products from algolia
+                                                }
+                                              },
                                             ),
                                           ],
                                         ),
@@ -3097,7 +3285,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     ),
                                               MenuButton<String>(
                                                 child: normalChildButton,
-                                                items: keys,
+                                                items: sortkeys,
                                                 itemBuilder: (String value) =>
                                                     Container(
                                                   height: 40,
@@ -3156,6 +3344,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                           GradientButton(
                                             title: "Load More",
+                                            onPressed: () {
+                                              if (widget.searchTerm == "") {
+                                                getMoreProducts();
+                                              } else {
+                                                //TODO: Get more products from algolia
+                                              }
+                                            },
                                           ),
                                         ],
                                       ),
@@ -3225,7 +3420,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   // ),
                                                 ),
                                                 onSubmitted: (query) {
-                                                  algo(query);
+                                                  _searchalgolia(query);
                                                 },
                                               ),
                                             ),
