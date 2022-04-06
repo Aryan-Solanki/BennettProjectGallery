@@ -19,7 +19,8 @@ import 'ProjectGalleryElements/topprojects.dart';
 
 class ProjectGallery extends StatefulWidget {
   final List<dynamic> categoriesname;
-  ProjectGallery({this.categoriesname});
+  final bool isOnSearchState;
+  ProjectGallery({@required this.categoriesname, this.isOnSearchState = false});
   @override
   _ProjectGalleryState createState() =>
       _ProjectGalleryState(categoriesname: categoriesname);
@@ -310,13 +311,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     //   ),
                                                     // ),
                                                     CategoriesButton(
-                                                      onPressed: (){
+                                                      onPressed: () {
                                                         setState(() {
-                                                          searched=true;
-                                                          searchedvalue=categoriesname[index];
+                                                          searched = true;
+                                                          searchedvalue =
+                                                              categoriesname[
+                                                                  index];
                                                         });
                                                       },
-                                                      categoryName: categoriesname[index],
+                                                      categoryName:
+                                                          categoriesname[index],
                                                       categoryQuantity: 213,
                                                     ),
                                                     Divider(
