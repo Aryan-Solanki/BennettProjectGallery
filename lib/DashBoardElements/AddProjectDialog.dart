@@ -268,8 +268,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
           if (image2selected) {
             uploadImageToFirebase(sampleImage2)
                 .then((value){
-                  imageLink2=value;
-                  listImageLinks.add(value);
+                  setState(() {
+                    imageLink2=value;
+                    listImageLinks.add(value);
+                  });
+
                 });
           }
         });
@@ -286,8 +289,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
           if (image3selected) {
             uploadImageToFirebase(sampleImage3)
                 .then((value){
-                  imageLink3=value;
-                  listImageLinks.add(value);
+                  setState(() {
+                    imageLink3=value;
+                    listImageLinks.add(value);
+                  });
+
                 });
           }
         });
