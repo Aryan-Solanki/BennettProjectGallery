@@ -154,8 +154,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     List<AlgoliaObjectSnapshot> snaplist = await _searchalgolia(query);
     for (var pr in snaplist) {
       var project = pr.data;
-      var timestamp1 = project["datetime"]; // timestamp in seconds
-      Timestamp ts = Timestamp.fromMillisecondsSinceEpoch(timestamp1 * 1000);
+      // var timestamp1 = project["datetime"]; // timestamp in seconds
+      // Timestamp ts = Timestamp.fromMillisecondsSinceEpoch(timestamp1 * 1000);
 
       ProjectList.add(
         new Project(
@@ -171,7 +171,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
           images: project["images"],
           title: project["title"],
           viewCount: project["viewCount"],
-          timestamp: ts,
           Categories: project["ProjectDetails"]["Categories"],
           ProfessorDetails: project["ProfessorDetails"],
         ),

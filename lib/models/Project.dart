@@ -34,6 +34,6 @@ class Project {
       @required this.title,
       @required this.viewCount,
       @required this.yog,
-      @required this.timestamp,
+      this.timestamp,
       @required this.ProfessorDetails});
 }
