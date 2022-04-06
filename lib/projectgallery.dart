@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:algolia/algolia.dart';
 import 'package:bennettprojectgallery/HomePageElements/Footer.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
@@ -17,6 +19,7 @@ import 'ProjectGalleryElements/RightSide.dart';
 import 'ProjectGalleryElements/batchwiseprojects.dart';
 import 'ProjectGalleryElements/categoriesButton.dart';
 import 'ProjectGalleryElements/topprojects.dart';
+import 'package:lottie/lottie.dart';
 
 class ProjectGallery extends StatefulWidget {
   final List<dynamic> categoriesname;
@@ -28,7 +31,6 @@ class ProjectGallery extends StatefulWidget {
 }
 
 class _ProjectGalleryState extends State<ProjectGallery> {
-  //////////////////////////////////////////////////////////////////////////////
 
   List<Project> ProjectList = [];
   List<dynamic> keys = [];
@@ -72,7 +74,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     }
     _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
     setState(() {
-      _loadingProducts = false;
+      Future.delayed(Duration(seconds: 2), () { // <-- Delay here
+        setState(() {
+          _loadingProducts = false; // <-- Code run after delay
+        });
+      });
+
+
     });
   }
 
@@ -123,7 +131,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     setState(() {});
     _gettingMoreProducts = false;
   }
-  //////////////////////////////////////////////////////////////////////////////
 
   AlgoliaQuery algoliaQuery;
   Algolia algolia;
@@ -546,7 +553,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 setState(() {
                                                   searched = true;
                                                   searchedvalue = query;
-                                                  algo(query);
+                                                  
                                                 });
 
                                               },
@@ -825,7 +832,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               setState(() {
                                                 searched = true;
                                                 searchedvalue = query;
-                                                algo(query);
+                                                
                                               });
 
                                             },
@@ -1163,12 +1170,13 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                           _loadingProducts == true
                                               ? Container(
-                                                  child: Text("Loading..."),
-                                                  // REPLACE THIS WITH LOADING
-                                                )
+                                            height: 300,
+                                              width: 300,
+                                              child: Lottie.network("https://assets9.lottiefiles.com/packages/lf20_x62chJ.json",frameRate: FrameRate.max,)
+                                          )
                                               : Container(
                                                   height: ProjectList.length *
-                                                      140.toDouble(),
+                                                      160.toDouble(),
                                                   child: GridView.builder(
                                                     physics:
                                                         NeverScrollableScrollPhysics(),
@@ -1191,7 +1199,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     },
                                                   ),
                                                 ),
-                                          GradientButton(
+                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                             title: "Load More",
                                             onPressed: () {
                                               if (widget.searchTerm == "") {
@@ -1200,7 +1208,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 //TODO: Get more products from algolia
                                               }
                                             },
-                                          ),
+                                          ):Center(),
                                         ],
                                       ),
                                     );
@@ -1299,7 +1307,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          GradientButton(
+                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                             title: "Load More",
                                             onPressed: () {
                                               if (widget.searchTerm == "") {
@@ -1308,7 +1316,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 //TODO: Get more products from algolia
                                               }
                                             },
-                                          ),
+                                          ):Center(),
                                         ],
                                       ),
                                     );
@@ -1408,7 +1416,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          GradientButton(
+                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                             title: "Load More",
                                             onPressed: () {
                                               if (widget.searchTerm == "") {
@@ -1417,7 +1425,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 //TODO: Get more products from algolia
                                               }
                                             },
-                                          ),
+                                          ):Center(),
                                         ],
                                       ),
                                     );
@@ -1510,7 +1518,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             },
                                           ),
                                         ),
-                                        GradientButton(
+                                        _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                           title: "Load More",
                                           onPressed: () {
                                             if (widget.searchTerm == "") {
@@ -1519,7 +1527,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               //TODO: Get more products from algolia
                                             }
                                           },
-                                        ),
+                                        ):Center(),
                                       ],
                                     ),
                                   );
@@ -1640,7 +1648,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              GradientButton(
+                                              _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                                 title: "Load More",
                                                 onPressed: () {
                                                   if (widget.searchTerm == "") {
@@ -1649,7 +1657,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     //TODO: Get more products from algolia
                                                   }
                                                 },
-                                              ),
+                                              ):Center(),
                                             ],
                                           ),
                                         );
@@ -1754,7 +1762,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              GradientButton(
+                                              _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                                 title: "Load More",
                                                 onPressed: () {
                                                   if (widget.searchTerm == "") {
@@ -1763,7 +1771,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     //TODO: Get more products from algolia
                                                   }
                                                 },
-                                              ),
+                                              ):Center(),
                                             ],
                                           ),
                                         );
@@ -1868,7 +1876,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              GradientButton(
+                                              _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                                 title: "Load More",
                                                 onPressed: () {
                                                   if (widget.searchTerm == "") {
@@ -1877,7 +1885,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     //TODO: Get more products from algolia
                                                   }
                                                 },
-                                              ),
+                                              ):Center(),
                                             ],
                                           ),
                                         );
@@ -1979,7 +1987,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            GradientButton(
+                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                               title: "Load More",
                                               onPressed: () {
                                                 if (widget.searchTerm == "") {
@@ -1988,7 +1996,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   //TODO: Get more products from algolia
                                                 }
                                               },
-                                            ),
+                                            ):Center(),
                                           ],
                                         ),
                                       );
@@ -2331,7 +2339,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     setState(() {
                                                       searched = true;
                                                       searchedvalue = query;
-                                                      algo(query);
+                                                      
                                                     });
 
                                                   },
@@ -2639,7 +2647,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   setState(() {
                                                     searched = true;
                                                     searchedvalue = query;
-                                                    algo(query);
+                                                    
                                                   });
 
                                                 },
@@ -3034,7 +3042,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            GradientButton(
+                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                               title: "Load More",
                                               onPressed: () {
                                                 if (widget.searchTerm == "") {
@@ -3043,7 +3051,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   //TODO: Get more products from algolia
                                                 }
                                               },
-                                            ),
+                                            ):Center(),
                                           ],
                                         ),
                                       );
@@ -3146,7 +3154,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            GradientButton(
+                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                               title: "Load More",
                                               onPressed: () {
                                                 if (widget.searchTerm == "") {
@@ -3155,7 +3163,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   //TODO: Get more products from algolia
                                                 }
                                               },
-                                            ),
+                                            ):Center(),
                                           ],
                                         ),
                                       );
@@ -3258,7 +3266,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            GradientButton(
+                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                               title: "Load More",
                                               onPressed: () {
                                                 if (widget.searchTerm == "") {
@@ -3267,7 +3275,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   //TODO: Get more products from algolia
                                                 }
                                               },
-                                            ),
+                                            ):Center(),
                                           ],
                                         ),
                                       );
@@ -3365,7 +3373,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          GradientButton(
+                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
                                             title: "Load More",
                                             onPressed: () {
                                               if (widget.searchTerm == "") {
@@ -3374,7 +3382,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 //TODO: Get more products from algolia
                                               }
                                             },
-                                          ),
+                                          ):Center(),
                                         ],
                                       ),
                                     );
@@ -3709,7 +3717,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   setState(() {
                                                     searched = true;
                                                     searchedvalue = query;
-                                                    algo(query);
+                                                    
                                                   });
 
                                                 },
@@ -4007,7 +4015,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 setState(() {
                                                   searched = true;
                                                   searchedvalue = query;
-                                                  algo(query);
+                                                  
                                                 });
 
                                               },
