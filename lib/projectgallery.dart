@@ -31,7 +31,6 @@ class ProjectGallery extends StatefulWidget {
 }
 
 class _ProjectGalleryState extends State<ProjectGallery> {
-
   List<Project> ProjectList = [];
   List<dynamic> keys = [];
 
@@ -74,13 +73,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     }
     _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
     setState(() {
-      Future.delayed(Duration(seconds: 2), () { // <-- Delay here
+      Future.delayed(Duration(seconds: 2), () {
+        // <-- Delay here
         setState(() {
           _loadingProducts = false; // <-- Code run after delay
         });
       });
-
-
     });
   }
 
@@ -135,10 +133,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   AlgoliaQuery algoliaQuery;
   Algolia algolia;
 
-  refresh(String x){
+  refresh(String x) {
     print(x);
   }
-
 
   final List<dynamic> categoriesname;
   _ProjectGalleryState({this.categoriesname});
@@ -157,8 +154,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     List<AlgoliaObjectSnapshot> snaplist = await _searchalgolia(query);
     for (var pr in snaplist) {
       var project = pr.data;
-      var timestamp1 = project["datetime"]; // timestamp in seconds
-      Timestamp ts = Timestamp.fromMillisecondsSinceEpoch(timestamp1 * 1000);
+      // var timestamp1 = project["datetime"]; // timestamp in seconds
+      // Timestamp ts = Timestamp.fromMillisecondsSinceEpoch(timestamp1 * 1000);
 
       ProjectList.add(
         new Project(
@@ -174,7 +171,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
           images: project["images"],
           title: project["title"],
           viewCount: project["viewCount"],
-          timestamp: ts,
           Categories: project["ProjectDetails"]["Categories"],
           ProfessorDetails: project["ProfessorDetails"],
         ),
@@ -561,7 +557,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          BatchWiseProjects(notifyParent: refresh),
+                                          BatchWiseProjects(
+                                              notifyParent: refresh),
                                           SizedBox(
                                             height: 20,
                                           ),
@@ -596,9 +593,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 setState(() {
                                                   searched = true;
                                                   searchedvalue = query;
-                                                  
                                                 });
-
                                               },
                                               decoration: InputDecoration(
                                                 suffixIcon: InkWell(
@@ -696,10 +691,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 return Column(
                                                   children: [
                                                     CategoriesButton(
-                                                      onPressed: (){
+                                                      onPressed: () {
                                                         setState(() {
-                                                          searched=true;
-                                                          searchedvalue=categoriesname[index];
+                                                          searched = true;
+                                                          searchedvalue =
+                                                              categoriesname[
+                                                                  index];
                                                         });
                                                       },
                                                       categoryName:
@@ -875,9 +872,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               setState(() {
                                                 searched = true;
                                                 searchedvalue = query;
-                                                
                                               });
-
                                             },
                                             decoration: InputDecoration(
                                               suffixIcon: InkWell(
@@ -892,7 +887,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   color: Colors.black,
                                                 ),
                                               ),
-
 
                                               border: InputBorder.none,
                                               hintStyle: TextStyle(
@@ -975,13 +969,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               return Column(
                                                 children: [
                                                   CategoriesButton(
-                                                    onPressed: (){
+                                                    onPressed: () {
                                                       setState(() {
-                                                        searched=true;
-                                                        searchedvalue=categoriesname[index];
+                                                        searched = true;
+                                                        searchedvalue =
+                                                            categoriesname[
+                                                                index];
                                                       });
                                                     },
-                                                    categoryName: categoriesname[index],
+                                                    categoryName:
+                                                        categoriesname[index],
                                                     categoryQuantity: 213,
                                                   ),
                                                   Divider(
@@ -1213,10 +1210,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                           _loadingProducts == true
                                               ? Container(
-                                            height: 300,
-                                              width: 300,
-                                              child: Lottie.asset('assets/loading.json',frameRate: FrameRate.max),
-                                          )
+                                                  height: 300,
+                                                  width: 300,
+                                                  child: Lottie.asset(
+                                                      'assets/loading.json',
+                                                      frameRate: FrameRate.max),
+                                                )
                                               : Container(
                                                   height: ProjectList.length *
                                                       160.toDouble(),
@@ -1242,16 +1241,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     },
                                                   ),
                                                 ),
-                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                            title: "Load More",
-                                            onPressed: () {
-                                              if (widget.searchTerm == "") {
-                                                getMoreProducts();
-                                              } else {
-                                                //TODO: Get more products from algolia
-                                              }
-                                            },
-                                          ):Center(),
+                                          _moreProductsAvailable == true &&
+                                                  _loadingProducts == false
+                                              ? GradientButton(
+                                                  title: "Load More",
+                                                  onPressed: () {
+                                                    if (widget.searchTerm ==
+                                                        "") {
+                                                      getMoreProducts();
+                                                    } else {
+                                                      //TODO: Get more products from algolia
+                                                    }
+                                                  },
+                                                )
+                                              : Center(),
                                         ],
                                       ),
                                     );
@@ -1350,16 +1353,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                            title: "Load More",
-                                            onPressed: () {
-                                              if (widget.searchTerm == "") {
-                                                getMoreProducts();
-                                              } else {
-                                                //TODO: Get more products from algolia
-                                              }
-                                            },
-                                          ):Center(),
+                                          _moreProductsAvailable == true &&
+                                                  _loadingProducts == false
+                                              ? GradientButton(
+                                                  title: "Load More",
+                                                  onPressed: () {
+                                                    if (widget.searchTerm ==
+                                                        "") {
+                                                      getMoreProducts();
+                                                    } else {
+                                                      //TODO: Get more products from algolia
+                                                    }
+                                                  },
+                                                )
+                                              : Center(),
                                         ],
                                       ),
                                     );
@@ -1459,16 +1466,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                            title: "Load More",
-                                            onPressed: () {
-                                              if (widget.searchTerm == "") {
-                                                getMoreProducts();
-                                              } else {
-                                                //TODO: Get more products from algolia
-                                              }
-                                            },
-                                          ):Center(),
+                                          _moreProductsAvailable == true &&
+                                                  _loadingProducts == false
+                                              ? GradientButton(
+                                                  title: "Load More",
+                                                  onPressed: () {
+                                                    if (widget.searchTerm ==
+                                                        "") {
+                                                      getMoreProducts();
+                                                    } else {
+                                                      //TODO: Get more products from algolia
+                                                    }
+                                                  },
+                                                )
+                                              : Center(),
                                         ],
                                       ),
                                     );
@@ -1561,16 +1572,19 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             },
                                           ),
                                         ),
-                                        _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                          title: "Load More",
-                                          onPressed: () {
-                                            if (widget.searchTerm == "") {
-                                              getMoreProducts();
-                                            } else {
-                                              //TODO: Get more products from algolia
-                                            }
-                                          },
-                                        ):Center(),
+                                        _moreProductsAvailable == true &&
+                                                _loadingProducts == false
+                                            ? GradientButton(
+                                                title: "Load More",
+                                                onPressed: () {
+                                                  if (widget.searchTerm == "") {
+                                                    getMoreProducts();
+                                                  } else {
+                                                    //TODO: Get more products from algolia
+                                                  }
+                                                },
+                                              )
+                                            : Center(),
                                       ],
                                     ),
                                   );
@@ -1691,16 +1705,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                                title: "Load More",
-                                                onPressed: () {
-                                                  if (widget.searchTerm == "") {
-                                                    getMoreProducts();
-                                                  } else {
-                                                    //TODO: Get more products from algolia
-                                                  }
-                                                },
-                                              ):Center(),
+                                              _moreProductsAvailable == true &&
+                                                      _loadingProducts == false
+                                                  ? GradientButton(
+                                                      title: "Load More",
+                                                      onPressed: () {
+                                                        if (widget.searchTerm ==
+                                                            "") {
+                                                          getMoreProducts();
+                                                        } else {
+                                                          //TODO: Get more products from algolia
+                                                        }
+                                                      },
+                                                    )
+                                                  : Center(),
                                             ],
                                           ),
                                         );
@@ -1805,16 +1823,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                                title: "Load More",
-                                                onPressed: () {
-                                                  if (widget.searchTerm == "") {
-                                                    getMoreProducts();
-                                                  } else {
-                                                    //TODO: Get more products from algolia
-                                                  }
-                                                },
-                                              ):Center(),
+                                              _moreProductsAvailable == true &&
+                                                      _loadingProducts == false
+                                                  ? GradientButton(
+                                                      title: "Load More",
+                                                      onPressed: () {
+                                                        if (widget.searchTerm ==
+                                                            "") {
+                                                          getMoreProducts();
+                                                        } else {
+                                                          //TODO: Get more products from algolia
+                                                        }
+                                                      },
+                                                    )
+                                                  : Center(),
                                             ],
                                           ),
                                         );
@@ -1919,16 +1941,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                                title: "Load More",
-                                                onPressed: () {
-                                                  if (widget.searchTerm == "") {
-                                                    getMoreProducts();
-                                                  } else {
-                                                    //TODO: Get more products from algolia
-                                                  }
-                                                },
-                                              ):Center(),
+                                              _moreProductsAvailable == true &&
+                                                      _loadingProducts == false
+                                                  ? GradientButton(
+                                                      title: "Load More",
+                                                      onPressed: () {
+                                                        if (widget.searchTerm ==
+                                                            "") {
+                                                          getMoreProducts();
+                                                        } else {
+                                                          //TODO: Get more products from algolia
+                                                        }
+                                                      },
+                                                    )
+                                                  : Center(),
                                             ],
                                           ),
                                         );
@@ -2030,16 +2056,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                              title: "Load More",
-                                              onPressed: () {
-                                                if (widget.searchTerm == "") {
-                                                  getMoreProducts();
-                                                } else {
-                                                  //TODO: Get more products from algolia
-                                                }
-                                              },
-                                            ):Center(),
+                                            _moreProductsAvailable == true &&
+                                                    _loadingProducts == false
+                                                ? GradientButton(
+                                                    title: "Load More",
+                                                    onPressed: () {
+                                                      if (widget.searchTerm ==
+                                                          "") {
+                                                        getMoreProducts();
+                                                      } else {
+                                                        //TODO: Get more products from algolia
+                                                      }
+                                                    },
+                                                  )
+                                                : Center(),
                                           ],
                                         ),
                                       );
@@ -2114,8 +2144,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       searchedvalue = query;
                                                       _searchalgolia(query);
                                                     });
-
-                                                    
                                                   },
                                                 ),
                                               ),
@@ -2187,20 +2215,24 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
-                                                  itemCount: categoriesname.length,
+                                                  itemCount:
+                                                      categoriesname.length,
                                                   itemBuilder:
                                                       (context, index) {
                                                     return Column(
                                                       children: [
                                                         CategoriesButton(
-                                                          onPressed: (){
+                                                          onPressed: () {
                                                             setState(() {
-                                                              searched=true;
-                                                              searchedvalue=categoriesname[index];
+                                                              searched = true;
+                                                              searchedvalue =
+                                                                  categoriesname[
+                                                                      index];
                                                             });
                                                           },
                                                           categoryName:
-                                                              categoriesname[index],
+                                                              categoriesname[
+                                                                  index],
                                                           categoryQuantity: 213,
                                                         ),
                                                         Divider(
@@ -2382,9 +2414,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     setState(() {
                                                       searched = true;
                                                       searchedvalue = query;
-                                                      
                                                     });
-
                                                   },
                                                   style: TextStyle(
                                                       fontFamily:
@@ -2495,20 +2525,24 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
                                                   shrinkWrap: true,
-                                                  itemCount: categoriesname.length,
+                                                  itemCount:
+                                                      categoriesname.length,
                                                   itemBuilder:
                                                       (context, index) {
                                                     return Column(
                                                       children: [
                                                         CategoriesButton(
-                                                          onPressed: (){
+                                                          onPressed: () {
                                                             setState(() {
-                                                              searched=true;
-                                                              searchedvalue=categoriesname[index];
+                                                              searched = true;
+                                                              searchedvalue =
+                                                                  categoriesname[
+                                                                      index];
                                                             });
                                                           },
                                                           categoryName:
-                                                              categoriesname[index],
+                                                              categoriesname[
+                                                                  index],
                                                           categoryQuantity: 213,
                                                         ),
                                                         Divider(
@@ -2690,9 +2724,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   setState(() {
                                                     searched = true;
                                                     searchedvalue = query;
-                                                    
                                                   });
-
                                                 },
                                                 style: TextStyle(
                                                     fontFamily:
@@ -2801,18 +2833,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
-                                                itemCount: categoriesname.length,
+                                                itemCount:
+                                                    categoriesname.length,
                                                 itemBuilder: (context, index) {
                                                   return Column(
                                                     children: [
                                                       CategoriesButton(
-                                                        onPressed: (){
+                                                        onPressed: () {
                                                           setState(() {
-                                                            searched=true;
-                                                            searchedvalue=categoriesname[index];
+                                                            searched = true;
+                                                            searchedvalue =
+                                                                categoriesname[
+                                                                    index];
                                                           });
                                                         },
-                                                        categoryName: categoriesname[index],
+                                                        categoryName:
+                                                            categoriesname[
+                                                                index],
                                                         categoryQuantity: 213,
                                                       ),
                                                       Divider(
@@ -3002,7 +3039,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                searched == false
+                                                widget.searchTerm == ""
                                                     ? Text(
                                                         "Showing 1–9 of 12 results",
                                                         style: TextStyle(
@@ -3014,7 +3051,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                 Colors.black54),
                                                       )
                                                     : Text(
-                                                        'Showing 1–9 of "$searchedvalue"',
+                                                        'Showing 1–9 of "${widget.searchTerm}"',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Metrisch-Medium",
@@ -3085,16 +3122,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                              title: "Load More",
-                                              onPressed: () {
-                                                if (widget.searchTerm == "") {
-                                                  getMoreProducts();
-                                                } else {
-                                                  //TODO: Get more products from algolia
-                                                }
-                                              },
-                                            ):Center(),
+                                            _moreProductsAvailable == true &&
+                                                    _loadingProducts == false
+                                                ? GradientButton(
+                                                    title: "Load More",
+                                                    onPressed: () {
+                                                      if (widget.searchTerm ==
+                                                          "") {
+                                                        getMoreProducts();
+                                                      } else {
+                                                        //TODO: Get more products from algolia
+                                                      }
+                                                    },
+                                                  )
+                                                : Center(),
                                           ],
                                         ),
                                       );
@@ -3114,7 +3155,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                searched == false
+                                                widget.searchTerm == ""
                                                     ? Text(
                                                         "Showing 1–9 of 12 results",
                                                         style: TextStyle(
@@ -3126,7 +3167,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                 Colors.black54),
                                                       )
                                                     : Text(
-                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        'Showing 1–9 of "${widget.searchTerm}"',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Metrisch-Medium",
@@ -3197,16 +3238,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                              title: "Load More",
-                                              onPressed: () {
-                                                if (widget.searchTerm == "") {
-                                                  getMoreProducts();
-                                                } else {
-                                                  //TODO: Get more products from algolia
-                                                }
-                                              },
-                                            ):Center(),
+                                            _moreProductsAvailable == true &&
+                                                    _loadingProducts == false
+                                                ? GradientButton(
+                                                    title: "Load More",
+                                                    onPressed: () {
+                                                      if (widget.searchTerm ==
+                                                          "") {
+                                                        getMoreProducts();
+                                                      } else {
+                                                        //TODO: Get more products from algolia
+                                                      }
+                                                    },
+                                                  )
+                                                : Center(),
                                           ],
                                         ),
                                       );
@@ -3223,7 +3268,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                searched == false
+                                                widget.searchTerm == ""
                                                     ? Text(
                                                         "Showing 1–9 of 12 results",
                                                         style: TextStyle(
@@ -3235,7 +3280,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                 Colors.black54),
                                                       )
                                                     : Text(
-                                                        'Showing 1–9 of "${searchedvalue}"',
+                                                        'Showing 1–9 of "${widget.searchTerm}"',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Metrisch-Medium",
@@ -3309,16 +3354,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                              title: "Load More",
-                                              onPressed: () {
-                                                if (widget.searchTerm == "") {
-                                                  getMoreProducts();
-                                                } else {
-                                                  //TODO: Get more products from algolia
-                                                }
-                                              },
-                                            ):Center(),
+                                            _moreProductsAvailable == true &&
+                                                    _loadingProducts == false
+                                                ? GradientButton(
+                                                    title: "Load More",
+                                                    onPressed: () {
+                                                      if (widget.searchTerm ==
+                                                          "") {
+                                                        getMoreProducts();
+                                                      } else {
+                                                        //TODO: Get more products from algolia
+                                                      }
+                                                    },
+                                                  )
+                                                : Center(),
                                           ],
                                         ),
                                       );
@@ -3336,7 +3385,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              searched == false
+                                              widget.searchTerm == ""
                                                   ? Text(
                                                       "Showing 1–9 of 12 results",
                                                       style: TextStyle(
@@ -3348,7 +3397,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                               Colors.black54),
                                                     )
                                                   : Text(
-                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      'Showing 1–9 of "${widget.searchTerm}"',
                                                       style: TextStyle(
                                                           fontFamily:
                                                               "Metrisch-Medium",
@@ -3416,16 +3465,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          _moreProductsAvailable==true && _loadingProducts==false?GradientButton(
-                                            title: "Load More",
-                                            onPressed: () {
-                                              if (widget.searchTerm == "") {
-                                                getMoreProducts();
-                                              } else {
-                                                //TODO: Get more products from algolia
-                                              }
-                                            },
-                                          ):Center(),
+                                          _moreProductsAvailable == true &&
+                                                  _loadingProducts == false
+                                              ? GradientButton(
+                                                  title: "Load More",
+                                                  onPressed: () {
+                                                    if (widget.searchTerm ==
+                                                        "") {
+                                                      getMoreProducts();
+                                                    } else {
+                                                      //TODO: Get more products from algolia
+                                                    }
+                                                  },
+                                                )
+                                              : Center(),
                                         ],
                                       ),
                                     );
@@ -3499,8 +3552,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     searchedvalue = query;
                                                     _searchalgolia(query);
                                                   });
-
-                                                  
                                                 },
                                               ),
                                             ),
@@ -3571,18 +3622,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
-                                                itemCount: categoriesname.length,
+                                                itemCount:
+                                                    categoriesname.length,
                                                 itemBuilder: (context, index) {
                                                   return Column(
                                                     children: [
                                                       CategoriesButton(
-                                                        onPressed: (){
+                                                        onPressed: () {
                                                           setState(() {
-                                                            searched=true;
-                                                            searchedvalue=categoriesname[index];
+                                                            searched = true;
+                                                            searchedvalue =
+                                                                categoriesname[
+                                                                    index];
                                                           });
                                                         },
-                                                        categoryName: categoriesname[index],
+                                                        categoryName:
+                                                            categoriesname[
+                                                                index],
                                                         categoryQuantity: 213,
                                                       ),
                                                       Divider(
@@ -3760,9 +3816,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   setState(() {
                                                     searched = true;
                                                     searchedvalue = query;
-                                                    
                                                   });
-
                                                 },
                                                 style: TextStyle(
                                                     fontFamily:
@@ -3871,18 +3925,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
                                                 shrinkWrap: true,
-                                                itemCount: categoriesname.length,
+                                                itemCount:
+                                                    categoriesname.length,
                                                 itemBuilder: (context, index) {
                                                   return Column(
                                                     children: [
                                                       CategoriesButton(
-                                                        onPressed: (){
+                                                        onPressed: () {
                                                           setState(() {
-                                                            searched=true;
-                                                            searchedvalue=categoriesname[index];
+                                                            searched = true;
+                                                            searchedvalue =
+                                                                categoriesname[
+                                                                    index];
                                                           });
                                                         },
-                                                        categoryName: categoriesname[index],
+                                                        categoryName:
+                                                            categoriesname[
+                                                                index],
                                                         categoryQuantity: 213,
                                                       ),
                                                       Divider(
@@ -4058,9 +4117,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 setState(() {
                                                   searched = true;
                                                   searchedvalue = query;
-                                                  
                                                 });
-
                                               },
                                               style: TextStyle(
                                                   fontFamily: "Metrisch-Medium",
@@ -4167,13 +4224,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 return Column(
                                                   children: [
                                                     CategoriesButton(
-                                                      onPressed: (){
+                                                      onPressed: () {
                                                         setState(() {
-                                                          searched=true;
-                                                          searchedvalue=categoriesname[index];
+                                                          searched = true;
+                                                          searchedvalue =
+                                                              categoriesname[
+                                                                  index];
                                                         });
                                                       },
-                                                      categoryName: categoriesname[index],
+                                                      categoryName:
+                                                          categoriesname[index],
                                                       categoryQuantity: 213,
                                                     ),
                                                     Divider(
