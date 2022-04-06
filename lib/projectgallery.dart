@@ -250,9 +250,73 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               itemBuilder: (context, index) {
                                                 return Column(
                                                   children: [
+                                                    // Container(
+                                                    //   child: TextButton(
+                                                    //     onHover: (x) {
+                                                    //       if (x) {
+                                                    //         setState(() {
+                                                    //           hover = true;
+                                                    //         });
+                                                    //       } else {
+                                                    //         setState(() {
+                                                    //           hover = false;
+                                                    //         });
+                                                    //       }
+                                                    //     },
+                                                    //     style: TextButton.styleFrom(
+                                                    //       backgroundColor: Colors.transparent,
+                                                    //       primary: Colors.white,
+                                                    //       padding: EdgeInsets.all(0.0),
+                                                    //     ),
+                                                    //     onPressed: () {
+                                                    //       setState(() {
+                                                    //         print(categoriesname[index]);
+                                                    //         searched=true;
+                                                    //         searchedvalue=categoriesname[index];
+                                                    //       });
+                                                    //
+                                                    //     },
+                                                    //     child: Row(
+                                                    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    //       children: [
+                                                    //         Text(
+                                                    //           "widget.categoryName",
+                                                    //           style: TextStyle(
+                                                    //               fontSize: 15,
+                                                    //               color: hover == true ? Colors.green : Colors.black87,
+                                                    //               fontFamily: "Metrisch-Bold"),
+                                                    //         ),
+                                                    //         AnimatedContainer(
+                                                    //           duration: Duration(milliseconds: 300),
+                                                    //           width: 35,
+                                                    //           height: 25,
+                                                    //           decoration: BoxDecoration(
+                                                    //             border: Border.all(
+                                                    //                 color: hover == true ? Color(0xff3224e9) : Colors.white),
+                                                    //             borderRadius: BorderRadius.circular(5),
+                                                    //             color: hover == true ? Colors.white : Color(0xff3224e9),
+                                                    //           ),
+                                                    //           child: Center(
+                                                    //             child: Text(
+                                                    //               213.toString(),
+                                                    //               style: TextStyle(
+                                                    //                   fontSize: 13,
+                                                    //                   color: hover == true ? Color(0xff3224e9) : Colors.white),
+                                                    //             ),
+                                                    //           ),
+                                                    //         )
+                                                    //       ],
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
                                                     CategoriesButton(
-                                                      categoryName:
-                                                          categoriesname[index],
+                                                      onPressed: (){
+                                                        setState(() {
+                                                          searched=true;
+                                                          searchedvalue=categoriesname[index];
+                                                        });
+                                                      },
+                                                      categoryName: categoriesname[index],
                                                       categoryQuantity: 213,
                                                     ),
                                                     Divider(

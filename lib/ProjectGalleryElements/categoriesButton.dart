@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class CategoriesButton extends StatefulWidget {
   final String categoryName;
   final int categoryQuantity;
+  final Function onPressed;
   const CategoriesButton({
     this.categoryName,
     this.categoryQuantity,
+    this.onPressed,
   });
 
   @override
@@ -35,7 +37,7 @@ class _CategoriesButtonState extends State<CategoriesButton> {
           primary: Colors.white,
           padding: EdgeInsets.all(0.0),
         ),
-        onPressed: () {},
+        onPressed: widget.onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
