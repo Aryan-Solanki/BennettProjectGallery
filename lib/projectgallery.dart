@@ -150,13 +150,48 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     return results;
   }
 
+  searchalgolia(String query) async {
+    setState(() {
+      _loadingProducts = false;
+    });
+    List<AlgoliaObjectSnapshot> snaplist = await _searchalgolia(query);
+    for (var pr in snaplist) {
+      var project = pr.data;
+      var timestamp1 = project["datetime"]; // timestamp in seconds
+      Timestamp ts = Timestamp.fromMillisecondsSinceEpoch(timestamp1 * 1000);
+
+      ProjectList.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"],
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          Description: project["ProjectDetails"]["Description"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          viewCount: project["viewCount"],
+          timestamp: ts,
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+    }
+    setState(() {
+      _loadingProducts = false;
+    });
+  }
+
   @override
   void initState() {
     algolia = Application.algolia;
     if (widget.searchTerm == "") {
       _getProducts();
     } else {
-      _searchalgolia(widget.searchTerm);
+      searchalgolia(widget.searchTerm);
     }
     super.initState();
   }
@@ -268,9 +303,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               decoration: InputDecoration(
                                                 suffixIcon: InkWell(
                                                     onTap: () {
-                                                      setState(() {
-                                                        searched = true;
-                                                      });
+                                                      Navigator.pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  ProjectGallery(
+                                                                    categoriesname:
+                                                                        categoriesname,
+                                                                    searchTerm:
+                                                                        searchedvalue,
+                                                                  )));
                                                     },
                                                     child: Icon(
                                                       Icons.search,
@@ -294,14 +336,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 // ),
                                               ),
                                               onSubmitted: (query) {
-                                                setState(() {
-                                                  searched = true;
-                                                  searchedvalue = query;
-                                                  _searchalgolia(query);
-                                                  
-                                                });
-
-                                                
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProjectGallery(
+                                                              categoriesname:
+                                                                  categoriesname,
+                                                              searchTerm: query,
+                                                            )));
                                               },
                                             ),
                                           ),
@@ -1107,7 +1150,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              searched == false
+                                              widget.searchTerm == ""
                                                   ? Text(
                                                       "Showing 1–9 of 12 results",
                                                       style: TextStyle(
@@ -1119,7 +1162,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                               Colors.black54),
                                                     )
                                                   : Text(
-                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      'Showing 1–9 of "${widget.searchTerm}"',
                                                       style: TextStyle(
                                                           fontFamily:
                                                               "Metrisch-Medium",
@@ -1227,7 +1270,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              searched == false
+                                              widget.searchTerm == ""
                                                   ? Text(
                                                       "Showing 1–9 of 12 results",
                                                       style: TextStyle(
@@ -1239,7 +1282,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                               Colors.black54),
                                                     )
                                                   : Text(
-                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      'Showing 1–9 of "${widget.searchTerm}"',
                                                       style: TextStyle(
                                                           fontFamily:
                                                               "Metrisch-Medium",
@@ -1333,7 +1376,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
-                                              searched == false
+                                              widget.searchTerm == ""
                                                   ? Text(
                                                       "Showing 1–9 of 12 results",
                                                       style: TextStyle(
@@ -1345,7 +1388,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                               Colors.black54),
                                                     )
                                                   : Text(
-                                                      'Showing 1–9 of "${searchedvalue}"',
+                                                      'Showing 1–9 of "${widget.searchTerm}"',
                                                       style: TextStyle(
                                                           fontFamily:
                                                               "Metrisch-Medium",
@@ -1442,7 +1485,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            searched == false
+                                            widget.searchTerm == ""
                                                 ? Text(
                                                     "Showing 1–9 of 12 results",
                                                     style: TextStyle(
@@ -1453,7 +1496,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         color: Colors.black54),
                                                   )
                                                 : Text(
-                                                    'Showing 1–9 of "${searchedvalue}"',
+                                                    'Showing 1–9 of "${widget.searchTerm}"',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -1563,7 +1606,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  searched == false
+                                                  widget.searchTerm == ""
                                                       ? Text(
                                                           "Showing 1–9 of 12 results",
                                                           style: TextStyle(
@@ -1575,7 +1618,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                   .black54),
                                                         )
                                                       : Text(
-                                                          'Showing 1–9 of "${searchedvalue}"',
+                                                          'Showing 1–9 of "${widget.searchTerm}"',
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Metrisch-Medium",
@@ -1677,7 +1720,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  searched == false
+                                                  widget.searchTerm == ""
                                                       ? Text(
                                                           "Showing 1–9 of 12 results",
                                                           style: TextStyle(
@@ -1689,7 +1732,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                   .black54),
                                                         )
                                                       : Text(
-                                                          'Showing 1–9 of "${searchedvalue}"',
+                                                          'Showing 1–9 of "${widget.searchTerm}"',
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Metrisch-Medium",
@@ -1788,7 +1831,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.end,
                                                 children: [
-                                                  searched == false
+                                                  widget.searchTerm == ""
                                                       ? Text(
                                                           "Showing 1–9 of 12 results",
                                                           style: TextStyle(
@@ -1800,7 +1843,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                   .black54),
                                                         )
                                                       : Text(
-                                                          'Showing 1–9 of "${searchedvalue}"',
+                                                          'Showing 1–9 of "${widget.searchTerm}"',
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Metrisch-Medium",
@@ -1904,7 +1947,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                searched == false
+                                                widget.searchTerm == ""
                                                     ? Text(
                                                         "Showing 1–9 of 12 results",
                                                         style: TextStyle(
@@ -1916,7 +1959,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                 Colors.black54),
                                                       )
                                                     : Text(
-                                                        'Showing 1–9 of "$searchedvalue"',
+                                                        'Showing 1–9 of "${widget.searchTerm}"',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Metrisch-Medium",
