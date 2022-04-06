@@ -246,14 +246,12 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
       if (file != null) {
         setState(() {
           sampleImage1 = file;
-          uploadImageToFirebase(sampleImage1)
-              .then((value){
-                setState(() {
-                  imageLink1=value;
-                  listImageLinks.add(value);
-                });
-
-              });
+          uploadImageToFirebase(sampleImage1).then((value) {
+            setState(() {
+              imageLink1 = value;
+              listImageLinks.add(value);
+            });
+          });
         });
       }
     });
@@ -266,14 +264,12 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
         setState(() {
           sampleImage2 = file;
           if (image2selected) {
-            uploadImageToFirebase(sampleImage2)
-                .then((value){
-                  setState(() {
-                    imageLink2=value;
-                    listImageLinks.add(value);
-                  });
-
-                });
+            uploadImageToFirebase(sampleImage2).then((value) {
+              setState(() {
+                imageLink2 = value;
+                listImageLinks.add(value);
+              });
+            });
           }
         });
       }
@@ -287,14 +283,12 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
         setState(() {
           sampleImage3 = file;
           if (image3selected) {
-            uploadImageToFirebase(sampleImage3)
-                .then((value){
-                  setState(() {
-                    imageLink3=value;
-                    listImageLinks.add(value);
-                  });
-
-                });
+            uploadImageToFirebase(sampleImage3).then((value) {
+              setState(() {
+                imageLink3 = value;
+                listImageLinks.add(value);
+              });
+            });
           }
         });
       }
@@ -413,19 +407,29 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                 ),
                               ),
                             )
-                          : Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Color(0xfff3f5fe),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image:NetworkImage(
-                                    imageLink1)
+                          : TextButton(
+                              onPressed: () {
+                                getImage1();
+                                print("sssssssssssssssssssssssssssssss");
+                                print(listImageLinks);
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                primary: Colors.white,
+                                padding: EdgeInsets.all(0.0),
+                              ),
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xfff3f5fe),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(imageLink1)),
+                                ),
                               ),
                             ),
-                          ),
                       SizedBox(
                         width: 15,
                       ),
@@ -452,19 +456,27 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                 ),
                               ),
                             )
-                          : Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Color(0xfff3f5fe),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image:NetworkImage(
-                                  imageLink2)
-                          ),
-                        ),
-                      ),
+                          : TextButton(
+                              onPressed: () {
+                                getImage2();
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                primary: Colors.white,
+                                padding: EdgeInsets.all(0.0),
+                              ),
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xfff3f5fe),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(imageLink2)),
+                                ),
+                              ),
+                            ),
                       SizedBox(
                         width: 15,
                       ),
@@ -491,19 +503,27 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                 ),
                               ),
                             )
-                          : Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Color(0xfff3f5fe),
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image:NetworkImage(
-                                  imageLink3)
-                          ),
-                        ),
-                      )
+                          : TextButton(
+                              onPressed: () {
+                                getImage3();
+                              },
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                primary: Colors.white,
+                                padding: EdgeInsets.all(0.0),
+                              ),
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xfff3f5fe),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(imageLink3)),
+                                ),
+                              ),
+                            )
                     ],
                   ),
                   SizedBox(
@@ -958,16 +978,16 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         if (_selectedCategories.isEmpty) {
                           addError(error: "Fill Categories Field");
                         }
-                        if (ProjectLink=="") {
+                        if (ProjectLink == "") {
                           addError(error: "Fill Project Link Field");
                         }
-                        if (DatasetLink=="") {
+                        if (DatasetLink == "") {
                           addError(error: "Fill Dataset Link Field");
                         }
-                        if (ReportLink=="") {
+                        if (ReportLink == "") {
                           addError(error: "Fill Report Link Field");
                         }
-                        if (VideoLink=="") {
+                        if (VideoLink == "") {
                           addError(error: "Fill Video Link Field");
                         }
 
