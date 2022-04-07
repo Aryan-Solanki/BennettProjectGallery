@@ -149,7 +149,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   searchalgolia(String query) async {
     setState(() {
-      _loadingProducts = false;
+      _loadingProducts = true;
     });
     List<AlgoliaObjectSnapshot> snaplist = await _searchalgolia(query);
     for (var pr in snaplist) {
@@ -177,7 +177,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
       );
     }
     setState(() {
-      _loadingProducts = false;
+      Future.delayed(Duration(seconds: 1), () {
+        // <-- Delay here
+        setState(() {
+          _loadingProducts = false; // <-- Code run after delay
+        });
+      });
     });
   }
 
@@ -413,9 +418,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       onPressed: () {
                                                         setState(() {
                                                           searched = true;
-                                                          searchedvalue =
-                                                              categoriesname[
-                                                                  index];
+                                                          Navigator
+                                                              .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                          ProjectGallery(
+                                                                            categoriesname:
+                                                                                categoriesname,
+                                                                            searchTerm:
+                                                                                categoriesname[index],
+                                                                          )));
                                                         });
                                                       },
                                                       categoryName:
