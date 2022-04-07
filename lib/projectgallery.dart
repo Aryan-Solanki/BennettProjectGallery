@@ -73,7 +73,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     }
     _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
     setState(() {
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 1), () {
         // <-- Delay here
         setState(() {
           _loadingProducts = false; // <-- Code run after delay
