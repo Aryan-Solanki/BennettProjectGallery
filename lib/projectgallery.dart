@@ -135,6 +135,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   refresh(String x) {
     print(x);
+    // var newString = x.substring(x.length - 5).trim();
+    // Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => ProjectGallery(
+    //               categoriesname: categoriesname,
+    //               searchTerm: newString,
+    //             )));
   }
 
   final List<dynamic> categoriesname;
@@ -571,7 +579,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 20,
                                           ),
                                           BatchWiseProjects(
-                                              notifyParent: refresh),
+                                              notifyParent: refresh,
+                                              categoriesname: categoriesname),
                                           SizedBox(
                                             height: 20,
                                           ),
