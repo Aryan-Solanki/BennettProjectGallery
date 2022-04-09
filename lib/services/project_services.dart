@@ -12,7 +12,11 @@ class ProjectServices {
       FirebaseFirestore.instance.collection('facultyDatabase');
 
   CollectionReference studentCol =
-  FirebaseFirestore.instance.collection('studentDatabase');
+      FirebaseFirestore.instance.collection('studentDatabase');
+
+  Future<DocumentReference> getProjectbyId(String id) async {
+    return await FirebaseFirestore.instance.collection('project').doc(id);
+  }
 }
 
 //

@@ -73,7 +73,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     }
     _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
     setState(() {
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 1), () {
         // <-- Delay here
         setState(() {
           _loadingProducts = false; // <-- Code run after delay
@@ -135,6 +135,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   refresh(String x) {
     print(x);
+    // var newString = x.substring(x.length - 5).trim();
+    // Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => ProjectGallery(
+    //               categoriesname: categoriesname,
+    //               searchTerm: newString,
+    //             )));
   }
 
   final List<dynamic> categoriesname;
@@ -149,7 +157,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   searchalgolia(String query) async {
     setState(() {
-      _loadingProducts = false;
+      _loadingProducts = true;
     });
     List<AlgoliaObjectSnapshot> snaplist = await _searchalgolia(query);
     for (var pr in snaplist) {
@@ -177,7 +185,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
       );
     }
     setState(() {
-      _loadingProducts = false;
+      Future.delayed(Duration(seconds: 1), () {
+        // <-- Delay here
+        setState(() {
+          _loadingProducts = false; // <-- Code run after delay
+        });
+      });
     });
   }
 
@@ -413,9 +426,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       onPressed: () {
                                                         setState(() {
                                                           searched = true;
-                                                          searchedvalue =
-                                                              categoriesname[
-                                                                  index];
+                                                          Navigator
+                                                              .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                          ProjectGallery(
+                                                                            categoriesname:
+                                                                                categoriesname,
+                                                                            searchTerm:
+                                                                                categoriesname[index],
+                                                                          )));
                                                         });
                                                       },
                                                       categoryName:
@@ -558,7 +579,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 20,
                                           ),
                                           BatchWiseProjects(
-                                              notifyParent: refresh),
+                                              notifyParent: refresh,
+                                              categoriesname: categoriesname),
                                           SizedBox(
                                             height: 20,
                                           ),

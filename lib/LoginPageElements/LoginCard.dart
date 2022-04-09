@@ -4,10 +4,12 @@ import 'package:bennettprojectgallery/DashBoard.dart';
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/facultylogin.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
+import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:bennettprojectgallery/services/faculty_service.dart';
 import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:bennettprojectgallery/signup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -247,8 +249,10 @@ class _LoginCardState extends State<LoginCard> {
                                   bool emailVerified = true;
                                   if (emailVerified) {
                                     UserServices _services = new UserServices();
+
                                     var doc =
                                         await _services.getUserById(result);
+
                                     String batch = doc["batch"];
                                     String course = doc["course"];
                                     String email1 = doc["email"];
@@ -257,9 +261,55 @@ class _LoginCardState extends State<LoginCard> {
                                     String school = doc["school"];
                                     String yog = doc["yog"].toString();
                                     List<dynamic> projectList = doc["projects"];
-                                    print(batch);
-                                    print(course);
-                                    print(email1);
+
+                                    List<Project> projectListFinal = [];
+
+                                    ProjectServices _services1 =
+                                        new ProjectServices();
+
+                                    for (var projectID in projectList) {
+                                      var project = await FirebaseFirestore
+                                          .instance
+                                          .collection("project")
+                                          .doc(projectID)
+                                          .get();
+                                      bool x = project.exists;
+                                      if (!x) {
+                                        projectList.remove(projectID);
+                                        continue;
+                                      }
+
+                                      _services.updateUserData(
+                                          result, {"projects": projectList});
+
+                                      projectListFinal.add(
+                                        new Project(
+                                          yog: project["StudentIdList"][0]
+                                              ["yog"],
+                                          like_count: project["LikeCount"],
+                                          DatasetLink: project["ProjectDetails"]
+                                              ["DatasetLink"],
+                                          Description: project["ProjectDetails"]
+                                              ["Description"],
+                                          ProjectLink: project["ProjectDetails"]
+                                              ["ProjectLink"],
+                                          ReportLink: project["ProjectDetails"]
+                                              ["ReportLink"],
+                                          VideoLink: project["ProjectDetails"]
+                                              ["VideoLink"],
+                                          Reviews: project["Reviews"],
+                                          StudentList: project["StudentIdList"],
+                                          images: project["images"],
+                                          title: project["title"],
+                                          timestamp: project["datetime"],
+                                          viewCount: project["viewCount"],
+                                          Categories: project["ProjectDetails"]
+                                              ["Categories"],
+                                          ProfessorDetails:
+                                              project["ProfessorDetails"],
+                                        ),
+                                      );
+                                    }
 
                                     Fluttertoast.showToast(
                                         msg: "Login Successful",
@@ -282,7 +332,8 @@ class _LoginCardState extends State<LoginCard> {
                                                 name: name,
                                                 school: school,
                                                 yog: yog,
-                                                projectList: projectList)));
+                                                projectList:
+                                                    projectListFinal)));
                                   } else {
                                     FirebaseAuth.instance.signOut();
                                     print("Email not yet verified");
@@ -312,18 +363,16 @@ class _LoginCardState extends State<LoginCard> {
                                   });
                                 }
                                 print('Failed with error code: ${e.code}');
-                                print(e.message);
-                                // TODO: Raise Error
+                                addError(error: e.message);
                               } catch (e) {
                                 print("Something Went Wrong");
-                                //TODO: Raise Error
+                                addError(error: "Something Went Wrong");
                               }
                             } else {
                               setState(() {
                                 addError(error: "Student Id Not Found");
                               });
                               print("Cannot find id in student database");
-                              //TODO: Raise Error
                             }
                           } catch (e) {
                             setState(() {

@@ -1,6 +1,9 @@
 import 'package:bennettprojectgallery/DashBoardElements/RightBoard.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
+import 'package:bennettprojectgallery/models/Project.dart';
+import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -16,7 +19,7 @@ class DashBoard extends StatefulWidget {
   final String name;
   final String school;
   final String yog;
-  final List<dynamic> projectList;
+  final List<Project> projectList;
 
   DashBoard(
       {this.id,
@@ -53,7 +56,7 @@ class _DashBoardState extends State<DashBoard> {
   final String name;
   final String school;
   final String yog;
-  final List<dynamic> projectList;
+  final List<Project> projectList;
   _DashBoardState(
       {this.id,
       this.batch,
@@ -66,8 +69,10 @@ class _DashBoardState extends State<DashBoard> {
       this.projectList});
 
   List<dynamic> projectListupdated = [];
+  List<Project> finalProjectList = [];
 
   UserServices _services = UserServices();
+  ProjectServices _services1 = ProjectServices();
 
   getUserProjects() async {
     var user = await _services.getUserById(id);
@@ -848,7 +853,9 @@ class _DashBoardState extends State<DashBoard> {
                                                       .size
                                                       .width >
                                                   800
-                                              ? ProjectCard()
+                                              ? ProjectCard(
+                                                  project: projectList[index],
+                                                )
                                               : NoHoverProjectCard());
                                     },
                                   ),
