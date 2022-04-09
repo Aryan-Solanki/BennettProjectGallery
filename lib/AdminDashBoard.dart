@@ -1,8 +1,10 @@
 import 'package:bennettprojectgallery/DashBoardElements/RightBoard.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'HomePageElements/Header.dart';
 import 'ProjectGalleryElements/NoHoverProjectCard.dart';
@@ -92,211 +94,205 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
           Container(
             width: 1050,
             height: MediaQuery.of(context).size.height - 60,
-            child: MediaQuery.of(context).size.width > 645
-                ? Stack(
-              clipBehavior: Clip.none,
-              children: [
-                SingleChildScrollView(
-                  child: Positioned(
-                    left: 0,
-                    top: 0,
-                    child: Padding(
-                      padding:
-                      EdgeInsets.only(top: 20, right: 20, left: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Container(
-                            height: 5*500.0,
-                            child: ListView.builder
-                              (
-                                itemCount: 5,
-                                itemBuilder: (BuildContext ctxt, int index) {
-                                  return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("2020 Batch Projects",
-                                          style: TextStyle(
-                                              fontFamily: "Metrisch-Bold",
-                                              fontSize: 25)),
-                                      Align(
-                                        alignment: Alignment.centerRight,
-                                        child: InkWell(
-                                          onTap: (){
-
-                                          },
-                                          child: Text("Download CSV",
-                                              style: TextStyle(
-                                                  color: Colors.blue,
-                                                  fontFamily: "Metrisch-Bold",
-                                                  fontSize: 12)),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: DataTable(
-                                          showBottomBorder: true,
-                                          dataRowHeight: 60,
-                                          headingRowColor: MaterialStateProperty.all(Colors.grey[200]),
-                                          columns: const <DataColumn>[
-                                            DataColumn(
-                                              label: Text(
-                                                'Name',
-                                                style: TextStyle(fontStyle: FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Age',
-                                                style: TextStyle(fontStyle: FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Role',
-                                                style: TextStyle(fontStyle: FontStyle.italic),
-                                              ),
-                                            ),
-                                          ],
-                                          rows: const <DataRow>[
-                                            DataRow(
-                                              cells: <DataCell>[
-                                                DataCell(Text('Sarah\n\nWilliam')),
-                                                DataCell(Text('19')),
-                                                DataCell(Text('Student')),
-                                              ],
-                                            ),
-                                            DataRow(
-                                              cells: <DataCell>[
-                                                DataCell(Text('Janine')),
-                                                DataCell(Text('43')),
-                                                DataCell(Text('Professor')),
-                                              ],
-                                            ),
-                                            DataRow(
-                                              cells: <DataCell>[
-                                                DataCell(Text('William')),
-                                                DataCell(Text('27')),
-                                                DataCell(Text('Associate Professor')),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 25,
-                                      ),
-                                    ],
-                                  );
-                                }
-                            ),
-                          )
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-                : SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding:
-                    EdgeInsets.only(top: 20, right: 20, left: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            child: SingleChildScrollView(
+              child: ResponsiveBuilder(
+                breakpoints: ScreenBreakpoints(tablet: 971, desktop: 971, watch: 300),
+                builder: (context, sizingInformation) {
+                  // Check the sizing information here and return your UI
+                  if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+                    return Row(
                       children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text("2020 Batch Projects",
-                            style: TextStyle(
-                                fontFamily: "Metrisch-Bold",
-                                fontSize: 25)),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: InkWell(
-                            onTap: (){
+                        LeftSide(),
+                        SizedBox(width: 20,),
+                        Padding(
+                          padding:
+                          EdgeInsets.only(top: 20, right: 20, left: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text("2020 Batch Projects",
+                                  style: TextStyle(
+                                      fontFamily: "Metrisch-Bold",
+                                      fontSize: 25)),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                  onTap: (){
 
-                            },
-                            child: Text("Download CSV",
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontFamily: "Metrisch-Bold",
-                                    fontSize: 12)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: DataTable(
-                            showBottomBorder: true,
-                            dataRowHeight: 60,
-                            headingRowColor: MaterialStateProperty.all(Colors.grey[200]),
-                            columns: const <DataColumn>[
-                              DataColumn(
-                                label: Text(
-                                  'Name',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                  },
+                                  child: Text("Download CSV",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontFamily: "Metrisch-Bold",
+                                          fontSize: 12)),
                                 ),
                               ),
-                              DataColumn(
-                                label: Text(
-                                  'Age',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: DataTable(
+                                  showBottomBorder: true,
+                                  dataRowHeight: 60,
+                                  headingRowColor: MaterialStateProperty.all(Colors.grey[200]),
+                                  columns: const <DataColumn>[
+                                    DataColumn(
+                                      label: Text(
+                                        'Name',
+                                        style: TextStyle(fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                    DataColumn(
+                                      label: Text(
+                                        'Age',
+                                        style: TextStyle(fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                    DataColumn(
+                                      label: Text(
+                                        'Role',
+                                        style: TextStyle(fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                  ],
+                                  rows: const <DataRow>[
+                                    DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text('Sarah\n\nWilliam')),
+                                        DataCell(Text('19')),
+                                        DataCell(Text('Student')),
+                                      ],
+                                    ),
+                                    DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text('Janine')),
+                                        DataCell(Text('43')),
+                                        DataCell(Text('Professor')),
+                                      ],
+                                    ),
+                                    DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text('William')),
+                                        DataCell(Text('27')),
+                                        DataCell(Text('Associate Professor')),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                              DataColumn(
-                                label: Text(
-                                  'Role',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                ),
+
+                              SizedBox(
+                                height: 15,
                               ),
                             ],
-                            rows: const <DataRow>[
-                              DataRow(
-                                cells: <DataCell>[
-                                  DataCell(Text('Sarah\n\nWilliam')),
-                                  DataCell(Text('19')),
-                                  DataCell(Text('Student')),
-                                ],
-                              ),
-                              DataRow(
-                                cells: <DataCell>[
-                                  DataCell(Text('Janine')),
-                                  DataCell(Text('43')),
-                                  DataCell(Text('Professor')),
-                                ],
-                              ),
-                              DataRow(
-                                cells: <DataCell>[
-                                  DataCell(Text('William')),
-                                  DataCell(Text('27')),
-                                  DataCell(Text('Associate Professor')),
-                                ],
-                              ),
-                            ],
                           ),
-                        ),
-
-                        SizedBox(
-                          height: 15,
                         ),
                       ],
-                    ),
-                  ),
-                ],
-              ),
+                    );
+                  }
+
+                  return Column(
+                    children: [
+                      LeftSide(),
+                      SizedBox(width: 20,),
+                      Padding(
+                        padding:
+                        EdgeInsets.only(top: 20, right: 20, left: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text("2020 Batch Projects",
+                                style: TextStyle(
+                                    fontFamily: "Metrisch-Bold",
+                                    fontSize: 25)),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: InkWell(
+                                onTap: (){
+
+                                },
+                                child: Text("Download CSV",
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontFamily: "Metrisch-Bold",
+                                        fontSize: 12)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: DataTable(
+                                showBottomBorder: true,
+                                dataRowHeight: 60,
+                                headingRowColor: MaterialStateProperty.all(Colors.grey[200]),
+                                columns: const <DataColumn>[
+                                  DataColumn(
+                                    label: Text(
+                                      'Name',
+                                      style: TextStyle(fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Age',
+                                      style: TextStyle(fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Role',
+                                      style: TextStyle(fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
+                                rows: const <DataRow>[
+                                  DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(Text('Sarah\n\nWilliam')),
+                                      DataCell(Text('19')),
+                                      DataCell(Text('Student')),
+                                    ],
+                                  ),
+                                  DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(Text('Janine')),
+                                      DataCell(Text('43')),
+                                      DataCell(Text('Professor')),
+                                    ],
+                                  ),
+                                  DataRow(
+                                    cells: <DataCell>[
+                                      DataCell(Text('William')),
+                                      DataCell(Text('27')),
+                                      DataCell(Text('Associate Professor')),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              )
             ),
           )
         ],
