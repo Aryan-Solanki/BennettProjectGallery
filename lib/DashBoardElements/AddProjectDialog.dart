@@ -931,12 +931,15 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
                         CollectionReference project =
                             FirebaseFirestore.instance.collection('project');
+                        print("working 1");
 
                         var var1 = studnameController2.text == ""
                             ? studnameController2.text
                             : studnameController2.text
                                 .split("(")[1]
                                 .split(")")[0];
+
+                        print("working 2");
 
                         List stud = [
                           id,
@@ -1052,6 +1055,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           UserServices userServices = UserServices();
 
                           while (true) {
+                            print("working 3");
                             if (listImageLinks.length != 0) {
                               String uploadID =
                                   dtnow.millisecondsSinceEpoch.toString() +
@@ -1061,11 +1065,27 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
                               UserServices _service = UserServices();
 
+                              var prof =
+                                  await _service.getProfessorById(profID);
+                              Map profProjects = prof["projects"];
+                              try {
+                                profProjects[studentDicList[0]["yog"]]
+                                    .add(uploadID);
+                              } catch (e) {
+                                profProjects[studentDicList[0]["yog"]] = [];
+                                profProjects[studentDicList[0]["yog"]]
+                                    .add(uploadID);
+                              }
+                              userServices.updateProfData(profID, {
+                                "projects": profProjects,
+                              });
+
                               for (int i = 0; i < studentDicList.length; i++) {
                                 var studentId = studentDicList[i]["id"];
                                 var user =
                                     await _service.getUserById(studentId);
                                 List<dynamic> oldProjects = user["projects"];
+
                                 oldProjects.add(uploadID);
                                 userServices.updateUserData(studentId, {
                                   "projects": oldProjects,

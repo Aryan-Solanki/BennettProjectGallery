@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserServices {
   String collectionStudent = 'studentDatabase';
+  String collectionFaculty = 'facultyDatabase';
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   //create new user
@@ -18,8 +19,17 @@ class UserServices {
     await _firestore.collection(collectionStudent).doc(id).update(values);
   }
 
+  Future<void> updateProfData(String id, Map<String, dynamic> values) async {
+    await _firestore.collection(collectionFaculty).doc(id).update(values);
+  }
+
   Future<DocumentSnapshot> getUserById(String id) async {
     var result = await _firestore.collection(collectionStudent).doc(id).get();
+    return result;
+  }
+
+  Future<DocumentSnapshot> getProfessorById(String id) async {
+    var result = await _firestore.collection(collectionFaculty).doc(id).get();
     return result;
   }
 
