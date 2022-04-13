@@ -1,7 +1,5 @@
 import 'package:bennettprojectgallery/AdminDashBoard.dart';
 import 'package:bennettprojectgallery/DashBoard.dart';
-import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
-import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
 import 'package:bennettprojectgallery/projectgallery.dart';
@@ -71,7 +69,7 @@ class _HeaderState extends State<Header> {
 
   @override
   void initState() {
-    islogin = FirebaseAuth.instance.currentUser != null;
+    islogin = auth.currentUser != null;
     getinfo();
     getAllCategories();
     super.initState();
