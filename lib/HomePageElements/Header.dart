@@ -475,11 +475,7 @@ class _HeaderState extends State<Header> {
                           Container(
                               padding: EdgeInsets.only(bottom: 5),
                               child: Text(
-                                userType == "student"
-                                    ? "Student Dashboard"
-                                    : userType == "faculty"
-                                        ? "Faculty Dashboard"
-                                        : "Dashboard",
+                                "Dashboard",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Metrisch-Bold"),
