@@ -19,10 +19,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Header extends StatefulWidget {
   final String current;
-  final List<Project> projectList;
   const Header({
     this.current,
-    this.projectList,
   });
 
   @override
@@ -132,7 +130,9 @@ class _HeaderState extends State<Header> {
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => MyHomePage()));
+                            builder: (context) => MyHomePage(
+                                  isReoaded: false,
+                                )));
                       },
                       onHover: (x) {
                         if (x) {

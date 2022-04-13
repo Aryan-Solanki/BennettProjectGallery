@@ -46,12 +46,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Bennett Project Archive",
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: MyHomePage(isReoaded: true),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  final bool isReoaded;
+  MyHomePage({this.isReoaded});
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -75,9 +77,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    if (widget.isReoaded) {
+      FirebaseAuth.instance.signOut();
+      UserSimplePreferences.setUserType("");
+    }
+
     FirebaseAuth.instance.authStateChanges().listen((User user) {
       if (user == null) {
+        print("User is not logged in");
         UserSimplePreferences.setUserType("");
+        setState(() {
+          loading = false;
+        });
       } else {
         print('User is signed in!');
         setState(() {
@@ -1496,7 +1507,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   width: 40,
                                                 ),
                                                 ZoomInImage(
-                                                    Name: "Aryan Solanki",
+                                                    Name: "Akshat Rastogi",
                                                     Title: "General Manager",
                                                     ImageLink:
                                                         "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
