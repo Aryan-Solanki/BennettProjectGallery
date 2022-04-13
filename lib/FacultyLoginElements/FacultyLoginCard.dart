@@ -6,6 +6,7 @@ import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/services/faculty_service.dart';
+import 'package:bennettprojectgallery/services/user_simple_preferences.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -201,7 +202,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                               await auth
                                   .signInWithEmailAndPassword(
                                       email: email, password: password)
-                                  .then((_) {
+                                  .then((_) async {
                                 bool emailVerified = true;
                                 if (emailVerified) {
                                   Navigator.pushReplacement(
@@ -209,6 +210,9 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               AdminDashBoard()));
+
+                                  await UserSimplePreferences.setUserType("faculty");
+
                                   Fluttertoast.showToast(
                                       msg: "Login Successful",
                                       toastLength: Toast.LENGTH_LONG,

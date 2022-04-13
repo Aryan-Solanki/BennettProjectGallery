@@ -8,6 +8,7 @@ import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:bennettprojectgallery/services/faculty_service.dart';
 import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
+import 'package:bennettprojectgallery/services/user_simple_preferences.dart';
 import 'package:bennettprojectgallery/signup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -311,6 +312,9 @@ class _LoginCardState extends State<LoginCard> {
                                       );
                                     }
 
+                                    projectListFinal.sort((a, b) =>
+                                        b.timestamp.compareTo(a.timestamp));
+
                                     Fluttertoast.showToast(
                                         msg: "Login Successful",
                                         toastLength: Toast.LENGTH_LONG,
@@ -319,6 +323,9 @@ class _LoginCardState extends State<LoginCard> {
                                         backgroundColor: Colors.red,
                                         textColor: Colors.white,
                                         fontSize: 16.0);
+
+                                    await UserSimplePreferences.setUserType(
+                                        "student");
 
                                     Navigator.pushReplacement(
                                         context,
@@ -365,7 +372,7 @@ class _LoginCardState extends State<LoginCard> {
                                 print('Failed with error code: ${e.code}');
                                 addError(error: e.message);
                               } catch (e) {
-                                print("Something Went Wrong");
+                                print("Something Went Wrong $e");
                                 addError(error: "Something Went Wrong");
                               }
                             } else {

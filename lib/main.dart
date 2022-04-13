@@ -4,7 +4,9 @@ import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/HomePageElements/NoAnimationZoomInImage.dart';
 import 'package:bennettprojectgallery/featuredprojects.dart';
+import 'package:bennettprojectgallery/services/user_simple_preferences.dart';
 import 'package:countup/countup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ import 'HomePageElements/Footer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserSimplePreferences.init();
   await Firebase.initializeApp(
     options: FirebaseOptions(
         apiKey: "AIzaSyAEIYggOFQByKpPDY6b-lhqo-Z7YRiJpQ0",
