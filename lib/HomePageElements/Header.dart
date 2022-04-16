@@ -378,48 +378,51 @@ class _HeaderState extends State<Header> {
                         List<Project> projectListFinal = [];
                         UserServices _services = new UserServices();
 
-                        for (var projectID in projectList) {
-                          var project = await FirebaseFirestore.instance
-                              .collection("project")
-                              .doc(projectID)
-                              .get();
-                          bool x = project.exists;
-                          if (!x) {
-                            projectList.remove(projectID);
-                            continue;
+                        if (userType == "student") {
+                          for (var projectID in projectList) {
+                            var project = await FirebaseFirestore.instance
+                                .collection("project")
+                                .doc(projectID)
+                                .get();
+                            bool x = project.exists;
+                            if (!x) {
+                              projectList.remove(projectID);
+                              continue;
+                            }
+
+                            _services.updateUserData(
+                                result, {"projects": projectList});
+
+                            projectListFinal.add(
+                              new Project(
+                                yog: project["StudentIdList"][0]["yog"],
+                                like_count: project["LikeCount"],
+                                DatasetLink: project["ProjectDetails"]
+                                    ["DatasetLink"],
+                                Description: project["ProjectDetails"]
+                                    ["Description"],
+                                ProjectLink: project["ProjectDetails"]
+                                    ["ProjectLink"],
+                                ReportLink: project["ProjectDetails"]
+                                    ["ReportLink"],
+                                VideoLink: project["ProjectDetails"]
+                                    ["VideoLink"],
+                                Reviews: project["Reviews"],
+                                StudentList: project["StudentIdList"],
+                                images: project["images"],
+                                title: project["title"],
+                                timestamp: project["datetime"],
+                                viewCount: project["viewCount"],
+                                Categories: project["ProjectDetails"]
+                                    ["Categories"],
+                                ProfessorDetails: project["ProfessorDetails"],
+                              ),
+                            );
                           }
 
-                          _services.updateUserData(
-                              result, {"projects": projectList});
-
-                          projectListFinal.add(
-                            new Project(
-                              yog: project["StudentIdList"][0]["yog"],
-                              like_count: project["LikeCount"],
-                              DatasetLink: project["ProjectDetails"]
-                                  ["DatasetLink"],
-                              Description: project["ProjectDetails"]
-                                  ["Description"],
-                              ProjectLink: project["ProjectDetails"]
-                                  ["ProjectLink"],
-                              ReportLink: project["ProjectDetails"]
-                                  ["ReportLink"],
-                              VideoLink: project["ProjectDetails"]["VideoLink"],
-                              Reviews: project["Reviews"],
-                              StudentList: project["StudentIdList"],
-                              images: project["images"],
-                              title: project["title"],
-                              timestamp: project["datetime"],
-                              viewCount: project["viewCount"],
-                              Categories: project["ProjectDetails"]
-                                  ["Categories"],
-                              ProfessorDetails: project["ProfessorDetails"],
-                            ),
-                          );
+                          projectListFinal.sort(
+                              (a, b) => b.timestamp.compareTo(a.timestamp));
                         }
-
-                        projectListFinal
-                            .sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
                         !islogin
                             ? Navigator.of(context).pushReplacement(
@@ -439,19 +442,10 @@ class _HeaderState extends State<Header> {
                                               yog: yog,
                                               projectList: projectListFinal,
                                             )))
-                                : Navigator.of(context)
-                                    .pushReplacement(MaterialPageRoute(
-                                        builder: (context) => AdminDashBoard(
-                                              id: result,
-                                              batch: batch,
-                                              course: course,
-                                              email: email1,
-                                              image: image,
-                                              name: name,
-                                              school: school,
-                                              yog: yog,
-                                              projectList: projectList,
-                                            )));
+                                : Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AdminDashBoard()));
                       },
                       onHover: (x) {
                         if (x) {
@@ -871,16 +865,7 @@ class _HeaderState extends State<Header> {
                                         : Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AdminDashBoard(
-                                                      id: result,
-                                                      batch: batch,
-                                                      course: course,
-                                                      email: email1,
-                                                      image: image,
-                                                      name: name,
-                                                      school: school,
-                                                      yog: yog,
-                                                    )));
+                                                    AdminDashBoard()));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -1298,16 +1283,7 @@ class _HeaderState extends State<Header> {
                                         : Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AdminDashBoard(
-                                                      id: result,
-                                                      batch: batch,
-                                                      course: course,
-                                                      email: email1,
-                                                      image: image,
-                                                      name: name,
-                                                      school: school,
-                                                      yog: yog,
-                                                    )));
+                                                    AdminDashBoard()));
                                   },
                                   onHover: (x) {
                                     if (x) {
