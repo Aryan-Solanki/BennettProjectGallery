@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../errors.dart';
-import '../form_error.dart';
-import '../login.dart';
+import 'package:bennettprojectgallery/errors.dart';
+import 'package:bennettprojectgallery/form_error.dart';
+import 'package:bennettprojectgallery/login.dart';
 
 class ForgotPasswordCard extends StatefulWidget {
   @override
@@ -25,6 +25,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
       errors.remove(error);
     });
   }
+
   final myController = TextEditingController();
   bool Hoveralreadyhaveaccnt = false;
   String _email;
@@ -32,16 +33,14 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
   @override
   Widget build(BuildContext context) {
     Future resetPassword() async {
-      try{
-        String result = _email
-            .substring(0, _email.indexOf('@'))
-            .toUpperCase();
+      try {
+        String result = _email.substring(0, _email.indexOf('@')).toUpperCase();
 
-        try{
-          await FirebaseAuth.instance.sendPasswordResetEmail(email: _email.trim());
+        try {
+          await FirebaseAuth.instance
+              .sendPasswordResetEmail(email: _email.trim());
           print("Password Reset Email Sent");
-          Navigator.of(context)
-              .pop();
+          Navigator.of(context).pop();
           Fluttertoast.showToast(
               msg: "Password Reset Mail Sent Successful",
               toastLength: Toast.LENGTH_LONG,
@@ -50,13 +49,12 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
               backgroundColor: Colors.red,
               textColor: Colors.white,
               fontSize: 16.0);
-        }
-        on FirebaseAuthException catch (e) {
+        } on FirebaseAuthException catch (e) {
           if (e.code == 'user-not-found') {
             setState(() {
               addError(error: kUserNotFoundError);
             });
-          } else{
+          } else {
             setState(() {
               addError(error: kFirebaseNetworkError);
             });
@@ -64,17 +62,13 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
           print('Failed with error code: ${e.code}');
           print(e.message);
           // TODO: Raise Error
-        }
-        catch(e){
+        } catch (e) {
           addError(error: "Enter Valid Email");
         }
-      } catch(e){
+      } catch (e) {
         addError(error: "Enter Valid Email");
       }
-
-
     }
-
 
     return Card(
       elevation: 8,
@@ -152,7 +146,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
                   title: "Send Verification",
                   buttonwidth: 300,
                   onPressed: () {
-                    errors=[];
+                    errors = [];
                     resetPassword();
                   },
                 )),

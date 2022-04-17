@@ -1,13 +1,13 @@
 import 'package:bennettprojectgallery/FeaturedProjectsElements/NonHoverFeaturedProjects.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'FeaturedProjectsElements/FeaturedProductCard.dart';
+import 'package:bennettprojectgallery/FeaturedProjectsElements/FeaturedProductCard.dart';
 
 class FeaturedProjects extends StatefulWidget {
-
   @override
   _FeaturedProjectsState createState() => _FeaturedProjectsState();
 }
+
 final List<dynamic> imgList = [
   [
     [
@@ -30,11 +30,7 @@ final List<dynamic> imgList = [
       "Java",
       "Robotics",
     ],
-    [
-      "Aryan Solanki",
-      "Akshat Rastogi",
-      "Aman Singh"
-    ],
+    ["Aryan Solanki", "Akshat Rastogi", "Aman Singh"],
     [
       "November 16, 2021 ",
       "April 6, 2020 ",
@@ -62,17 +58,12 @@ final List<dynamic> imgList = [
       "Java",
       "Robotics",
     ],
-    [
-      "Aryan Solanki",
-      "Akshat Rastogi",
-      "Aman Singh"
-    ],
+    ["Aryan Solanki", "Akshat Rastogi", "Aman Singh"],
     [
       "November 16, 2021 ",
       "April 6, 2020 ",
       "March 21, 2021 ",
     ],
-
   ],
   [
     [
@@ -95,56 +86,93 @@ final List<dynamic> imgList = [
       "Java",
       "Robotics",
     ],
-    [
-      "Aryan Solanki",
-      "Akshat Rastogi",
-      "Aman Singh"
-    ],
+    ["Aryan Solanki", "Akshat Rastogi", "Aman Singh"],
     [
       "November 16, 2021 ",
       "April 6, 2020 ",
       "March 21, 2021 ",
     ],
-
   ],
-  ];
+];
 final List<Widget> imageSlidersPC = imgList
     .map((item) => Container(
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      FeaturedProductCard(title: item[0][0],description: item[1][0],imagelink: item[2][0],Category: item[3][0],madeby: item[4][0],date: item[5][0]),
-      SizedBox(width: 20,),
-      FeaturedProductCard(title: item[0][1],description: item[1][1],imagelink: item[2][1],Category: item[3][1],madeby: item[4][1],date: item[5][1]),
-      SizedBox(width: 20,),
-      FeaturedProductCard(title: item[0][2],description: item[1][2],imagelink: item[2][2],Category: item[3][2],madeby: item[4][2],date: item[5][2]),
-    ],
-  ),
-))
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FeaturedProductCard(
+                  title: item[0][0],
+                  description: item[1][0],
+                  imagelink: item[2][0],
+                  Category: item[3][0],
+                  madeby: item[4][0],
+                  date: item[5][0]),
+              SizedBox(
+                width: 20,
+              ),
+              FeaturedProductCard(
+                  title: item[0][1],
+                  description: item[1][1],
+                  imagelink: item[2][1],
+                  Category: item[3][1],
+                  madeby: item[4][1],
+                  date: item[5][1]),
+              SizedBox(
+                width: 20,
+              ),
+              FeaturedProductCard(
+                  title: item[0][2],
+                  description: item[1][2],
+                  imagelink: item[2][2],
+                  Category: item[3][2],
+                  madeby: item[4][2],
+                  date: item[5][2]),
+            ],
+          ),
+        ))
     .toList();
 
 final List<Widget> imageSlidersTab = imgList
     .map((item) => Container(
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      FeaturedProductCard(title: item[0][0],description: item[1][0],imagelink: item[2][0],Category: item[3][0],madeby: item[4][0],date: item[5][0]),
-      SizedBox(width: 20,),
-      FeaturedProductCard(title: item[0][1],description: item[1][1],imagelink: item[2][1],Category: item[3][1],madeby: item[4][1],date: item[5][1]),
-      ],
-  ),
-))
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FeaturedProductCard(
+                  title: item[0][0],
+                  description: item[1][0],
+                  imagelink: item[2][0],
+                  Category: item[3][0],
+                  madeby: item[4][0],
+                  date: item[5][0]),
+              SizedBox(
+                width: 20,
+              ),
+              FeaturedProductCard(
+                  title: item[0][1],
+                  description: item[1][1],
+                  imagelink: item[2][1],
+                  Category: item[3][1],
+                  madeby: item[4][1],
+                  date: item[5][1]),
+            ],
+          ),
+        ))
     .toList();
 
 final List<Widget> imageSlidersMobile = imgList
     .map((item) => Container(
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      NonHoverFeaturedProductCard(title: item[0][0],description: item[1][0],imagelink: item[2][0],Category: item[3][0],madeby: item[4][0],date: item[5][0]),
-      ],
-  ),
-))
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              NonHoverFeaturedProductCard(
+                  title: item[0][0],
+                  description: item[1][0],
+                  imagelink: item[2][0],
+                  Category: item[3][0],
+                  madeby: item[4][0],
+                  date: item[5][0]),
+            ],
+          ),
+        ))
     .toList();
 
 class _FeaturedProjectsState extends State<FeaturedProjects> {
@@ -158,7 +186,9 @@ class _FeaturedProjectsState extends State<FeaturedProjects> {
       color: Color(0xfff5f6fb),
       child: Column(
         children: [
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -170,7 +200,9 @@ class _FeaturedProjectsState extends State<FeaturedProjects> {
                 width: 10,
                 height: 2,
               ),
-              SizedBox(width: 10,),
+              SizedBox(
+                width: 10,
+              ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -179,7 +211,9 @@ class _FeaturedProjectsState extends State<FeaturedProjects> {
                 width: 50,
                 height: 2,
               ),
-              SizedBox(width: 10,),
+              SizedBox(
+                width: 10,
+              ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -190,87 +224,99 @@ class _FeaturedProjectsState extends State<FeaturedProjects> {
               )
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Text("Featured Projects",
-              style:TextStyle(
-                  fontFamily: "Metrisch-Bold", fontSize: 25)),
+              style: TextStyle(fontFamily: "Metrisch-Bold", fontSize: 25)),
           SizedBox(
             height: 5,
           ),
-          Text(
-              "Top featured Projects made by Bennetians",
+          Text("Top featured Projects made by Bennetians",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: "Metrisch-Medium",height: 1.3, fontSize: 15,color: Colors.black54)),
+                  fontFamily: "Metrisch-Medium",
+                  height: 1.3,
+                  fontSize: 15,
+                  color: Colors.black54)),
           SizedBox(
             height: 50,
           ),
-          MediaQuery.of(context).size.width>1200?CarouselSlider(
-            items: imageSlidersPC,
-            carouselController: _controller,
-            options: CarouselOptions(
-
-              scrollPhysics: NeverScrollableScrollPhysics(),
-                viewportFraction: 1,
-                height: 500,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-          ):MediaQuery.of(context).size.width>800?CarouselSlider(
-            items: imageSlidersTab,
-            carouselController: _controller,
-            options: CarouselOptions(
-
-                scrollPhysics: NeverScrollableScrollPhysics(),
-                viewportFraction: 1,
-                height: 500,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-          ):CarouselSlider(
-            items: imageSlidersMobile,
-            carouselController: _controller,
-            options: CarouselOptions(
-
-                scrollPhysics: NeverScrollableScrollPhysics(),
-                viewportFraction: 1,
-                height: 500,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-          ),
+          MediaQuery.of(context).size.width > 1200
+              ? CarouselSlider(
+                  items: imageSlidersPC,
+                  carouselController: _controller,
+                  options: CarouselOptions(
+                      scrollPhysics: NeverScrollableScrollPhysics(),
+                      viewportFraction: 1,
+                      height: 500,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _current = index;
+                        });
+                      }),
+                )
+              : MediaQuery.of(context).size.width > 800
+                  ? CarouselSlider(
+                      items: imageSlidersTab,
+                      carouselController: _controller,
+                      options: CarouselOptions(
+                          scrollPhysics: NeverScrollableScrollPhysics(),
+                          viewportFraction: 1,
+                          height: 500,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                            });
+                          }),
+                    )
+                  : CarouselSlider(
+                      items: imageSlidersMobile,
+                      carouselController: _controller,
+                      options: CarouselOptions(
+                          scrollPhysics: NeverScrollableScrollPhysics(),
+                          viewportFraction: 1,
+                          height: 500,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                            });
+                          }),
+                    ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: imgList.asMap().entries.map((entry) {
               return InkWell(
                 onTap: () => _controller.animateToPage(entry.key),
-                child: _current == entry.key ?Container(
-                  width: 20.0,
-                  height: 6.0,
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                ):Container(
-                  width: 6.0,
-                  height: 6.0,
-                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-                ),
+                child: _current == entry.key
+                    ? Container(
+                        width: 20.0,
+                        height: 6.0,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black)
+                                    .withOpacity(
+                                        _current == entry.key ? 0.9 : 0.4)),
+                      )
+                    : Container(
+                        width: 6.0,
+                        height: 6.0,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black)
+                                    .withOpacity(
+                                        _current == entry.key ? 0.9 : 0.4)),
+                      ),
               );
             }).toList(),
           ),

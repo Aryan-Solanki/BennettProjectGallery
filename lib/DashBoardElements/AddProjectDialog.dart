@@ -16,7 +16,7 @@ import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../form_error.dart';
+import 'package:bennettprojectgallery/form_error.dart';
 
 class CategoryClass {
   final int id;

@@ -16,8 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../errors.dart';
-import '../form_error.dart';
+import 'package:bennettprojectgallery/errors.dart';
+import 'package:bennettprojectgallery/form_error.dart';
 
 class LoginCard extends StatefulWidget {
   @override

@@ -4,17 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:menu_button/menu_button.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'ProjectCard.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
 
 class RightSide extends StatefulWidget {
-
   @override
   _RightSideState createState() => _RightSideState();
 }
-String selectedKey="Default sorting";
+
+String selectedKey = "Default sorting";
+
 class _RightSideState extends State<RightSide> {
-
-
   List<String> keys = <String>[
     'Default sorting',
     'Sort by popularity',
@@ -22,10 +21,10 @@ class _RightSideState extends State<RightSide> {
     'Sort by latest',
   ];
 
-  int cardnumber=9;
+  int cardnumber = 9;
 
-  bool searched=false;
-  String seachcategory="Python";
+  bool searched = false;
+  String seachcategory = "Python";
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,15 @@ class _RightSideState extends State<RightSide> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Flexible(
-                child: Text(selectedKey, overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+              child: Text(
+                selectedKey,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontFamily: "Metrisch-Medium",
+                    height: 1.5,
+                    fontSize: 15,
+                    color: Colors.black54),
+              ),
             ),
             const SizedBox(
               width: 12,
@@ -57,12 +64,10 @@ class _RightSideState extends State<RightSide> {
       ),
     );
     return ResponsiveBuilder(
-      breakpoints: ScreenBreakpoints(
-          tablet: 700, desktop: 1140, watch: 541),
+      breakpoints: ScreenBreakpoints(tablet: 700, desktop: 1140, watch: 541),
       builder: (context, sizingInformation) {
         // Check the sizing information here and return your UI
-        if (sizingInformation.deviceScreenType ==
-            DeviceScreenType.desktop) {
+        if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
           return Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             width: 800,
@@ -72,19 +77,39 @@ class _RightSideState extends State<RightSide> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    searched==false?Text(
-                      "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                    ):Text(
-                      'Showing 1–9 of "${seachcategory}"',style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
-                    ),
+                    searched == false
+                        ? Text(
+                            "Showing 1–9 of 12 results",
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Medium",
+                                height: 1.5,
+                                fontSize: 15,
+                                color: Colors.black54),
+                          )
+                        : Text(
+                            'Showing 1–9 of "${seachcategory}"',
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Medium",
+                                height: 1.5,
+                                fontSize: 15,
+                                color: Colors.black54),
+                          ),
                     MenuButton<String>(
                       child: normalChildButton,
                       items: keys,
                       itemBuilder: (String value) => Container(
                         height: 40,
                         alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                        child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 16),
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              height: 1.5,
+                              fontSize: 15,
+                              color: Colors.black54),
+                        ),
                       ),
                       toggledChild: Container(
                         child: normalChildButton,
@@ -98,19 +123,21 @@ class _RightSideState extends State<RightSide> {
                         print(isToggle);
                       },
                     )
-
                   ],
-
                 ),
-                SizedBox(height: 40,),
+                SizedBox(
+                  height: 40,
+                ),
                 Container(
-                  height: cardnumber*140.toDouble(),
+                  height: cardnumber * 140.toDouble(),
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: cardnumber,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.68,crossAxisSpacing: 20
-                    ),
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 40,
+                        childAspectRatio: 0.68,
+                        crossAxisSpacing: 20),
                     itemBuilder: (BuildContext context, int index) {
                       return ProjectCard();
                     },
@@ -119,14 +146,11 @@ class _RightSideState extends State<RightSide> {
                 GradientButton(
                   title: "Load More",
                 ),
-
-
               ],
             ),
           );
         }
-        if (sizingInformation.deviceScreenType ==
-            DeviceScreenType.tablet) {
+        if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
           return Container(
             padding: EdgeInsets.symmetric(vertical: 10),
             width: 660,
@@ -137,7 +161,12 @@ class _RightSideState extends State<RightSide> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                      "Showing 1–9 of 12 results",
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          height: 1.5,
+                          fontSize: 15,
+                          color: Colors.black54),
                     ),
                     MenuButton<String>(
                       child: normalChildButton,
@@ -145,8 +174,16 @@ class _RightSideState extends State<RightSide> {
                       itemBuilder: (String value) => Container(
                         height: 40,
                         alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                        child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 16),
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              height: 1.5,
+                              fontSize: 15,
+                              color: Colors.black54),
+                        ),
                       ),
                       toggledChild: Container(
                         child: normalChildButton,
@@ -160,19 +197,21 @@ class _RightSideState extends State<RightSide> {
                         print(isToggle);
                       },
                     )
-
                   ],
-
                 ),
-                SizedBox(height: 40,),
+                SizedBox(
+                  height: 40,
+                ),
                 Container(
-                  height: cardnumber*130.toDouble(),
+                  height: cardnumber * 130.toDouble(),
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: cardnumber,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                    ),
+                        crossAxisCount: 3,
+                        mainAxisSpacing: 40,
+                        childAspectRatio: 0.63,
+                        crossAxisSpacing: 20),
                     itemBuilder: (BuildContext context, int index) {
                       return NoHoverProjectCard();
                     },
@@ -181,13 +220,11 @@ class _RightSideState extends State<RightSide> {
                 GradientButton(
                   title: "Load More",
                 ),
-
               ],
             ),
           );
         }
-        if (sizingInformation.deviceScreenType ==
-            DeviceScreenType.watch){
+        if (sizingInformation.deviceScreenType == DeviceScreenType.watch) {
           return Container(
             width: 250,
             padding: EdgeInsets.symmetric(vertical: 10),
@@ -197,17 +234,32 @@ class _RightSideState extends State<RightSide> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                      "Showing 1–9 of 12 results",
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          height: 1.5,
+                          fontSize: 15,
+                          color: Colors.black54),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     MenuButton<String>(
                       child: normalChildButton,
                       items: keys,
                       itemBuilder: (String value) => Container(
                         height: 40,
                         alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                        child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0.0, horizontal: 16),
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Medium",
+                              height: 1.5,
+                              fontSize: 15,
+                              color: Colors.black54),
+                        ),
                       ),
                       toggledChild: Container(
                         child: normalChildButton,
@@ -221,19 +273,21 @@ class _RightSideState extends State<RightSide> {
                         print(isToggle);
                       },
                     )
-
                   ],
-
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  height: cardnumber*445.toDouble(),
+                  height: cardnumber * 445.toDouble(),
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: cardnumber,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                    ),
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 40,
+                        childAspectRatio: 0.63,
+                        crossAxisSpacing: 20),
                     itemBuilder: (BuildContext context, int index) {
                       return NoHoverProjectCard();
                     },
@@ -242,7 +296,6 @@ class _RightSideState extends State<RightSide> {
                 GradientButton(
                   title: "Load More",
                 ),
-
               ],
             ),
           );
@@ -258,7 +311,12 @@ class _RightSideState extends State<RightSide> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Showing 1–9 of 12 results",style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize:15,color: Colors.black54),
+                    "Showing 1–9 of 12 results",
+                    style: TextStyle(
+                        fontFamily: "Metrisch-Medium",
+                        height: 1.5,
+                        fontSize: 15,
+                        color: Colors.black54),
                   ),
                   MenuButton<String>(
                     child: normalChildButton,
@@ -266,8 +324,16 @@ class _RightSideState extends State<RightSide> {
                     itemBuilder: (String value) => Container(
                       height: 40,
                       alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16),
-                      child: Text(value,style: TextStyle(fontFamily: "Metrisch-Medium",height: 1.5, fontSize: 15,color: Colors.black54),),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 16),
+                      child: Text(
+                        value,
+                        style: TextStyle(
+                            fontFamily: "Metrisch-Medium",
+                            height: 1.5,
+                            fontSize: 15,
+                            color: Colors.black54),
+                      ),
                     ),
                     toggledChild: Container(
                       child: normalChildButton,
@@ -281,19 +347,21 @@ class _RightSideState extends State<RightSide> {
                       print(isToggle);
                     },
                   )
-
                 ],
-
               ),
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               Container(
-                height: cardnumber*240.toDouble(),
+                height: cardnumber * 240.toDouble(),
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: cardnumber,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,mainAxisSpacing: 40,childAspectRatio: 0.63,crossAxisSpacing: 20
-                  ),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 40,
+                      childAspectRatio: 0.63,
+                      crossAxisSpacing: 20),
                   itemBuilder: (BuildContext context, int index) {
                     return NoHoverProjectCard();
                   },
@@ -302,7 +370,6 @@ class _RightSideState extends State<RightSide> {
               GradientButton(
                 title: "Load More",
               ),
-
             ],
           ),
         );

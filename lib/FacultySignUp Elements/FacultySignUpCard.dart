@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../facultylogin.dart';
-import '../login.dart';
+import 'package:bennettprojectgallery/facultylogin.dart';
+import 'package:bennettprojectgallery/login.dart';
 
 class FacultySignUpCard extends StatefulWidget {
   @override

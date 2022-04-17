@@ -19,8 +19,8 @@ import 'package:lottie/lottie.dart';
 
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'HomePageElements/ZoomInImage.dart';
-import 'HomePageElements/Footer.dart';
+import 'package:bennettprojectgallery/HomePageElements/ZoomInImage.dart';
+import 'package:bennettprojectgallery/HomePageElements/Footer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

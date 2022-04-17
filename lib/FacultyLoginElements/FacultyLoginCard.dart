@@ -7,14 +7,13 @@ import 'package:bennettprojectgallery/forgotpassword.dart';
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/services/faculty_service.dart';
 import 'package:bennettprojectgallery/services/user_simple_preferences.dart';
-import 'package:bennettprojectgallery/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../FacultySignUp.dart';
-import '../errors.dart';
-import '../form_error.dart';
+import 'package:bennettprojectgallery/FacultySignUp.dart';
+import 'package:bennettprojectgallery/errors.dart';
+import 'package:bennettprojectgallery/form_error.dart';
 
 class FacultyLoginCard extends StatefulWidget {
   @override
@@ -211,7 +210,8 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                                           builder: (context) =>
                                               AdminDashBoard()));
 
-                                  await UserSimplePreferences.setUserType("faculty");
+                                  await UserSimplePreferences.setUserType(
+                                      "faculty");
 
                                   Fluttertoast.showToast(
                                       msg: "Login Successful",
