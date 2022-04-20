@@ -39,7 +39,8 @@ class _LeftSideState extends State<LeftSide> {
     algolia = Application.algolia;
     super.initState();
   }
-  String searchedvalue="";
+
+  String searchedvalue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -52,93 +53,6 @@ class _LeftSideState extends State<LeftSide> {
             width: 250,
             child: Column(
               children: [
-                Container(
-                  padding: EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      color: Color(0xfff3f5fe)),
-                  height: 45,
-                  child: TextField(
-                    style: TextStyle(
-                        fontFamily: "Metrisch-Medium",
-                        height: 1.5,
-                        fontSize: 15,
-                        color: Colors.black54),
-                    onChanged: (value) {
-                      searchedvalue=value;
-                      //Do something with the user input.
-                    },
-                    decoration: InputDecoration(
-                      suffixIcon: InkWell(
-                          onTap: () {
-                            print(searchedvalue);
-                          },
-                          child: Icon(
-                            Icons.search,
-                            size: 22,
-                            color: Colors.black,
-                          )),
-
-                      border: InputBorder.none,
-                      hintStyle: TextStyle(
-                          fontFamily: "Metrisch-Medium",
-                          height: 1.5,
-                          fontSize: 15,
-                          color: Colors.black54),
-
-                      hintText: 'Search Project',
-                      // contentPadding:
-                      // EdgeInsets.symmetric(horizontal: 20.0),
-                      // border: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      // ),
-                    ),
-                    onSubmitted: (query) {
-                      algo(query);
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.orange.shade400,
-                      ),
-                      width: 5,
-                      height: 3,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.orange.shade400,
-                      ),
-                      width: 20,
-                      height: 3,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.orange.shade400,
-                      ),
-                      width: 5,
-                      height: 3,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 40,
-                ),
                 Text(
                   "Batch Wise Projects",
                   style: TextStyle(
@@ -162,81 +76,6 @@ class _LeftSideState extends State<LeftSide> {
           width: MediaQuery.of(context).size.width - 40,
           child: Column(
             children: [
-              Container(
-                padding: EdgeInsets.only(left: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    color: Color(0xfff3f5fe)),
-                height: 45,
-                child: TextField(
-                  style: TextStyle(
-                      fontFamily: "Metrisch-Medium",
-                      height: 1.5,
-                      fontSize: 15,
-                      color: Colors.black54),
-                  onChanged: (value) {
-                    //Do something with the user input.
-                  },
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(
-                      Icons.search,
-                      size: 22,
-                      color: Colors.black,
-                    ),
-
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(
-                        fontFamily: "Metrisch-Medium",
-                        height: 1.5,
-                        fontSize: 15,
-                        color: Colors.black54),
-                    hintText: 'Search Project',
-                    // contentPadding:
-                    // EdgeInsets.symmetric(horizontal: 20.0),
-                    // border: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    // ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.orange.shade400,
-                    ),
-                    width: 5,
-                    height: 3,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.orange.shade400,
-                    ),
-                    width: 20,
-                    height: 3,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.orange.shade400,
-                    ),
-                    width: 5,
-                    height: 3,
-                  )
-                ],
-              ),
               SizedBox(
                 height: 40,
               ),

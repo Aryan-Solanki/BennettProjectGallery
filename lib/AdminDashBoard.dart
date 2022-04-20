@@ -4,11 +4,16 @@ import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdminDashBoard extends StatefulWidget {
+  final String current_Year;
+  AdminDashBoard({this.current_Year = "2020"});
   @override
   _AdminDashBoardState createState() => _AdminDashBoardState();
 }
@@ -19,9 +24,23 @@ double num_of_reviews = 5;
 class _AdminDashBoardState extends State<AdminDashBoard> {
   Map projectMap = {};
   Map finalProjectMap = {};
+  Map finalDataRowMap = {};
+  List<DataRow> listRowFinal = [];
   List<Project> projectListFinal = [];
   FirebaseAuth auth = FirebaseAuth.instance;
   UserServices _services = UserServices();
+  bool loading = true;
+
+  void _launchURL(_url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
+
+  String convert_timestamp_to_string(timestamp) {
+    var date = DateTime.fromMillisecondsSinceEpoch(timestamp.seconds * 1000);
+    var formatter = new DateFormat('dd-MM-yyyy');
+    String formatted = formatter.format(date);
+    return formatted;
+  }
 
   getProfProjects() async {
     var ProfID = auth.currentUser.email.toUpperCase();
@@ -29,10 +48,14 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
 
     projectMap = prof["projects"];
 
+    loading = true;
+
     for (var yog in projectMap.keys) {
       bool anyProjectRemoved = false;
       List<dynamic> projectList = projectMap[yog];
       finalProjectMap[yog] = List<Project>();
+      finalDataRowMap[yog] = List<DataRow>();
+
       for (var projectID in projectList) {
         var project = await FirebaseFirestore.instance
             .collection("project")
@@ -46,6 +69,59 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
           projectMap[yog].remove(projectID);
           continue;
         }
+
+        String StudentString = "";
+
+        String StringCategories = "";
+
+        for (var student in project["StudentIdList"]) {
+          StudentString += student["name"] +
+              " | " +
+              student["id"] +
+              " | " +
+              student["batch"] +
+              "\n";
+        }
+
+        for (var category in project["ProjectDetails"]["Categories"]) {
+          StringCategories += category + "\n";
+        }
+
+        finalDataRowMap[yog].add(
+          DataRow(
+            cells: <DataCell>[
+              DataCell(Text(project.id)),
+              DataCell(Text(project["title"])),
+              DataCell(Text(StudentString)),
+              DataCell(FlatButton(
+                child: Text(project["ProjectDetails"]["DatasetLink"]),
+                onPressed: () {
+                  _launchURL(project["ProjectDetails"]["DatasetLink"]);
+                },
+              )),
+              DataCell(FlatButton(
+                child: Text(project["ProjectDetails"]["ProjectLink"]),
+                onPressed: () {
+                  _launchURL(project["ProjectDetails"]["ProjectLink"]);
+                },
+              )),
+              DataCell(FlatButton(
+                child: Text(project["ProjectDetails"]["ReportLink"]),
+                onPressed: () {
+                  _launchURL(project["ProjectDetails"]["ReportLink"]);
+                },
+              )),
+              DataCell(FlatButton(
+                child: Text(project["ProjectDetails"]["VideoLink"]),
+                onPressed: () {
+                  _launchURL(project["ProjectDetails"]["VideoLink"]);
+                },
+              )),
+              DataCell(Text(StringCategories)),
+              DataCell(Text(convert_timestamp_to_string(project["datetime"]))),
+            ],
+          ),
+        );
 
         finalProjectMap[yog].add(
           new Project(
@@ -73,6 +149,9 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
       if (anyProjectRemoved)
         _services.updateProfData(ProfID, {"projects": projectMap});
     }
+    setState(() {
+      loading = false;
+    });
   }
 
   @override
@@ -101,103 +180,148 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                 // Check the sizing information here and return your UI
                 if (sizingInformation.deviceScreenType ==
                     DeviceScreenType.desktop) {
-                  return Row(
-                    children: [
-                      LeftSide(),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  return loading
+                      ? Center(
+                          child: Container(
+                            height: 300,
+                            width: 300,
+                            child: Lottie.asset('assets/loading.json',
+                                frameRate: FrameRate.max),
+                          ),
+                        )
+                      : Row(
                           children: [
+                            LeftSide(),
                             SizedBox(
-                              height: 15,
+                              width: 20,
                             ),
-                            Text("2020 Batch Projects",
-                                style: TextStyle(
-                                    fontFamily: "Metrisch-Bold", fontSize: 25)),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Text("Download CSV",
-                                    style: TextStyle(
-                                        color: Colors.blue,
-                                        fontFamily: "Metrisch-Bold",
-                                        fontSize: 12)),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: DataTable(
-                                showBottomBorder: true,
-                                dataRowHeight: 60,
-                                headingRowColor:
-                                    MaterialStateProperty.all(Colors.grey[200]),
-                                columns: const <DataColumn>[
-                                  DataColumn(
-                                    label: Text(
-                                      'Name',
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: 20, right: 20, left: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text("Dashboard",
                                       style: TextStyle(
-                                          fontStyle: FontStyle.italic),
+                                          fontFamily: "Metrisch-Bold",
+                                          fontSize: 25)),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: InkWell(
+                                      onTap: () {},
+                                      child: Text("Download CSV",
+                                          style: TextStyle(
+                                              color: Colors.blue,
+                                              fontFamily: "Metrisch-Bold",
+                                              fontSize: 12)),
                                     ),
                                   ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Age',
-                                      style: TextStyle(
-                                          fontStyle: FontStyle.italic),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width -
+                                        MediaQuery.of(context).size.width / 2.3,
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: DataTable(
+                                          showBottomBorder: true,
+                                          dataRowHeight: 60,
+                                          headingRowColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.grey[200]),
+                                          columns: const <DataColumn>[
+                                            DataColumn(
+                                              label: Text(
+                                                'ProjectId',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Project Title',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Students',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Dataset Link',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Project Link',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Report Link',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Video Link',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Categories',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'Submission Time',
+                                                style: TextStyle(
+                                                    fontStyle:
+                                                        FontStyle.italic),
+                                              ),
+                                            ),
+                                          ],
+                                          rows: finalDataRowMap[
+                                              widget.current_Year]),
                                     ),
                                   ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Role',
-                                      style: TextStyle(
-                                          fontStyle: FontStyle.italic),
-                                    ),
+                                  SizedBox(
+                                    height: 15,
                                   ),
                                 ],
-                                rows: const <DataRow>[
-                                  DataRow(
-                                    cells: <DataCell>[
-                                      DataCell(Text('Sarah\n\nWilliam')),
-                                      DataCell(Text('19')),
-                                      DataCell(Text('Student')),
-                                    ],
-                                  ),
-                                  DataRow(
-                                    cells: <DataCell>[
-                                      DataCell(Text('Janine')),
-                                      DataCell(Text('43')),
-                                      DataCell(Text('Professor')),
-                                    ],
-                                  ),
-                                  DataRow(
-                                    cells: <DataCell>[
-                                      DataCell(Text('William')),
-                                      DataCell(Text('27')),
-                                      DataCell(Text('Associate Professor')),
-                                    ],
-                                  ),
-                                ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 15,
                             ),
                           ],
-                        ),
-                      ),
-                    ],
-                  );
+                        );
                 }
 
                 return Column(
