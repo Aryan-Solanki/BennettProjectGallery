@@ -1,5 +1,6 @@
 import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
 import 'package:bennettprojectgallery/models/Project.dart';
+import 'package:bennettprojectgallery/projectgallery.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +31,12 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
   FirebaseAuth auth = FirebaseAuth.instance;
   UserServices _services = UserServices();
   bool loading = true;
+  bool hover1 = false;
+  bool hover2 = false;
+  bool hover3 = false;
+  bool hover4 = false;
+  bool hover5 = false;
+  bool hover6 = false;
 
   void _launchURL(_url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';
@@ -191,7 +198,3597 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                         )
                       : Row(
                           children: [
-                            LeftSide(),
+                            ResponsiveBuilder(
+                              breakpoints: ScreenBreakpoints(
+                                  tablet: 971, desktop: 971, watch: 300),
+                              builder: (context, sizingInformation) {
+                                // Check the sizing information here and retrurn your UI
+                                if (sizingInformation.deviceScreenType ==
+                                    DeviceScreenType.desktop) {
+                                  return Container(
+                                    width: 250,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Batch Wise Projects",
+                                          style: TextStyle(
+                                              fontSize: 21,
+                                              color: Colors.black87,
+                                              fontFamily: "Metrisch-Bold"),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        MediaQuery.of(context).size.width > 971
+                                            ? Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover1 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover1 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover1 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2016",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover1 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover2 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover2 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover2 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2017",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover2 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover3 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover3 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover3 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2018",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover3 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover4 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover4 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover4 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2019",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover4 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover5 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover5 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover5 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2020",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover5 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover6 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover6 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover6 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2021",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover6 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                            : MediaQuery.of(context)
+                                                        .size
+                                                        .width >
+                                                    715
+                                                ? Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {
+                                                          print(
+                                                              "hijedwcasfwes");
+                                                        },
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover1 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover1 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover1 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2016",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover1 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover2 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover2 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover2 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2017",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover2 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover3 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover3 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover3 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2018",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover3 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover4 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover4 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover4 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2019",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover4 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover5 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover5 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover5 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2020",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover5 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover6 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover6 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover6 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2021",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover6 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        430
+                                                    ? Column(
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed: () {
+                                                                  print(
+                                                                      "hijedwcasfwes");
+                                                                },
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover1 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover1 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover1 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2016",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover1 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover2 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover2 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover2 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2017",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover2 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover3 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover3 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover3 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2018",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover3 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover4 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover4 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover4 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2019",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover4 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover5 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover5 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover5 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2020",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover5 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover6 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover6 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover6 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2021",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover6 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : Column(
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed: () {
+                                                                  print(
+                                                                      "hijedwcasfwes");
+                                                                },
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover1 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover1 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover1 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2016",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover1 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover2 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover2 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover2 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2017",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover2 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover3 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover3 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover3 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2018",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover3 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover4 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover4 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover4 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2019",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover4 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover5 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover5 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover5 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2020",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover5 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              TextButton(
+                                                                style: TextButton
+                                                                    .styleFrom(
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0)),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  primary: Colors
+                                                                      .transparent,
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              0.0),
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                onHover: (x) {
+                                                                  if (x) {
+                                                                    setState(
+                                                                        () {
+                                                                      hover6 =
+                                                                          true;
+                                                                    });
+                                                                  } else {
+                                                                    setState(
+                                                                        () {
+                                                                      hover6 =
+                                                                          false;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration: BoxDecoration(
+                                                                      color: hover6 ==
+                                                                              true
+                                                                          ? Colors
+                                                                              .orange
+                                                                              .shade400
+                                                                          : Color(
+                                                                              0xfff3f5fe),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5)),
+                                                                  height: 30,
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Batch of 2021",
+                                                                      style: TextStyle(
+                                                                          fontFamily:
+                                                                              "Metrisch-Medium",
+                                                                          fontSize:
+                                                                              13,
+                                                                          color: hover6 == true
+                                                                              ? Colors.white
+                                                                              : Colors.grey.shade600),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+
+                                return Container(
+                                  width: MediaQuery.of(context).size.width - 40,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                      Text(
+                                        "Batch Wise Projects",
+                                        style: TextStyle(
+                                            fontSize: 21,
+                                            color: Colors.black87,
+                                            fontFamily: "Metrisch-Bold"),
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      MediaQuery.of(context).size.width > 971
+                                          ? Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover1 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover1 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover1 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2016",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover1 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover2 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover2 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover2 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2017",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover2 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover3 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover3 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover3 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2018",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover3 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover4 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover4 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover4 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2019",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover4 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover5 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover5 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover5 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2020",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover5 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover6 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover6 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover6 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2021",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover6 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            )
+                                          : MediaQuery.of(context).size.width >
+                                                  715
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {
+                                                        print("hijedwcasfwes");
+                                                      },
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover1 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover1 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover1 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2016",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover1 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover2 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover2 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover2 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2017",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover2 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover3 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover3 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover3 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2018",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover3 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover4 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover4 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover4 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2019",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover4 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover5 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover5 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover5 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2020",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover5 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover6 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover6 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover6 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2021",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover6 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      430
+                                                  ? Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {
+                                                                print(
+                                                                    "hijedwcasfwes");
+                                                              },
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover1 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover1 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover1 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2016",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover1 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover2 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover2 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover2 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2017",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover2 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover3 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover3 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover3 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2018",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover3 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover4 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover4 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover4 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2019",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover4 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover5 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover5 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover5 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2020",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover5 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover6 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover6 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover6 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2021",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover6 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {
+                                                                print(
+                                                                    "hijedwcasfwes");
+                                                              },
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover1 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover1 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover1 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2016",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover1 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover2 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover2 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover2 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2017",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover2 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover3 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover3 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover3 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2018",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover3 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover4 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover4 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover4 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2019",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover4 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover5 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover5 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover5 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2020",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover5 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            TextButton(
+                                                              style: TextButton
+                                                                  .styleFrom(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0)),
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                primary: Colors
+                                                                    .transparent,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .all(
+                                                                            0.0),
+                                                              ),
+                                                              onPressed: () {},
+                                                              onHover: (x) {
+                                                                if (x) {
+                                                                  setState(() {
+                                                                    hover6 =
+                                                                        true;
+                                                                  });
+                                                                } else {
+                                                                  setState(() {
+                                                                    hover6 =
+                                                                        false;
+                                                                  });
+                                                                }
+                                                              },
+                                                              child:
+                                                                  AnimatedContainer(
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                        horizontal:
+                                                                            10),
+                                                                decoration: BoxDecoration(
+                                                                    color: hover6 ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .orange
+                                                                            .shade400
+                                                                        : Color(
+                                                                            0xfff3f5fe),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                height: 30,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    "Batch of 2021",
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            13,
+                                                                        color: hover6 ==
+                                                                                true
+                                                                            ? Colors.white
+                                                                            : Colors.grey.shade600),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
                             SizedBox(
                               width: 20,
                             ),
@@ -326,7 +3923,3158 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
 
                 return Column(
                   children: [
-                    LeftSide(),
+                    ResponsiveBuilder(
+                      breakpoints: ScreenBreakpoints(
+                          tablet: 971, desktop: 971, watch: 300),
+                      builder: (context, sizingInformation) {
+                        // Check the sizing information here and retrurn your UI
+                        if (sizingInformation.deviceScreenType ==
+                            DeviceScreenType.desktop) {
+                          return Container(
+                            width: 250,
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Batch Wise Projects",
+                                  style: TextStyle(
+                                      fontSize: 21,
+                                      color: Colors.black87,
+                                      fontFamily: "Metrisch-Bold"),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                MediaQuery.of(context).size.width > 971
+                                    ? Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover1 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover1 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover1 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2016",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover1 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover2 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover2 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover2 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2017",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover2 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover3 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover3 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover3 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2018",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover3 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover4 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover4 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover4 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2019",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover4 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover5 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover5 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover5 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2020",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover5 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover6 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover6 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover6 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2021",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover6 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                    : MediaQuery.of(context).size.width > 715
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {
+                                                  print("hijedwcasfwes");
+                                                },
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover1 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover1 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover1 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2016",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover1 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover2 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover2 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover2 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2017",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover2 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover3 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover3 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover3 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2018",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover3 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover4 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover4 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover4 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2019",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover4 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover5 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover5 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover5 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2020",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover5 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5.0)),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  primary: Colors.transparent,
+                                                  padding: EdgeInsets.all(0.0),
+                                                ),
+                                                onPressed: () {},
+                                                onHover: (x) {
+                                                  if (x) {
+                                                    setState(() {
+                                                      hover6 = true;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      hover6 = false;
+                                                    });
+                                                  }
+                                                },
+                                                child: AnimatedContainer(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                                  decoration: BoxDecoration(
+                                                      color: hover6 == true
+                                                          ? Colors
+                                                              .orange.shade400
+                                                          : Color(0xfff3f5fe),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  height: 30,
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Batch of 2021",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          fontSize: 13,
+                                                          color: hover6 == true
+                                                              ? Colors.white
+                                                              : Colors.grey
+                                                                  .shade600),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : MediaQuery.of(context).size.width >
+                                                430
+                                            ? Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {
+                                                          print(
+                                                              "hijedwcasfwes");
+                                                        },
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover1 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover1 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover1 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2016",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover1 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover2 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover2 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover2 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2017",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover2 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover3 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover3 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover3 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2018",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover3 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover4 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover4 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover4 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2019",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover4 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover5 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover5 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover5 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2020",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover5 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover6 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover6 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover6 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2021",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover6 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                            : Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {
+                                                          print(
+                                                              "hijedwcasfwes");
+                                                        },
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover1 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover1 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover1 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2016",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover1 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover2 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover2 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover2 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2017",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover2 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover3 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover3 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover3 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2018",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover3 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover4 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover4 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover4 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2019",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover4 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover5 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover5 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover5 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2020",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover5 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          primary: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  0.0),
+                                                        ),
+                                                        onPressed: () {},
+                                                        onHover: (x) {
+                                                          if (x) {
+                                                            setState(() {
+                                                              hover6 = true;
+                                                            });
+                                                          } else {
+                                                            setState(() {
+                                                              hover6 = false;
+                                                            });
+                                                          }
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  300),
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color: hover6 ==
+                                                                      true
+                                                                  ? Colors
+                                                                      .orange
+                                                                      .shade400
+                                                                  : Color(
+                                                                      0xfff3f5fe),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5)),
+                                                          height: 30,
+                                                          child: Center(
+                                                            child: Text(
+                                                              "Batch of 2021",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Metrisch-Medium",
+                                                                  fontSize: 13,
+                                                                  color: hover6 ==
+                                                                          true
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey
+                                                                          .shade600),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
+                        return Container(
+                          width: MediaQuery.of(context).size.width - 40,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text(
+                                "Batch Wise Projects",
+                                style: TextStyle(
+                                    fontSize: 21,
+                                    color: Colors.black87,
+                                    fontFamily: "Metrisch-Bold"),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              MediaQuery.of(context).size.width > 971
+                                  ? Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover1 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover1 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover1 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2016",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover1 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover2 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover2 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover2 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2017",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover2 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover3 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover3 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover3 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2018",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover3 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover4 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover4 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover4 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2019",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover4 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover5 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover5 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover5 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2020",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover5 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover6 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover6 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover6 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2021",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover6 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )
+                                  : MediaQuery.of(context).size.width > 715
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {
+                                                print("hijedwcasfwes");
+                                              },
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover1 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover1 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover1 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2016",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover1 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover2 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover2 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover2 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2017",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover2 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover3 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover3 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover3 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2018",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover3 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover4 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover4 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover4 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2019",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover4 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover5 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover5 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover5 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2020",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover5 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0)),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                primary: Colors.transparent,
+                                                padding: EdgeInsets.all(0.0),
+                                              ),
+                                              onPressed: () {},
+                                              onHover: (x) {
+                                                if (x) {
+                                                  setState(() {
+                                                    hover6 = true;
+                                                  });
+                                                } else {
+                                                  setState(() {
+                                                    hover6 = false;
+                                                  });
+                                                }
+                                              },
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                decoration: BoxDecoration(
+                                                    color: hover6 == true
+                                                        ? Colors.orange.shade400
+                                                        : Color(0xfff3f5fe),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                height: 30,
+                                                child: Center(
+                                                  child: Text(
+                                                    "Batch of 2021",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        fontSize: 13,
+                                                        color: hover6 == true
+                                                            ? Colors.white
+                                                            : Colors
+                                                                .grey.shade600),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      : MediaQuery.of(context).size.width > 430
+                                          ? Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {
+                                                        print("hijedwcasfwes");
+                                                      },
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover1 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover1 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover1 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2016",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover1 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover2 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover2 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover2 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2017",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover2 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover3 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover3 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover3 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2018",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover3 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover4 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover4 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover4 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2019",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover4 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover5 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover5 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover5 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2020",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover5 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover6 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover6 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover6 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2021",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover6 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            )
+                                          : Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {
+                                                        print("hijedwcasfwes");
+                                                      },
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover1 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover1 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover1 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2016",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover1 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover2 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover2 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover2 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2017",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover2 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover3 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover3 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover3 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2018",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover3 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover4 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover4 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover4 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2019",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover4 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover5 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover5 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover5 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2020",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover5 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    TextButton(
+                                                      style:
+                                                          TextButton.styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        primary:
+                                                            Colors.transparent,
+                                                        padding:
+                                                            EdgeInsets.all(0.0),
+                                                      ),
+                                                      onPressed: () {},
+                                                      onHover: (x) {
+                                                        if (x) {
+                                                          setState(() {
+                                                            hover6 = true;
+                                                          });
+                                                        } else {
+                                                          setState(() {
+                                                            hover6 = false;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: hover6 ==
+                                                                    true
+                                                                ? Colors.orange
+                                                                    .shade400
+                                                                : Color(
+                                                                    0xfff3f5fe),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
+                                                        height: 30,
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Batch of 2021",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                fontSize: 13,
+                                                                color: hover6 ==
+                                                                        true
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey
+                                                                        .shade600),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                     SizedBox(
                       width: 20,
                     ),
