@@ -33,6 +33,7 @@ dependencies:
   algolia: ^1.0.1
   textfield_search:
   lottie:
+  fl_chart:
 
 dev_dependencies:
   flutter_test:
