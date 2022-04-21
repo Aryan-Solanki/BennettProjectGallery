@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSimplePreferences {
@@ -13,11 +11,9 @@ class UserSimplePreferences {
   static const _keyPhoneNum = 'phnum';
   static const _keyVerify = 'verify';
   static const _keyImagePath = 'imgpath';
-  static const _keyUserPoints = 'user_points';
   static const _keyImagelink = 'image_link';
   static const _keyAuth = 'authkey';
   static const _keyUserPhone = 'userphone';
-  static const _keyIsBenefeciary = 'isBenefeciary';
   static const _keyIsFirst = 'isFirst';
   static const _keyIsFirst1 = 'isFirst1';
 
