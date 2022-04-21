@@ -36,6 +36,7 @@ dependencies:
   textfield_search:
   csv: ^4.1.0
   lottie:
+  fl_chart:
   shared_preferences: any
 
 dev_dependencies:
