@@ -12,13 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:menu_button/menu_button.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'HomePageElements/GradientButton.dart';
-import 'ProjectGalleryElements/NoHoverProjectCard.dart';
-import 'ProjectGalleryElements/ProjectCard.dart';
-import 'ProjectGalleryElements/RightSide.dart';
-import 'ProjectGalleryElements/batchwiseprojects.dart';
-import 'ProjectGalleryElements/categoriesButton.dart';
-import 'ProjectGalleryElements/topprojects.dart';
+import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/NoHoverProjectCard.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/RightSide.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/batchwiseprojects.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/categoriesButton.dart';
+import 'package:bennettprojectgallery/ProjectGalleryElements/topprojects.dart';
 import 'package:lottie/lottie.dart';
 
 class ProjectGallery extends StatefulWidget {

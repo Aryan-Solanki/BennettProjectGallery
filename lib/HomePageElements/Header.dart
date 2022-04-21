@@ -1,18 +1,19 @@
 import 'package:bennettprojectgallery/AdminDashBoard.dart';
 import 'package:bennettprojectgallery/DashBoard.dart';
-import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
-import 'package:bennettprojectgallery/LoginPageElements/LoginCard.dart';
 import 'package:bennettprojectgallery/login.dart';
 import 'package:bennettprojectgallery/main.dart';
+import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:bennettprojectgallery/projectgallery.dart';
 import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
+import 'package:bennettprojectgallery/services/user_simple_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -44,9 +45,12 @@ class _HeaderState extends State<Header> {
   String yog = "";
   String result = "";
   List<dynamic> projectList = [];
-  bool islogin;
+  bool islogin = false;
+  String userType;
 
   void getinfo() async {
+    userType = UserSimplePreferences.getUserType();
+    islogin = auth.currentUser != null;
     String email = auth.currentUser.email;
     result = email.substring(0, email.indexOf('@')).toUpperCase();
     UserServices _services = new UserServices();
@@ -71,7 +75,16 @@ class _HeaderState extends State<Header> {
 
   @override
   void initState() {
-    islogin = FirebaseAuth.instance.currentUser != null;
+    FirebaseAuth.instance.authStateChanges().listen((User user) {
+      if (user == null) {
+        print('User is currently signed out!');
+        islogin = false;
+        UserSimplePreferences.setUserType("");
+      } else {
+        print('User is signed in!');
+        islogin = true;
+      }
+    });
     getinfo();
     getAllCategories();
     super.initState();
@@ -79,6 +92,7 @@ class _HeaderState extends State<Header> {
 
   void logoutandlogin() async {
     await FirebaseAuth.instance.signOut();
+    await UserSimplePreferences.setUserType(""); //clearing user type
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => LoginPage()));
     Fluttertoast.showToast(
@@ -116,7 +130,9 @@ class _HeaderState extends State<Header> {
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => MyHomePage()));
+                            builder: (context) => MyHomePage(
+                                  isReoaded: false,
+                                )));
                       },
                       onHover: (x) {
                         if (x) {
@@ -264,24 +280,78 @@ class _HeaderState extends State<Header> {
                     width: 10,
                   ),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        List<Project> projectListFinal = [];
+                        UserServices _services = new UserServices();
+
+                        if (userType == "student") {
+                          for (var projectID in projectList) {
+                            var project = await FirebaseFirestore.instance
+                                .collection("project")
+                                .doc(projectID)
+                                .get();
+                            bool x = project.exists;
+                            if (!x) {
+                              projectList.remove(projectID);
+                              continue;
+                            }
+
+                            _services.updateUserData(
+                                result, {"projects": projectList});
+
+                            projectListFinal.add(
+                              new Project(
+                                yog: project["StudentIdList"][0]["yog"],
+                                like_count: project["LikeCount"],
+                                DatasetLink: project["ProjectDetails"]
+                                    ["DatasetLink"],
+                                Description: project["ProjectDetails"]
+                                    ["Description"],
+                                ProjectLink: project["ProjectDetails"]
+                                    ["ProjectLink"],
+                                ReportLink: project["ProjectDetails"]
+                                    ["ReportLink"],
+                                VideoLink: project["ProjectDetails"]
+                                    ["VideoLink"],
+                                Reviews: project["Reviews"],
+                                StudentList: project["StudentIdList"],
+                                images: project["images"],
+                                title: project["title"],
+                                timestamp: project["datetime"],
+                                viewCount: project["viewCount"],
+                                Categories: project["ProjectDetails"]
+                                    ["Categories"],
+                                ProfessorDetails: project["ProfessorDetails"],
+                              ),
+                            );
+                          }
+
+                          projectListFinal.sort(
+                              (a, b) => b.timestamp.compareTo(a.timestamp));
+                        }
+
                         !islogin
                             ? Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()))
-                            : Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(
-                                    builder: (context) => DashBoard(
-                                          id: result,
-                                          batch: batch,
-                                          course: course,
-                                          email: email1,
-                                          image: image,
-                                          name: name,
-                                          school: school,
-                                          yog: yog,
-                                          projectList: projectList,
-                                        )));
+                            : userType == "student"
+                                ? Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                        builder: (context) => DashBoard(
+                                              id: result,
+                                              batch: batch,
+                                              course: course,
+                                              email: email1,
+                                              image: image,
+                                              name: name,
+                                              school: school,
+                                              yog: yog,
+                                              projectList: projectListFinal,
+                                            )))
+                                : Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AdminDashBoard()));
                       },
                       onHover: (x) {
                         if (x) {
@@ -339,7 +409,7 @@ class _HeaderState extends State<Header> {
                       onHover: (x) {
                         if (x) {
                           setState(() {
-                            hover = "Sign In";
+                            hover = islogin == false ? "Sign In" : "Sign Out";
                           });
                         } else {
                           setState(() {
@@ -371,7 +441,7 @@ class _HeaderState extends State<Header> {
                             duration: Duration(milliseconds: 200),
                             width: widget.current == "Sign In"
                                 ? 25
-                                : hover == "Sign In"
+                                : hover == "Sign In" || hover == "Sign Out"
                                     ? 25
                                     : 0,
                             height: 2,
@@ -603,16 +673,7 @@ class _HeaderState extends State<Header> {
                                         : Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AdminDashBoard(
-                                                      id: result,
-                                                      batch: batch,
-                                                      course: course,
-                                                      email: email1,
-                                                      image: image,
-                                                      name: name,
-                                                      school: school,
-                                                      yog: yog,
-                                                    )));
+                                                    AdminDashBoard()));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -663,9 +724,12 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
+                                    islogin == false
+                                        ? Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()))
+                                        : logoutandlogin();
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -929,16 +993,7 @@ class _HeaderState extends State<Header> {
                                         : Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AdminDashBoard(
-                                                      id: result,
-                                                      batch: batch,
-                                                      course: course,
-                                                      email: email1,
-                                                      image: image,
-                                                      name: name,
-                                                      school: school,
-                                                      yog: yog,
-                                                    )));
+                                                    AdminDashBoard()));
                                   },
                                   onHover: (x) {
                                     if (x) {
@@ -989,9 +1044,12 @@ class _HeaderState extends State<Header> {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
+                                    islogin == false
+                                        ? Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()))
+                                        : logoutandlogin();
                                   },
                                   onHover: (x) {
                                     if (x) {

@@ -22,6 +22,7 @@ dependencies:
   url_launcher: any
   fluttertoast: any
   firebase_auth:
+  intl: ^0.17.0
   firebase:
   cloud_firestore:
   firebase_storage:
@@ -34,6 +35,7 @@ dependencies:
   textfield_search:
   lottie:
   fl_chart:
+  shared_preferences: any
 
 dev_dependencies:
   flutter_test:
