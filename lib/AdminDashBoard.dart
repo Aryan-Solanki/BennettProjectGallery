@@ -177,7 +177,6 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
             current: "Dashboard",
           ),
           Container(
-            width: 1050,
             height: MediaQuery.of(context).size.height - 60,
             child: SingleChildScrollView(
                 child: ResponsiveBuilder(
@@ -3823,8 +3822,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                                     height: 15,
                                   ),
                                   Container(
-                                    width: MediaQuery.of(context).size.width -
-                                        MediaQuery.of(context).size.width / 2.3,
+                                    width: MediaQuery.of(context).size.width-350,
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: DataTable(
