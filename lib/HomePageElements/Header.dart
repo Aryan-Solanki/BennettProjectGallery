@@ -180,6 +180,53 @@ class _HeaderState extends State<Header> {
                     width: 10,
                   ),
                   TextButton(
+                      onPressed: () {},
+                      onHover: (x) {
+                        if (x) {
+                          setState(() {
+                            hover = "About";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
+                          });
+                        }
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Color(0xff101770),
+                        // padding: EdgeInsets.all(0.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "About",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current == "About"
+                                ? 25
+                                : hover == "About"
+                                    ? 25
+                                    : 0,
+                            height: 2,
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => ProjectGallery(
@@ -221,6 +268,53 @@ class _HeaderState extends State<Header> {
                             width: widget.current == "Project Gallery"
                                 ? 25
                                 : hover == "Project Gallery"
+                                    ? 25
+                                    : 0,
+                            height: 2,
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      onHover: (x) {
+                        if (x) {
+                          setState(() {
+                            hover = "Achievers";
+                          });
+                        } else {
+                          setState(() {
+                            hover = "";
+                          });
+                        }
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Color(0xff101770),
+                        // padding: EdgeInsets.all(0.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "Achievers",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Metrisch-Bold"),
+                              )),
+                          AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.orange.shade400,
+                            ),
+                            duration: Duration(milliseconds: 200),
+                            width: widget.current == "Achievers"
+                                ? 25
+                                : hover == "Achievers"
                                     ? 25
                                     : 0,
                             height: 2,
@@ -556,6 +650,55 @@ class _HeaderState extends State<Header> {
                                 height: 6,
                               ),
                               TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "About";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "About",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "About"
+                                            ? 25
+                                            : hover == "About"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
@@ -606,6 +749,55 @@ class _HeaderState extends State<Header> {
                                                 : hover == "Project Gallery"
                                                     ? 25
                                                     : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Achievers";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Achievers",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Achievers"
+                                            ? 25
+                                            : hover == "Achievers"
+                                                ? 25
+                                                : 0,
                                         height: 2,
                                       )
                                     ],
@@ -874,6 +1066,55 @@ class _HeaderState extends State<Header> {
                                 height: 6,
                               ),
                               TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "About";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "About",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "About"
+                                            ? 25
+                                            : hover == "About"
+                                                ? 25
+                                                : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
@@ -924,6 +1165,55 @@ class _HeaderState extends State<Header> {
                                                 : hover == "Project Gallery"
                                                     ? 25
                                                     : 0,
+                                        height: 2,
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  onHover: (x) {
+                                    if (x) {
+                                      setState(() {
+                                        hover = "Achievers";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        hover = "";
+                                      });
+                                    }
+                                  },
+                                  style: TextButton.styleFrom(
+                                    primary: Color(0xff101770),
+                                    padding: EdgeInsets.all(0.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Text(
+                                            "Achievers",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontFamily: "Metrisch-Bold"),
+                                          )),
+                                      AnimatedContainer(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.orange.shade400,
+                                        ),
+                                        duration: Duration(milliseconds: 200),
+                                        width: widget.current == "Achievers"
+                                            ? 25
+                                            : hover == "Achievers"
+                                                ? 25
+                                                : 0,
                                         height: 2,
                                       )
                                     ],
