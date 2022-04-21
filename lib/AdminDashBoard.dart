@@ -287,6 +287,9 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                                     width: 250,
                                     child: Column(
                                       children: [
+                                        SizedBox(
+                                          height: 40,
+                                        ),
                                         Text(
                                           "Batch Wise Projects",
                                           style: TextStyle(
@@ -299,6 +302,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                                         ),
                                         MediaQuery.of(context).size.width > 971
                                             ? GridView.builder(
+                                            padding: EdgeInsets.zero,
                                           physics: NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
