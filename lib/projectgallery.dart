@@ -71,6 +71,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
         ),
       );
     }
+    ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
     _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
     setState(() {
       Future.delayed(Duration(seconds: 1), () {
@@ -126,6 +127,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
         ),
       );
     }
+    ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
     setState(() {});
     _gettingMoreProducts = false;
   }
@@ -221,7 +223,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   @override
   Widget build(BuildContext context) {
     double catheight = (40 * categoriesname.length) as double;
-
     final Widget normalChildButton = Container(
       color: Color(0xfff3f5fe),
       width: 250,
@@ -272,7 +273,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                     padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                     child: ResponsiveBuilder(
                       breakpoints: ScreenBreakpoints(
-                          tablet: 550, desktop: 971, watch: 300),
+                          tablet: 580, desktop: 951, watch: 300),
                       builder: (context, sizingInformation) {
                         // Check the sizing information here and return your UI
                         if (sizingInformation.deviceScreenType ==
