@@ -28,6 +28,8 @@ class CategoryClass {
   });
 }
 
+
+
 class UpperCaseTextFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -83,6 +85,8 @@ Image image3;
 String imageLink3 = "";
 
 String selectedKey = "1";
+
+
 
 class _AddProjectDialogState extends State<AddProjectDialog> {
   List<String> errors = [];
@@ -965,6 +969,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           }
                         }
 
+                        print(sampleImage1);
+
                         if (Title == "") {
                           addError(error: "Fill Title Field");
                         }
@@ -992,6 +998,13 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         }
                         if (VideoLink == "") {
                           addError(error: "Fill Video Link Field");
+                        }
+                        if(ProjectLink.indexOf("https://")!=0 || DatasetLink.indexOf("https://")!=0 || ReportLink.indexOf("https://")!=0 || VideoLink.indexOf("https://")!=0){
+                          addError(error: "Provide HTPP link");
+                        }
+
+                        if(sampleImage1.size/1048576>2 || sampleImage2.size/1048576>2 || sampleImage3.size/1048576>2 ){
+                          addError(error: "Image Size Should Be Less Than 2 MB");
                         }
 
                         if (errors.isEmpty) {
