@@ -1240,9 +1240,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       frameRate: FrameRate.max),
                                                 )
                                               : Container(
-                                                  height: ProjectList.length *
-                                                      160.toDouble(),
+                                            clipBehavior: Clip.none,
+                                                  // height: ProjectList.length *
+                                                  //     160.toDouble(),
                                                   child: GridView.builder(
+                                                    shrinkWrap: true,
                                                     physics:
                                                         NeverScrollableScrollPhysics(),
                                                     itemCount:
@@ -1258,25 +1260,31 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     itemBuilder:
                                                         (BuildContext context,
                                                             int index) {
-                                                      return ProjectCard(
-                                                          project: ProjectList[
-                                                              index]);
+                                                      return Padding(
+                                                        padding: const EdgeInsets.only(bottom: 30.0),
+                                                        child: ProjectCard(
+                                                            project: ProjectList[
+                                                                index]),
+                                                      );
                                                     },
                                                   ),
                                                 ),
                                           _moreProductsAvailable == true &&
                                                   _loadingProducts == false
-                                              ? GradientButton(
-                                                  title: "Load More",
-                                                  onPressed: () {
-                                                    if (widget.searchTerm ==
-                                                        "") {
-                                                      getMoreProducts();
-                                                    } else {
-                                                      //TODO: Get more products from algolia
-                                                    }
-                                                  },
-                                                )
+                                              ? Padding(
+                                                padding: const EdgeInsets.only(top: 50.0),
+                                                child: GradientButton(
+                                                    title: "Load More",
+                                                    onPressed: () {
+                                                      if (widget.searchTerm ==
+                                                          "") {
+                                                        getMoreProducts();
+                                                      } else {
+                                                        //TODO: Get more products from algolia
+                                                      }
+                                                    },
+                                                  ),
+                                              )
                                               : Center(),
                                         ],
                                       ),
