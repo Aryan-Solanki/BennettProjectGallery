@@ -45,7 +45,8 @@ class DashBoard extends StatefulWidget {
 }
 
 String selected = "zero";
-double num_of_reviews = 5;
+double num_of_reviews = 0;
+double num_of_likes = 0;
 
 class _DashBoardState extends State<DashBoard> {
   final String id;
@@ -74,14 +75,16 @@ class _DashBoardState extends State<DashBoard> {
   UserServices _services = UserServices();
   ProjectServices _services1 = ProjectServices();
 
-  getUserProjects() async {
-    var user = await _services.getUserById(id);
-    projectListupdated = user["projects"];
+  void count_likes_and_reviews_from_projects(projectList) {
+    for (int i = 0; i < projectList.length; i++) {
+      num_of_reviews = num_of_reviews + projectList[i].Reviews.length;
+      num_of_likes = num_of_likes + projectList[i].like_count;
+    }
   }
 
   @override
   void initState() {
-    getUserProjects();
+    count_likes_and_reviews_from_projects(projectList);
     super.initState();
   }
 
@@ -154,148 +157,174 @@ class _DashBoardState extends State<DashBoard> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                  height: num_of_reviews * 130,
-                                  child: ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: num_of_reviews.toInt(),
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        padding: EdgeInsets.only(bottom: 30),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 80,
-                                              height: 80,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                child: Image(
-                                                    fit: BoxFit.cover,
-                                                    image: NetworkImage(
-                                                        "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 30,
-                                            ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                          .size
-                                                          .width >
-                                                      1050
-                                                  ? 900
-                                                  : MediaQuery.of(context)
-                                                          .size
-                                                          .width -
-                                                      150,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                num_of_reviews == 0
+                                    ? Column(
+                                        children: [
+                                          Center(
+                                            child: Text("No Reviews Found"),
+                                          ),
+                                          SizedBox(
+                                            height: 40,
+                                          )
+                                        ],
+                                      )
+                                    : Container(
+                                        height: num_of_reviews * 130,
+                                        child: ListView.builder(
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: num_of_reviews.toInt(),
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 30),
+                                              child: Row(
                                                 children: [
-                                                  MediaQuery.of(context)
-                                                              .size
-                                                              .width >
-                                                          380
-                                                      ? Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Text(
-                                                              "David Parker",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  height: 1.3,
-                                                                  fontFamily:
-                                                                      "Metrisch-Medium",
-                                                                  fontSize: 17),
-                                                            ),
-                                                            RatingBarIndicator(
-                                                              rating: 3.5,
-                                                              itemBuilder:
-                                                                  (context,
-                                                                          index) =>
-                                                                      Icon(
-                                                                Icons
-                                                                    .star_rounded,
-                                                                color: Colors
-                                                                    .amber,
+                                                  Container(
+                                                    width: 80,
+                                                    height: 80,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      child: Image(
+                                                          fit: BoxFit.cover,
+                                                          image: NetworkImage(
+                                                              "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 30,
+                                                  ),
+                                                  Container(
+                                                    width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width >
+                                                            1050
+                                                        ? 900
+                                                        : MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            150,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        MediaQuery.of(context)
+                                                                    .size
+                                                                    .width >
+                                                                380
+                                                            ? Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    "David Parker",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        height:
+                                                                            1.3,
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            17),
+                                                                  ),
+                                                                  RatingBarIndicator(
+                                                                    rating: 3.5,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                                index) =>
+                                                                            Icon(
+                                                                      Icons
+                                                                          .star_rounded,
+                                                                      color: Colors
+                                                                          .amber,
+                                                                    ),
+                                                                    itemCount:
+                                                                        5,
+                                                                    itemSize:
+                                                                        20.0,
+                                                                    direction: Axis
+                                                                        .horizontal,
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            : Column(
+                                                                children: [
+                                                                  Text(
+                                                                    "David Parker",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        height:
+                                                                            1.3,
+                                                                        fontFamily:
+                                                                            "Metrisch-Medium",
+                                                                        fontSize:
+                                                                            17),
+                                                                  ),
+                                                                  RatingBarIndicator(
+                                                                    rating: 3.5,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                                index) =>
+                                                                            Icon(
+                                                                      Icons
+                                                                          .star_rounded,
+                                                                      color: Colors
+                                                                          .amber,
+                                                                    ),
+                                                                    itemCount:
+                                                                        5,
+                                                                    itemSize:
+                                                                        20.0,
+                                                                    direction: Axis
+                                                                        .horizontal,
+                                                                  ),
+                                                                ],
                                                               ),
-                                                              itemCount: 5,
-                                                              itemSize: 20.0,
-                                                              direction: Axis
-                                                                  .horizontal,
-                                                            ),
-                                                          ],
-                                                        )
-                                                      : Column(
-                                                          children: [
-                                                            Text(
-                                                              "David Parker",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  height: 1.3,
-                                                                  fontFamily:
-                                                                      "Metrisch-Medium",
-                                                                  fontSize: 17),
-                                                            ),
-                                                            RatingBarIndicator(
-                                                              rating: 3.5,
-                                                              itemBuilder:
-                                                                  (context,
-                                                                          index) =>
-                                                                      Icon(
-                                                                Icons
-                                                                    .star_rounded,
-                                                                color: Colors
-                                                                    .amber,
-                                                              ),
-                                                              itemCount: 5,
-                                                              itemSize: 20.0,
-                                                              direction: Axis
-                                                                  .horizontal,
-                                                            ),
-                                                          ],
+                                                        SizedBox(
+                                                          height: 5,
                                                         ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    "NOVEMBER 27, 2018",
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 12,
-                                                        color: Colors.black26),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  Text(
-                                                    "This is a useful post for finding broken links within the website, what about links pointing outwards that are broken? I can use a free web service but wondered if this was possible.",
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
+                                                        Text(
+                                                          "NOVEMBER 27, 2018",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 12,
+                                                              color: Colors
+                                                                  .black26),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                        Text(
+                                                          "This is a useful post for finding broken links within the website, what about links pointing outwards that are broken? I can use a free web service but wondered if this was possible.",
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        )
+                                                      ],
+                                                    ),
                                                   )
                                                 ],
                                               ),
-                                            )
-                                          ],
+                                            );
+                                          },
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                      ),
                                 SizedBox(
                                   height: 15,
                                 ),
@@ -308,14 +337,17 @@ class _DashBoardState extends State<DashBoard> {
                           right: 0,
                           top: 0,
                           child: RightBoard(
-                              id: id,
-                              batch: batch,
-                              school: school,
-                              email: email,
-                              name: name,
-                              yog: yog,
-                              course: course,
-                              image: image))
+                            id: id,
+                            batch: batch,
+                            school: school,
+                            email: email,
+                            name: name,
+                            yog: yog,
+                            course: course,
+                            image: image,
+                            no_of_reviews: num_of_reviews,
+                            no_of_likes: num_of_likes,
+                          ))
                     ],
                   )
                 : SingleChildScrollView(
@@ -375,150 +407,167 @@ class _DashBoardState extends State<DashBoard> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Container(
-                                height: MediaQuery.of(context).size.width > 380
-                                    ? num_of_reviews * 130
-                                    : num_of_reviews * 150,
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: num_of_reviews.toInt(),
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      padding: EdgeInsets.only(bottom: 30),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 80,
-                                            height: 80,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              child: Image(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                        .size
-                                                        .width >
-                                                    1050
-                                                ? 900
-                                                : MediaQuery.of(context)
-                                                        .size
-                                                        .width -
-                                                    150,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                              num_of_reviews == 0
+                                  ? Center(
+                                      child: Text("No Reviews Found"),
+                                    )
+                                  : Container(
+                                      height:
+                                          MediaQuery.of(context).size.width >
+                                                  380
+                                              ? num_of_reviews * 130
+                                              : num_of_reviews * 150,
+                                      child: ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: num_of_reviews.toInt(),
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            padding:
+                                                EdgeInsets.only(bottom: 30),
+                                            child: Row(
                                               children: [
-                                                MediaQuery.of(context)
-                                                            .size
-                                                            .width >
-                                                        380
-                                                    ? Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            "David Parker",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                height: 1.3,
-                                                                fontFamily:
-                                                                    "Metrisch-Medium",
-                                                                fontSize: 17),
-                                                          ),
-                                                          RatingBarIndicator(
-                                                            rating: 3.5,
-                                                            itemBuilder:
-                                                                (context,
-                                                                        index) =>
-                                                                    Icon(
-                                                              Icons
-                                                                  .star_rounded,
-                                                              color:
-                                                                  Colors.amber,
+                                                Container(
+                                                  width: 80,
+                                                  height: 80,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    child: Image(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(
+                                                            "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width >
+                                                          1050
+                                                      ? 900
+                                                      : MediaQuery.of(context)
+                                                              .size
+                                                              .width -
+                                                          150,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      MediaQuery.of(context)
+                                                                  .size
+                                                                  .width >
+                                                              380
+                                                          ? Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                  "David Parker",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      height:
+                                                                          1.3,
+                                                                      fontFamily:
+                                                                          "Metrisch-Medium",
+                                                                      fontSize:
+                                                                          17),
+                                                                ),
+                                                                RatingBarIndicator(
+                                                                  rating: 3.5,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                              index) =>
+                                                                          Icon(
+                                                                    Icons
+                                                                        .star_rounded,
+                                                                    color: Colors
+                                                                        .amber,
+                                                                  ),
+                                                                  itemCount: 5,
+                                                                  itemSize:
+                                                                      20.0,
+                                                                  direction: Axis
+                                                                      .horizontal,
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : Column(
+                                                              children: [
+                                                                Text(
+                                                                  "David Parker",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      height:
+                                                                          1.3,
+                                                                      fontFamily:
+                                                                          "Metrisch-Medium",
+                                                                      fontSize:
+                                                                          17),
+                                                                ),
+                                                                RatingBarIndicator(
+                                                                  rating: 3.5,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                              index) =>
+                                                                          Icon(
+                                                                    Icons
+                                                                        .star_rounded,
+                                                                    color: Colors
+                                                                        .amber,
+                                                                  ),
+                                                                  itemCount: 5,
+                                                                  itemSize:
+                                                                      20.0,
+                                                                  direction: Axis
+                                                                      .horizontal,
+                                                                ),
+                                                              ],
                                                             ),
-                                                            itemCount: 5,
-                                                            itemSize: 20.0,
-                                                            direction:
-                                                                Axis.horizontal,
-                                                          ),
-                                                        ],
-                                                      )
-                                                    : Column(
-                                                        children: [
-                                                          Text(
-                                                            "David Parker",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                height: 1.3,
-                                                                fontFamily:
-                                                                    "Metrisch-Medium",
-                                                                fontSize: 17),
-                                                          ),
-                                                          RatingBarIndicator(
-                                                            rating: 3.5,
-                                                            itemBuilder:
-                                                                (context,
-                                                                        index) =>
-                                                                    Icon(
-                                                              Icons
-                                                                  .star_rounded,
-                                                              color:
-                                                                  Colors.amber,
-                                                            ),
-                                                            itemCount: 5,
-                                                            itemSize: 20.0,
-                                                            direction:
-                                                                Axis.horizontal,
-                                                          ),
-                                                        ],
+                                                      SizedBox(
+                                                        height: 5,
                                                       ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  "NOVEMBER 27, 2018",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          "Metrisch-Medium",
-                                                      height: 1.5,
-                                                      fontSize: 12,
-                                                      color: Colors.black26),
-                                                ),
-                                                SizedBox(
-                                                  height: 8,
-                                                ),
-                                                Text(
-                                                  "This is a useful post for finding broken links within the website, what about links pointing outwards that are broken? I can use a free web service but wondered if this was possible.",
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          "Metrisch-Medium",
-                                                      height: 1.5,
-                                                      fontSize: 15,
-                                                      color: Colors.black54),
+                                                      Text(
+                                                        "NOVEMBER 27, 2018",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black26),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8,
+                                                      ),
+                                                      Text(
+                                                        "This is a useful post for finding broken links within the website, what about links pointing outwards that are broken? I can use a free web service but wondered if this was possible.",
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    ],
+                                                  ),
                                                 )
                                               ],
                                             ),
-                                          )
-                                        ],
+                                          );
+                                        },
                                       ),
-                                    );
-                                  },
-                                ),
-                              ),
+                                    ),
                               SizedBox(
                                 height: 15,
                               ),

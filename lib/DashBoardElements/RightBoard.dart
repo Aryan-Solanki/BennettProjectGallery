@@ -17,6 +17,8 @@ class RightBoard extends StatefulWidget {
   final String name;
   final String school;
   final String yog;
+  final double no_of_likes;
+  final double no_of_reviews;
 
   RightBoard({
     this.batch,
@@ -27,6 +29,8 @@ class RightBoard extends StatefulWidget {
     this.name,
     this.school,
     this.yog,
+    this.no_of_likes,
+    this.no_of_reviews,
   });
 
   @override
@@ -38,7 +42,9 @@ class RightBoard extends StatefulWidget {
       imageL: image,
       name: name,
       school: school,
-      yog: yog);
+      yog: yog,
+      no_of_likes: no_of_likes,
+      no_of_reviews: no_of_reviews);
 }
 
 class _RightBoardState extends State<RightBoard> {
@@ -55,6 +61,8 @@ class _RightBoardState extends State<RightBoard> {
   final String name;
   final String school;
   final String yog;
+  final double no_of_likes;
+  final double no_of_reviews;
 
   _RightBoardState(
       {this.batch,
@@ -64,7 +72,9 @@ class _RightBoardState extends State<RightBoard> {
       this.imageL,
       this.name,
       this.school,
-      this.yog});
+      this.yog,
+      this.no_of_likes,
+      this.no_of_reviews});
   // Future<void> uploadStatusImage() async {
   //   FirebaseStorage storage = FirebaseStorage.instance;
   //   final Reference postImageRef = storage.ref().child("Post Images");
@@ -355,7 +365,7 @@ class _RightBoardState extends State<RightBoard> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "23",
+                                                  no_of_likes.toString(),
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -389,7 +399,7 @@ class _RightBoardState extends State<RightBoard> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "123",
+                                                  no_of_reviews.toString(),
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,
