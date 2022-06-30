@@ -170,7 +170,7 @@ class _RightBoardState extends State<RightBoard> {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                                "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")),
+                                "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(30),
                         ),
@@ -474,7 +474,7 @@ class _RightBoardState extends State<RightBoard> {
                         children: [
                           CircleAvatar(
                               foregroundImage: NetworkImage(
-                                  "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1")),
+                                  "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
                           Positioned(
                             right: 11,
                             bottom: 7,
