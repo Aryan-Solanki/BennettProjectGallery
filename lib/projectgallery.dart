@@ -1380,7 +1380,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
-                                                return NoHoverProjectCard();
+                                                return NoHoverProjectCard(
+                                                    project: ProjectList[
+                                                    index]
+                                                );
                                               },
                                             ),
                                           ),
@@ -1493,7 +1496,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
-                                                return NoHoverProjectCard();
+                                                return NoHoverProjectCard(
+                                                    project: ProjectList[
+                                                    index]
+                                                );
                                               },
                                             ),
                                           ),
@@ -1599,7 +1605,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     crossAxisSpacing: 20),
                                             itemBuilder: (BuildContext context,
                                                 int index) {
-                                              return NoHoverProjectCard();
+                                              return NoHoverProjectCard(
+                                                  project: ProjectList[
+                                                  index]
+                                              );
                                             },
                                           ),
                                         ),
@@ -1732,7 +1741,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
-                                                    return ProjectCard();
+                                                    return ProjectCard(
+                                                        project: ProjectList[
+                                                        index]
+
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -1850,7 +1863,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
-                                                    return NoHoverProjectCard();
+                                                    return NoHoverProjectCard(
+                                                        project: ProjectList[
+                                                        index]
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -1968,7 +1984,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
-                                                    return NoHoverProjectCard();
+                                                    return NoHoverProjectCard(
+                                                        project: ProjectList[
+                                                        index]
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -2083,7 +2102,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {
-                                                  return NoHoverProjectCard();
+                                                  return NoHoverProjectCard(
+                                                      project: ProjectList[
+                                                      index]
+                                                  );
                                                 },
                                               ),
                                             ),
@@ -3149,7 +3171,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {
-                                                  return ProjectCard();
+                                                  return ProjectCard(
+                                                      project: ProjectList[
+                                                      index]
+                                                  );
                                                 },
                                               ),
                                             ),
@@ -3265,7 +3290,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {
-                                                  return NoHoverProjectCard();
+                                                  return NoHoverProjectCard(
+                                                      project: ProjectList[
+                                                      index]
+                                                  );
                                                 },
                                               ),
                                             ),
@@ -3381,7 +3409,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {
-                                                  return NoHoverProjectCard();
+                                                  return NoHoverProjectCard(
+                                                      project: ProjectList[
+                                                      index]
+                                                  );
                                                 },
                                               ),
                                             ),
@@ -3492,7 +3523,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
-                                                return NoHoverProjectCard();
+                                                return NoHoverProjectCard(
+                                                    project: ProjectList[
+                                                    index]
+                                                );
                                               },
                                             ),
                                           ),
