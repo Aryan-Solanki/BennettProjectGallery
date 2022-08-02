@@ -462,11 +462,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           SizedBox(
                                             height: 25,
                                           ),
-                                          GradientButton(
-                                            title: "Upvote Project ",
-                                            buttonheight: 45,
-                                            buttonwidth: 180,
-                                          )
+
                                         ],
                                       ),
                                     )
@@ -638,96 +634,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           ),
                                           SizedBox(
                                             height: 20,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(left: 10),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5.0)),
-                                                      color: Color(0xfff3f5fe)),
-                                                  height: 45,
-                                                  child: TextField(
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
-                                                    onChanged: (value) {
-                                                      //Do something with the user input.
-                                                    },
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      hintStyle: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                      hintText: 'Name',
-                                                      // contentPadding:
-                                                      // EdgeInsets.symmetric(horizontal: 20.0),
-                                                      // border: OutlineInputBorder(
-                                                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                      // ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 40,
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(left: 10),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5.0)),
-                                                      color: Color(0xfff3f5fe)),
-                                                  height: 45,
-                                                  child: TextField(
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
-                                                    onChanged: (value) {
-                                                      //Do something with the user input.
-                                                    },
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      hintStyle: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                      hintText: 'Email',
-                                                      // contentPadding:
-                                                      // EdgeInsets.symmetric(horizontal: 20.0),
-                                                      // border: OutlineInputBorder(
-                                                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                      // ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
                                           ),
                                           Text(
                                             "Your rating",
@@ -1179,12 +1085,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           SizedBox(
                                             height: 25,
                                           ),
-                                          GradientButton(
-                                            title: "Upvote Project ",
-                                          ),
-                                          SizedBox(
-                                            height: 25,
-                                          ),
                                           RichText(
                                             text: TextSpan(
                                               style: TextStyle(
@@ -1446,96 +1346,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           ),
                                           SizedBox(
                                             height: 20,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(left: 10),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5.0)),
-                                                      color: Color(0xfff3f5fe)),
-                                                  height: 45,
-                                                  child: TextField(
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
-                                                    onChanged: (value) {
-                                                      //Do something with the user input.
-                                                    },
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      hintStyle: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                      hintText: 'Name',
-                                                      // contentPadding:
-                                                      // EdgeInsets.symmetric(horizontal: 20.0),
-                                                      // border: OutlineInputBorder(
-                                                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                      // ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 40,
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(left: 10),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5.0)),
-                                                      color: Color(0xfff3f5fe)),
-                                                  height: 45,
-                                                  child: TextField(
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
-                                                    onChanged: (value) {
-                                                      //Do something with the user input.
-                                                    },
-                                                    decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      hintStyle: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                      hintText: 'Email',
-                                                      // contentPadding:
-                                                      // EdgeInsets.symmetric(horizontal: 20.0),
-                                                      // border: OutlineInputBorder(
-                                                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                      // ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
                                           ),
                                           Text(
                                             "Your rating",
