@@ -369,8 +369,7 @@ class _LoginCardState extends State<LoginCard> {
                                     addError(error: ksomethingerror);
                                   });
                                 }
-                                print('Failed with error code: ${e.code}');
-                                addError(error: e.message);
+
                               } catch (e) {
                                 print("Something Went Wrong $e");
                                 addError(error: "Something Went Wrong");

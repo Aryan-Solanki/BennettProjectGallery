@@ -235,12 +235,14 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           ),
                                           Container(
                                             child: Text(
-                                              "Made by - Aryan Solanki",
+                                              "Made by - Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki",
                                               overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
+                                              maxLines: 2,
+                                              textAlign: TextAlign.left,
                                               style: TextStyle(
                                                   fontFamily: "Metrisch-Medium",
                                                   fontSize: 15,
+                                                  height: 1.5,
                                                   color: Colors.green),
                                             ),
                                           ),
@@ -970,12 +972,14 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           Container(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              "Made by - Aryan Solanki",
+                                              "Made by - Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki",
                                               overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
                                                   fontFamily: "Metrisch-Medium",
                                                   fontSize: 15,
+                                                  height: 1.5,
                                                   color: Colors.green),
                                             ),
                                           ),

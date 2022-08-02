@@ -213,7 +213,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     'Default sorting',
     'Sort by popularity',
     'Sort by rating',
-    'Sort by latest',
   ];
 
   int cardnumber = 9;
