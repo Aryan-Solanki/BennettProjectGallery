@@ -435,13 +435,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                             categoriesname:
                                                                                 categoriesname,
                                                                             searchTerm:
-                                                                                categoriesname[index],
+                                                                                categoriesname[index]["name"],
                                                                           )));
                                                         });
                                                       },
                                                       categoryName:
-                                                          categoriesname[index],
-                                                      categoryQuantity: 213,
+                                                          categoriesname[index]
+                                                              ["name"],
+                                                      categoryQuantity:
+                                                          categoriesname[index]
+                                                              ["number"],
                                                     ),
                                                     Divider(
                                                       color: Colors.black12,
@@ -718,12 +721,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                           searched = true;
                                                           searchedvalue =
                                                               categoriesname[
-                                                                  index];
+                                                                      index]
+                                                                  ["name"];
                                                         });
                                                       },
                                                       categoryName:
-                                                          categoriesname[index],
-                                                      categoryQuantity: 213,
+                                                          categoriesname[index]
+                                                              ["name"],
+                                                      categoryQuantity:
+                                                          categoriesname[index]
+                                                              ["number"],
                                                     ),
                                                     Divider(
                                                       color: Colors.black12,
@@ -996,12 +1003,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         searched = true;
                                                         searchedvalue =
                                                             categoriesname[
-                                                                index];
+                                                                index]["name"];
                                                       });
                                                     },
                                                     categoryName:
-                                                        categoriesname[index],
-                                                    categoryQuantity: 213,
+                                                        categoriesname[index]
+                                                            ["name"],
+                                                    categoryQuantity:
+                                                        categoriesname[index]
+                                                            ["number"],
                                                   ),
                                                   Divider(
                                                     color: Colors.black12,
@@ -1239,7 +1249,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       frameRate: FrameRate.max),
                                                 )
                                               : Container(
-                                            clipBehavior: Clip.none,
+                                                  clipBehavior: Clip.none,
                                                   // height: ProjectList.length *
                                                   //     160.toDouble(),
                                                   child: GridView.builder(
@@ -1260,10 +1270,14 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         (BuildContext context,
                                                             int index) {
                                                       return Padding(
-                                                        padding: const EdgeInsets.only(bottom: 30.0),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                bottom: 30.0),
                                                         child: ProjectCard(
-                                                            project: ProjectList[
-                                                                index]),
+                                                            project:
+                                                                ProjectList[
+                                                                    index]),
                                                       );
                                                     },
                                                   ),
@@ -1271,8 +1285,10 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           _moreProductsAvailable == true &&
                                                   _loadingProducts == false
                                               ? Padding(
-                                                padding: const EdgeInsets.only(top: 50.0),
-                                                child: GradientButton(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 50.0),
+                                                  child: GradientButton(
                                                     title: "Load More",
                                                     onPressed: () {
                                                       if (widget.searchTerm ==
@@ -1283,7 +1299,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       }
                                                     },
                                                   ),
-                                              )
+                                                )
                                               : Center(),
                                         ],
                                       ),
@@ -1380,9 +1396,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   (BuildContext context,
                                                       int index) {
                                                 return NoHoverProjectCard(
-                                                    project: ProjectList[
-                                                    index]
-                                                );
+                                                    project:
+                                                        ProjectList[index]);
                                               },
                                             ),
                                           ),
@@ -1496,9 +1511,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   (BuildContext context,
                                                       int index) {
                                                 return NoHoverProjectCard(
-                                                    project: ProjectList[
-                                                    index]
-                                                );
+                                                    project:
+                                                        ProjectList[index]);
                                               },
                                             ),
                                           ),
@@ -1605,9 +1619,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             itemBuilder: (BuildContext context,
                                                 int index) {
                                               return NoHoverProjectCard(
-                                                  project: ProjectList[
-                                                  index]
-                                              );
+                                                  project: ProjectList[index]);
                                             },
                                           ),
                                         ),
@@ -1741,10 +1753,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       (BuildContext context,
                                                           int index) {
                                                     return ProjectCard(
-                                                        project: ProjectList[
-                                                        index]
-
-                                                    );
+                                                        project:
+                                                            ProjectList[index]);
                                                   },
                                                 ),
                                               ),
@@ -1863,9 +1873,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       (BuildContext context,
                                                           int index) {
                                                     return NoHoverProjectCard(
-                                                        project: ProjectList[
-                                                        index]
-                                                    );
+                                                        project:
+                                                            ProjectList[index]);
                                                   },
                                                 ),
                                               ),
@@ -1984,9 +1993,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       (BuildContext context,
                                                           int index) {
                                                     return NoHoverProjectCard(
-                                                        project: ProjectList[
-                                                        index]
-                                                    );
+                                                        project:
+                                                            ProjectList[index]);
                                                   },
                                                 ),
                                               ),
@@ -2102,9 +2110,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     (BuildContext context,
                                                         int index) {
                                                   return NoHoverProjectCard(
-                                                      project: ProjectList[
-                                                      index]
-                                                  );
+                                                      project:
+                                                          ProjectList[index]);
                                                 },
                                               ),
                                             ),
@@ -2279,13 +2286,18 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                               searched = true;
                                                               searchedvalue =
                                                                   categoriesname[
-                                                                      index];
+                                                                          index]
+                                                                      ["name"];
                                                             });
                                                           },
                                                           categoryName:
                                                               categoriesname[
-                                                                  index],
-                                                          categoryQuantity: 213,
+                                                                      index]
+                                                                  ["name"],
+                                                          categoryQuantity:
+                                                              categoriesname[
+                                                                      index]
+                                                                  ["number"],
                                                         ),
                                                         Divider(
                                                           color: Colors.black12,
@@ -2589,13 +2601,18 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                               searched = true;
                                                               searchedvalue =
                                                                   categoriesname[
-                                                                      index];
+                                                                          index]
+                                                                      ["name"];
                                                             });
                                                           },
                                                           categoryName:
                                                               categoriesname[
-                                                                  index],
-                                                          categoryQuantity: 213,
+                                                                      index]
+                                                                  ["name"],
+                                                          categoryQuantity:
+                                                              categoriesname[
+                                                                      index]
+                                                                  ["number"],
                                                         ),
                                                         Divider(
                                                           color: Colors.black12,
@@ -2896,13 +2913,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                             searched = true;
                                                             searchedvalue =
                                                                 categoriesname[
-                                                                    index];
+                                                                        index]
+                                                                    ["name"];
                                                           });
                                                         },
                                                         categoryName:
                                                             categoriesname[
-                                                                index],
-                                                        categoryQuantity: 213,
+                                                                index]["name"],
+                                                        categoryQuantity:
+                                                            categoriesname[
+                                                                    index]
+                                                                ["number"],
                                                       ),
                                                       Divider(
                                                         color: Colors.black12,
@@ -3171,9 +3192,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     (BuildContext context,
                                                         int index) {
                                                   return ProjectCard(
-                                                      project: ProjectList[
-                                                      index]
-                                                  );
+                                                      project:
+                                                          ProjectList[index]);
                                                 },
                                               ),
                                             ),
@@ -3290,9 +3310,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     (BuildContext context,
                                                         int index) {
                                                   return NoHoverProjectCard(
-                                                      project: ProjectList[
-                                                      index]
-                                                  );
+                                                      project:
+                                                          ProjectList[index]);
                                                 },
                                               ),
                                             ),
@@ -3409,9 +3428,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     (BuildContext context,
                                                         int index) {
                                                   return NoHoverProjectCard(
-                                                      project: ProjectList[
-                                                      index]
-                                                  );
+                                                      project:
+                                                          ProjectList[index]);
                                                 },
                                               ),
                                             ),
@@ -3523,9 +3541,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   (BuildContext context,
                                                       int index) {
                                                 return NoHoverProjectCard(
-                                                    project: ProjectList[
-                                                    index]
-                                                );
+                                                    project:
+                                                        ProjectList[index]);
                                               },
                                             ),
                                           ),
@@ -3697,13 +3714,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                             searched = true;
                                                             searchedvalue =
                                                                 categoriesname[
-                                                                    index];
+                                                                        index]
+                                                                    ["name"];
                                                           });
                                                         },
                                                         categoryName:
                                                             categoriesname[
-                                                                index],
-                                                        categoryQuantity: 213,
+                                                                index]["name"],
+                                                        categoryQuantity:
+                                                            categoriesname[
+                                                                    index]
+                                                                ["number"],
                                                       ),
                                                       Divider(
                                                         color: Colors.black12,
@@ -4000,13 +4021,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                             searched = true;
                                                             searchedvalue =
                                                                 categoriesname[
-                                                                    index];
+                                                                        index]
+                                                                    ["name"];
                                                           });
                                                         },
                                                         categoryName:
                                                             categoriesname[
-                                                                index],
-                                                        categoryQuantity: 213,
+                                                                index]["name"],
+                                                        categoryQuantity:
+                                                            categoriesname[
+                                                                    index]
+                                                                ["number"],
                                                       ),
                                                       Divider(
                                                         color: Colors.black12,
@@ -4293,12 +4318,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                           searched = true;
                                                           searchedvalue =
                                                               categoriesname[
-                                                                  index];
+                                                                      index]
+                                                                  ["name"];
                                                         });
                                                       },
                                                       categoryName:
-                                                          categoriesname[index],
-                                                      categoryQuantity: 213,
+                                                          categoriesname[index]
+                                                              ["name"],
+                                                      categoryQuantity:
+                                                          categoriesname[index]
+                                                              ["number"],
                                                     ),
                                                     Divider(
                                                       color: Colors.black12,

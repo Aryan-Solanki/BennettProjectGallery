@@ -350,7 +350,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   GetAllCategories() {
     setState(() {
       for (int i = 0; i < categoryList.length; i++) {
-        _catList.add(CategoryClass(id: i, name: categoryList[i]));
+        _catList.add(CategoryClass(id: i, name: categoryList[i]["name"]));
       }
     });
   }
@@ -371,7 +371,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   Widget build(BuildContext context) {
     String errorString = "";
     for (int i = 0; i < categoryList.length; i++) {
-      _catList.add(CategoryClass(id: i, name: categoryList[i]));
+      _catList.add(CategoryClass(id: i, name: categoryList[i]["name"]));
     }
 
     final Widget normalChildButton = Container(
@@ -1171,7 +1171,9 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         if (LongDescription == "") {
                           addError(error: "Fill Long Description Field");
                         }
-                        if (KeyFeature1 == "" || KeyFeature2 == "" ||  KeyFeature3 == "") {
+                        if (KeyFeature1 == "" ||
+                            KeyFeature2 == "" ||
+                            KeyFeature3 == "") {
                           addError(error: "Fill all the Key Features Field");
                         }
                         if (SelectedProfessor == "") {
