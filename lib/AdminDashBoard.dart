@@ -12,6 +12,26 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'dart:convert';
+
+import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
+import 'package:bennettprojectgallery/models/Project.dart';
+import 'package:bennettprojectgallery/projectgallery.dart';
+import 'package:bennettprojectgallery/services/user_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csv/csv.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:bennettprojectgallery/HomePageElements/Header.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Directory, File, Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:universal_html/html.dart' as html;
+
 class AdminDashBoard extends StatefulWidget {
   final String current_Year;
   AdminDashBoard({this.current_Year = "2020"});
@@ -28,6 +48,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
   Map finalDataRowMap = {};
   List<DataRow> listRowFinal = [];
   List<Project> projectListFinal = [];
+  Map<String, List<List<String>>> csvMap = {};
   FirebaseAuth auth = FirebaseAuth.instance;
   UserServices _services = UserServices();
   bool loading = true;
@@ -49,6 +70,42 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
     return formatted;
   }
 
+  generateCSV() async {
+    String csvData = ListToCsvConverter().convert(csvMap["result"]);
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('dd-MM-yy-HH-mm-ss').format(now);
+    if (kIsWeb) {
+      final bytes = utf8.encode(csvData);
+      final blob = html.Blob([bytes]);
+      final url = html.Url.createObjectUrlFromBlob(blob);
+      final anchor = html.document.createElement('a') as html.AnchorElement
+        ..href = url
+        ..style.display = 'none'
+        ..download =
+            'export_CSV_batch${widget.current_Year}_${formattedDate}.csv';
+      html.document.body.children.add(anchor);
+      anchor.click();
+      html.Url.revokeObjectUrl(url);
+    } else {
+      if (Platform.isAndroid) {
+        Directory generalDownloadDir =
+            Directory('/storage/emulated/0/Download');
+        final File file = await File(
+                '${generalDownloadDir.path}/export_CSV_batch${widget.current_Year}_${formattedDate}.csv')
+            .create();
+        await file.writeAsString(csvData);
+      }
+      if (Platform.isIOS) {
+        Directory generalDownloadDir = Directory(
+            '/private/var/mobile/Containers/Data/Application/B8C7C8D8-B9A6-4A2A-B8A7-A9C9C9C9C9C9/Documents');
+        final File file = await File(
+                '${generalDownloadDir.path}/export_CSV_batch${widget.current_Year}_${formattedDate}.csv')
+            .create();
+        await file.writeAsString(csvData);
+      }
+    }
+  }
+
   getProfProjects() async {
     var ProfID = auth.currentUser.email.toUpperCase();
     var prof = await _services.getProfessorById(ProfID);
@@ -58,6 +115,9 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
     loading = true;
 
     for (var yog in projectMap.keys) {
+      bool isFirst = true;
+      csvMap["result"] = [];
+
       bool anyProjectRemoved = false;
       List<dynamic> projectList = projectMap[yog];
       finalProjectMap["result"] = List<Project>();
@@ -216,6 +276,52 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
           ),
         );
 
+        if (isFirst) {
+          csvMap["result"].add(
+            [
+              "Project ID",
+              "Title",
+              "Student Name",
+              "Student Roll Number",
+              "Student Batch",
+              "Student Year",
+              "Dataset Link",
+              "Project Link",
+              "Report Link",
+              "Video Link",
+              "Image Links",
+              "Categories",
+              "DateTime",
+              "Description",
+            ],
+          );
+          isFirst = false;
+        }
+
+        String imgString = "";
+        for (var image in project["images"]) {
+          imgString += image + "\n";
+        }
+
+        csvMap["result"].add(
+          [
+            project.id,
+            project["title"],
+            studentNameString,
+            studentIDString,
+            studentBatchString,
+            studentYogString,
+            project["ProjectDetails"]["DatasetLink"],
+            project["ProjectDetails"]["ProjectLink"],
+            project["ProjectDetails"]["ReportLink"],
+            project["ProjectDetails"]["VideoLink"],
+            imgString,
+            StringCategories,
+            convert_timestamp_to_string(project["datetime"]),
+            project["ProjectDetails"]["Description"],
+          ],
+        );
+
         finalProjectMap["result"].add(
           new Project(
             yog: project["StudentIdList"][0]["yog"].toString(),
@@ -301,7 +407,9 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    generateCSV();
+                                  },
                                   child: Text("Download CSV",
                                       style: TextStyle(
                                           color: Colors.blue,
@@ -452,7 +560,9 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                             Align(
                               alignment: Alignment.centerRight,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  generateCSV();
+                                },
                                 child: Text("Download CSV",
                                     style: TextStyle(
                                         color: Colors.blue,
