@@ -127,7 +127,7 @@ class _FacultyLoginCardState extends State<FacultyLoginCard> {
                         height: 1.5,
                         fontSize: 15,
                         color: Colors.black54),
-                    hintText: 'facultyroll@bennett.edu.in',
+                    hintText: 'facultyid@bennett.edu.in',
                     // contentPadding:
                     // EdgeInsets.symmetric(horizontal: 20.0),
                     // border: OutlineInputBorder(

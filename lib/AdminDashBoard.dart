@@ -60,8 +60,8 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
     for (var yog in projectMap.keys) {
       bool anyProjectRemoved = false;
       List<dynamic> projectList = projectMap[yog];
-      finalProjectMap[yog] = List<Project>();
-      finalDataRowMap[yog] = List<DataRow>();
+      finalProjectMap["result"] = List<Project>();
+      finalDataRowMap["result"] = List<DataRow>();
 
       for (var projectID in projectList) {
         var project = await FirebaseFirestore.instance
@@ -81,12 +81,20 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
 
         String StringCategories = "";
 
+        String imageLinks = "";
+
+        for (var image in project["images"]) {
+          imageLinks += image + "\n";
+        }
+
         for (var student in project["StudentIdList"]) {
           StudentString += student["name"] +
               " | " +
               student["id"] +
               " | " +
               student["batch"] +
+              " | " +
+              student["yog"] +
               "\n";
         }
 
@@ -94,12 +102,31 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
           StringCategories += category + "\n";
         }
 
-        finalDataRowMap[yog].add(
+        // Split a string into a list of strings, splitting on a delimiter.
+        List<String> students = StudentString.split("\n");
+        String studentNameString = "";
+        String studentIDString = "";
+        String studentBatchString = "";
+        String studentYogString = "";
+        for (var student in students) {
+          if (student == "") {
+            continue;
+          }
+          studentNameString += student.split("|")[0] + "\n";
+          studentIDString += student.split("|")[1] + "\n";
+          studentBatchString += student.split("|")[2] + "\n";
+          studentYogString += student.split("|")[3] + "\n";
+        }
+
+        finalDataRowMap["result"].add(
           DataRow(
             cells: <DataCell>[
               DataCell(Text(project.id)),
               DataCell(Text(project["title"])),
-              DataCell(Text(StudentString)),
+              DataCell(Text(studentNameString)),
+              DataCell(Text(studentIDString)),
+              DataCell(Text(studentBatchString)),
+              DataCell(Text(studentYogString)),
               DataCell(FlatButton(
                 child: Text(project["ProjectDetails"]["DatasetLink"]),
                 onPressed: () {
@@ -124,13 +151,72 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                   _launchURL(project["ProjectDetails"]["VideoLink"]);
                 },
               )),
+              //find length of the list of images
+              project["images"].length == 1
+                  ? DataCell(
+                      Row(
+                        children: [
+                          FlatButton(
+                            child: Text(project["images"][0]),
+                            onPressed: () {
+                              _launchURL(project["images"][0]);
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  : project["images"].length == 2
+                      ? DataCell(
+                          Row(
+                            children: [
+                              FlatButton(
+                                child: Text(project["images"][0]),
+                                onPressed: () {
+                                  _launchURL(project["images"][0]);
+                                },
+                              ),
+                              FlatButton(
+                                child: Text(project["images"][1]),
+                                onPressed: () {
+                                  _launchURL(project["images"][1]);
+                                },
+                              ),
+                            ],
+                          ),
+                        )
+                      : project["images"].length == 3
+                          ? DataCell(
+                              Row(
+                                children: [
+                                  FlatButton(
+                                    child: Text(project["images"][0]),
+                                    onPressed: () {
+                                      _launchURL(project["images"][0]);
+                                    },
+                                  ),
+                                  FlatButton(
+                                    child: Text(project["images"][1]),
+                                    onPressed: () {
+                                      _launchURL(project["images"][1]);
+                                    },
+                                  ),
+                                  FlatButton(
+                                    child: Text(project["images"][2]),
+                                    onPressed: () {
+                                      _launchURL(project["images"][2]);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            )
+                          : DataCell(Text("No Images")),
               DataCell(Text(StringCategories)),
               DataCell(Text(convert_timestamp_to_string(project["datetime"]))),
             ],
           ),
         );
 
-        finalProjectMap[yog].add(
+        finalProjectMap["result"].add(
           new Project(
             yog: project["StudentIdList"][0]["yog"].toString(),
             like_count: project["LikeCount"],
@@ -150,7 +236,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
           ),
         );
       }
-      List<Project> yog_list = finalProjectMap[yog];
+      List<Project> yog_list = finalProjectMap["result"];
       yog_list
           .sort((a, b) => a.timestamp.seconds.compareTo(b.timestamp.seconds));
       if (anyProjectRemoved)
@@ -197,129 +283,147 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                           ),
                         )
                       : Padding(
-                    padding:
-                    EdgeInsets.only(top: 20, right: 20, left: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text("Dashboard",
-                            style: TextStyle(
-                                fontFamily: "Metrisch-Bold",
-                                fontSize: 25)),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: InkWell(
-                            onTap: () {},
-                            child: Text("Download CSV",
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontFamily: "Metrisch-Bold",
-                                    fontSize: 12)),
+                          padding:
+                              EdgeInsets.only(top: 20, right: 20, left: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text("Dashboard",
+                                  style: TextStyle(
+                                      fontFamily: "Metrisch-Bold",
+                                      fontSize: 25)),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Text("Download CSV",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontFamily: "Metrisch-Bold",
+                                          fontSize: 12)),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 50,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: DataTable(
+                                      showBottomBorder: true,
+                                      dataRowHeight: 60,
+                                      headingRowColor:
+                                          MaterialStateProperty.all(
+                                              Colors.grey[200]),
+                                      columns: const <DataColumn>[
+                                        DataColumn(
+                                          label: Text(
+                                            'ProjectId',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Project Title',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Student Name',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Student Roll Number',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Student Batch',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Year',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Dataset Link',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Project Link',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Report Link',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Video Link',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Image Links',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Categories',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Submission Time',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                      ],
+                                      rows: finalDataRowMap["result"]),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width-50,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: DataTable(
-                                showBottomBorder: true,
-                                dataRowHeight: 60,
-                                headingRowColor:
-                                MaterialStateProperty.all(
-                                    Colors.grey[200]),
-                                columns: const <DataColumn>[
-                                  DataColumn(
-                                    label: Text(
-                                      'ProjectId',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Project Title',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Students',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Dataset Link',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Project Link',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Report Link',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Video Link',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Categories',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'Submission Time',
-                                      style: TextStyle(
-                                          fontStyle:
-                                          FontStyle.italic),
-                                    ),
-                                  ),
-                                ],
-                                rows: finalDataRowMap[
-                                widget.current_Year]),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                      ],
-                    ),
-                  );
+                        );
                 }
 
                 return Padding(
@@ -351,91 +455,80 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                         height: 15,
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width-50,
+                        width: MediaQuery.of(context).size.width - 50,
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: DataTable(
                               showBottomBorder: true,
                               dataRowHeight: 60,
                               headingRowColor:
-                              MaterialStateProperty.all(
-                                  Colors.grey[200]),
+                                  MaterialStateProperty.all(Colors.grey[200]),
                               columns: const <DataColumn>[
                                 DataColumn(
                                   label: Text(
                                     'ProjectId',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Project Title',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Students',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Dataset Link',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Project Link',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Report Link',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Video Link',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Categories',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
                                     'Submission Time',
-                                    style: TextStyle(
-                                        fontStyle:
-                                        FontStyle.italic),
+                                    style:
+                                        TextStyle(fontStyle: FontStyle.italic),
                                   ),
                                 ),
                               ],
-                              rows: finalDataRowMap[
-                              widget.current_Year]),
+                              rows: finalDataRowMap["result"]),
                         ),
                       ),
                       SizedBox(
