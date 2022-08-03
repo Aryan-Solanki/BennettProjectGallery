@@ -1329,6 +1329,16 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                 "projects": profProjects,
                               });
 
+                              //check if category name from categoryList is present in ListCategories
+
+                              for (var cat in categoryList) {
+                                if (ListCategories.contains(cat["name"])) {
+                                  cat["number"] = cat["number"] + 1;
+                                }
+                              }
+
+                              userServices.updateCategoryData(categoryList);
+
                               for (int i = 0; i < studentDicList.length; i++) {
                                 var studentId = studentDicList[i]["id"];
                                 var user =

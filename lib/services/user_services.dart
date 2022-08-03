@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserServices {
   String collectionStudent = 'studentDatabase';
+  String collectionCategories = 'ProjectCategories';
   String collectionFaculty = 'facultyDatabase';
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -17,6 +18,13 @@ class UserServices {
 
   Future<void> updateUserData(String id, Map<String, dynamic> values) async {
     await _firestore.collection(collectionStudent).doc(id).update(values);
+  }
+
+  Future<void> updateCategoryData(List<dynamic> values) async {
+    await _firestore
+        .collection(collectionCategories)
+        .doc("Categories")
+        .update({"categoryList": values});
   }
 
   Future<void> updateProfData(String id, Map<String, dynamic> values) async {
