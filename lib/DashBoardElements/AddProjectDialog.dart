@@ -2,6 +2,7 @@ import 'dart:html' as html;
 import 'dart:html';
 import 'dart:math';
 
+import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
@@ -27,8 +28,6 @@ class CategoryClass {
     this.name,
   });
 }
-
-
 
 class UpperCaseTextFormatter extends TextInputFormatter {
   @override
@@ -85,8 +84,6 @@ Image image3;
 String imageLink3 = "";
 
 String selectedKey = "1";
-
-
 
 class _AddProjectDialogState extends State<AddProjectDialog> {
   List<String> errors = [];
@@ -210,6 +207,52 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
       });
     });
     //selected image
+  }
+
+  void reloadProjectList() async {
+    List<dynamic> projectList = [];
+    UserServices _services = new UserServices();
+    var doc = await _services.getUserById(widget.id);
+    projectList = doc["projects"];
+
+    List<Project> projectListFinal = [];
+    UserServices _services1 = new UserServices();
+
+    for (var projectID in projectList) {
+      var project = await FirebaseFirestore.instance
+          .collection("project")
+          .doc(projectID)
+          .get();
+      bool x = project.exists;
+      if (!x) {
+        projectList.remove(projectID);
+        continue;
+      }
+
+      _services.updateUserData(widget.id, {"projects": projectList});
+
+      projectListFinal.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"],
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          Description: project["ProjectDetails"]["Description"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          timestamp: project["datetime"],
+          viewCount: project["viewCount"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+
+      projectListFinal.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    }
   }
 
   Future<String> uploadImageToFirebase(var image) async {
@@ -390,8 +433,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           ? TextButton(
                               onPressed: () {
                                 getImage1();
-                                print("sssssssssssssssssssssssssssssss");
-                                print(listImageLinks);
+                                // print(listImageLinks);
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor: Colors.transparent,
@@ -414,8 +456,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           : TextButton(
                               onPressed: () {
                                 getImage1();
-                                print("sssssssssssssssssssssssssssssss");
-                                print(listImageLinks);
+                                // print("sssssssssssssssssssssssssssssss");
+                                // print(listImageLinks);
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor: Colors.transparent,
@@ -935,7 +977,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
                         CollectionReference project =
                             FirebaseFirestore.instance.collection('project');
-                        print("working 1");
+                        // print("working 1");
 
                         var var1 = studnameController2.text == ""
                             ? studnameController2.text
@@ -943,7 +985,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                 .split("(")[1]
                                 .split(")")[0];
 
-                        print("working 2");
+                        // print("working 2");
 
                         List stud = [
                           id,
@@ -999,13 +1041,46 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         if (VideoLink == "") {
                           addError(error: "Fill Video Link Field");
                         }
-                        if(ProjectLink.indexOf("https://")!=0 || DatasetLink.indexOf("https://")!=0 || ReportLink.indexOf("https://")!=0 || VideoLink.indexOf("https://")!=0){
+                        if (ProjectLink.indexOf("https://") != 0 ||
+                            DatasetLink.indexOf("https://") != 0 ||
+                            ReportLink.indexOf("https://") != 0 ||
+                            VideoLink.indexOf("https://") != 0) {
                           addError(error: "Provide HTPP link");
                         }
 
-                        if(sampleImage1.size/1048576>2 || sampleImage2.size/1048576>2 || sampleImage3.size/1048576>2 ){
-                          addError(error: "Image Size Should Be Less Than 2 MB");
+                        if (image1selected == false &&
+                            image2selected == false &&
+                            image3selected == false) {
+                          addError(error: "Upload Images");
                         }
+
+                        if (image1selected) {
+                          if (sampleImage1.size / 1048576 > 2) {
+                            addError(
+                                error: "Image 1 size should be less than 2 MB");
+                          }
+                        }
+
+                        if (image2selected) {
+                          if (sampleImage2.size / 1048576 > 2) {
+                            addError(
+                                error: "Image 2 size should be less than 2 MB");
+                          }
+                        }
+
+                        if (image3selected) {
+                          if (sampleImage3.size / 1048576 > 2) {
+                            addError(
+                                error: "Image 3 size should be less than 2 MB");
+                          }
+                        }
+
+                        // else if (sampleImage1.size / 1048576 > 2 ||
+                        //     sampleImage2.size / 1048576 > 2 ||
+                        //     sampleImage3.size / 1048576 > 2) {
+                        //   addError(
+                        //       error: "Image Size Should Be Less Than 2 MB");
+                        // }
 
                         if (errors.isEmpty) {
                           UserServices _services_user = UserServices();
@@ -1108,6 +1183,26 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             }
                           }
                           Navigator.pop(context);
+                          //  Generate Toast
+                          Fluttertoast.showToast(
+                              msg: "Project Uploaded Successfully",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+
+                          reloadProjectList();
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: errorString,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
                         }
                       }
                     },
