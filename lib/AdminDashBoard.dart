@@ -196,1517 +196,253 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                                 frameRate: FrameRate.max),
                           ),
                         )
-                      : Row(
-                          children: [
-                            ResponsiveBuilder(
-                              breakpoints: ScreenBreakpoints(
-                                  tablet: 971, desktop: 971, watch: 300),
-                              builder: (context, sizingInformation) {
-                                // Check the sizing information here and retrurn your UI
-                                if (sizingInformation.deviceScreenType ==
-                                    DeviceScreenType.desktop) {
-                                  return Container(
-                                    width: 250,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 40,
-                                        ),
-                                        Text(
-                                          "Batch Wise Projects",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.black87,
-                                              fontFamily: "Metrisch-Bold"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        MediaQuery.of(context).size.width > 971
-                                            ? GridView.builder(
-                                            padding: EdgeInsets.zero,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 0.0,
-                                            mainAxisSpacing: 0.0,
-                                          ),
-                                          itemCount: 6,
-                                          itemBuilder: (context, index) {
-                                            return TextButton(
-                                              style: TextButton
-                                                  .styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5.0)),
-                                                backgroundColor:
-                                                Colors
-                                                    .transparent,
-                                                primary: Colors
-                                                    .transparent,
-                                                padding: EdgeInsets.all(0.0),
-                                              ),
-                                              onPressed: () {
-                                                print(
-                                                    "hijedwcasfwes");
-                                              },
-                                              child: AnimatedContainer(
-                                                duration: Duration(
-                                                    milliseconds:
-                                                    300),
-                                                padding: EdgeInsets
-                                                    .symmetric(
-                                                    horizontal:
-                                                    10),
-                                                decoration: BoxDecoration(
-                                                    color: hover1 ==
-                                                        true
-                                                        ? Colors
-                                                        .orange
-                                                        .shade400
-                                                        : Color(
-                                                        0xfff3f5fe),
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5)),
-                                                height: 30,
-                                                child: Center(
-                                                  child: Text(
-                                                    "Batch of 2016",
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                        "Metrisch-Medium",
-                                                        fontSize: 13,
-                                                        color: hover1 ==
-                                                            true
-                                                            ? Colors
-                                                            .white
-                                                            : Colors
-                                                            .grey
-                                                            .shade600),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        )
-                                            : MediaQuery.of(context)
-                                                        .size
-                                                        .width >
-                                                    715
-                                                ? GridView.builder(
-                                          physics: NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 6,
-                                            crossAxisSpacing: 5.0,
-                                            mainAxisSpacing: 5.0,
-                                          ),
-                                          itemCount: 6,
-                                          itemBuilder: (context, index) {
-                                            return TextButton(
-                                              style: TextButton
-                                                  .styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5.0)),
-                                                backgroundColor:
-                                                Colors
-                                                    .transparent,
-                                                primary: Colors
-                                                    .transparent,
-                                                padding:
-                                                EdgeInsets.all(
-                                                    0.0),
-                                              ),
-                                              onPressed: () {
-                                                print(
-                                                    "hijedwcasfwes");
-                                              },
-                                              child: AnimatedContainer(
-                                                duration: Duration(
-                                                    milliseconds:
-                                                    300),
-                                                padding: EdgeInsets
-                                                    .symmetric(
-                                                    horizontal:
-                                                    10),
-                                                decoration: BoxDecoration(
-                                                    color: hover1 ==
-                                                        true
-                                                        ? Colors
-                                                        .orange
-                                                        .shade400
-                                                        : Color(
-                                                        0xfff3f5fe),
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5)),
-                                                height: 30,
-                                                child: Center(
-                                                  child: Text(
-                                                    "Batch of 2016",
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                        "Metrisch-Medium",
-                                                        fontSize: 13,
-                                                        color: hover1 ==
-                                                            true
-                                                            ? Colors
-                                                            .white
-                                                            : Colors
-                                                            .grey
-                                                            .shade600),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        )
-                                                : MediaQuery.of(context)
-                                                            .size
-                                                            .width >
-                                                        430
-                                                    ? GridView.builder(
-                                          physics: NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
-                                            crossAxisSpacing: 5.0,
-                                            mainAxisSpacing: 5.0,
-                                          ),
-                                          itemCount: 6,
-                                          itemBuilder: (context, index) {
-                                            return TextButton(
-                                              style: TextButton
-                                                  .styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5.0)),
-                                                backgroundColor:
-                                                Colors
-                                                    .transparent,
-                                                primary: Colors
-                                                    .transparent,
-                                                padding:
-                                                EdgeInsets.all(
-                                                    0.0),
-                                              ),
-                                              onPressed: () {
-                                                print(
-                                                    "hijedwcasfwes");
-                                              },
-                                              child: AnimatedContainer(
-                                                duration: Duration(
-                                                    milliseconds:
-                                                    300),
-                                                padding: EdgeInsets
-                                                    .symmetric(
-                                                    horizontal:
-                                                    10),
-                                                decoration: BoxDecoration(
-                                                    color: hover1 ==
-                                                        true
-                                                        ? Colors
-                                                        .orange
-                                                        .shade400
-                                                        : Color(
-                                                        0xfff3f5fe),
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5)),
-                                                height: 30,
-                                                child: Center(
-                                                  child: Text(
-                                                    "Batch of 2016",
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                        "Metrisch-Medium",
-                                                        fontSize: 13,
-                                                        color: hover1 ==
-                                                            true
-                                                            ? Colors
-                                                            .white
-                                                            : Colors
-                                                            .grey
-                                                            .shade600),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        )
-                                                    : GridView.builder(
-                                          physics: NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 5.0,
-                                            mainAxisSpacing: 5.0,
-                                          ),
-                                          itemCount: 6,
-                                          itemBuilder: (context, index) {
-                                            return TextButton(
-                                              style: TextButton
-                                                  .styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5.0)),
-                                                backgroundColor:
-                                                Colors
-                                                    .transparent,
-                                                primary: Colors
-                                                    .transparent,
-                                                padding:
-                                                EdgeInsets.all(
-                                                    0.0),
-                                              ),
-                                              onPressed: () {
-                                                print(
-                                                    "hijedwcasfwes");
-                                              },
-                                              child: AnimatedContainer(
-                                                duration: Duration(
-                                                    milliseconds:
-                                                    300),
-                                                padding: EdgeInsets
-                                                    .symmetric(
-                                                    horizontal:
-                                                    10),
-                                                decoration: BoxDecoration(
-                                                    color: hover1 ==
-                                                        true
-                                                        ? Colors
-                                                        .orange
-                                                        .shade400
-                                                        : Color(
-                                                        0xfff3f5fe),
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        5)),
-                                                height: 30,
-                                                child: Center(
-                                                  child: Text(
-                                                    "Batch of 2016",
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                        "Metrisch-Medium",
-                                                        fontSize: 13,
-                                                        color: hover1 ==
-                                                            true
-                                                            ? Colors
-                                                            .white
-                                                            : Colors
-                                                            .grey
-                                                            .shade600),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }
-
-                                return Container(
-                                  width: MediaQuery.of(context).size.width - 40,
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 40,
-                                      ),
-                                      Text(
-                                        "Batch Wise Projects",
-                                        style: TextStyle(
-                                            fontSize: 21,
-                                            color: Colors.black87,
-                                            fontFamily: "Metrisch-Bold"),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      MediaQuery.of(context).size.width > 971
-                                          ? GridView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 5.0,
-                                          mainAxisSpacing: 5.0,
-                                        ),
-                                        itemCount: 6,
-                                        itemBuilder: (context, index) {
-                                          return TextButton(
-                                            style: TextButton
-                                                .styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5.0)),
-                                              backgroundColor:
-                                              Colors
-                                                  .transparent,
-                                              primary: Colors
-                                                  .transparent,
-                                              padding:
-                                              EdgeInsets.all(
-                                                  0.0),
-                                            ),
-                                            onPressed: () {
-                                              print(
-                                                  "hijedwcasfwes");
-                                            },
-                                            child: AnimatedContainer(
-                                              duration: Duration(
-                                                  milliseconds:
-                                                  300),
-                                              padding: EdgeInsets
-                                                  .symmetric(
-                                                  horizontal:
-                                                  10),
-                                              decoration: BoxDecoration(
-                                                  color: hover1 ==
-                                                      true
-                                                      ? Colors
-                                                      .orange
-                                                      .shade400
-                                                      : Color(
-                                                      0xfff3f5fe),
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5)),
-                                              height: 30,
-                                              child: Center(
-                                                child: Text(
-                                                  "Batch of 2016",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      "Metrisch-Medium",
-                                                      fontSize: 13,
-                                                      color: hover1 ==
-                                                          true
-                                                          ? Colors
-                                                          .white
-                                                          : Colors
-                                                          .grey
-                                                          .shade600),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      )
-                                          : MediaQuery.of(context).size.width >
-                                                  715
-                                              ? GridView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 6,
-                                          crossAxisSpacing: 5.0,
-                                          mainAxisSpacing: 5.0,
-                                        ),
-                                        itemCount: 6,
-                                        itemBuilder: (context, index) {
-                                          return TextButton(
-                                            style: TextButton
-                                                .styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5.0)),
-                                              backgroundColor:
-                                              Colors
-                                                  .transparent,
-                                              primary: Colors
-                                                  .transparent,
-                                              padding:
-                                              EdgeInsets.all(
-                                                  0.0),
-                                            ),
-                                            onPressed: () {
-                                              print(
-                                                  "hijedwcasfwes");
-                                            },
-                                            child: AnimatedContainer(
-                                              duration: Duration(
-                                                  milliseconds:
-                                                  300),
-                                              padding: EdgeInsets
-                                                  .symmetric(
-                                                  horizontal:
-                                                  10),
-                                              decoration: BoxDecoration(
-                                                  color: hover1 ==
-                                                      true
-                                                      ? Colors
-                                                      .orange
-                                                      .shade400
-                                                      : Color(
-                                                      0xfff3f5fe),
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5)),
-                                              height: 30,
-                                              child: Center(
-                                                child: Text(
-                                                  "Batch of 2016",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      "Metrisch-Medium",
-                                                      fontSize: 13,
-                                                      color: hover1 ==
-                                                          true
-                                                          ? Colors
-                                                          .white
-                                                          : Colors
-                                                          .grey
-                                                          .shade600),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      )
-                                              : MediaQuery.of(context)
-                                                          .size
-                                                          .width >
-                                                      430
-                                                  ? GridView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 3,
-                                          crossAxisSpacing: 5.0,
-                                          mainAxisSpacing: 5.0,
-                                        ),
-                                        itemCount: 6,
-                                        itemBuilder: (context, index) {
-                                          return TextButton(
-                                            style: TextButton
-                                                .styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5.0)),
-                                              backgroundColor:
-                                              Colors
-                                                  .transparent,
-                                              primary: Colors
-                                                  .transparent,
-                                              padding:
-                                              EdgeInsets.all(
-                                                  0.0),
-                                            ),
-                                            onPressed: () {
-                                              print(
-                                                  "hijedwcasfwes");
-                                            },
-                                            child: AnimatedContainer(
-                                              duration: Duration(
-                                                  milliseconds:
-                                                  300),
-                                              padding: EdgeInsets
-                                                  .symmetric(
-                                                  horizontal:
-                                                  10),
-                                              decoration: BoxDecoration(
-                                                  color: hover1 ==
-                                                      true
-                                                      ? Colors
-                                                      .orange
-                                                      .shade400
-                                                      : Color(
-                                                      0xfff3f5fe),
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5)),
-                                              height: 30,
-                                              child: Center(
-                                                child: Text(
-                                                  "Batch of 2016",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      "Metrisch-Medium",
-                                                      fontSize: 13,
-                                                      color: hover1 ==
-                                                          true
-                                                          ? Colors
-                                                          .white
-                                                          : Colors
-                                                          .grey
-                                                          .shade600),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      )
-                                                  : GridView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 5.0,
-                                          mainAxisSpacing: 5.0,
-                                        ),
-                                        itemCount: 6,
-                                        itemBuilder: (context, index) {
-                                          return TextButton(
-                                            style: TextButton
-                                                .styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5.0)),
-                                              backgroundColor:
-                                              Colors
-                                                  .transparent,
-                                              primary: Colors
-                                                  .transparent,
-                                              padding:
-                                              EdgeInsets.all(
-                                                  0.0),
-                                            ),
-                                            onPressed: () {
-                                              print(
-                                                  "hijedwcasfwes");
-                                            },
-                                            child: AnimatedContainer(
-                                              duration: Duration(
-                                                  milliseconds:
-                                                  300),
-                                              padding: EdgeInsets
-                                                  .symmetric(
-                                                  horizontal:
-                                                  10),
-                                              decoration: BoxDecoration(
-                                                  color: hover1 ==
-                                                      true
-                                                      ? Colors
-                                                      .orange
-                                                      .shade400
-                                                      : Color(
-                                                      0xfff3f5fe),
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(
-                                                      5)),
-                                              height: 30,
-                                              child: Center(
-                                                child: Text(
-                                                  "Batch of 2016",
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                      "Metrisch-Medium",
-                                                      fontSize: 13,
-                                                      color: hover1 ==
-                                                          true
-                                                          ? Colors
-                                                          .white
-                                                          : Colors
-                                                          .grey
-                                                          .shade600),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(top: 20, right: 20, left: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text("Dashboard",
-                                      style: TextStyle(
-                                          fontFamily: "Metrisch-Bold",
-                                          fontSize: 25)),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: Text("Download CSV",
-                                          style: TextStyle(
-                                              color: Colors.blue,
-                                              fontFamily: "Metrisch-Bold",
-                                              fontSize: 12)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width -
-                                        MediaQuery.of(context).size.width / 2.3,
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: DataTable(
-                                          showBottomBorder: true,
-                                          dataRowHeight: 60,
-                                          headingRowColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.grey[200]),
-                                          columns: const <DataColumn>[
-                                            DataColumn(
-                                              label: Text(
-                                                'ProjectId',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Project Title',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Students',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Dataset Link',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Project Link',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Report Link',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Video Link',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Categories',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
-                                                'Submission Time',
-                                                style: TextStyle(
-                                                    fontStyle:
-                                                        FontStyle.italic),
-                                              ),
-                                            ),
-                                          ],
-                                          rows: finalDataRowMap[
-                                              widget.current_Year]),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        );
-                }
-
-                return Column(
-                  children: [
-                    ResponsiveBuilder(
-                      breakpoints: ScreenBreakpoints(
-                          tablet: 971, desktop: 971, watch: 300),
-                      builder: (context, sizingInformation) {
-                        // Check the sizing information here and retrurn your UI
-                        if (sizingInformation.deviceScreenType ==
-                            DeviceScreenType.desktop) {
-                          return Container(
-                            width: 250,
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Batch Wise Projects",
-                                  style: TextStyle(
-                                      fontSize: 21,
-                                      color: Colors.black87,
-                                      fontFamily: "Metrisch-Bold"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                MediaQuery.of(context).size.width > 971
-                                    ? GridView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 5.0,
-                                    mainAxisSpacing: 5.0,
-                                  ),
-                                  itemCount: 6,
-                                  itemBuilder: (context, index) {
-                                    return TextButton(
-                                      style: TextButton
-                                          .styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5.0)),
-                                        backgroundColor:
-                                        Colors
-                                            .transparent,
-                                        primary: Colors
-                                            .transparent,
-                                        padding:
-                                        EdgeInsets.all(
-                                            0.0),
-                                      ),
-                                      onPressed: () {
-                                        print(
-                                            "hijedwcasfwes");
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: Duration(
-                                            milliseconds:
-                                            300),
-                                        padding: EdgeInsets
-                                            .symmetric(
-                                            horizontal:
-                                            10),
-                                        decoration: BoxDecoration(
-                                            color: hover1 ==
-                                                true
-                                                ? Colors
-                                                .orange
-                                                .shade400
-                                                : Color(
-                                                0xfff3f5fe),
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5)),
-                                        height: 30,
-                                        child: Center(
-                                          child: Text(
-                                            "Batch of 2016",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                "Metrisch-Medium",
-                                                fontSize: 13,
-                                                color: hover1 ==
-                                                    true
-                                                    ? Colors
-                                                    .white
-                                                    : Colors
-                                                    .grey
-                                                    .shade600),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
-                                    : MediaQuery.of(context).size.width > 715
-                                        ? GridView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 6,
-                                    crossAxisSpacing: 5.0,
-                                    mainAxisSpacing: 5.0,
-                                  ),
-                                  itemCount: 6,
-                                  itemBuilder: (context, index) {
-                                    return TextButton(
-                                      style: TextButton
-                                          .styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5.0)),
-                                        backgroundColor:
-                                        Colors
-                                            .transparent,
-                                        primary: Colors
-                                            .transparent,
-                                        padding:
-                                        EdgeInsets.all(
-                                            0.0),
-                                      ),
-                                      onPressed: () {
-                                        print(
-                                            "hijedwcasfwes");
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: Duration(
-                                            milliseconds:
-                                            300),
-                                        padding: EdgeInsets
-                                            .symmetric(
-                                            horizontal:
-                                            10),
-                                        decoration: BoxDecoration(
-                                            color: hover1 ==
-                                                true
-                                                ? Colors
-                                                .orange
-                                                .shade400
-                                                : Color(
-                                                0xfff3f5fe),
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5)),
-                                        height: 30,
-                                        child: Center(
-                                          child: Text(
-                                            "Batch of 2016",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                "Metrisch-Medium",
-                                                fontSize: 13,
-                                                color: hover1 ==
-                                                    true
-                                                    ? Colors
-                                                    .white
-                                                    : Colors
-                                                    .grey
-                                                    .shade600),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
-                                        : MediaQuery.of(context).size.width >
-                                                430
-                                            ? GridView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 5.0,
-                                    mainAxisSpacing: 5.0,
-                                  ),
-                                  itemCount: 6,
-                                  itemBuilder: (context, index) {
-                                    return TextButton(
-                                      style: TextButton
-                                          .styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5.0)),
-                                        backgroundColor:
-                                        Colors
-                                            .transparent,
-                                        primary: Colors
-                                            .transparent,
-                                        padding:
-                                        EdgeInsets.all(
-                                            0.0),
-                                      ),
-                                      onPressed: () {
-                                        print(
-                                            "hijedwcasfwes");
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: Duration(
-                                            milliseconds:
-                                            300),
-                                        padding: EdgeInsets
-                                            .symmetric(
-                                            horizontal:
-                                            10),
-                                        decoration: BoxDecoration(
-                                            color: hover1 ==
-                                                true
-                                                ? Colors
-                                                .orange
-                                                .shade400
-                                                : Color(
-                                                0xfff3f5fe),
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5)),
-                                        height: 30,
-                                        child: Center(
-                                          child: Text(
-                                            "Batch of 2016",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                "Metrisch-Medium",
-                                                fontSize: 13,
-                                                color: hover1 ==
-                                                    true
-                                                    ? Colors
-                                                    .white
-                                                    : Colors
-                                                    .grey
-                                                    .shade600),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
-                                            : GridView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 5.0,
-                                    mainAxisSpacing: 5.0,
-                                  ),
-                                  itemCount: 6,
-                                  itemBuilder: (context, index) {
-                                    return TextButton(
-                                      style: TextButton
-                                          .styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5.0)),
-                                        backgroundColor:
-                                        Colors
-                                            .transparent,
-                                        primary: Colors
-                                            .transparent,
-                                        padding:
-                                        EdgeInsets.all(
-                                            0.0),
-                                      ),
-                                      onPressed: () {
-                                        print(
-                                            "hijedwcasfwes");
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: Duration(
-                                            milliseconds:
-                                            300),
-                                        padding: EdgeInsets
-                                            .symmetric(
-                                            horizontal:
-                                            10),
-                                        decoration: BoxDecoration(
-                                            color: hover1 ==
-                                                true
-                                                ? Colors
-                                                .orange
-                                                .shade400
-                                                : Color(
-                                                0xfff3f5fe),
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                5)),
-                                        height: 30,
-                                        child: Center(
-                                          child: Text(
-                                            "Batch of 2016",
-                                            style: TextStyle(
-                                                fontFamily:
-                                                "Metrisch-Medium",
-                                                fontSize: 13,
-                                                color: hover1 ==
-                                                    true
-                                                    ? Colors
-                                                    .white
-                                                    : Colors
-                                                    .grey
-                                                    .shade600),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-
-                        return Container(
-                          width: MediaQuery.of(context).size.width - 40,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Text(
-                                "Batch Wise Projects",
+                      : Padding(
+                    padding:
+                    EdgeInsets.only(top: 20, right: 20, left: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text("Dashboard",
+                            style: TextStyle(
+                                fontFamily: "Metrisch-Bold",
+                                fontSize: 25)),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () {},
+                            child: Text("Download CSV",
                                 style: TextStyle(
-                                    fontSize: 21,
-                                    color: Colors.black87,
-                                    fontFamily: "Metrisch-Bold"),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              MediaQuery.of(context).size.width > 971
-                                  ? GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 5.0,
-                                  mainAxisSpacing: 5.0,
-                                ),
-                                itemCount: 6,
-                                itemBuilder: (context, index) {
-                                  return TextButton(
-                                    style: TextButton
-                                        .styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5.0)),
-                                      backgroundColor:
-                                      Colors
-                                          .transparent,
-                                      primary: Colors
-                                          .transparent,
-                                      padding:
-                                      EdgeInsets.all(
-                                          0.0),
-                                    ),
-                                    onPressed: () {
-                                      print(
-                                          "hijedwcasfwes");
-                                    },
-                                    child: AnimatedContainer(
-                                      duration: Duration(
-                                          milliseconds:
-                                          300),
-                                      padding: EdgeInsets
-                                          .symmetric(
-                                          horizontal:
-                                          10),
-                                      decoration: BoxDecoration(
-                                          color: hover1 ==
-                                              true
-                                              ? Colors
-                                              .orange
-                                              .shade400
-                                              : Color(
-                                              0xfff3f5fe),
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5)),
-                                      height: 30,
-                                      child: Center(
-                                        child: Text(
-                                          "Batch of 2016",
-                                          style: TextStyle(
-                                              fontFamily:
-                                              "Metrisch-Medium",
-                                              fontSize: 13,
-                                              color: hover1 ==
-                                                  true
-                                                  ? Colors
-                                                  .white
-                                                  : Colors
-                                                  .grey
-                                                  .shade600),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                                  : MediaQuery.of(context).size.width > 715
-                                      ? GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 6,
-                                  crossAxisSpacing: 5.0,
-                                  mainAxisSpacing: 5.0,
-                                ),
-                                itemCount: 6,
-                                itemBuilder: (context, index) {
-                                  return TextButton(
-                                    style: TextButton
-                                        .styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5.0)),
-                                      backgroundColor:
-                                      Colors
-                                          .transparent,
-                                      primary: Colors
-                                          .transparent,
-                                      padding:
-                                      EdgeInsets.all(
-                                          0.0),
-                                    ),
-                                    onPressed: () {
-                                      print(
-                                          "hijedwcasfwes");
-                                    },
-                                    child: AnimatedContainer(
-                                      duration: Duration(
-                                          milliseconds:
-                                          300),
-                                      padding: EdgeInsets
-                                          .symmetric(
-                                          horizontal:
-                                          10),
-                                      decoration: BoxDecoration(
-                                          color: hover1 ==
-                                              true
-                                              ? Colors
-                                              .orange
-                                              .shade400
-                                              : Color(
-                                              0xfff3f5fe),
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5)),
-                                      height: 30,
-                                      child: Center(
-                                        child: Text(
-                                          "Batch of 2016",
-                                          style: TextStyle(
-                                              fontFamily:
-                                              "Metrisch-Medium",
-                                              fontSize: 13,
-                                              color: hover1 ==
-                                                  true
-                                                  ? Colors
-                                                  .white
-                                                  : Colors
-                                                  .grey
-                                                  .shade600),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                                      : MediaQuery.of(context).size.width > 430
-                                          ? GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 5.0,
-                                  mainAxisSpacing: 5.0,
-                                ),
-                                itemCount: 6,
-                                itemBuilder: (context, index) {
-                                  return TextButton(
-                                    style: TextButton
-                                        .styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5.0)),
-                                      backgroundColor:
-                                      Colors
-                                          .transparent,
-                                      primary: Colors
-                                          .transparent,
-                                      padding:
-                                      EdgeInsets.all(
-                                          0.0),
-                                    ),
-                                    onPressed: () {
-                                      print(
-                                          "hijedwcasfwes");
-                                    },
-                                    child: AnimatedContainer(
-                                      duration: Duration(
-                                          milliseconds:
-                                          300),
-                                      padding: EdgeInsets
-                                          .symmetric(
-                                          horizontal:
-                                          10),
-                                      decoration: BoxDecoration(
-                                          color: hover1 ==
-                                              true
-                                              ? Colors
-                                              .orange
-                                              .shade400
-                                              : Color(
-                                              0xfff3f5fe),
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5)),
-                                      height: 30,
-                                      child: Center(
-                                        child: Text(
-                                          "Batch of 2016",
-                                          style: TextStyle(
-                                              fontFamily:
-                                              "Metrisch-Medium",
-                                              fontSize: 13,
-                                              color: hover1 ==
-                                                  true
-                                                  ? Colors
-                                                  .white
-                                                  : Colors
-                                                  .grey
-                                                  .shade600),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                                          : GridView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 5.0,
-                                  mainAxisSpacing: 5.0,
-                                ),
-                                itemCount: 6,
-                                itemBuilder: (context, index) {
-                                  return TextButton(
-                                    style: TextButton
-                                        .styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5.0)),
-                                      backgroundColor:
-                                      Colors
-                                          .transparent,
-                                      primary: Colors
-                                          .transparent,
-                                      padding:
-                                      EdgeInsets.all(
-                                          0.0),
-                                    ),
-                                    onPressed: () {
-                                      print(
-                                          "hijedwcasfwes");
-                                    },
-                                    child: AnimatedContainer(
-                                      duration: Duration(
-                                          milliseconds:
-                                          300),
-                                      padding: EdgeInsets
-                                          .symmetric(
-                                          horizontal:
-                                          10),
-                                      decoration: BoxDecoration(
-                                          color: hover1 ==
-                                              true
-                                              ? Colors
-                                              .orange
-                                              .shade400
-                                              : Color(
-                                              0xfff3f5fe),
-                                          borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                              5)),
-                                      height: 30,
-                                      child: Center(
-                                        child: Text(
-                                          "Batch of 2016",
-                                          style: TextStyle(
-                                              fontFamily:
-                                              "Metrisch-Medium",
-                                              fontSize: 13,
-                                              color: hover1 ==
-                                                  true
-                                                  ? Colors
-                                                  .white
-                                                  : Colors
-                                                  .grey
-                                                  .shade600),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
+                                    color: Colors.blue,
+                                    fontFamily: "Metrisch-Bold",
+                                    fontSize: 12)),
                           ),
-                        );
-                      },
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text("2020 Batch Projects",
-                              style: TextStyle(
-                                  fontFamily: "Metrisch-Bold", fontSize: 25)),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Text("Download CSV",
-                                  style: TextStyle(
-                                      color: Colors.blue,
-                                      fontFamily: "Metrisch-Bold",
-                                      fontSize: 12)),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          SingleChildScrollView(
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width-50,
+                          child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: DataTable(
+                                showBottomBorder: true,
+                                dataRowHeight: 60,
+                                headingRowColor:
+                                MaterialStateProperty.all(
+                                    Colors.grey[200]),
+                                columns: const <DataColumn>[
+                                  DataColumn(
+                                    label: Text(
+                                      'ProjectId',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Project Title',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Students',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Dataset Link',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Project Link',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Report Link',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Video Link',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Categories',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                      'Submission Time',
+                                      style: TextStyle(
+                                          fontStyle:
+                                          FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
+                                rows: finalDataRowMap[
+                                widget.current_Year]),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                return Padding(
+                  padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text("DashBoard",
+                          style: TextStyle(
+                              fontFamily: "Metrisch-Bold", fontSize: 25)),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: InkWell(
+                          onTap: () {},
+                          child: Text("Download CSV",
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontFamily: "Metrisch-Bold",
+                                  fontSize: 12)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width-50,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
                               showBottomBorder: true,
                               dataRowHeight: 60,
                               headingRowColor:
-                                  MaterialStateProperty.all(Colors.grey[200]),
+                              MaterialStateProperty.all(
+                                  Colors.grey[200]),
                               columns: const <DataColumn>[
                                 DataColumn(
                                   label: Text(
-                                    'Name',
-                                    style:
-                                        TextStyle(fontStyle: FontStyle.italic),
+                                    'ProjectId',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
-                                    'Age',
-                                    style:
-                                        TextStyle(fontStyle: FontStyle.italic),
+                                    'Project Title',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
                                   ),
                                 ),
                                 DataColumn(
                                   label: Text(
-                                    'Role',
-                                    style:
-                                        TextStyle(fontStyle: FontStyle.italic),
+                                    'Students',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Dataset Link',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Project Link',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Report Link',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Video Link',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Categories',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'Submission Time',
+                                    style: TextStyle(
+                                        fontStyle:
+                                        FontStyle.italic),
                                   ),
                                 ),
                               ],
-                              rows: const <DataRow>[
-                                DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(Text('Sarah\n\nWilliam')),
-                                    DataCell(Text('19')),
-                                    DataCell(Text('Student')),
-                                  ],
-                                ),
-                                DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(Text('Janine')),
-                                    DataCell(Text('43')),
-                                    DataCell(Text('Professor')),
-                                  ],
-                                ),
-                                DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(Text('William')),
-                                    DataCell(Text('27')),
-                                    DataCell(Text('Associate Professor')),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                        ],
+                              rows: finalDataRowMap[
+                              widget.current_Year]),
+                        ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
                 );
               },
             )),

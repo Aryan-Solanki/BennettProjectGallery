@@ -133,7 +133,12 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
   });
 
   String Title = "";
-  String Description = "";
+  String ShortDescription = "";
+  String LongDescription = "";
+  String KeyFeature1 = "";
+  String KeyFeature2 = "";
+  String KeyFeature3 = "";
+
   String ProjectLink = "";
   String DatasetLink = "";
   String ReportLink = "";
@@ -580,8 +585,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         color: Color(0xfff3f5fe)),
-                    height: 45,
                     child: TextField(
+                      maxLength: 100,
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",
                           height: 1.5,
@@ -598,6 +603,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             fontSize: 15,
                             color: Colors.black),
                         hintText: '* Title',
+                        // contentPadding:
+                        // EdgeInsets.symmetric(horizontal: 20.0),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        // ),
                       ),
                     ),
                   ),
@@ -611,13 +621,14 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         color: Color(0xfff3f5fe)),
                     child: TextField(
                       maxLines: 3,
+                      maxLength: 300,
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",
                           height: 1.5,
                           fontSize: 15,
                           color: Colors.black),
                       onChanged: (value) {
-                        Description = value;
+                        ShortDescription = value;
                       },
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -626,7 +637,144 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             height: 1.5,
                             fontSize: 15,
                             color: Colors.black),
-                        hintText: '* Description',
+                        hintText: '* Short Description',
+                        // contentPadding:
+                        // EdgeInsets.symmetric(horizontal: 20.0),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        // ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    child: TextField(
+                      maxLines: 8,
+                      maxLength: 1500,
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          height: 1.5,
+                          fontSize: 15,
+                          color: Colors.black),
+                      onChanged: (value) {
+                        LongDescription = value;
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            fontFamily: "Metrisch-Medium",
+                            height: 1.5,
+                            fontSize: 15,
+                            color: Colors.black),
+                        hintText: '* Long Description',
+                        // contentPadding:
+                        // EdgeInsets.symmetric(horizontal: 20.0),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        // ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    child: TextField(
+                      maxLength: 100,
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          height: 1.5,
+                          fontSize: 15,
+                          color: Colors.black),
+                      onChanged: (value) {
+                        KeyFeature1 = value;
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            fontFamily: "Metrisch-Medium",
+                            height: 1.5,
+                            fontSize: 15,
+                            color: Colors.black),
+                        hintText: '* Key Feature 1',
+                        // contentPadding:
+                        // EdgeInsets.symmetric(horizontal: 20.0),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        // ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    child: TextField(
+                      maxLength: 100,
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          height: 1.5,
+                          fontSize: 15,
+                          color: Colors.black),
+                      onChanged: (value) {
+                        KeyFeature2 = value;
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            fontFamily: "Metrisch-Medium",
+                            height: 1.5,
+                            fontSize: 15,
+                            color: Colors.black),
+                        hintText: '* Key Feature 2',
+                        // contentPadding:
+                        // EdgeInsets.symmetric(horizontal: 20.0),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        // ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        color: Color(0xfff3f5fe)),
+                    child: TextField(
+                      maxLength: 100,
+                      style: TextStyle(
+                          fontFamily: "Metrisch-Medium",
+                          height: 1.5,
+                          fontSize: 15,
+                          color: Colors.black),
+                      onChanged: (value) {
+                        KeyFeature3 = value;
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintStyle: TextStyle(
+                            fontFamily: "Metrisch-Medium",
+                            height: 1.5,
+                            fontSize: 15,
+                            color: Colors.black),
+                        hintText: '* Key Feature 3',
                         // contentPadding:
                         // EdgeInsets.symmetric(horizontal: 20.0),
                         // border: OutlineInputBorder(
@@ -1016,8 +1164,15 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         if (Title == "") {
                           addError(error: "Fill Title Field");
                         }
-                        if (Description == "") {
-                          addError(error: "Fill Description Field");
+
+                        if (ShortDescription == "") {
+                          addError(error: "Fill Short Description Field");
+                        }
+                        if (LongDescription == "") {
+                          addError(error: "Fill Long Description Field");
+                        }
+                        if (KeyFeature1 == "" || KeyFeature2 == "" ||  KeyFeature3 == "") {
+                          addError(error: "Fill all the Key Features Field");
                         }
                         if (SelectedProfessor == "") {
                           addError(error: "Fill Professor Name Field");
@@ -1115,7 +1270,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                               "Categories": ListCategories,
                               "ProjectLink": ProjectLink,
                               "DatasetLink": DatasetLink,
-                              "Description": Description,
+                              "ShortDescription": ShortDescription,
+                              "LongDescription": LongDescription,
+                              "KeyFeature1": KeyFeature1,
+                              "KeyFeature2": KeyFeature2,
+                              "KeyFeature3": KeyFeature3,
                               "ReportLink": ReportLink,
                               "VideoLink": VideoLink,
                             },

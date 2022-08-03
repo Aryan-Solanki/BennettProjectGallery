@@ -19,7 +19,7 @@ class _FooterState extends State<Footer> {
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/footerimg.png"), fit: BoxFit.fill),
-              color: Color(0xfff5f6fb),
+              color: Colors.white,
             ),
             height: 500,
             width: MediaQuery.of(context).size.width,
@@ -426,7 +426,7 @@ class _FooterState extends State<Footer> {
                   image: DecorationImage(
                       image: AssetImage("assets/footerimg.png"),
                       fit: BoxFit.fill),
-                  color: Color(0xfff5f6fb),
+                  color: Colors.white,
                 ),
                 height: 730,
                 width: MediaQuery.of(context).size.width,
@@ -842,7 +842,7 @@ class _FooterState extends State<Footer> {
                   image: DecorationImage(
                       image: AssetImage("assets/footerimg.png"),
                       fit: BoxFit.cover),
-                  color: Color(0xfff5f6fb),
+                  color: Colors.white,
                 ),
                 height: 1030,
                 width: MediaQuery.of(context).size.width,
