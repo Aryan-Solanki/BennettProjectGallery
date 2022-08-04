@@ -292,7 +292,11 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
               "Image Links",
               "Categories",
               "DateTime",
-              "Description",
+              "Short Description",
+              "Long Description",
+              "KeyFeature1",
+              "KeyFeature2",
+              "KeyFeature3",
             ],
           );
           isFirst = false;
@@ -318,7 +322,11 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
             imgString,
             StringCategories,
             convert_timestamp_to_string(project["datetime"]),
-            project["ProjectDetails"]["Description"],
+            project["ProjectDetails"]["ShortDescription"],
+            project["ProjectDetails"]["LongDescription"],
+            project["ProjectDetails"]["KeyFeature1"],
+            project["ProjectDetails"]["KeyFeature2"],
+            project["ProjectDetails"]["KeyFeature3"],
           ],
         );
 
@@ -327,7 +335,11 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
             yog: project["StudentIdList"][0]["yog"].toString(),
             like_count: project["LikeCount"],
             DatasetLink: project["ProjectDetails"]["DatasetLink"],
-            Description: project["ProjectDetails"]["Description"],
+            ShortDescription: project["ProjectDetails"]["ShortDescription"],
+            LongDescription: project["ProjectDetails"]["LongDescription"],
+            KeyFeature1: project["ProjectDetails"]["KeyFeature1"],
+            KeyFeature2: project["ProjectDetails"]["KeyFeature2"],
+            KeyFeature3: project["ProjectDetails"]["KeyFeature3"],
             ProjectLink: project["ProjectDetails"]["ProjectLink"],
             ReportLink: project["ProjectDetails"]["ReportLink"],
             VideoLink: project["ProjectDetails"]["VideoLink"],

@@ -383,7 +383,7 @@ class _DashBoardState extends State<DashBoard> {
                                 height: 400,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: 5,
+                                  itemCount: projectList.length,
                                   itemBuilder: (BuildContext ctxt, int index) {
                                     return Container(
                                         width: 250,
@@ -392,7 +392,9 @@ class _DashBoardState extends State<DashBoard> {
                                         child:
                                             MediaQuery.of(context).size.width >
                                                     800
-                                                ? ProjectCard()
+                                                ? ProjectCard(
+                                                    project: projectList[index],
+                                                  )
                                                 : NoHoverProjectCard());
                                   },
                                 ),

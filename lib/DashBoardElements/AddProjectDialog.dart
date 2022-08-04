@@ -241,7 +241,11 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
           yog: project["StudentIdList"][0]["yog"],
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],
-          Description: project["ProjectDetails"]["Description"],
+          ShortDescription: project["ProjectDetails"]["ShortDescription"],
+          LongDescription: project["ProjectDetails"]["LongDescription"],
+          KeyFeature1: project["ProjectDetails"]["KeyFeature1"],
+          KeyFeature2: project["ProjectDetails"]["KeyFeature2"],
+          KeyFeature3: project["ProjectDetails"]["KeyFeature3"],
           ProjectLink: project["ProjectDetails"]["ProjectLink"],
           ReportLink: project["ProjectDetails"]["ReportLink"],
           VideoLink: project["ProjectDetails"]["VideoLink"],
@@ -1304,7 +1308,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                           UserServices userServices = UserServices();
 
                           while (true) {
-                            print("working 3");
                             if (listImageLinks.length != 0) {
                               String uploadID =
                                   dtnow.millisecondsSinceEpoch.toString() +
@@ -1354,6 +1357,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             }
                           }
                           Navigator.pop(context);
+
                           //  Generate Toast
                           Fluttertoast.showToast(
                               msg: "Project Uploaded Successfully",

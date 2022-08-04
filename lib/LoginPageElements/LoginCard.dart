@@ -290,8 +290,18 @@ class _LoginCardState extends State<LoginCard> {
                                           like_count: project["LikeCount"],
                                           DatasetLink: project["ProjectDetails"]
                                               ["DatasetLink"],
-                                          Description: project["ProjectDetails"]
-                                              ["Description"],
+                                          ShortDescription:
+                                              project["ProjectDetails"]
+                                                  ["ShortDescription"],
+                                          LongDescription:
+                                              project["ProjectDetails"]
+                                                  ["LongDescription"],
+                                          KeyFeature1: project["ProjectDetails"]
+                                              ["KeyFeature1"],
+                                          KeyFeature2: project["ProjectDetails"]
+                                              ["KeyFeature2"],
+                                          KeyFeature3: project["ProjectDetails"]
+                                              ["KeyFeature3"],
                                           ProjectLink: project["ProjectDetails"]
                                               ["ProjectLink"],
                                           ReportLink: project["ProjectDetails"]
@@ -369,7 +379,6 @@ class _LoginCardState extends State<LoginCard> {
                                     addError(error: ksomethingerror);
                                   });
                                 }
-
                               } catch (e) {
                                 print("Something Went Wrong $e");
                                 addError(error: "Something Went Wrong");
