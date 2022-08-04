@@ -43,8 +43,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   bool _moreProductsAvailable = true;
 
   _getProducts() async {
-    Query q =
-        _firestore.collection("project").orderBy("datetime").limit(_perpage);
+    // firestore query orderby reverse datetime to show latest projects at top
+    Query q = _firestore
+        .collection("project")
+        .orderBy("datetime", descending: true)
+        .limit(_perpage);
     setState(() {
       _loadingProducts = true;
     });
@@ -75,7 +78,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
         ),
       );
     }
-    ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
     _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
     setState(() {
       Future.delayed(Duration(seconds: 1), () {
@@ -100,7 +103,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
     Query q = _firestore
         .collection("project")
-        .orderBy("datetime")
+        .orderBy("datetime", descending: true)
         .startAfter([_lastDocument.get("datetime")]).limit(_perpage);
     QuerySnapshot querySnapshot = await q.get();
 
@@ -135,7 +138,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
         ),
       );
     }
-    ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
     setState(() {});
     _gettingMoreProducts = false;
   }
@@ -169,6 +172,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     setState(() {
       _loadingProducts = true;
     });
+    //search algolia for query and get results in descending order of datetime
     List<AlgoliaObjectSnapshot> snaplist = await _searchalgolia(query);
     for (var pr in snaplist) {
       var project = pr.data;
@@ -198,6 +202,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
         ),
       );
     }
+    //reverse a list in dart
+    ProjectList = ProjectList.reversed.toList();
     setState(() {
       Future.delayed(Duration(seconds: 1), () {
         // <-- Delay here
@@ -221,11 +227,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   String searchedvalue = "";
 
-  List<String> sortkeys = <String>[
-    'Default sorting',
-    'Sort by popularity',
-    'Sort by rating',
-  ];
+  List<String> sortkeys = <String>['Sort by latest', 'Sort by popularity'];
 
   int cardnumber = 9;
 
