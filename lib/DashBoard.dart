@@ -46,7 +46,7 @@ class DashBoard extends StatefulWidget {
 
 String selected = "zero";
 double num_of_reviews = 0;
-double num_of_likes = 0;
+double no_of_views = 0;
 
 class _DashBoardState extends State<DashBoard> {
   final String id;
@@ -75,16 +75,16 @@ class _DashBoardState extends State<DashBoard> {
   UserServices _services = UserServices();
   ProjectServices _services1 = ProjectServices();
 
-  void count_likes_and_reviews_from_projects(projectList) {
+  void count_views_and_reviews_from_projects(projectList) {
     for (int i = 0; i < projectList.length; i++) {
       num_of_reviews = num_of_reviews + projectList[i].Reviews.length;
-      num_of_likes = num_of_likes + projectList[i].like_count;
+      no_of_views = no_of_views + projectList[i].viewCount;
     }
   }
 
   @override
   void initState() {
-    count_likes_and_reviews_from_projects(projectList);
+    count_views_and_reviews_from_projects(projectList);
     super.initState();
   }
 
@@ -346,7 +346,7 @@ class _DashBoardState extends State<DashBoard> {
                             course: course,
                             image: image,
                             no_of_reviews: num_of_reviews,
-                            no_of_likes: num_of_likes,
+                            no_of_views: no_of_views,
                           ))
                     ],
                   )

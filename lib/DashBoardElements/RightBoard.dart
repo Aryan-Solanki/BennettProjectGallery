@@ -17,7 +17,7 @@ class RightBoard extends StatefulWidget {
   final String name;
   final String school;
   final String yog;
-  final double no_of_likes;
+  final double no_of_views;
   final double no_of_reviews;
 
   RightBoard({
@@ -29,7 +29,7 @@ class RightBoard extends StatefulWidget {
     this.name,
     this.school,
     this.yog,
-    this.no_of_likes,
+    this.no_of_views,
     this.no_of_reviews,
   });
 
@@ -43,7 +43,7 @@ class RightBoard extends StatefulWidget {
       name: name,
       school: school,
       yog: yog,
-      no_of_likes: no_of_likes,
+      no_of_views: no_of_views,
       no_of_reviews: no_of_reviews);
 }
 
@@ -61,7 +61,7 @@ class _RightBoardState extends State<RightBoard> {
   final String name;
   final String school;
   final String yog;
-  final double no_of_likes;
+  final double no_of_views;
   final double no_of_reviews;
 
   _RightBoardState(
@@ -73,7 +73,7 @@ class _RightBoardState extends State<RightBoard> {
       this.name,
       this.school,
       this.yog,
-      this.no_of_likes,
+      this.no_of_views,
       this.no_of_reviews});
   // Future<void> uploadStatusImage() async {
   //   FirebaseStorage storage = FirebaseStorage.instance;
@@ -365,7 +365,7 @@ class _RightBoardState extends State<RightBoard> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  no_of_likes.toString(),
+                                                  no_of_views.toString(),
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -379,7 +379,7 @@ class _RightBoardState extends State<RightBoard> {
                                                   height: 5,
                                                 ),
                                                 Text(
-                                                  "Likes",
+                                                  "Views",
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -649,7 +649,7 @@ class _RightBoardState extends State<RightBoard> {
                                               height: 5,
                                             ),
                                             Text(
-                                              "Likes",
+                                              "Views",
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
