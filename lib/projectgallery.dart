@@ -227,7 +227,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   String searchedvalue = "";
 
-  List<String> sortkeys = <String>['Sort by latest', 'Sort by popularity'];
+  List<String> sortkeys = <String>[];
 
   int cardnumber = 9;
 
@@ -1302,17 +1302,20 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 50.0),
-                                                  child: GradientButton(
-                                                    title: "Load More",
-                                                    onPressed: () {
-                                                      if (widget.searchTerm ==
-                                                          "") {
-                                                        getMoreProducts();
-                                                      } else {
-                                                        //TODO: Get more products from algolia
-                                                      }
-                                                    },
-                                                  ),
+                                                  child: widget.searchTerm == ""
+                                                      ? GradientButton(
+                                                          title: "Load More",
+                                                          onPressed: () {
+                                                            if (widget
+                                                                    .searchTerm ==
+                                                                "") {
+                                                              getMoreProducts();
+                                                            } else {
+                                                              //TODO: Get more products from algolia
+                                                            }
+                                                          },
+                                                        )
+                                                      : Center(),
                                                 )
                                               : Center(),
                                         ],
