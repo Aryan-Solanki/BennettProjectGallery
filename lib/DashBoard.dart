@@ -76,6 +76,8 @@ class _DashBoardState extends State<DashBoard> {
   ProjectServices _services1 = ProjectServices();
 
   void count_views_and_reviews_from_projects(projectList) {
+    num_of_reviews = 0;
+    no_of_views = 0;
     for (int i = 0; i < projectList.length; i++) {
       num_of_reviews = num_of_reviews + projectList[i].Reviews.length;
       no_of_views = no_of_views + projectList[i].viewCount;
