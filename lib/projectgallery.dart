@@ -24,7 +24,15 @@ import 'package:lottie/lottie.dart';
 class ProjectGallery extends StatefulWidget {
   final List<dynamic> categoriesname;
   final String searchTerm;
-  ProjectGallery({@required this.categoriesname, this.searchTerm = ""});
+  final String categoryTerm;
+  final String yearTerm;
+  final bool lm;
+  ProjectGallery(
+      {@required this.categoriesname,
+      this.searchTerm = "",
+      this.categoryTerm = "",
+      this.yearTerm = "",
+      this.lm = true});
   @override
   _ProjectGalleryState createState() =>
       _ProjectGalleryState(categoriesname: categoriesname);
@@ -41,6 +49,109 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   DocumentSnapshot _lastDocument;
   bool _gettingMoreProducts = false;
   bool _moreProductsAvailable = true;
+
+  _getCategoryProducts(String catname) async {
+    // firestore query where category is equal to the category name and category is inside project details in firestore database structure
+    Query q = _firestore
+        .collection("project")
+        .where("ProjectDetails.Categories", arrayContains: catname)
+        .orderBy("datetime", descending: true)
+        .limit(_perpage);
+    setState(() {
+      _loadingProducts = true;
+    });
+    QuerySnapshot querySnapshot = await q.get();
+    _projects = querySnapshot.docs;
+    for (var project in _projects) {
+      ProjectList.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"].toString(),
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          ShortDescription: project["ProjectDetails"]["ShortDescription"],
+          LongDescription: project["ProjectDetails"]["LongDescription"],
+          KeyFeature1: project["ProjectDetails"]["KeyFeature1"],
+          KeyFeature2: project["ProjectDetails"]["KeyFeature2"],
+          KeyFeature3: project["ProjectDetails"]["KeyFeature3"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          viewCount: project["viewCount"],
+          timestamp: project["datetime"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+    }
+    // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    setState(() {
+      Future.delayed(Duration(seconds: 1), () {
+        // <-- Delay here
+        setState(() {
+          _loadingProducts = false; // <-- Code run after delay
+        });
+      });
+    });
+  }
+
+  getMoreCategoryProducts(String catname) async {
+    if (_moreProductsAvailable == false) {
+      return;
+    }
+
+    if (_gettingMoreProducts == true) {
+      return;
+    }
+
+    _gettingMoreProducts = true;
+
+    Query q = _firestore
+        .collection("project")
+        .where("ProjectDetails.Categories", arrayContains: catname)
+        .orderBy("datetime", descending: true)
+        .startAfter([_lastDocument.get("datetime")]).limit(_perpage);
+    QuerySnapshot querySnapshot = await q.get();
+
+    if (querySnapshot.docs.length < _perpage) {
+      _moreProductsAvailable = false;
+    }
+
+    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    _projects = querySnapshot.docs;
+    for (var project in _projects) {
+      ProjectList.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"],
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          ShortDescription: project["ProjectDetails"]["ShortDescription"],
+          LongDescription: project["ProjectDetails"]["LongDescription"],
+          KeyFeature1: project["ProjectDetails"]["KeyFeature1"],
+          KeyFeature2: project["ProjectDetails"]["KeyFeature2"],
+          KeyFeature3: project["ProjectDetails"]["KeyFeature3"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          viewCount: project["viewCount"],
+          timestamp: project["datetime"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+    }
+    // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    setState(() {});
+    _gettingMoreProducts = false;
+  }
 
   _getProducts() async {
     // firestore query orderby reverse datetime to show latest projects at top
@@ -217,7 +328,11 @@ class _ProjectGalleryState extends State<ProjectGallery> {
   @override
   void initState() {
     algolia = Application.algolia;
-    if (widget.searchTerm == "") {
+    if (widget.categoryTerm != "") {
+      _getCategoryProducts(widget.categoryTerm);
+    } else if (widget.yearTerm != "") {
+      // _getYearProducts(widget.yearTerm);
+    } else if (widget.searchTerm == "") {
       _getProducts();
     } else {
       searchalgolia(widget.searchTerm);
@@ -229,7 +344,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   List<String> sortkeys = <String>[];
 
-  int cardnumber = 9;
+  // int cardnumber = 9;
 
   bool searched = false;
 
@@ -335,6 +450,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                         categoriesname,
                                                                     searchTerm:
                                                                         searchedvalue,
+                                                                    lm: false,
                                                                   )));
                                                     },
                                                     child: Icon(
@@ -367,6 +483,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                               categoriesname:
                                                                   categoriesname,
                                                               searchTerm: query,
+                                                              lm: false,
                                                             )));
                                               },
                                             ),
@@ -448,7 +565,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                                           ProjectGallery(
                                                                             categoriesname:
                                                                                 categoriesname,
-                                                                            searchTerm:
+                                                                            categoryTerm:
                                                                                 categoriesname[index]["name"],
                                                                           )));
                                                         });
@@ -629,17 +746,32 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 //Do something with the user input.
                                               },
                                               onSubmitted: (query) {
-                                                setState(() {
-                                                  searched = true;
-                                                  searchedvalue = query;
-                                                });
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProjectGallery(
+                                                              categoriesname:
+                                                                  categoriesname,
+                                                              searchTerm:
+                                                                  searchedvalue,
+                                                              lm: false,
+                                                            )));
                                               },
                                               decoration: InputDecoration(
                                                 suffixIcon: InkWell(
                                                   onTap: () {
-                                                    setState(() {
-                                                      searched = true;
-                                                    });
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ProjectGallery(
+                                                                  categoriesname:
+                                                                      categoriesname,
+                                                                  searchTerm:
+                                                                      searchedvalue,
+                                                                  lm: false,
+                                                                )));
                                                   },
                                                   child: Icon(
                                                     Icons.search,
@@ -733,10 +865,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       onPressed: () {
                                                         setState(() {
                                                           searched = true;
-                                                          searchedvalue =
-                                                              categoriesname[
-                                                                      index]
-                                                                  ["name"];
+                                                          Navigator
+                                                              .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                          ProjectGallery(
+                                                                            categoriesname:
+                                                                                categoriesname,
+                                                                            categoryTerm:
+                                                                                categoriesname[index]["name"],
+                                                                          )));
                                                         });
                                                       },
                                                       categoryName:
@@ -889,7 +1028,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                       ),
                                     );
                                   }
-
                                   return Container(
                                     width:
                                         MediaQuery.of(context).size.width - 40,
@@ -909,20 +1047,35 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 fontSize: 15,
                                                 color: Colors.black54),
                                             onChanged: (value) {
-                                              //Do something with the user input.
+                                              searchedvalue = value;
                                             },
                                             onSubmitted: (query) {
-                                              setState(() {
-                                                searched = true;
-                                                searchedvalue = query;
-                                              });
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ProjectGallery(
+                                                            categoriesname:
+                                                                categoriesname,
+                                                            searchTerm:
+                                                                searchedvalue,
+                                                            lm: false,
+                                                          )));
                                             },
                                             decoration: InputDecoration(
                                               suffixIcon: InkWell(
                                                 onTap: () {
-                                                  setState(() {
-                                                    searched = true;
-                                                  });
+                                                  Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ProjectGallery(
+                                                                categoriesname:
+                                                                    categoriesname,
+                                                                searchTerm:
+                                                                    searchedvalue,
+                                                                lm: false,
+                                                              )));
                                                 },
                                                 child: Icon(
                                                   Icons.search,
@@ -1015,9 +1168,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     onPressed: () {
                                                       setState(() {
                                                         searched = true;
-                                                        searchedvalue =
-                                                            categoriesname[
-                                                                index]["name"];
+                                                        Navigator
+                                                            .pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
                                                       });
                                                     },
                                                     categoryName:
@@ -1194,6 +1354,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               widget.searchTerm == ""
+                                                  // TODO: FOR CATEGORY SEARCH AND YEAR SEARCH
                                                   ? Text(
                                                       "Showing 1–9 of 12 results",
                                                       style: TextStyle(
@@ -1302,11 +1463,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 50.0),
-                                                  child: widget.searchTerm == ""
+                                                  child: ProjectList.length !=
+                                                              0 &&
+                                                          widget.lm == true
                                                       ? GradientButton(
                                                           title: "Load More",
                                                           onPressed: () {
                                                             if (widget
+                                                                    .categoryTerm !=
+                                                                "") {
+                                                              getMoreCategoryProducts(
+                                                                  widget
+                                                                      .categoryTerm);
+                                                            } else if (widget
+                                                                    .yearTerm !=
+                                                                "") {
+                                                              // getMoreYearProducts(widget.categoryTerm);
+                                                            } else if (widget
                                                                     .searchTerm ==
                                                                 "") {
                                                               getMoreProducts();
@@ -1398,11 +1571,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Container(
-                                            height: cardnumber * 130.toDouble(),
+                                            height: ProjectList.length *
+                                                130.toDouble(),
                                             child: GridView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
-                                              itemCount: cardnumber,
+                                              itemCount: ProjectList.length,
                                               gridDelegate:
                                                   SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 3,
@@ -1418,12 +1592,24 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          _moreProductsAvailable == true &&
+                                          ProjectList.length > 9 &&
+                                                  widget.lm == true &&
+                                                  _moreProductsAvailable ==
+                                                      true &&
                                                   _loadingProducts == false
                                               ? GradientButton(
                                                   title: "Load More",
                                                   onPressed: () {
-                                                    if (widget.searchTerm ==
+                                                    if (widget.categoryTerm !=
+                                                        "") {
+                                                      getMoreCategoryProducts(
+                                                          widget.categoryTerm);
+                                                    } else if (widget
+                                                            .yearTerm !=
+                                                        "") {
+                                                      // getMoreYearProducts(widget.categoryTerm);
+                                                    } else if (widget
+                                                            .searchTerm ==
                                                         "") {
                                                       getMoreProducts();
                                                     } else {
@@ -1513,11 +1699,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 20,
                                           ),
                                           Container(
-                                            height: cardnumber * 445.toDouble(),
+                                            height: ProjectList.length *
+                                                445.toDouble(),
                                             child: GridView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
-                                              itemCount: cardnumber,
+                                              itemCount: ProjectList.length,
                                               gridDelegate:
                                                   SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 1,
@@ -1533,12 +1720,24 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          _moreProductsAvailable == true &&
+                                          ProjectList.length > 9 &&
+                                                  widget.lm == true &&
+                                                  _moreProductsAvailable ==
+                                                      true &&
                                                   _loadingProducts == false
                                               ? GradientButton(
                                                   title: "Load More",
                                                   onPressed: () {
-                                                    if (widget.searchTerm ==
+                                                    if (widget.categoryTerm !=
+                                                        "") {
+                                                      getMoreCategoryProducts(
+                                                          widget.categoryTerm);
+                                                    } else if (widget
+                                                            .yearTerm !=
+                                                        "") {
+                                                      // getMoreYearProducts(widget.categoryTerm);
+                                                    } else if (widget
+                                                            .searchTerm ==
                                                         "") {
                                                       getMoreProducts();
                                                     } else {
@@ -1622,11 +1821,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           height: 40,
                                         ),
                                         Container(
-                                          height: cardnumber * 240.toDouble(),
+                                          height: ProjectList.length *
+                                              240.toDouble(),
                                           child: GridView.builder(
                                             physics:
                                                 NeverScrollableScrollPhysics(),
-                                            itemCount: cardnumber,
+                                            itemCount: ProjectList.length,
                                             gridDelegate:
                                                 SliverGridDelegateWithFixedCrossAxisCount(
                                                     crossAxisCount: 2,
@@ -1640,12 +1840,24 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             },
                                           ),
                                         ),
-                                        _moreProductsAvailable == true &&
+                                        ProjectList.length > 9 &&
+                                                widget.lm == true &&
+                                                _moreProductsAvailable ==
+                                                    true &&
                                                 _loadingProducts == false
                                             ? GradientButton(
                                                 title: "Load More",
                                                 onPressed: () {
-                                                  if (widget.searchTerm == "") {
+                                                  if (widget.categoryTerm !=
+                                                      "") {
+                                                    getMoreCategoryProducts(
+                                                        widget.categoryTerm);
+                                                  } else if (widget.yearTerm !=
+                                                      "") {
+                                                    // getMoreYearProducts(widget.categoryTerm);
+                                                  } else if (widget
+                                                          .searchTerm ==
+                                                      "") {
                                                     getMoreProducts();
                                                   } else {
                                                     //TODO: Get more products from algolia
@@ -1753,12 +1965,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Container(
-                                                height:
-                                                    cardnumber * 140.toDouble(),
+                                                height: ProjectList.length *
+                                                    140.toDouble(),
                                                 child: GridView.builder(
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
-                                                  itemCount: cardnumber,
+                                                  itemCount: ProjectList.length,
                                                   gridDelegate:
                                                       SliverGridDelegateWithFixedCrossAxisCount(
                                                           crossAxisCount: 3,
@@ -1775,12 +1987,26 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              _moreProductsAvailable == true &&
+                                              ProjectList.length > 9 &&
+                                                      widget.lm == true &&
+                                                      _moreProductsAvailable ==
+                                                          true &&
                                                       _loadingProducts == false
                                                   ? GradientButton(
                                                       title: "Load More",
                                                       onPressed: () {
-                                                        if (widget.searchTerm ==
+                                                        if (widget
+                                                                .categoryTerm !=
+                                                            "") {
+                                                          getMoreCategoryProducts(
+                                                              widget
+                                                                  .categoryTerm);
+                                                        } else if (widget
+                                                                .yearTerm !=
+                                                            "") {
+                                                          // getMoreYearProducts(widget.categoryTerm);
+                                                        } else if (widget
+                                                                .searchTerm ==
                                                             "") {
                                                           getMoreProducts();
                                                         } else {
@@ -1873,12 +2099,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 40,
                                               ),
                                               Container(
-                                                height:
-                                                    cardnumber * 130.toDouble(),
+                                                height: ProjectList.length *
+                                                    130.toDouble(),
                                                 child: GridView.builder(
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
-                                                  itemCount: cardnumber,
+                                                  itemCount: ProjectList.length,
                                                   gridDelegate:
                                                       SliverGridDelegateWithFixedCrossAxisCount(
                                                           crossAxisCount: 3,
@@ -1895,12 +2121,26 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              _moreProductsAvailable == true &&
+                                              ProjectList.length > 9 &&
+                                                      widget.lm == true &&
+                                                      _moreProductsAvailable ==
+                                                          true &&
                                                       _loadingProducts == false
                                                   ? GradientButton(
                                                       title: "Load More",
                                                       onPressed: () {
-                                                        if (widget.searchTerm ==
+                                                        if (widget
+                                                                .categoryTerm !=
+                                                            "") {
+                                                          getMoreCategoryProducts(
+                                                              widget
+                                                                  .categoryTerm);
+                                                        } else if (widget
+                                                                .yearTerm !=
+                                                            "") {
+                                                          // getMoreYearProducts(widget.categoryTerm);
+                                                        } else if (widget
+                                                                .searchTerm ==
                                                             "") {
                                                           getMoreProducts();
                                                         } else {
@@ -1993,12 +2233,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 height: 20,
                                               ),
                                               Container(
-                                                height:
-                                                    cardnumber * 445.toDouble(),
+                                                height: ProjectList.length *
+                                                    445.toDouble(),
                                                 child: GridView.builder(
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
-                                                  itemCount: cardnumber,
+                                                  itemCount: ProjectList.length,
                                                   gridDelegate:
                                                       SliverGridDelegateWithFixedCrossAxisCount(
                                                           crossAxisCount: 1,
@@ -2015,12 +2255,26 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              _moreProductsAvailable == true &&
+                                              ProjectList.length > 9 &&
+                                                      widget.lm == true &&
+                                                      _moreProductsAvailable ==
+                                                          true &&
                                                       _loadingProducts == false
                                                   ? GradientButton(
                                                       title: "Load More",
                                                       onPressed: () {
-                                                        if (widget.searchTerm ==
+                                                        if (widget
+                                                                .categoryTerm !=
+                                                            "") {
+                                                          getMoreCategoryProducts(
+                                                              widget
+                                                                  .categoryTerm);
+                                                        } else if (widget
+                                                                .yearTerm !=
+                                                            "") {
+                                                          // getMoreYearProducts(widget.categoryTerm);
+                                                        } else if (widget
+                                                                .searchTerm ==
                                                             "") {
                                                           getMoreProducts();
                                                         } else {
@@ -2111,12 +2365,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Container(
-                                              height:
-                                                  cardnumber * 240.toDouble(),
+                                              height: ProjectList.length *
+                                                  240.toDouble(),
                                               child: GridView.builder(
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
-                                                itemCount: cardnumber,
+                                                itemCount: ProjectList.length,
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
                                                         crossAxisCount: 2,
@@ -2132,12 +2386,25 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable == true &&
+                                            ProjectList.length > 9 &&
+                                                    widget.lm == true &&
+                                                    _moreProductsAvailable ==
+                                                        true &&
                                                     _loadingProducts == false
                                                 ? GradientButton(
                                                     title: "Load More",
                                                     onPressed: () {
-                                                      if (widget.searchTerm ==
+                                                      if (widget.categoryTerm !=
+                                                          "") {
+                                                        getMoreCategoryProducts(
+                                                            widget
+                                                                .categoryTerm);
+                                                      } else if (widget
+                                                              .yearTerm !=
+                                                          "") {
+                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                      } else if (widget
+                                                              .searchTerm ==
                                                           "") {
                                                         getMoreProducts();
                                                       } else {
@@ -2301,10 +2568,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                           onPressed: () {
                                                             setState(() {
                                                               searched = true;
-                                                              searchedvalue =
-                                                                  categoriesname[
-                                                                          index]
-                                                                      ["name"];
+                                                              Navigator.pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => ProjectGallery(
+                                                                            categoriesname:
+                                                                                categoriesname,
+                                                                            categoryTerm:
+                                                                                categoriesname[index]["name"],
+                                                                          )));
                                                             });
                                                           },
                                                           categoryName:
@@ -2616,10 +2888,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                           onPressed: () {
                                                             setState(() {
                                                               searched = true;
-                                                              searchedvalue =
-                                                                  categoriesname[
-                                                                          index]
-                                                                      ["name"];
+                                                              Navigator.pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => ProjectGallery(
+                                                                            categoriesname:
+                                                                                categoriesname,
+                                                                            categoryTerm:
+                                                                                categoriesname[index]["name"],
+                                                                          )));
                                                             });
                                                           },
                                                           categoryName:
@@ -2928,10 +3205,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         onPressed: () {
                                                           setState(() {
                                                             searched = true;
-                                                            searchedvalue =
-                                                                categoriesname[
-                                                                        index]
-                                                                    ["name"];
+                                                            Navigator
+                                                                .pushReplacement(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) =>
+                                                                            ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
                                                           });
                                                         },
                                                         categoryName:
@@ -3193,12 +3475,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Container(
-                                              height:
-                                                  cardnumber * 140.toDouble(),
+                                              height: ProjectList.length *
+                                                  140.toDouble(),
                                               child: GridView.builder(
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
-                                                itemCount: cardnumber,
+                                                itemCount: ProjectList.length,
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
                                                         crossAxisCount: 3,
@@ -3214,12 +3496,25 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable == true &&
+                                            ProjectList.length > 9 &&
+                                                    widget.lm == true &&
+                                                    _moreProductsAvailable ==
+                                                        true &&
                                                     _loadingProducts == false
                                                 ? GradientButton(
                                                     title: "Load More",
                                                     onPressed: () {
-                                                      if (widget.searchTerm ==
+                                                      if (widget.categoryTerm !=
+                                                          "") {
+                                                        getMoreCategoryProducts(
+                                                            widget
+                                                                .categoryTerm);
+                                                      } else if (widget
+                                                              .yearTerm !=
+                                                          "") {
+                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                      } else if (widget
+                                                              .searchTerm ==
                                                           "") {
                                                         getMoreProducts();
                                                       } else {
@@ -3311,12 +3606,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 40,
                                             ),
                                             Container(
-                                              height:
-                                                  cardnumber * 130.toDouble(),
+                                              height: ProjectList.length *
+                                                  130.toDouble(),
                                               child: GridView.builder(
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
-                                                itemCount: cardnumber,
+                                                itemCount: ProjectList.length,
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
                                                         crossAxisCount: 3,
@@ -3332,12 +3627,25 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable == true &&
+                                            ProjectList.length > 9 &&
+                                                    widget.lm == true &&
+                                                    _moreProductsAvailable ==
+                                                        true &&
                                                     _loadingProducts == false
                                                 ? GradientButton(
                                                     title: "Load More",
                                                     onPressed: () {
-                                                      if (widget.searchTerm ==
+                                                      if (widget.categoryTerm !=
+                                                          "") {
+                                                        getMoreCategoryProducts(
+                                                            widget
+                                                                .categoryTerm);
+                                                      } else if (widget
+                                                              .yearTerm !=
+                                                          "") {
+                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                      } else if (widget
+                                                              .searchTerm ==
                                                           "") {
                                                         getMoreProducts();
                                                       } else {
@@ -3429,12 +3737,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               height: 20,
                                             ),
                                             Container(
-                                              height:
-                                                  cardnumber * 445.toDouble(),
+                                              height: ProjectList.length *
+                                                  445.toDouble(),
                                               child: GridView.builder(
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
-                                                itemCount: cardnumber,
+                                                itemCount: ProjectList.length,
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
                                                         crossAxisCount: 1,
@@ -3450,12 +3758,25 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            _moreProductsAvailable == true &&
+                                            ProjectList.length > 9 &&
+                                                    widget.lm == true &&
+                                                    _moreProductsAvailable ==
+                                                        true &&
                                                     _loadingProducts == false
                                                 ? GradientButton(
                                                     title: "Load More",
                                                     onPressed: () {
-                                                      if (widget.searchTerm ==
+                                                      if (widget.categoryTerm !=
+                                                          "") {
+                                                        getMoreCategoryProducts(
+                                                            widget
+                                                                .categoryTerm);
+                                                      } else if (widget
+                                                              .yearTerm !=
+                                                          "") {
+                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                      } else if (widget
+                                                              .searchTerm ==
                                                           "") {
                                                         getMoreProducts();
                                                       } else {
@@ -3543,11 +3864,12 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             height: 40,
                                           ),
                                           Container(
-                                            height: cardnumber * 240.toDouble(),
+                                            height: ProjectList.length *
+                                                240.toDouble(),
                                             child: GridView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
-                                              itemCount: cardnumber,
+                                              itemCount: ProjectList.length,
                                               gridDelegate:
                                                   SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 2,
@@ -3563,12 +3885,24 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          _moreProductsAvailable == true &&
+                                          ProjectList.length > 9 &&
+                                                  widget.lm == true &&
+                                                  _moreProductsAvailable ==
+                                                      true &&
                                                   _loadingProducts == false
                                               ? GradientButton(
                                                   title: "Load More",
                                                   onPressed: () {
-                                                    if (widget.searchTerm ==
+                                                    if (widget.categoryTerm !=
+                                                        "") {
+                                                      getMoreCategoryProducts(
+                                                          widget.categoryTerm);
+                                                    } else if (widget
+                                                            .yearTerm !=
+                                                        "") {
+                                                      // getMoreYearProducts(widget.categoryTerm);
+                                                    } else if (widget
+                                                            .searchTerm ==
                                                         "") {
                                                       getMoreProducts();
                                                     } else {
@@ -3729,10 +4063,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         onPressed: () {
                                                           setState(() {
                                                             searched = true;
-                                                            searchedvalue =
-                                                                categoriesname[
-                                                                        index]
-                                                                    ["name"];
+                                                            Navigator
+                                                                .pushReplacement(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) =>
+                                                                            ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
                                                           });
                                                         },
                                                         categoryName:
@@ -4036,10 +4375,15 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         onPressed: () {
                                                           setState(() {
                                                             searched = true;
-                                                            searchedvalue =
-                                                                categoriesname[
-                                                                        index]
-                                                                    ["name"];
+                                                            Navigator
+                                                                .pushReplacement(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) =>
+                                                                            ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
                                                           });
                                                         },
                                                         categoryName:
@@ -4333,10 +4677,17 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       onPressed: () {
                                                         setState(() {
                                                           searched = true;
-                                                          searchedvalue =
-                                                              categoriesname[
-                                                                      index]
-                                                                  ["name"];
+                                                          Navigator
+                                                              .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                          ProjectGallery(
+                                                                            categoriesname:
+                                                                                categoriesname,
+                                                                            categoryTerm:
+                                                                                categoriesname[index]["name"],
+                                                                          )));
                                                         });
                                                       },
                                                       categoryName:
