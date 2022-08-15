@@ -1570,8 +1570,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 50.0),
-                                                  child: ProjectList.length !=
-                                                              0 &&
+                                                  child: ProjectList.length >
+                                                              9 &&
                                                           widget.lm == true
                                                       ? GradientButton(
                                                           title: "Load More",
