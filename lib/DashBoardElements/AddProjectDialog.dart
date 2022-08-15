@@ -1126,6 +1126,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                         }
 
                         List studentDicList = [];
+                        List studentYearList = [];
+                        List studentBatchList = [];
 
                         CollectionReference project =
                             FirebaseFirestore.instance.collection('project');
@@ -1257,6 +1259,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                 "yog": tempStudent["yog"]
                               };
                               studentDicList.add(strucDic);
+                              studentYearList.add(tempStudent["yog"]);
+                              studentBatchList.add(tempStudent["batch"]);
                             } catch (e) {
                               errorString = "Student Not Found";
                             }
@@ -1291,6 +1295,8 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                             "images": listImageLinks,
                             "Reviews": [],
                             "StudentIdList": studentDicList,
+                            "StudentYearList": studentYearList,
+                            "StudentBatchList": studentBatchList,
                             "title": Title,
                             "viewCount": 0,
                             "datetime": dtnow
@@ -1349,7 +1355,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                                 List<dynamic> oldProjects = user["projects"];
 
                                 oldProjects.add(uploadID);
-                                userServices.updateUserData(studentId, {
+                                await userServices.updateUserData(studentId, {
                                   "projects": oldProjects,
                                 });
                               }

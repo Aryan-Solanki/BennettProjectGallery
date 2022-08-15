@@ -42,7 +42,9 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                           MaterialPageRoute(
                               builder: (context) => ProjectGallery(
                                     categoriesname: widget.categoriesname,
-                                    searchTerm: "Batch 2016",
+                                    yearTerm: "2016",
+                                    lm: true,
+                                    // searchTerm: "Batch 2016",
                                   )));
                     },
                     onHover: (x) {
@@ -95,7 +97,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                           MaterialPageRoute(
                               builder: (context) => ProjectGallery(
                                     categoriesname: widget.categoriesname,
-                                    searchTerm: "Batch 2017",
+                                    yearTerm: "2017",
                                   )));
                     },
                     onHover: (x) {
@@ -153,7 +155,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                           MaterialPageRoute(
                               builder: (context) => ProjectGallery(
                                     categoriesname: widget.categoriesname,
-                                    searchTerm: "Batch 2018",
+                                    yearTerm: "2018",
                                   )));
                     },
                     onHover: (x) {
@@ -206,7 +208,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                           MaterialPageRoute(
                               builder: (context) => ProjectGallery(
                                     categoriesname: widget.categoriesname,
-                                    searchTerm: "Batch 2019",
+                                    yearTerm: "2019",
                                   )));
                     },
                     onHover: (x) {
@@ -264,7 +266,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                           MaterialPageRoute(
                               builder: (context) => ProjectGallery(
                                     categoriesname: widget.categoriesname,
-                                    searchTerm: "2020",
+                                    yearTerm: "2020",
                                   )));
                     },
                     onHover: (x) {
@@ -317,7 +319,7 @@ class _BatchWiseProjectsState extends State<BatchWiseProjects> {
                           MaterialPageRoute(
                               builder: (context) => ProjectGallery(
                                     categoriesname: widget.categoriesname,
-                                    searchTerm: "Batch 2021",
+                                    yearTerm: "2021",
                                   )));
                     },
                     onHover: (x) {

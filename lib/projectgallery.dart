@@ -153,6 +153,109 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     _gettingMoreProducts = false;
   }
 
+  _getYearProducts(String yearname) async {
+    // firestore query where category is equal to the category name and category is inside project details in firestore database structure
+    Query q = _firestore
+        .collection("project")
+        .where("StudentYearList", arrayContains: yearname)
+        .orderBy("datetime", descending: true)
+        .limit(_perpage);
+    setState(() {
+      _loadingProducts = true;
+    });
+    QuerySnapshot querySnapshot = await q.get();
+    _projects = querySnapshot.docs;
+    for (var project in _projects) {
+      ProjectList.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"].toString(),
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          ShortDescription: project["ProjectDetails"]["ShortDescription"],
+          LongDescription: project["ProjectDetails"]["LongDescription"],
+          KeyFeature1: project["ProjectDetails"]["KeyFeature1"],
+          KeyFeature2: project["ProjectDetails"]["KeyFeature2"],
+          KeyFeature3: project["ProjectDetails"]["KeyFeature3"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          viewCount: project["viewCount"],
+          timestamp: project["datetime"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+    }
+    // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    setState(() {
+      Future.delayed(Duration(seconds: 1), () {
+        // <-- Delay here
+        setState(() {
+          _loadingProducts = false; // <-- Code run after delay
+        });
+      });
+    });
+  }
+
+  getMoreYearProducts(String yearname) async {
+    if (_moreProductsAvailable == false) {
+      return;
+    }
+
+    if (_gettingMoreProducts == true) {
+      return;
+    }
+
+    _gettingMoreProducts = true;
+
+    Query q = _firestore
+        .collection("project")
+        .where("StudentYearList", arrayContains: yearname)
+        .orderBy("datetime", descending: true)
+        .startAfter([_lastDocument.get("datetime")]).limit(_perpage);
+    QuerySnapshot querySnapshot = await q.get();
+
+    if (querySnapshot.docs.length < _perpage) {
+      _moreProductsAvailable = false;
+    }
+
+    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    _projects = querySnapshot.docs;
+    for (var project in _projects) {
+      ProjectList.add(
+        new Project(
+          yog: project["StudentIdList"][0]["yog"],
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          ShortDescription: project["ProjectDetails"]["ShortDescription"],
+          LongDescription: project["ProjectDetails"]["LongDescription"],
+          KeyFeature1: project["ProjectDetails"]["KeyFeature1"],
+          KeyFeature2: project["ProjectDetails"]["KeyFeature2"],
+          KeyFeature3: project["ProjectDetails"]["KeyFeature3"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          viewCount: project["viewCount"],
+          timestamp: project["datetime"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+    }
+    // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+    setState(() {});
+    _gettingMoreProducts = false;
+  }
+
   _getProducts() async {
     // firestore query orderby reverse datetime to show latest projects at top
     Query q = _firestore
@@ -331,7 +434,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     if (widget.categoryTerm != "") {
       _getCategoryProducts(widget.categoryTerm);
     } else if (widget.yearTerm != "") {
-      // _getYearProducts(widget.yearTerm);
+      _getYearProducts(widget.yearTerm);
     } else if (widget.searchTerm == "") {
       _getProducts();
     } else {
@@ -1020,7 +1123,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          BatchWiseProjects(),
+                                          BatchWiseProjects(
+                                            categoriesname: categoriesname,
+                                          ),
                                           SizedBox(
                                             height: 20,
                                           ),
@@ -1322,7 +1427,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        BatchWiseProjects(),
+                                        BatchWiseProjects(
+                                          categoriesname: categoriesname,
+                                        ),
                                         SizedBox(
                                           height: 20,
                                         ),
@@ -1478,7 +1585,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                             } else if (widget
                                                                     .yearTerm !=
                                                                 "") {
-                                                              // getMoreYearProducts(widget.categoryTerm);
+                                                              getMoreYearProducts(
+                                                                  widget
+                                                                      .yearTerm);
                                                             } else if (widget
                                                                     .searchTerm ==
                                                                 "") {
@@ -1607,7 +1716,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     } else if (widget
                                                             .yearTerm !=
                                                         "") {
-                                                      // getMoreYearProducts(widget.categoryTerm);
+                                                      getMoreYearProducts(
+                                                          widget.yearTerm);
                                                     } else if (widget
                                                             .searchTerm ==
                                                         "") {
@@ -1735,7 +1845,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     } else if (widget
                                                             .yearTerm !=
                                                         "") {
-                                                      // getMoreYearProducts(widget.categoryTerm);
+                                                      getMoreYearProducts(
+                                                          widget.yearTerm);
                                                     } else if (widget
                                                             .searchTerm ==
                                                         "") {
@@ -1854,7 +1965,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         widget.categoryTerm);
                                                   } else if (widget.yearTerm !=
                                                       "") {
-                                                    // getMoreYearProducts(widget.categoryTerm);
+                                                    getMoreYearProducts(
+                                                        widget.yearTerm);
                                                   } else if (widget
                                                           .searchTerm ==
                                                       "") {
@@ -2004,7 +2116,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         } else if (widget
                                                                 .yearTerm !=
                                                             "") {
-                                                          // getMoreYearProducts(widget.categoryTerm);
+                                                          getMoreYearProducts(
+                                                              widget.yearTerm);
                                                         } else if (widget
                                                                 .searchTerm ==
                                                             "") {
@@ -2138,7 +2251,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         } else if (widget
                                                                 .yearTerm !=
                                                             "") {
-                                                          // getMoreYearProducts(widget.categoryTerm);
+                                                          getMoreYearProducts(
+                                                              widget.yearTerm);
                                                         } else if (widget
                                                                 .searchTerm ==
                                                             "") {
@@ -2272,7 +2386,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                         } else if (widget
                                                                 .yearTerm !=
                                                             "") {
-                                                          // getMoreYearProducts(widget.categoryTerm);
+                                                          getMoreYearProducts(
+                                                              widget.yearTerm);
                                                         } else if (widget
                                                                 .searchTerm ==
                                                             "") {
@@ -2402,7 +2517,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       } else if (widget
                                                               .yearTerm !=
                                                           "") {
-                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                        getMoreYearProducts(
+                                                            widget.yearTerm);
                                                       } else if (widget
                                                               .searchTerm ==
                                                           "") {
@@ -2738,7 +2854,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              BatchWiseProjects(),
+                                              BatchWiseProjects(
+                                                categoriesname: categoriesname,
+                                              ),
                                               SizedBox(
                                                 height: 20,
                                               ),
@@ -3058,7 +3176,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              BatchWiseProjects(),
+                                              BatchWiseProjects(
+                                                categoriesname: categoriesname,
+                                              ),
                                               SizedBox(
                                                 height: 20,
                                               ),
@@ -3371,7 +3491,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             SizedBox(
                                               height: 20,
                                             ),
-                                            BatchWiseProjects(),
+                                            BatchWiseProjects(
+                                              categoriesname: categoriesname,
+                                            ),
                                             SizedBox(
                                               height: 20,
                                             ),
@@ -3512,7 +3634,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       } else if (widget
                                                               .yearTerm !=
                                                           "") {
-                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                        getMoreYearProducts(
+                                                            widget.yearTerm);
                                                       } else if (widget
                                                               .searchTerm ==
                                                           "") {
@@ -3643,7 +3766,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       } else if (widget
                                                               .yearTerm !=
                                                           "") {
-                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                        getMoreYearProducts(
+                                                            widget.yearTerm);
                                                       } else if (widget
                                                               .searchTerm ==
                                                           "") {
@@ -3774,7 +3898,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       } else if (widget
                                                               .yearTerm !=
                                                           "") {
-                                                        // getMoreYearProducts(widget.categoryTerm);
+                                                        getMoreYearProducts(
+                                                            widget.yearTerm);
                                                       } else if (widget
                                                               .searchTerm ==
                                                           "") {
@@ -3900,7 +4025,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     } else if (widget
                                                             .yearTerm !=
                                                         "") {
-                                                      // getMoreYearProducts(widget.categoryTerm);
+                                                      getMoreYearProducts(
+                                                          widget.yearTerm);
                                                     } else if (widget
                                                             .searchTerm ==
                                                         "") {
@@ -4229,7 +4355,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             SizedBox(
                                               height: 20,
                                             ),
-                                            BatchWiseProjects(),
+                                            BatchWiseProjects(
+                                              categoriesname: categoriesname,
+                                            ),
                                             SizedBox(
                                               height: 20,
                                             ),
@@ -4541,7 +4669,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             SizedBox(
                                               height: 20,
                                             ),
-                                            BatchWiseProjects(),
+                                            BatchWiseProjects(
+                                              categoriesname: categoriesname,
+                                            ),
                                             SizedBox(
                                               height: 20,
                                             ),
@@ -4832,7 +4962,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          BatchWiseProjects(),
+                                          BatchWiseProjects(
+                                            categoriesname: categoriesname,
+                                          ),
                                           SizedBox(
                                             height: 20,
                                           ),

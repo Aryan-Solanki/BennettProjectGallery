@@ -275,52 +275,59 @@ class _LoginCardState extends State<LoginCard> {
                                           .doc(projectID)
                                           .get();
                                       bool x = project.exists;
-                                      if (!x) {
+                                      if (x == false) {
                                         projectList.remove(projectID);
-                                        continue;
+                                      } else {
+                                        projectListFinal.add(
+                                          new Project(
+                                            yog: project["StudentIdList"][0]
+                                                ["yog"],
+                                            like_count: project["LikeCount"],
+                                            DatasetLink:
+                                                project["ProjectDetails"]
+                                                    ["DatasetLink"],
+                                            ShortDescription:
+                                                project["ProjectDetails"]
+                                                    ["ShortDescription"],
+                                            LongDescription:
+                                                project["ProjectDetails"]
+                                                    ["LongDescription"],
+                                            KeyFeature1:
+                                                project["ProjectDetails"]
+                                                    ["KeyFeature1"],
+                                            KeyFeature2:
+                                                project["ProjectDetails"]
+                                                    ["KeyFeature2"],
+                                            KeyFeature3:
+                                                project["ProjectDetails"]
+                                                    ["KeyFeature3"],
+                                            ProjectLink:
+                                                project["ProjectDetails"]
+                                                    ["ProjectLink"],
+                                            ReportLink:
+                                                project["ProjectDetails"]
+                                                    ["ReportLink"],
+                                            VideoLink: project["ProjectDetails"]
+                                                ["VideoLink"],
+                                            Reviews: project["Reviews"],
+                                            StudentList:
+                                                project["StudentIdList"],
+                                            images: project["images"],
+                                            title: project["title"],
+                                            timestamp: project["datetime"],
+                                            viewCount: project["viewCount"],
+                                            Categories:
+                                                project["ProjectDetails"]
+                                                    ["Categories"],
+                                            ProfessorDetails:
+                                                project["ProfessorDetails"],
+                                          ),
+                                        );
                                       }
-
-                                      _services.updateUserData(
-                                          result, {"projects": projectList});
-
-                                      projectListFinal.add(
-                                        new Project(
-                                          yog: project["StudentIdList"][0]
-                                              ["yog"],
-                                          like_count: project["LikeCount"],
-                                          DatasetLink: project["ProjectDetails"]
-                                              ["DatasetLink"],
-                                          ShortDescription:
-                                              project["ProjectDetails"]
-                                                  ["ShortDescription"],
-                                          LongDescription:
-                                              project["ProjectDetails"]
-                                                  ["LongDescription"],
-                                          KeyFeature1: project["ProjectDetails"]
-                                              ["KeyFeature1"],
-                                          KeyFeature2: project["ProjectDetails"]
-                                              ["KeyFeature2"],
-                                          KeyFeature3: project["ProjectDetails"]
-                                              ["KeyFeature3"],
-                                          ProjectLink: project["ProjectDetails"]
-                                              ["ProjectLink"],
-                                          ReportLink: project["ProjectDetails"]
-                                              ["ReportLink"],
-                                          VideoLink: project["ProjectDetails"]
-                                              ["VideoLink"],
-                                          Reviews: project["Reviews"],
-                                          StudentList: project["StudentIdList"],
-                                          images: project["images"],
-                                          title: project["title"],
-                                          timestamp: project["datetime"],
-                                          viewCount: project["viewCount"],
-                                          Categories: project["ProjectDetails"]
-                                              ["Categories"],
-                                          ProfessorDetails:
-                                              project["ProfessorDetails"],
-                                        ),
-                                      );
                                     }
+
+                                    _services.updateUserData(
+                                        result, {"projects": projectList});
 
                                     projectListFinal.sort((a, b) =>
                                         b.timestamp.compareTo(a.timestamp));
