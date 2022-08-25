@@ -28,8 +28,9 @@ class _ProjectCardState extends State<ProjectCard> {
         padding: EdgeInsets.all(0.0),
       ),
       onPressed: () {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => ProjectDetail()));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) =>
+                ProjectDetail(project: widget.project, cat: cat)));
       },
       onHover: (x) {
         if (x) {

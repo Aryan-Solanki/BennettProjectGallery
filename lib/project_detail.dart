@@ -3,27 +3,56 @@ import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/ProjectDetailsElements/ProjectDetailsReview.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
+import 'package:bennettprojectgallery/models/Project.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProjectDetail extends StatefulWidget {
+  final Project project;
+  final String cat;
+  const ProjectDetail({Key key, this.project, this.cat}) : super(key: key);
   @override
   _ProjectDetailState createState() => _ProjectDetailState();
 }
 
 class _ProjectDetailState extends State<ProjectDetail> {
   String selected = "image1";
-  String image1link =
-      "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1";
-  String image2link =
-      "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1";
-  String image3link =
-      "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1";
+  // String image1link =
+  //     "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1";
+  // String image2link =
+  //     "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1";
+  // String image3link =
+  //     "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1";
   bool isdescription = true;
+  bool islogin = true;
   double num_of_reviews = 3;
+
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((User user) {
+      if (user == null) {
+        islogin = false;
+      } else {
+        islogin = true;
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    String mb = "Made By : \n";
+    for (int i = 0; i < widget.project.StudentList.length; i++) {
+      mb += widget.project.StudentList[i]["name"];
+      mb += " ";
+      mb += widget.project.StudentList[i]["batch"];
+      mb += " ";
+      mb += widget.project.StudentList[i]["id"];
+      mb += " \n";
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -66,12 +95,15 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                               child: Image(
                                                   fit: BoxFit.cover,
                                                   image: selected == "image1"
-                                                      ? NetworkImage(image1link)
+                                                      ? NetworkImage(widget
+                                                          .project.images[0])
                                                       : selected == "image2"
-                                                          ? NetworkImage(
-                                                              image2link)
-                                                          : NetworkImage(
-                                                              image3link)),
+                                                          ? NetworkImage(widget
+                                                              .project
+                                                              .images[1])
+                                                          : NetworkImage(widget
+                                                              .project
+                                                              .images[2])),
                                             )),
                                         SizedBox(
                                           height: 20,
@@ -105,75 +137,97 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                         child: Image(
                                                             fit: BoxFit.cover,
                                                             image: NetworkImage(
-                                                                image1link)))),
+                                                                widget.project
+                                                                        .images[
+                                                                    0])))),
                                               ),
                                             ),
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                primary: Colors.white,
-                                                padding: EdgeInsets.all(0.0),
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  selected = "image2";
-                                                });
-                                              },
-                                              child: Card(
-                                                elevation: selected == "image2"
-                                                    ? 8
-                                                    : 0,
-                                                child: Container(
-                                                    padding: EdgeInsets.all(15),
-                                                    height: 110,
-                                                    width: 90,
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        child: Image(
-                                                            fit: BoxFit.cover,
-                                                            image: NetworkImage(
-                                                                image2link)))),
-                                              ),
-                                            ),
+                                            widget.project.images.length == 2
+                                                ? TextButton(
+                                                    style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      primary: Colors.white,
+                                                      padding:
+                                                          EdgeInsets.all(0.0),
+                                                    ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selected = "image2";
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                      elevation:
+                                                          selected == "image2"
+                                                              ? 8
+                                                              : 0,
+                                                      child: Container(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  15),
+                                                          height: 110,
+                                                          width: 90,
+                                                          child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              child: Image(
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  image: NetworkImage(widget
+                                                                          .project
+                                                                          .images[
+                                                                      1])))),
+                                                    ),
+                                                  )
+                                                : Center(),
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                primary: Colors.white,
-                                                padding: EdgeInsets.all(0.0),
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  selected = "image3";
-                                                });
-                                              },
-                                              child: Card(
-                                                elevation: selected == "image3"
-                                                    ? 8
-                                                    : 0,
-                                                child: Container(
-                                                    padding: EdgeInsets.all(15),
-                                                    height: 110,
-                                                    width: 90,
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        child: Image(
-                                                            fit: BoxFit.cover,
-                                                            image: NetworkImage(
-                                                                image3link)))),
-                                              ),
-                                            ),
+                                            widget.project.images.length == 3
+                                                ? TextButton(
+                                                    style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      primary: Colors.white,
+                                                      padding:
+                                                          EdgeInsets.all(0.0),
+                                                    ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selected = "image3";
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                      elevation:
+                                                          selected == "image3"
+                                                              ? 8
+                                                              : 0,
+                                                      child: Container(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  15),
+                                                          height: 110,
+                                                          width: 90,
+                                                          child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              child: Image(
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  image: NetworkImage(widget
+                                                                          .project
+                                                                          .images[
+                                                                      2])))),
+                                                    ),
+                                                  )
+                                                : Center(),
                                           ],
                                         )
                                       ],
@@ -191,7 +245,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Computer Vision using Machine Learning and DeepLearning",
+                                            widget.project.title,
                                             textAlign: TextAlign.start,
                                             style: TextStyle(
                                                 height: 1.3,
@@ -204,7 +258,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           Row(
                                             children: [
                                               RatingBarIndicator(
-                                                rating: 3.5,
+                                                rating: 0,
                                                 itemBuilder: (context, index) =>
                                                     Icon(
                                                   Icons.star_rounded,
@@ -217,7 +271,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                               Container(
                                                 width: 180,
                                                 child: Text(
-                                                  "(1 customer review)",
+                                                  "(${widget.project.Reviews.length} Reviews)",
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   textAlign: TextAlign.center,
@@ -235,9 +289,9 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           ),
                                           Container(
                                             child: Text(
-                                              "Made by - Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki",
+                                              mb,
                                               overflow: TextOverflow.ellipsis,
-                                              maxLines: 2,
+                                              maxLines: 10,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                   fontFamily: "Metrisch-Medium",
@@ -247,11 +301,11 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 25,
+                                            height: 10,
                                           ),
                                           Container(
                                             child: Text(
-                                              "We et solutions that are at the forefront of the industry.We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",
+                                              widget.project.ShortDescription,
                                               style: TextStyle(
                                                   fontFamily: "Metrisch-Medium",
                                                   height: 1.5,
@@ -282,7 +336,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                     ? null
                                                     : 370,
                                                 child: Text(
-                                                  "We enjoy adapting our strategies to offer every client the best solutions",
+                                                  widget.project.KeyFeature1,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           "Metrisch-Medium",
@@ -316,7 +370,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                     ? null
                                                     : 370,
                                                 child: Text(
-                                                  "We enjoy adapting our strategies to offer every client the best solutions",
+                                                  widget.project.KeyFeature2,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           "Metrisch-Medium",
@@ -350,7 +404,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                     ? null
                                                     : 370,
                                                 child: Text(
-                                                  "We enjoy adapting our strategies to offer every client the best solutions",
+                                                  widget.project.KeyFeature3,
                                                   style: TextStyle(
                                                       fontFamily:
                                                           "Metrisch-Medium",
@@ -379,7 +433,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                   fontSize: 36),
                                               children: <TextSpan>[
                                                 TextSpan(
-                                                    text: 'Topic: ',
+                                                    text: 'Categories : ',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -387,7 +441,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                         fontSize: 15,
                                                         color: Colors.black)),
                                                 TextSpan(
-                                                    text: 'Machine Learning',
+                                                    text: widget.cat,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -415,7 +469,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                         fontSize: 15,
                                                         color: Colors.black)),
                                                 TextSpan(
-                                                    text: '2020-2024',
+                                                    text: widget.project.yog,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -428,43 +482,9 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           SizedBox(
                                             height: 5,
                                           ),
-                                          RichText(
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 36),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text: 'Project Type: ',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black)),
-                                                TextSpan(
-                                                    text: 'End Semester',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54)),
-                                              ],
-                                            ),
-                                          ),
                                           SizedBox(
                                             height: 25,
                                           ),
-                                          // Container(
-                                          //   width: double.maxFinite,
-                                          //   height: 1,
-                                          //   color: Colors.black12,
-                                          // ),
-                                          SizedBox(
-                                            height: 25,
-                                          ),
-
                                         ],
                                       ),
                                     )
@@ -581,136 +601,154 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                isdescription == true
-                                    ? Container(
-                                        child: Text(
-                                          "We et solutions that are at the forefront of the industry.We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",
-                                          style: TextStyle(
-                                              fontFamily: "Metrisch-Medium",
-                                              height: 1.5,
-                                              fontSize: 15,
-                                              color: Colors.black54),
-                                        ),
-                                      )
-                                    : Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: MediaQuery.of(context)
-                                                        .size
-                                                        .width >
+                                if (isdescription == true)
+                                  Container(
+                                    child: Text(
+                                      widget.project.LongDescription,
+                                      style: TextStyle(
+                                          fontFamily: "Metrisch-Medium",
+                                          height: 1.5,
+                                          fontSize: 15,
+                                          color: Colors.black54),
+                                    ),
+                                  )
+                                else
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.width >
                                                     380
                                                 ? num_of_reviews * 130
                                                 : num_of_reviews * 150,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: 5,
-                                              itemBuilder: (context, index) {
-                                                return ProjectDetailsReview();
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            "Add a review",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                height: 1.3,
-                                                fontFamily: "Metrisch-Bold",
-                                                fontSize: 25),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "Your email address will not be published. Required fields are marked *",
-                                            style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",
-                                                height: 1.5,
-                                                fontSize: 15,
-                                                color: Colors.black54),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            "Your rating",
-                                            style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",
-                                                height: 1.5,
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          RatingBar.builder(
-                                            initialRating: 0,
-                                            minRating: 1,
-                                            itemSize: 20,
-                                            direction: Axis.horizontal,
-                                            allowHalfRating: true,
-                                            itemCount: 5,
-                                            itemPadding: EdgeInsets.symmetric(
-                                                horizontal: 4.0),
-                                            itemBuilder: (context, _) => Icon(
-                                              Icons.star_rounded,
-                                              color: Colors.amber,
-                                            ),
-                                            onRatingUpdate: (rating) {
-                                              print(rating);
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                                color: Color(0xfff3f5fe)),
-                                            child: TextField(
-                                              maxLines: 5,
-                                              style: TextStyle(
-                                                  fontFamily: "Metrisch-Medium",
-                                                  height: 1.5,
-                                                  fontSize: 15,
-                                                  color: Colors.black54),
-                                              onChanged: (value) {
-                                                //Do something with the user input.
-                                              },
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                hintStyle: TextStyle(
-                                                    fontFamily:
-                                                        "Metrisch-Medium",
-                                                    height: 1.5,
-                                                    fontSize: 15,
-                                                    color: Colors.black54),
-                                                hintText: 'Your review',
-                                                // contentPadding:
-                                                // EdgeInsets.symmetric(horizontal: 20.0),
-                                                // border: OutlineInputBorder(
-                                                //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                // ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          GradientButton(
-                                            title: "SUBMIT",
-                                            buttonheight: 45,
-                                            buttonwidth: 130,
-                                          )
-                                        ],
+                                        child: ListView.builder(
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: 5,
+                                          itemBuilder: (context, index) {
+                                            return ProjectDetailsReview();
+                                          },
+                                        ),
                                       ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      islogin
+                                          ? Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Add a review",
+                                                  textAlign: TextAlign.start,
+                                                  style: TextStyle(
+                                                      height: 1.3,
+                                                      fontFamily:
+                                                          "Metrisch-Bold",
+                                                      fontSize: 25),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  "Your email address will not be published. Required fields are marked *",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
+                                                      height: 1.5,
+                                                      fontSize: 15,
+                                                      color: Colors.black54),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Text(
+                                                  "Your rating",
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
+                                                      height: 1.5,
+                                                      fontSize: 14,
+                                                      color: Colors.black),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                RatingBar.builder(
+                                                  initialRating: 0,
+                                                  minRating: 1,
+                                                  itemSize: 20,
+                                                  direction: Axis.horizontal,
+                                                  allowHalfRating: true,
+                                                  itemCount: 5,
+                                                  itemPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 4.0),
+                                                  itemBuilder: (context, _) =>
+                                                      Icon(
+                                                    Icons.star_rounded,
+                                                    color: Colors.amber,
+                                                  ),
+                                                  onRatingUpdate: (rating) {
+                                                    print(rating);
+                                                  },
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      EdgeInsets.only(left: 10),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5.0)),
+                                                      color: Color(0xfff3f5fe)),
+                                                  child: TextField(
+                                                    maxLines: 5,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                    onChanged: (value) {
+                                                      //Do something with the user input.
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      hintStyle: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                      hintText: 'Your review',
+                                                      // contentPadding:
+                                                      // EdgeInsets.symmetric(horizontal: 20.0),
+                                                      // border: OutlineInputBorder(
+                                                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                      // ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                GradientButton(
+                                                  title: "SUBMIT",
+                                                  buttonheight: 45,
+                                                  buttonwidth: 130,
+                                                )
+                                              ],
+                                            )
+                                          : Center(),
+                                    ],
+                                  ),
                                 SizedBox(
                                   height: 40,
                                 ),
@@ -800,12 +838,15 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                               child: Image(
                                                   fit: BoxFit.cover,
                                                   image: selected == "image1"
-                                                      ? NetworkImage(image1link)
+                                                      ? NetworkImage(widget
+                                                          .project.images[0])
                                                       : selected == "image2"
-                                                          ? NetworkImage(
-                                                              image2link)
-                                                          : NetworkImage(
-                                                              image3link)),
+                                                          ? NetworkImage(widget
+                                                              .project
+                                                              .images[1])
+                                                          : NetworkImage(widget
+                                                              .project
+                                                              .images[2])),
                                             )),
                                         SizedBox(
                                           height: 20,
@@ -841,75 +882,96 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                         child: Image(
                                                             fit: BoxFit.cover,
                                                             image: NetworkImage(
-                                                                image1link)))),
+                                                                widget.project
+                                                                        .images[
+                                                                    0])))),
                                               ),
                                             ),
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                primary: Colors.white,
-                                                padding: EdgeInsets.all(0.0),
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  selected = "image2";
-                                                });
-                                              },
-                                              child: Card(
-                                                elevation: selected == "image2"
-                                                    ? 8
-                                                    : 0,
-                                                child: Container(
-                                                    padding: EdgeInsets.all(15),
-                                                    height: 110,
-                                                    width: 90,
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        child: Image(
-                                                            fit: BoxFit.cover,
-                                                            image: NetworkImage(
-                                                                image2link)))),
-                                              ),
-                                            ),
+                                            widget.project.images.length == 2
+                                                ? TextButton(
+                                                    style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      primary: Colors.white,
+                                                      padding:
+                                                          EdgeInsets.all(0.0),
+                                                    ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selected = "image2";
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                      elevation:
+                                                          selected == "image2"
+                                                              ? 8
+                                                              : 0,
+                                                      child: Container(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  15),
+                                                          height: 110,
+                                                          width: 90,
+                                                          child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              child: Image(
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  image: NetworkImage(widget
+                                                                          .project
+                                                                          .images[
+                                                                      1])))),
+                                                    ),
+                                                  )
+                                                : Center(),
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                primary: Colors.white,
-                                                padding: EdgeInsets.all(0.0),
-                                              ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  selected = "image3";
-                                                });
-                                              },
-                                              child: Card(
-                                                elevation: selected == "image3"
-                                                    ? 8
-                                                    : 0,
-                                                child: Container(
-                                                    padding: EdgeInsets.all(15),
-                                                    height: 110,
-                                                    width: 90,
-                                                    child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        child: Image(
+                                            widget.project.images.length == 3
+                                                ? TextButton(
+                                                    style: TextButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      primary: Colors.white,
+                                                      padding:
+                                                          EdgeInsets.all(0.0),
+                                                    ),
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selected = "image3";
+                                                      });
+                                                    },
+                                                    child: Card(
+                                                      elevation:
+                                                          selected == "image3"
+                                                              ? 8
+                                                              : 0,
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.all(15),
+                                                        height: 110,
+                                                        width: 90,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          child: Image(
                                                             fit: BoxFit.cover,
                                                             image: NetworkImage(
-                                                                image3link)))),
-                                              ),
-                                            ),
+                                                                widget.project
+                                                                    .images[2]),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : Center()
                                           ],
                                         )
                                       ],
@@ -927,7 +989,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            "Computer Vision using Machine Learning and DeepLearning",
+                                            widget.project.title,
                                             textAlign: TextAlign.start,
                                             style: TextStyle(
                                                 height: 1.3,
@@ -940,7 +1002,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           Row(
                                             children: [
                                               RatingBarIndicator(
-                                                rating: 3.5,
+                                                rating: 0,
                                                 itemBuilder: (context, index) =>
                                                     Icon(
                                                   Icons.star_rounded,
@@ -953,7 +1015,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                               Container(
                                                 width: 180,
                                                 child: Text(
-                                                  "(1 customer review)",
+                                                  "(${widget.project.Reviews.length} Reviews)",
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   textAlign: TextAlign.center,
@@ -972,7 +1034,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           Container(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              "Made by - Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki,Aryan Solanki",
+                                              mb,
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 2,
                                               textAlign: TextAlign.start,
@@ -984,11 +1046,11 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 25,
+                                            height: 10,
                                           ),
                                           Container(
                                             child: Text(
-                                              "We et solutions that are at the forefront of the industry.We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",
+                                              widget.project.ShortDescription,
                                               style: TextStyle(
                                                   fontFamily: "Metrisch-Medium",
                                                   height: 1.5,
@@ -1014,7 +1076,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                               Expanded(
                                                 child: Container(
                                                   child: Text(
-                                                    "We enjoy adapting our strategies to offer every client the best solutions",
+                                                    widget.project.KeyFeature1,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -1044,7 +1106,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                               Expanded(
                                                 child: Container(
                                                   child: Text(
-                                                    "We enjoy adapting our strategies to offer every client the best solutions",
+                                                    widget.project.KeyFeature2,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -1074,7 +1136,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                               Expanded(
                                                 child: Container(
                                                   child: Text(
-                                                    "We enjoy adapting our strategies to offer every client the best solutions",
+                                                    widget.project.KeyFeature3,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -1096,7 +1158,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                   fontSize: 36),
                                               children: <TextSpan>[
                                                 TextSpan(
-                                                    text: 'Topic: ',
+                                                    text: 'Categories : ',
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -1104,7 +1166,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                         fontSize: 15,
                                                         color: Colors.black)),
                                                 TextSpan(
-                                                    text: 'Machine Learning',
+                                                    text: widget.cat,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -1132,7 +1194,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                         fontSize: 15,
                                                         color: Colors.black)),
                                                 TextSpan(
-                                                    text: '2020-2024',
+                                                    text: widget.project.yog,
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -1144,31 +1206,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           ),
                                           SizedBox(
                                             height: 5,
-                                          ),
-                                          RichText(
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 36),
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                    text: 'Project Type: ',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black)),
-                                                TextSpan(
-                                                    text: 'End Semester',
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54)),
-                                              ],
-                                            ),
                                           ),
                                           // Container(
                                           //   width: double.maxFinite,
@@ -1298,7 +1335,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                 isdescription == true
                                     ? Container(
                                         child: Text(
-                                          "We et solutions that are at the forefront of the industry.We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",
+                                          widget.project.LongDescription,
                                           style: TextStyle(
                                               fontFamily: "Metrisch-Medium",
                                               height: 1.5,
@@ -1329,100 +1366,127 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          Text(
-                                            "Add a review",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                height: 1.3,
-                                                fontFamily: "Metrisch-Bold",
-                                                fontSize: 25),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "Your email address will not be published. Required fields are marked *",
-                                            style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",
-                                                height: 1.5,
-                                                fontSize: 15,
-                                                color: Colors.black54),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            "Your rating",
-                                            style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",
-                                                height: 1.5,
-                                                fontSize: 14,
-                                                color: Colors.black),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          RatingBar.builder(
-                                            initialRating: 0,
-                                            minRating: 1,
-                                            itemSize: 20,
-                                            direction: Axis.horizontal,
-                                            allowHalfRating: true,
-                                            itemCount: 5,
-                                            itemPadding: EdgeInsets.symmetric(
-                                                horizontal: 4.0),
-                                            itemBuilder: (context, _) => Icon(
-                                              Icons.star_rounded,
-                                              color: Colors.amber,
-                                            ),
-                                            onRatingUpdate: (rating) {
-                                              print(rating);
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                                color: Color(0xfff3f5fe)),
-                                            child: TextField(
-                                              maxLines: 5,
-                                              style: TextStyle(
-                                                  fontFamily: "Metrisch-Medium",
-                                                  height: 1.5,
-                                                  fontSize: 15,
-                                                  color: Colors.black54),
-                                              onChanged: (value) {
-                                                //Do something with the user input.
-                                              },
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                hintStyle: TextStyle(
-                                                    fontFamily:
-                                                        "Metrisch-Medium",
-                                                    height: 1.5,
-                                                    fontSize: 15,
-                                                    color: Colors.black54),
-                                                hintText: 'Your review',
-                                                // contentPadding:
-                                                // EdgeInsets.symmetric(horizontal: 20.0),
-                                                // border: OutlineInputBorder(
-                                                //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                // ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          GradientButton(
-                                            title: "SUBMIT",
-                                            buttonheight: 45,
-                                            buttonwidth: 130,
-                                          )
+                                          islogin
+                                              ? Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Add a review",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: TextStyle(
+                                                          height: 1.3,
+                                                          fontFamily:
+                                                              "Metrisch-Bold",
+                                                          fontSize: 25),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      "Your email address will not be published. Required fields are marked *",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    Text(
+                                                      "Your rating",
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 14,
+                                                          color: Colors.black),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 15,
+                                                    ),
+                                                    RatingBar.builder(
+                                                      initialRating: 0,
+                                                      minRating: 1,
+                                                      itemSize: 20,
+                                                      direction:
+                                                          Axis.horizontal,
+                                                      allowHalfRating: true,
+                                                      itemCount: 5,
+                                                      itemPadding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 4.0),
+                                                      itemBuilder:
+                                                          (context, _) => Icon(
+                                                        Icons.star_rounded,
+                                                        color: Colors.amber,
+                                                      ),
+                                                      onRatingUpdate: (rating) {
+                                                        print(rating);
+                                                      },
+                                                    ),
+                                                    SizedBox(
+                                                      height: 15,
+                                                    ),
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 10),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          5.0)),
+                                                          color: Color(
+                                                              0xfff3f5fe)),
+                                                      child: TextField(
+                                                        maxLines: 5,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                        onChanged: (value) {
+                                                          //Do something with the user input.
+                                                        },
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              InputBorder.none,
+                                                          hintStyle: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                          hintText:
+                                                              'Your review',
+                                                          // contentPadding:
+                                                          // EdgeInsets.symmetric(horizontal: 20.0),
+                                                          // border: OutlineInputBorder(
+                                                          //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                          // ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 15,
+                                                    ),
+                                                    GradientButton(
+                                                      title: "SUBMIT",
+                                                      buttonheight: 45,
+                                                      buttonwidth: 130,
+                                                    ),
+                                                  ],
+                                                )
+                                              : Center(),
                                         ],
                                       ),
                                 SizedBox(
