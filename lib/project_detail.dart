@@ -752,37 +752,37 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                 SizedBox(
                                   height: 40,
                                 ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Related Projects",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        height: 1.3,
-                                        fontFamily: "Metrisch-Bold",
-                                        fontSize: 25),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  height: 3 * 140.toDouble(),
-                                  child: GridView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: 4,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 4,
-                                            mainAxisSpacing: 40,
-                                            childAspectRatio: 0.68,
-                                            crossAxisSpacing: 15),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return ProjectCard();
-                                    },
-                                  ),
-                                ),
+                                // Container(
+                                //   alignment: Alignment.centerLeft,
+                                //   child: Text(
+                                //     "Related Projects",
+                                //     textAlign: TextAlign.start,
+                                //     style: TextStyle(
+                                //         height: 1.3,
+                                //         fontFamily: "Metrisch-Bold",
+                                //         fontSize: 25),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 15,
+                                // ),
+                                // Container(
+                                //   height: 3 * 140.toDouble(),
+                                //   child: GridView.builder(
+                                //     physics: NeverScrollableScrollPhysics(),
+                                //     itemCount: 4,
+                                //     gridDelegate:
+                                //         SliverGridDelegateWithFixedCrossAxisCount(
+                                //             crossAxisCount: 4,
+                                //             mainAxisSpacing: 40,
+                                //             childAspectRatio: 0.68,
+                                //             crossAxisSpacing: 15),
+                                //     itemBuilder:
+                                //         (BuildContext context, int index) {
+                                //       return ProjectCard();
+                                //     },
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -1315,7 +1315,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                             horizontal: 30, vertical: 8),
                                         child: Center(
                                           child: Text(
-                                            "REVIEWS ($num_of_reviews)",
+                                            "REVIEWS (${widget.project.Reviews.length})",
                                             style: TextStyle(
                                                 color: isdescription == true
                                                     ? Colors.black
@@ -1352,12 +1352,18 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                                         .size
                                                         .width >
                                                     380
-                                                ? num_of_reviews * 130
-                                                : num_of_reviews * 150,
+                                                ? widget.project.Reviews.length
+                                                        .toDouble() *
+                                                    130
+                                                : widget.project.Reviews.length
+                                                        .toDouble() *
+                                                    150,
                                             child: ListView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
-                                              itemCount: num_of_reviews.toInt(),
+                                              itemCount: widget
+                                                  .project.Reviews.length
+                                                  .toInt(),
                                               itemBuilder: (context, index) {
                                                 return ProjectDetailsReview();
                                               },
@@ -1492,37 +1498,37 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                 SizedBox(
                                   height: 40,
                                 ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Related Projects",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        height: 1.3,
-                                        fontFamily: "Metrisch-Bold",
-                                        fontSize: 25),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  height: 3 * 140.toDouble(),
-                                  child: GridView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: 4,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 4,
-                                            mainAxisSpacing: 40,
-                                            childAspectRatio: 0.68,
-                                            crossAxisSpacing: 15),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return ProjectCard();
-                                    },
-                                  ),
-                                ),
+                                // Container(
+                                //   alignment: Alignment.centerLeft,
+                                //   child: Text(
+                                //     "Related Projects",
+                                //     textAlign: TextAlign.start,
+                                //     style: TextStyle(
+                                //         height: 1.3,
+                                //         fontFamily: "Metrisch-Bold",
+                                //         fontSize: 25),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 15,
+                                // ),
+                                // Container(
+                                //   height: 3 * 140.toDouble(),
+                                //   child: GridView.builder(
+                                //     physics: NeverScrollableScrollPhysics(),
+                                //     itemCount: 4,
+                                //     gridDelegate:
+                                //         SliverGridDelegateWithFixedCrossAxisCount(
+                                //             crossAxisCount: 4,
+                                //             mainAxisSpacing: 40,
+                                //             childAspectRatio: 0.68,
+                                //             crossAxisSpacing: 15),
+                                //     itemBuilder:
+                                //         (BuildContext context, int index) {
+                                //       return ProjectCard();
+                                //     },
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
