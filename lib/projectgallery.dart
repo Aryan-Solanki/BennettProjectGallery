@@ -65,6 +65,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     for (var project in _projects) {
       ProjectList.add(
         new Project(
+          id: project.id,
           yog: project["StudentIdList"][0]["yog"].toString(),
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],
@@ -126,6 +127,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     for (var project in _projects) {
       ProjectList.add(
         new Project(
+          id: project.id,
           yog: project["StudentIdList"][0]["yog"],
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],
@@ -168,6 +170,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     for (var project in _projects) {
       ProjectList.add(
         new Project(
+          id: project.id,
           yog: project["StudentIdList"][0]["yog"].toString(),
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],
@@ -229,6 +232,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     for (var project in _projects) {
       ProjectList.add(
         new Project(
+          id: project.id,
           yog: project["StudentIdList"][0]["yog"],
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],
@@ -270,6 +274,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     for (var project in _projects) {
       ProjectList.add(
         new Project(
+          id: project.id,
           yog: project["StudentIdList"][0]["yog"].toString(),
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],
@@ -330,6 +335,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
     for (var project in _projects) {
       ProjectList.add(
         new Project(
+          id: project.id,
           yog: project["StudentIdList"][0]["yog"],
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],
@@ -395,6 +401,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
       ProjectList.add(
         new Project(
+          id: pr.objectID,
           yog: project["StudentIdList"][0]["yog"],
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],

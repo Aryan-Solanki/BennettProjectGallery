@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Project {
+  final String id;
   final int like_count;
   final String DatasetLink;
   final String ShortDescription;
@@ -25,7 +26,8 @@ class Project {
   final Map ProfessorDetails;
 
   Project(
-      {@required this.like_count,
+      {@required this.id,
+      @required this.like_count,
       @required this.DatasetLink,
       @required this.ShortDescription,
       @required this.LongDescription,
@@ -44,4 +46,30 @@ class Project {
       @required this.yog,
       this.timestamp,
       @required this.ProfessorDetails});
+}
+
+// to map function for project class
+Map<String, dynamic> toMap(Project project) {
+  return {
+    'id': project.id,
+    'like_count': project.like_count,
+    'DatasetLink': project.DatasetLink,
+    'ShortDescription': project.ShortDescription,
+    'LongDescription': project.LongDescription,
+    'KeyFeature1': project.KeyFeature1,
+    'KeyFeature2': project.KeyFeature2,
+    'KeyFeature3': project.KeyFeature3,
+    'ProjectLink': project.ProjectLink,
+    'ReportLink': project.ReportLink,
+    'VideoLink': project.VideoLink,
+    'Reviews': project.Reviews,
+    'StudentList': project.StudentList,
+    'Categories': project.Categories,
+    'images': project.images,
+    'title': project.title,
+    'viewCount': project.viewCount,
+    'yog': project.yog,
+    'timestamp': project.timestamp,
+    'ProfessorDetails': project.ProfessorDetails,
+  };
 }

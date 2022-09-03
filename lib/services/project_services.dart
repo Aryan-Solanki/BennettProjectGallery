@@ -17,6 +17,13 @@ class ProjectServices {
   Future<DocumentReference> getProjectbyId(String id) async {
     return await FirebaseFirestore.instance.collection('project').doc(id);
   }
+
+  Future<void> updateProjectData(String id, Map<String, dynamic> values) async {
+    await FirebaseFirestore.instance
+        .collection("project")
+        .doc(id)
+        .update(values);
+  }
 }
 
 //

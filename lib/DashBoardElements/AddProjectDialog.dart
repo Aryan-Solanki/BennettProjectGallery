@@ -238,6 +238,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
       projectListFinal.add(
         new Project(
+          id: project.id,
           yog: project["StudentIdList"][0]["yog"],
           like_count: project["LikeCount"],
           DatasetLink: project["ProjectDetails"]["DatasetLink"],

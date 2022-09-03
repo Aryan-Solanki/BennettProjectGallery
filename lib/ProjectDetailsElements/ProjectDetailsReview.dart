@@ -1,7 +1,10 @@
+import 'package:bennettprojectgallery/models/Review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProjectDetailsReview extends StatefulWidget {
+  final Review re;
+  ProjectDetailsReview({this.re});
   @override
   _ProjectDetailsReviewState createState() => _ProjectDetailsReviewState();
 }
@@ -39,7 +42,7 @@ class _ProjectDetailsReviewState extends State<ProjectDetailsReview> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "David Parker",
+                            widget.re.name,
                             style: TextStyle(
                                 color: Colors.black,
                                 height: 1.3,
@@ -47,7 +50,7 @@ class _ProjectDetailsReviewState extends State<ProjectDetailsReview> {
                                 fontSize: 17),
                           ),
                           RatingBarIndicator(
-                            rating: 3.5,
+                            rating: widget.re.rating,
                             itemBuilder: (context, index) => Icon(
                               Icons.star_rounded,
                               color: Colors.amber,
@@ -61,7 +64,7 @@ class _ProjectDetailsReviewState extends State<ProjectDetailsReview> {
                     : Column(
                         children: [
                           Text(
-                            "David Parker",
+                            widget.re.name,
                             style: TextStyle(
                                 color: Colors.black,
                                 height: 1.3,
@@ -69,7 +72,7 @@ class _ProjectDetailsReviewState extends State<ProjectDetailsReview> {
                                 fontSize: 17),
                           ),
                           RatingBarIndicator(
-                            rating: 3.5,
+                            rating: widget.re.rating,
                             itemBuilder: (context, index) => Icon(
                               Icons.star_rounded,
                               color: Colors.amber,
@@ -84,7 +87,7 @@ class _ProjectDetailsReviewState extends State<ProjectDetailsReview> {
                   height: 5,
                 ),
                 Text(
-                  "NOVEMBER 27, 2018",
+                  widget.re.date,
                   style: TextStyle(
                       fontFamily: "Metrisch-Medium",
                       height: 1.5,
@@ -95,7 +98,7 @@ class _ProjectDetailsReviewState extends State<ProjectDetailsReview> {
                   height: 8,
                 ),
                 Text(
-                  "This is a useful post for finding broken links within the website, what about links pointing outwards that are broken? I can use a free web service but wondered if this was possible.",
+                  widget.re.reviewText,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

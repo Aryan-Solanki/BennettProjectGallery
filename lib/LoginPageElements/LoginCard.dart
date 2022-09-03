@@ -280,6 +280,7 @@ class _LoginCardState extends State<LoginCard> {
                                       } else {
                                         projectListFinal.add(
                                           new Project(
+                                            id: project.id,
                                             yog: project["StudentIdList"][0]
                                                 ["yog"],
                                             like_count: project["LikeCount"],
@@ -400,7 +401,6 @@ class _LoginCardState extends State<LoginCard> {
                             setState(() {
                               addError(error: "Enter Valid Email Id");
                             });
-                            print("Please enter valid email id");
                           }
                           loading = false;
                         },

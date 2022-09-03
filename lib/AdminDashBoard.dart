@@ -1,6 +1,5 @@
 import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
 import 'package:bennettprojectgallery/models/Project.dart';
-import 'package:bennettprojectgallery/projectgallery.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -332,6 +331,7 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
 
         finalProjectMap["result"].add(
           new Project(
+            id: project.id,
             yog: project["StudentIdList"][0]["yog"].toString(),
             like_count: project["LikeCount"],
             DatasetLink: project["ProjectDetails"]["DatasetLink"],
@@ -357,8 +357,9 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
       List<Project> yog_list = finalProjectMap["result"];
       yog_list
           .sort((a, b) => a.timestamp.seconds.compareTo(b.timestamp.seconds));
-      if (anyProjectRemoved)
+      if (anyProjectRemoved) {
         _services.updateProfData(ProfID, {"projects": projectMap});
+      }
     }
     setState(() {
       loading = false;
