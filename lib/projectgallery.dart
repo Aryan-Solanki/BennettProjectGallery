@@ -1688,7 +1688,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                           Container(
                                             height: ProjectList.length *
-                                                130.toDouble(),
+                                                180.toDouble(),
                                             child: GridView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
@@ -2220,7 +2220,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               ),
                                               Container(
                                                 height: ProjectList.length *
-                                                    130.toDouble(),
+                                                    180.toDouble(),
                                                 child: GridView.builder(
                                                   physics:
                                                       NeverScrollableScrollPhysics(),
