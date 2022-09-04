@@ -511,7 +511,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                     padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
                     child: ResponsiveBuilder(
                       breakpoints: ScreenBreakpoints(
-                          tablet: 580, desktop: 951, watch: 300),
+                          tablet: 580, desktop: 971, watch: 300),
                       builder: (context, sizingInformation) {
                         // Check the sizing information here and return your UI
                         if (sizingInformation.deviceScreenType ==
@@ -1686,25 +1686,40 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           SizedBox(
                                             height: 40,
                                           ),
-                                          Container(
-                                            height: ProjectList.length *
-                                                130.toDouble(),
+                                          _loadingProducts == true
+                                              ? Container(
+                                            height: 300,
+                                            width: 300,
+                                            child: Lottie.asset(
+                                                'assets/loading.json',
+                                                frameRate: FrameRate.max),
+                                          )
+                                              : Container(
+                                            clipBehavior: Clip.none,
+                                            // height: ProjectList.length *
+                                            //     160.toDouble(),
                                             child: GridView.builder(
+                                              clipBehavior: Clip.none,
+                                              shrinkWrap: true,
                                               physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: ProjectList.length,
+                                              NeverScrollableScrollPhysics(),
+                                              itemCount:
+                                              ProjectList.length,
                                               gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 3,
-                                                      mainAxisSpacing: 40,
-                                                      childAspectRatio: 0.63,
-                                                      crossAxisSpacing: 20),
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 3,
+                                                  mainAxisSpacing: 40,
+                                                  childAspectRatio:
+                                                  0.63,
+                                                  crossAxisSpacing:
+                                                  20),
                                               itemBuilder:
                                                   (BuildContext context,
-                                                      int index) {
+                                                  int index) {
                                                 return NoHoverProjectCard(
                                                     project:
-                                                        ProjectList[index]);
+                                                    ProjectList[
+                                                    index]);
                                               },
                                             ),
                                           ),
