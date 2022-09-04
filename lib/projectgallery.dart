@@ -89,15 +89,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
       );
     }
     // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
-    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
-    setState(() {
-      Future.delayed(Duration(seconds: 1), () {
-        // <-- Delay here
-        setState(() {
-          _loadingProducts = false; // <-- Code run after delay
+    if (ProjectList.length == 0) {
+      setState(() {
+        _loadingProducts = false;
+        _moreProductsAvailable = false;
+      });
+    } else {
+      _lastDocument = _projects[_projects.length - 1];
+      setState(() {
+        Future.delayed(Duration(seconds: 1), () {
+          // <-- Delay here
+          setState(() {
+            _loadingProducts = false; // <-- Code run after delay
+          });
         });
       });
-    });
+    }
+    // _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
   }
 
   getMoreCategoryProducts(String catname) async {
@@ -194,15 +202,31 @@ class _ProjectGalleryState extends State<ProjectGallery> {
       );
     }
     // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
-    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
-    setState(() {
-      Future.delayed(Duration(seconds: 1), () {
-        // <-- Delay here
-        setState(() {
-          _loadingProducts = false; // <-- Code run after delay
+    if (ProjectList.length == 0) {
+      setState(() {
+        _loadingProducts = false;
+        _moreProductsAvailable = false;
+      });
+    } else {
+      _lastDocument = _projects[_projects.length - 1];
+      setState(() {
+        Future.delayed(Duration(seconds: 1), () {
+          // <-- Delay here
+          setState(() {
+            _loadingProducts = false; // <-- Code run after delay
+          });
         });
       });
-    });
+    }
+    // _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    // setState(() {
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     // <-- Delay here
+    //     setState(() {
+    //       _loadingProducts = false; // <-- Code run after delay
+    //     });
+    //   });
+    // });
   }
 
   getMoreYearProducts(String yearname) async {
@@ -1537,40 +1561,46 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       'assets/loading.json',
                                                       frameRate: FrameRate.max),
                                                 )
-                                              : Container(
-                                                  clipBehavior: Clip.none,
-                                                  // height: ProjectList.length *
-                                                  //     160.toDouble(),
-                                                  child: GridView.builder(
-                                                    shrinkWrap: true,
-                                                    physics:
-                                                        NeverScrollableScrollPhysics(),
-                                                    itemCount:
-                                                        ProjectList.length,
-                                                    gridDelegate:
-                                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                                            crossAxisCount: 3,
-                                                            mainAxisSpacing: 40,
-                                                            childAspectRatio:
-                                                                0.68,
-                                                            crossAxisSpacing:
-                                                                20),
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                bottom: 30.0),
-                                                        child: ProjectCard(
-                                                            project:
-                                                                ProjectList[
-                                                                    index]),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
+                                              : ProjectList.length != 0
+                                                  ? Container(
+                                                      clipBehavior: Clip.none,
+                                                      // height: ProjectList.length *
+                                                      //     160.toDouble(),
+                                                      child: GridView.builder(
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            NeverScrollableScrollPhysics(),
+                                                        itemCount:
+                                                            ProjectList.length,
+                                                        gridDelegate:
+                                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                                crossAxisCount:
+                                                                    3,
+                                                                mainAxisSpacing:
+                                                                    40,
+                                                                childAspectRatio:
+                                                                    0.68,
+                                                                crossAxisSpacing:
+                                                                    20),
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    bottom:
+                                                                        30.0),
+                                                            child: ProjectCard(
+                                                                project:
+                                                                    ProjectList[
+                                                                        index]),
+                                                          );
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Text("No Projects Found"),
                                           _moreProductsAvailable == true &&
                                                   _loadingProducts == false
                                               ? Padding(
@@ -1688,41 +1718,46 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           ),
                                           _loadingProducts == true
                                               ? Container(
-                                            height: 300,
-                                            width: 300,
-                                            child: Lottie.asset(
-                                                'assets/loading.json',
-                                                frameRate: FrameRate.max),
-                                          )
-                                              : Container(
-                                            clipBehavior: Clip.none,
-                                            // height: ProjectList.length *
-                                            //     160.toDouble(),
-                                            child: GridView.builder(
-                                              clipBehavior: Clip.none,
-                                              shrinkWrap: true,
-                                              physics:
-                                              NeverScrollableScrollPhysics(),
-                                              itemCount:
-                                              ProjectList.length,
-                                              gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 3,
-                                                  mainAxisSpacing: 40,
-                                                  childAspectRatio:
-                                                  0.63,
-                                                  crossAxisSpacing:
-                                                  20),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                  int index) {
-                                                return NoHoverProjectCard(
-                                                    project:
-                                                    ProjectList[
-                                                    index]);
-                                              },
-                                            ),
-                                          ),
+                                                  height: 300,
+                                                  width: 300,
+                                                  child: Lottie.asset(
+                                                      'assets/loading.json',
+                                                      frameRate: FrameRate.max),
+                                                )
+                                              : ProjectList.length != 0
+                                                  ? Container(
+                                                      clipBehavior: Clip.none,
+                                                      // height: ProjectList.length *
+                                                      //     160.toDouble(),
+                                                      child: GridView.builder(
+                                                        clipBehavior: Clip.none,
+                                                        shrinkWrap: true,
+                                                        physics:
+                                                            NeverScrollableScrollPhysics(),
+                                                        itemCount:
+                                                            ProjectList.length,
+                                                        gridDelegate:
+                                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                                crossAxisCount:
+                                                                    3,
+                                                                mainAxisSpacing:
+                                                                    40,
+                                                                childAspectRatio:
+                                                                    0.63,
+                                                                crossAxisSpacing:
+                                                                    20),
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return NoHoverProjectCard(
+                                                              project:
+                                                                  ProjectList[
+                                                                      index]);
+                                                        },
+                                                      ),
+                                                    )
+                                                  : Text("No Projects Found"),
                                           ProjectList.length > 9 &&
                                                   widget.lm == true &&
                                                   _moreProductsAvailable ==
