@@ -21,6 +21,22 @@ class _ProjectCardState extends State<ProjectCard> {
       cat += widget.project.Categories[i];
       cat += " ";
     }
+
+    double rating = 0.0;
+    int reviewLength = widget.project.Reviews.length;
+    if (reviewLength == 0) {
+      rating = 0.0;
+    } else {
+      for (int i = 0; i < reviewLength; i++) {
+        rating += widget.project.Reviews[i]["rating"];
+      }
+      rating = rating / reviewLength;
+    }
+    // for (int i = 0; i < widget.project.Reviews.length; i++) {
+    //   rating += widget.project.Reviews[i]["rating"];
+    // }
+    // rating = rating / widget.project.Reviews.length;
+
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: Colors.transparent,
@@ -29,8 +45,8 @@ class _ProjectCardState extends State<ProjectCard> {
       ),
       onPressed: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) =>
-                ProjectDetail(project: widget.project, cat: cat)));
+            builder: (context) => ProjectDetail(
+                project: widget.project, cat: cat, rating: rating)));
       },
       onHover: (x) {
         if (x) {
@@ -81,7 +97,7 @@ class _ProjectCardState extends State<ProjectCard> {
                       height: 10,
                     ),
                     RatingBarIndicator(
-                      rating: 3.5,
+                      rating: rating,
                       itemBuilder: (context, index) => Icon(
                         Icons.star_rounded,
                         color: Colors.amber,
@@ -124,6 +140,13 @@ class _ProjectCardState extends State<ProjectCard> {
                 opacity: hover ? 1.0 : 0.0,
                 child: GradientButton(
                   title: "Open Project",
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => ProjectDetail(
+                            project: widget.project,
+                            cat: cat,
+                            rating: rating)));
+                  },
                 ),
               ),
             ),

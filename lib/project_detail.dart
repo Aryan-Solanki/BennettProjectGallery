@@ -18,7 +18,9 @@ import 'package:lottie/lottie.dart';
 class ProjectDetail extends StatefulWidget {
   final Project project;
   final String cat;
-  const ProjectDetail({Key key, this.project, this.cat}) : super(key: key);
+  final double rating;
+  const ProjectDetail({Key key, this.project, this.cat, @required this.rating})
+      : super(key: key);
   @override
   _ProjectDetailState createState() => _ProjectDetailState();
 }
@@ -274,7 +276,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           Row(
                                             children: [
                                               RatingBarIndicator(
-                                                rating: 0,
+                                                rating: widget.rating,
                                                 itemBuilder: (context, index) =>
                                                     Icon(
                                                   Icons.star_rounded,
@@ -1176,7 +1178,7 @@ class _ProjectDetailState extends State<ProjectDetail> {
                                           Row(
                                             children: [
                                               RatingBarIndicator(
-                                                rating: 0,
+                                                rating: widget.rating,
                                                 itemBuilder: (context, index) =>
                                                     Icon(
                                                   Icons.star_rounded,
