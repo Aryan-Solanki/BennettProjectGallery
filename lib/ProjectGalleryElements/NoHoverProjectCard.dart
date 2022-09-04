@@ -61,7 +61,8 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
         children: [
           Card(
             shadowColor: Colors.black,
-            elevation: hover == true ? 8 : 1,
+            elevation: hover==true?8:1,
+            clipBehavior: Clip.none,
             child: Center(
               child: Container(
                 child: Column(
