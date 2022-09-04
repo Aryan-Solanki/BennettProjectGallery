@@ -24,6 +24,13 @@ class ProjectServices {
         .doc(id)
         .update(values);
   }
+
+  Future<void> incrementViewCount(String id) async {
+    await FirebaseFirestore.instance
+        .collection("project")
+        .doc(id)
+        .update({"viewCount": FieldValue.increment(1)});
+  }
 }
 
 //
