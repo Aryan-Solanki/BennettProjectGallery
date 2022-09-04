@@ -1,10 +1,8 @@
 import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
+import 'package:bennettprojectgallery/project_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-
-
 
 class NoHoverProjectCard extends StatefulWidget {
   final Project project;
@@ -12,7 +10,8 @@ class NoHoverProjectCard extends StatefulWidget {
   @override
   _NoHoverProjectCardState createState() => _NoHoverProjectCardState();
 }
-bool hover =false;
+
+bool hover = false;
 
 class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
   @override
@@ -22,26 +21,38 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
       cat += widget.project.Categories[i];
       cat += " ";
     }
+
+    double rating = 0.0;
+    int reviewLength = widget.project.Reviews.length;
+    if (reviewLength == 0) {
+      rating = 0.0;
+    } else {
+      for (int i = 0; i < reviewLength; i++) {
+        rating += widget.project.Reviews[i]["rating"];
+      }
+      rating = rating / reviewLength;
+    }
+
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: Colors.transparent,
         primary: Colors.white,
         padding: EdgeInsets.all(0.0),
       ),
-      onPressed: (){
-
+      onPressed: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => ProjectDetail(
+                project: widget.project, cat: cat, rating: rating)));
       },
-      onHover: (x){
-        if(x){
+      onHover: (x) {
+        if (x) {
           setState(() {
-            hover=true;
+            hover = true;
           });
-        }
-        else{
+        } else {
           setState(() {
-            hover=false;
+            hover = false;
           });
-
         }
       },
       child: Stack(
@@ -60,18 +71,30 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
                     Container(
                         height: 170,
                         width: 150,
-                        child: Image(fit: BoxFit.cover,image: NetworkImage(widget.project.images[0]))
+                        child: Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(widget.project.images[0]))),
+                    SizedBox(
+                      height: 20,
                     ),
-                    SizedBox(height: 20,),
                     Container(
                       width: 150,
                       child: Text(
-                          widget.project.title,textAlign: TextAlign.center,maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontFamily: "Metrisch-Bold",fontSize: 15,color: Colors.black87),
+                        widget.project.title,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontFamily: "Metrisch-Bold",
+                            fontSize: 15,
+                            color: Colors.black87),
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     RatingBarIndicator(
-                      rating: 3.5,
+                      rating: rating,
                       itemBuilder: (context, index) => Icon(
                         Icons.star_rounded,
                         color: Colors.amber,
@@ -80,15 +103,24 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
                       itemSize: 20.0,
                       direction: Axis.horizontal,
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       width: 150,
                       child: Text(
-                        cat,overflow: TextOverflow.ellipsis,textAlign: TextAlign.center,style: TextStyle(fontFamily: "Metrisch-Medium",fontSize: 13,color: Colors.green),
+                        cat,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: "Metrisch-Medium",
+                            fontSize: 13,
+                            color: Colors.green),
                       ),
                     ),
-                    SizedBox(height: 10,),
-
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ),
@@ -96,7 +128,16 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
           ),
           Positioned(
             bottom: -20,
-            child: GradientButton(title: "Open Project",buttonwidth: 165,buttonheight: 40,),
+            child: GradientButton(
+              title: "Open Project",
+              buttonwidth: 165,
+              buttonheight: 40,
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => ProjectDetail(
+                        project: widget.project, cat: cat, rating: rating)));
+              },
+            ),
           ),
         ],
       ),
