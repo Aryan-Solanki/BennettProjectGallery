@@ -1,6 +1,7 @@
 import 'package:bennettprojectgallery/DashBoardElements/RightBoard.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/ProjectCard.dart';
 import 'package:bennettprojectgallery/models/Project.dart';
+import 'package:bennettprojectgallery/models/Review.dart';
 import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,6 +72,7 @@ class _DashBoardState extends State<DashBoard> {
 
   List<dynamic> projectListupdated = [];
   List<Project> finalProjectList = [];
+  List<Review> finalReviewList = [];
 
   UserServices _services = UserServices();
   ProjectServices _services1 = ProjectServices();
@@ -80,6 +82,15 @@ class _DashBoardState extends State<DashBoard> {
     no_of_views = 0;
     for (int i = 0; i < projectList.length; i++) {
       num_of_reviews = num_of_reviews + projectList[i].Reviews.length;
+
+      for (int i = 0; i < projectList[i].Reviews.length; i++) {
+        finalReviewList.add(new Review(
+            reviewText: projectList[i].Reviews[i]["reviewText"],
+            name: projectList[i].Reviews[i]["name"],
+            date: projectList[i].Reviews[i]["date"],
+            rating: projectList[i].Reviews[i]["rating"]));
+      }
+
       no_of_views = no_of_views + projectList[i].viewCount;
     }
   }
@@ -224,7 +235,9 @@ class _DashBoardState extends State<DashBoard> {
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Text(
-                                                                    "David Parker",
+                                                                    finalReviewList[
+                                                                            index]
+                                                                        .name,
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .black,
@@ -236,7 +249,9 @@ class _DashBoardState extends State<DashBoard> {
                                                                             17),
                                                                   ),
                                                                   RatingBarIndicator(
-                                                                    rating: 3.5,
+                                                                    rating: finalReviewList[
+                                                                            index]
+                                                                        .rating,
                                                                     itemBuilder:
                                                                         (context,
                                                                                 index) =>
@@ -258,7 +273,9 @@ class _DashBoardState extends State<DashBoard> {
                                                             : Column(
                                                                 children: [
                                                                   Text(
-                                                                    "David Parker",
+                                                                    finalReviewList[
+                                                                            index]
+                                                                        .name,
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .black,
@@ -270,7 +287,9 @@ class _DashBoardState extends State<DashBoard> {
                                                                             17),
                                                                   ),
                                                                   RatingBarIndicator(
-                                                                    rating: 3.5,
+                                                                    rating: finalReviewList[
+                                                                            index]
+                                                                        .rating,
                                                                     itemBuilder:
                                                                         (context,
                                                                                 index) =>
@@ -293,7 +312,8 @@ class _DashBoardState extends State<DashBoard> {
                                                           height: 5,
                                                         ),
                                                         Text(
-                                                          "NOVEMBER 27, 2018",
+                                                          finalReviewList[index]
+                                                              .date,
                                                           style: TextStyle(
                                                               fontFamily:
                                                                   "Metrisch-Medium",
@@ -306,7 +326,8 @@ class _DashBoardState extends State<DashBoard> {
                                                           height: 8,
                                                         ),
                                                         Text(
-                                                          "This is a useful post for finding broken links within the website, what about links pointing outwards that are broken? I can use a free web service but wondered if this was possible.",
+                                                          finalReviewList[index]
+                                                              .reviewText,
                                                           maxLines: 2,
                                                           overflow: TextOverflow
                                                               .ellipsis,
@@ -471,7 +492,9 @@ class _DashBoardState extends State<DashBoard> {
                                                                       .spaceBetween,
                                                               children: [
                                                                 Text(
-                                                                  "David Parker",
+                                                                  finalReviewList[
+                                                                          index]
+                                                                      .name,
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
@@ -483,7 +506,9 @@ class _DashBoardState extends State<DashBoard> {
                                                                           17),
                                                                 ),
                                                                 RatingBarIndicator(
-                                                                  rating: 3.5,
+                                                                  rating: finalReviewList[
+                                                                          index]
+                                                                      .rating,
                                                                   itemBuilder:
                                                                       (context,
                                                                               index) =>
@@ -504,7 +529,9 @@ class _DashBoardState extends State<DashBoard> {
                                                           : Column(
                                                               children: [
                                                                 Text(
-                                                                  "David Parker",
+                                                                  finalReviewList[
+                                                                          index]
+                                                                      .name,
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
@@ -516,7 +543,9 @@ class _DashBoardState extends State<DashBoard> {
                                                                           17),
                                                                 ),
                                                                 RatingBarIndicator(
-                                                                  rating: 3.5,
+                                                                  rating: finalReviewList[
+                                                                          index]
+                                                                      .rating,
                                                                   itemBuilder:
                                                                       (context,
                                                                               index) =>
@@ -538,7 +567,8 @@ class _DashBoardState extends State<DashBoard> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        "NOVEMBER 27, 2018",
+                                                        finalReviewList[index]
+                                                            .date,
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 "Metrisch-Medium",
@@ -551,7 +581,8 @@ class _DashBoardState extends State<DashBoard> {
                                                         height: 8,
                                                       ),
                                                       Text(
-                                                        "This is a useful post for finding broken links within the website, what about links pointing outwards that are broken? I can use a free web service but wondered if this was possible.",
+                                                        finalReviewList[index]
+                                                            .reviewText,
                                                         maxLines: 2,
                                                         overflow: TextOverflow
                                                             .ellipsis,

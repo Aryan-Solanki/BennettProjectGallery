@@ -460,7 +460,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   @override
   Widget build(BuildContext context) {
-    double catheight = (40 * categoriesname.length) as double;
+    double catheight = (43 * categoriesname.length) as double;
     final Widget normalChildButton = Container(
       color: Color(0xfff3f5fe),
       width: 250,
@@ -696,77 +696,77 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Most Viewed Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: 300,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: 3,
-                                              itemBuilder: (context, index) {
-                                                return TopProjects(
-                                                  projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
-                                                  madeBy: "Aryan Solanki",
-                                                );
-                                              },
-                                            ),
-                                          ),
+                                          // SizedBox(
+                                          //   height: 40,
+                                          // ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.center,
+                                          //   children: [
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 5,
+                                          //       height: 3,
+                                          //     ),
+                                          //     SizedBox(
+                                          //       width: 10,
+                                          //     ),
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 20,
+                                          //       height: 3,
+                                          //     ),
+                                          //     // SizedBox(
+                                          //     //   width: 10,
+                                          //     // ),
+                                          //     // Container(
+                                          //     //   decoration: BoxDecoration(
+                                          //     //     borderRadius:
+                                          //     //         BorderRadius.circular(5),
+                                          //     //     color: Colors.orange.shade400,
+                                          //     //   ),
+                                          //     //   width: 5,
+                                          //     //   height: 3,
+                                          //     // )
+                                          //   ],
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 15,
+                                          // ),
+                                          // Text(
+                                          //   "Most Viewed Projects",
+                                          //   style: TextStyle(
+                                          //       fontSize: 21,
+                                          //       color: Colors.black87,
+                                          //       fontFamily: "Metrisch-Bold"),
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 20,
+                                          // ),
+                                          // Container(
+                                          //   height: 300,
+                                          //   child: ListView.builder(
+                                          //     physics:
+                                          //         NeverScrollableScrollPhysics(),
+                                          //     shrinkWrap: true,
+                                          //     itemCount: 3,
+                                          //     itemBuilder: (context, index) {
+                                          //       return TopProjects(
+                                          //         projectName:
+                                          //             "Computer Vision using Deep Learning and Machine Learning",
+                                          //         madeBy: "Aryan Solanki",
+                                          //       );
+                                          //     },
+                                          //   ),
+                                          // ),
                                           SizedBox(
                                             height: 40,
                                           ),
@@ -1004,77 +1004,77 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Most Viewed Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: 300,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: 3,
-                                              itemBuilder: (context, index) {
-                                                return TopProjects(
-                                                  projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
-                                                  madeBy: "Aryan Solanki",
-                                                );
-                                              },
-                                            ),
-                                          ),
+                                          // SizedBox(
+                                          //   height: 40,
+                                          // ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.center,
+                                          //   children: [
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 5,
+                                          //       height: 3,
+                                          //     ),
+                                          //     SizedBox(
+                                          //       width: 10,
+                                          //     ),
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 20,
+                                          //       height: 3,
+                                          //     ),
+                                          //     // SizedBox(
+                                          //     //   width: 10,
+                                          //     // ),
+                                          //     // Container(
+                                          //     //   decoration: BoxDecoration(
+                                          //     //     borderRadius:
+                                          //     //         BorderRadius.circular(5),
+                                          //     //     color: Colors.orange.shade400,
+                                          //     //   ),
+                                          //     //   width: 5,
+                                          //     //   height: 3,
+                                          //     // )
+                                          //   ],
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 15,
+                                          // ),
+                                          // Text(
+                                          //   "Most Viewed Projects",
+                                          //   style: TextStyle(
+                                          //       fontSize: 21,
+                                          //       color: Colors.black87,
+                                          //       fontFamily: "Metrisch-Bold"),
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 20,
+                                          // ),
+                                          // Container(
+                                          //   height: 300,
+                                          //   child: ListView.builder(
+                                          //     physics:
+                                          //         NeverScrollableScrollPhysics(),
+                                          //     shrinkWrap: true,
+                                          //     itemCount: 3,
+                                          //     itemBuilder: (context, index) {
+                                          //       return TopProjects(
+                                          //         projectName:
+                                          //             "Computer Vision using Deep Learning and Machine Learning",
+                                          //         madeBy: "Aryan Solanki",
+                                          //       );
+                                          //     },
+                                          //   ),
+                                          // ),
                                           SizedBox(
                                             height: 40,
                                           ),
@@ -1308,77 +1308,77 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                             },
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 40,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 20,
-                                              height: 3,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Text(
-                                          "Most Viewed Projects",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.black87,
-                                              fontFamily: "Metrisch-Bold"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          height: 300,
-                                          child: ListView.builder(
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: 3,
-                                            itemBuilder: (context, index) {
-                                              return TopProjects(
-                                                projectName:
-                                                    "Computer Vision using Deep Learning and Machine Learning",
-                                                madeBy: "Aryan Solanki",
-                                              );
-                                            },
-                                          ),
-                                        ),
+                                        // SizedBox(
+                                        //   height: 40,
+                                        // ),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.center,
+                                        //   children: [
+                                        //     Container(
+                                        //       decoration: BoxDecoration(
+                                        //         borderRadius:
+                                        //             BorderRadius.circular(5),
+                                        //         color: Colors.orange.shade400,
+                                        //       ),
+                                        //       width: 5,
+                                        //       height: 3,
+                                        //     ),
+                                        //     SizedBox(
+                                        //       width: 10,
+                                        //     ),
+                                        //     Container(
+                                        //       decoration: BoxDecoration(
+                                        //         borderRadius:
+                                        //             BorderRadius.circular(5),
+                                        //         color: Colors.orange.shade400,
+                                        //       ),
+                                        //       width: 20,
+                                        //       height: 3,
+                                        //     ),
+                                        //     // SizedBox(
+                                        //     //   width: 10,
+                                        //     // ),
+                                        //     // Container(
+                                        //     //   decoration: BoxDecoration(
+                                        //     //     borderRadius:
+                                        //     //         BorderRadius.circular(5),
+                                        //     //     color: Colors.orange.shade400,
+                                        //     //   ),
+                                        //     //   width: 5,
+                                        //     //   height: 3,
+                                        //     // )
+                                        //   ],
+                                        // ),
+                                        // SizedBox(
+                                        //   height: 15,
+                                        // ),
+                                        // Text(
+                                        //   "Most Viewed Projects",
+                                        //   style: TextStyle(
+                                        //       fontSize: 21,
+                                        //       color: Colors.black87,
+                                        //       fontFamily: "Metrisch-Bold"),
+                                        // ),
+                                        // SizedBox(
+                                        //   height: 20,
+                                        // ),
+                                        // Container(
+                                        //   height: 300,
+                                        //   child: ListView.builder(
+                                        //     physics:
+                                        //         NeverScrollableScrollPhysics(),
+                                        //     shrinkWrap: true,
+                                        //     itemCount: 3,
+                                        //     itemBuilder: (context, index) {
+                                        //       return TopProjects(
+                                        //         projectName:
+                                        //             "Computer Vision using Deep Learning and Machine Learning",
+                                        //         madeBy: "Aryan Solanki",
+                                        //       );
+                                        //     },
+                                        //   ),
+                                        // ),
                                         SizedBox(
                                           height: 40,
                                         ),
@@ -2720,85 +2720,85 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: 40,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 20,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Text(
-                                                "Most Viewed Projects",
-                                                style: TextStyle(
-                                                    fontSize: 21,
-                                                    color: Colors.black87,
-                                                    fontFamily:
-                                                        "Metrisch-Bold"),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Container(
-                                                height: 300,
-                                                child: ListView.builder(
-                                                  physics:
-                                                      NeverScrollableScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: 3,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return TopProjects(
-                                                      projectName:
-                                                          "Computer Vision using Deep Learning and Machine Learning",
-                                                      madeBy: "Aryan Solanki",
-                                                    );
-                                                  },
-                                                ),
-                                              ),
+                                              // SizedBox(
+                                              //   height: 40,
+                                              // ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color: Colors
+                                              //             .orange.shade400,
+                                              //       ),
+                                              //       width: 5,
+                                              //       height: 3,
+                                              //     ),
+                                              //     SizedBox(
+                                              //       width: 10,
+                                              //     ),
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color: Colors
+                                              //             .orange.shade400,
+                                              //       ),
+                                              //       width: 20,
+                                              //       height: 3,
+                                              //     ),
+                                              //     // SizedBox(
+                                              //     //   width: 10,
+                                              //     // ),
+                                              //     // Container(
+                                              //     //   decoration: BoxDecoration(
+                                              //     //     borderRadius:
+                                              //     //         BorderRadius.circular(
+                                              //     //             5),
+                                              //     //     color: Colors
+                                              //     //         .orange.shade400,
+                                              //     //   ),
+                                              //     //   width: 5,
+                                              //     //   height: 3,
+                                              //     // )
+                                              //   ],
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 15,
+                                              // ),
+                                              // Text(
+                                              //   "Most Viewed Projects",
+                                              //   style: TextStyle(
+                                              //       fontSize: 21,
+                                              //       color: Colors.black87,
+                                              //       fontFamily:
+                                              //           "Metrisch-Bold"),
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 20,
+                                              // ),
+                                              // Container(
+                                              //   height: 300,
+                                              //   child: ListView.builder(
+                                              //     physics:
+                                              //         NeverScrollableScrollPhysics(),
+                                              //     shrinkWrap: true,
+                                              //     itemCount: 3,
+                                              //     itemBuilder:
+                                              //         (context, index) {
+                                              //       return TopProjects(
+                                              //         projectName:
+                                              //             "Computer Vision using Deep Learning and Machine Learning",
+                                              //         madeBy: "Aryan Solanki",
+                                              //       );
+                                              //     },
+                                              //   ),
+                                              // ),
                                               SizedBox(
                                                 height: 40,
                                               ),
@@ -3042,85 +3042,85 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: 40,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 20,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Text(
-                                                "Most Viewed Projects",
-                                                style: TextStyle(
-                                                    fontSize: 21,
-                                                    color: Colors.black87,
-                                                    fontFamily:
-                                                        "Metrisch-Bold"),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Container(
-                                                height: 300,
-                                                child: ListView.builder(
-                                                  physics:
-                                                      NeverScrollableScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: 3,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return TopProjects(
-                                                      projectName:
-                                                          "Computer Vision using Deep Learning and Machine Learning",
-                                                      madeBy: "Aryan Solanki",
-                                                    );
-                                                  },
-                                                ),
-                                              ),
+                                              // SizedBox(
+                                              //   height: 40,
+                                              // ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color: Colors
+                                              //             .orange.shade400,
+                                              //       ),
+                                              //       width: 5,
+                                              //       height: 3,
+                                              //     ),
+                                              //     SizedBox(
+                                              //       width: 10,
+                                              //     ),
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color: Colors
+                                              //             .orange.shade400,
+                                              //       ),
+                                              //       width: 20,
+                                              //       height: 3,
+                                              //     ),
+                                              //     // SizedBox(
+                                              //     //   width: 10,
+                                              //     // ),
+                                              //     // Container(
+                                              //     //   decoration: BoxDecoration(
+                                              //     //     borderRadius:
+                                              //     //         BorderRadius.circular(
+                                              //     //             5),
+                                              //     //     color: Colors
+                                              //     //         .orange.shade400,
+                                              //     //   ),
+                                              //     //   width: 5,
+                                              //     //   height: 3,
+                                              //     // )
+                                              //   ],
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 15,
+                                              // ),
+                                              // Text(
+                                              //   "Most Viewed Projects",
+                                              //   style: TextStyle(
+                                              //       fontSize: 21,
+                                              //       color: Colors.black87,
+                                              //       fontFamily:
+                                              //           "Metrisch-Bold"),
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 20,
+                                              // ),
+                                              // Container(
+                                              //   height: 300,
+                                              //   child: ListView.builder(
+                                              //     physics:
+                                              //         NeverScrollableScrollPhysics(),
+                                              //     shrinkWrap: true,
+                                              //     itemCount: 3,
+                                              //     itemBuilder:
+                                              //         (context, index) {
+                                              //       return TopProjects(
+                                              //         projectName:
+                                              //             "Computer Vision using Deep Learning and Machine Learning",
+                                              //         madeBy: "Aryan Solanki",
+                                              //       );
+                                              //     },
+                                              //   ),
+                                              // ),
                                               SizedBox(
                                                 height: 40,
                                               ),
@@ -3360,83 +3360,83 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Most Viewed Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: 300,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: 3,
-                                                itemBuilder: (context, index) {
-                                                  return TopProjects(
-                                                    projectName:
-                                                        "Computer Vision using Deep Learning and Machine Learning",
-                                                    madeBy: "Aryan Solanki",
-                                                  );
-                                                },
-                                              ),
-                                            ),
+                                            // SizedBox(
+                                            //   height: 40,
+                                            // ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.center,
+                                            //   children: [
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 5),
+                                            //         color:
+                                            //             Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 5,
+                                            //       height: 3,
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 10,
+                                            //     ),
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 5),
+                                            //         color:
+                                            //             Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 20,
+                                            //       height: 3,
+                                            //     ),
+                                            //     // SizedBox(
+                                            //     //   width: 10,
+                                            //     // ),
+                                            //     // Container(
+                                            //     //   decoration: BoxDecoration(
+                                            //     //     borderRadius:
+                                            //     //         BorderRadius.circular(
+                                            //     //             5),
+                                            //     //     color:
+                                            //     //         Colors.orange.shade400,
+                                            //     //   ),
+                                            //     //   width: 5,
+                                            //     //   height: 3,
+                                            //     // )
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 15,
+                                            // ),
+                                            // Text(
+                                            //   "Most Viewed Projects",
+                                            //   style: TextStyle(
+                                            //       fontSize: 21,
+                                            //       color: Colors.black87,
+                                            //       fontFamily: "Metrisch-Bold"),
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 20,
+                                            // ),
+                                            // Container(
+                                            //   height: 300,
+                                            //   child: ListView.builder(
+                                            //     physics:
+                                            //         NeverScrollableScrollPhysics(),
+                                            //     shrinkWrap: true,
+                                            //     itemCount: 3,
+                                            //     itemBuilder: (context, index) {
+                                            //       return TopProjects(
+                                            //         projectName:
+                                            //             "Computer Vision using Deep Learning and Machine Learning",
+                                            //         madeBy: "Aryan Solanki",
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // ),
                                             SizedBox(
                                               height: 40,
                                             ),
@@ -4224,83 +4224,83 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Most Viewed Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: 300,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: 3,
-                                                itemBuilder: (context, index) {
-                                                  return TopProjects(
-                                                    projectName:
-                                                        "Computer Vision using Deep Learning and Machine Learning",
-                                                    madeBy: "Aryan Solanki",
-                                                  );
-                                                },
-                                              ),
-                                            ),
+                                            // SizedBox(
+                                            //   height: 40,
+                                            // ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.center,
+                                            //   children: [
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 5),
+                                            //         color:
+                                            //             Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 5,
+                                            //       height: 3,
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 10,
+                                            //     ),
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 5),
+                                            //         color:
+                                            //             Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 20,
+                                            //       height: 3,
+                                            //     ),
+                                            //     // SizedBox(
+                                            //     //   width: 10,
+                                            //     // ),
+                                            //     // Container(
+                                            //     //   decoration: BoxDecoration(
+                                            //     //     borderRadius:
+                                            //     //         BorderRadius.circular(
+                                            //     //             5),
+                                            //     //     color:
+                                            //     //         Colors.orange.shade400,
+                                            //     //   ),
+                                            //     //   width: 5,
+                                            //     //   height: 3,
+                                            //     // )
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 15,
+                                            // ),
+                                            // Text(
+                                            //   "Most Viewed Projects",
+                                            //   style: TextStyle(
+                                            //       fontSize: 21,
+                                            //       color: Colors.black87,
+                                            //       fontFamily: "Metrisch-Bold"),
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 20,
+                                            // ),
+                                            // Container(
+                                            //   height: 300,
+                                            //   child: ListView.builder(
+                                            //     physics:
+                                            //         NeverScrollableScrollPhysics(),
+                                            //     shrinkWrap: true,
+                                            //     itemCount: 3,
+                                            //     itemBuilder: (context, index) {
+                                            //       return TopProjects(
+                                            //         projectName:
+                                            //             "Computer Vision using Deep Learning and Machine Learning",
+                                            //         madeBy: "Aryan Solanki",
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // ),
                                             SizedBox(
                                               height: 40,
                                             ),
@@ -4538,83 +4538,83 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Most Viewed Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: 300,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: 3,
-                                                itemBuilder: (context, index) {
-                                                  return TopProjects(
-                                                    projectName:
-                                                        "Computer Vision using Deep Learning and Machine Learning",
-                                                    madeBy: "Aryan Solanki",
-                                                  );
-                                                },
-                                              ),
-                                            ),
+                                            // SizedBox(
+                                            //   height: 40,
+                                            // ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.center,
+                                            //   children: [
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 5),
+                                            //         color:
+                                            //             Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 5,
+                                            //       height: 3,
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 10,
+                                            //     ),
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 5),
+                                            //         color:
+                                            //             Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 20,
+                                            //       height: 3,
+                                            //     ),
+                                            //     // SizedBox(
+                                            //     //   width: 10,
+                                            //     // ),
+                                            //     // Container(
+                                            //     //   decoration: BoxDecoration(
+                                            //     //     borderRadius:
+                                            //     //         BorderRadius.circular(
+                                            //     //             5),
+                                            //     //     color:
+                                            //     //         Colors.orange.shade400,
+                                            //     //   ),
+                                            //     //   width: 5,
+                                            //     //   height: 3,
+                                            //     // )
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 15,
+                                            // ),
+                                            // Text(
+                                            //   "Most Viewed Projects",
+                                            //   style: TextStyle(
+                                            //       fontSize: 21,
+                                            //       color: Colors.black87,
+                                            //       fontFamily: "Metrisch-Bold"),
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 20,
+                                            // ),
+                                            // Container(
+                                            //   height: 300,
+                                            //   child: ListView.builder(
+                                            //     physics:
+                                            //         NeverScrollableScrollPhysics(),
+                                            //     shrinkWrap: true,
+                                            //     itemCount: 3,
+                                            //     itemBuilder: (context, index) {
+                                            //       return TopProjects(
+                                            //         projectName:
+                                            //             "Computer Vision using Deep Learning and Machine Learning",
+                                            //         madeBy: "Aryan Solanki",
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // ),
                                             SizedBox(
                                               height: 40,
                                             ),
@@ -4843,77 +4843,77 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Most Viewed Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: 300,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: 3,
-                                              itemBuilder: (context, index) {
-                                                return TopProjects(
-                                                  projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
-                                                  madeBy: "Aryan Solanki",
-                                                );
-                                              },
-                                            ),
-                                          ),
+                                          // SizedBox(
+                                          //   height: 40,
+                                          // ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.center,
+                                          //   children: [
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 5,
+                                          //       height: 3,
+                                          //     ),
+                                          //     SizedBox(
+                                          //       width: 10,
+                                          //     ),
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 20,
+                                          //       height: 3,
+                                          //     ),
+                                          //     // SizedBox(
+                                          //     //   width: 10,
+                                          //     // ),
+                                          //     // Container(
+                                          //     //   decoration: BoxDecoration(
+                                          //     //     borderRadius:
+                                          //     //         BorderRadius.circular(5),
+                                          //     //     color: Colors.orange.shade400,
+                                          //     //   ),
+                                          //     //   width: 5,
+                                          //     //   height: 3,
+                                          //     // )
+                                          //   ],
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 15,
+                                          // ),
+                                          // Text(
+                                          //   "Most Viewed Projects",
+                                          //   style: TextStyle(
+                                          //       fontSize: 21,
+                                          //       color: Colors.black87,
+                                          //       fontFamily: "Metrisch-Bold"),
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 20,
+                                          // ),
+                                          // Container(
+                                          //   height: 300,
+                                          //   child: ListView.builder(
+                                          //     physics:
+                                          //         NeverScrollableScrollPhysics(),
+                                          //     shrinkWrap: true,
+                                          //     itemCount: 3,
+                                          //     itemBuilder: (context, index) {
+                                          //       return TopProjects(
+                                          //         projectName:
+                                          //             "Computer Vision using Deep Learning and Machine Learning",
+                                          //         madeBy: "Aryan Solanki",
+                                          //       );
+                                          //     },
+                                          //   ),
+                                          // ),
                                           SizedBox(
                                             height: 40,
                                           ),
