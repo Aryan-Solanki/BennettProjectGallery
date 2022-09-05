@@ -70,9 +70,11 @@ class _DashBoardState extends State<DashBoard> {
       this.yog,
       this.projectList});
 
-  List<dynamic> projectListupdated = [];
+  List<Project> projectListupdated = [];
   List<Project> finalProjectList = [];
   List<Review> finalReviewList = [];
+
+  bool updated = false;
 
   UserServices _services = UserServices();
   ProjectServices _services1 = ProjectServices();
@@ -101,8 +103,69 @@ class _DashBoardState extends State<DashBoard> {
     super.initState();
   }
 
+  void reloadProjectList() async {
+    List<dynamic> projectList = [];
+    UserServices _services = new UserServices();
+    var doc = await _services.getUserById(widget.id);
+    projectList = doc["projects"];
+
+    List<Project> projectListFinal = [];
+    UserServices _services1 = new UserServices();
+
+    for (var projectID in projectList) {
+      var project = await FirebaseFirestore.instance
+          .collection("project")
+          .doc(projectID)
+          .get();
+      bool x = project.exists;
+      if (!x) {
+        projectList.remove(projectID);
+        continue;
+      }
+
+      _services.updateUserData(widget.id, {"projects": projectList});
+
+      projectListFinal.add(
+        new Project(
+          id: project.id,
+          yog: project["StudentIdList"][0]["yog"],
+          like_count: project["LikeCount"],
+          DatasetLink: project["ProjectDetails"]["DatasetLink"],
+          ShortDescription: project["ProjectDetails"]["ShortDescription"],
+          LongDescription: project["ProjectDetails"]["LongDescription"],
+          KeyFeature1: project["ProjectDetails"]["KeyFeature1"],
+          KeyFeature2: project["ProjectDetails"]["KeyFeature2"],
+          KeyFeature3: project["ProjectDetails"]["KeyFeature3"],
+          ProjectLink: project["ProjectDetails"]["ProjectLink"],
+          ReportLink: project["ProjectDetails"]["ReportLink"],
+          VideoLink: project["ProjectDetails"]["VideoLink"],
+          Reviews: project["Reviews"],
+          StudentList: project["StudentIdList"],
+          images: project["images"],
+          title: project["title"],
+          timestamp: project["datetime"],
+          viewCount: project["viewCount"],
+          Categories: project["ProjectDetails"]["Categories"],
+          ProfessorDetails: project["ProfessorDetails"],
+        ),
+      );
+
+      projectListFinal.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    }
+    updated = true;
+    setState(() {
+      projectListupdated = projectListFinal;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (updated == false) {
+      finalProjectList = widget.projectList;
+    } else {
+      finalProjectList = projectListupdated;
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -139,7 +202,7 @@ class _DashBoardState extends State<DashBoard> {
                                 height: 400,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: projectList.length,
+                                  itemCount: finalProjectList.length,
                                   itemBuilder: (BuildContext ctxt, int index) {
                                     return Container(
                                         width: 250,
@@ -149,10 +212,12 @@ class _DashBoardState extends State<DashBoard> {
                                             MediaQuery.of(context).size.width >
                                                     800
                                                 ? ProjectCard(
-                                                    project: projectList[index],
+                                                    project:
+                                                        finalProjectList[index],
                                                   )
                                                 : NoHoverProjectCard(
-                                                    project: projectList[index],
+                                                    project:
+                                                        finalProjectList[index],
                                                   ));
                                   },
                                 ),
@@ -352,17 +417,17 @@ class _DashBoardState extends State<DashBoard> {
                           right: 0,
                           top: 0,
                           child: RightBoard(
-                            id: id,
-                            batch: batch,
-                            school: school,
-                            email: email,
-                            name: name,
-                            yog: yog,
-                            course: course,
-                            image: image,
-                            no_of_reviews: num_of_reviews,
-                            no_of_views: no_of_views,
-                          ))
+                              id: id,
+                              batch: batch,
+                              school: school,
+                              email: email,
+                              name: name,
+                              yog: yog,
+                              course: course,
+                              image: image,
+                              no_of_reviews: num_of_reviews,
+                              no_of_views: no_of_views,
+                              func: reloadProjectList))
                     ],
                   )
                 : SingleChildScrollView(
@@ -376,7 +441,10 @@ class _DashBoardState extends State<DashBoard> {
                             name: name,
                             yog: yog,
                             course: course,
-                            image: image),
+                            image: image,
+                            no_of_reviews: num_of_reviews,
+                            no_of_views: no_of_views,
+                            func: reloadProjectList),
                         Padding(
                           padding:
                               EdgeInsets.only(top: 20, right: 20, left: 20),
@@ -398,7 +466,7 @@ class _DashBoardState extends State<DashBoard> {
                                 height: 400,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: projectList.length,
+                                  itemCount: finalProjectList.length,
                                   itemBuilder: (BuildContext ctxt, int index) {
                                     return Container(
                                         width: 250,
@@ -408,10 +476,12 @@ class _DashBoardState extends State<DashBoard> {
                                             MediaQuery.of(context).size.width >
                                                     800
                                                 ? ProjectCard(
-                                                    project: projectList[index],
+                                                    project:
+                                                        finalProjectList[index],
                                                   )
                                                 : NoHoverProjectCard(
-                                                    project: projectList[index],
+                                                    project:
+                                                        finalProjectList[index],
                                                   ));
                                   },
                                 ),

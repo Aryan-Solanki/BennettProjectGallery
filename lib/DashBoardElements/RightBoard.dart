@@ -19,6 +19,7 @@ class RightBoard extends StatefulWidget {
   final String yog;
   final double no_of_views;
   final double no_of_reviews;
+  final Function func;
 
   RightBoard({
     this.batch,
@@ -31,6 +32,7 @@ class RightBoard extends StatefulWidget {
     this.yog,
     this.no_of_views,
     this.no_of_reviews,
+    this.func,
   });
 
   @override
@@ -151,6 +153,10 @@ class _RightBoardState extends State<RightBoard> {
     getAllProfessors();
     getAllStudents();
     super.initState();
+  }
+
+  void runWidgetFunction() {
+    widget.func();
   }
 
   @override
@@ -454,7 +460,8 @@ class _RightBoardState extends State<RightBoard> {
                                         categoryList: categoryList,
                                         professorList: professorList1,
                                         studentList: studentList1,
-                                        studentDict: studentDict);
+                                        studentDict: studentDict,
+                                        func: runWidgetFunction);
                                     ;
                                   });
                             },
@@ -716,7 +723,8 @@ class _RightBoardState extends State<RightBoard> {
                                         categoryList: categoryList,
                                         professorList: professorList1,
                                         studentList: studentList1,
-                                        studentDict: studentDict);
+                                        studentDict: studentDict,
+                                        func: runWidgetFunction);
                                   });
                             },
                             buttonheight: 45,
