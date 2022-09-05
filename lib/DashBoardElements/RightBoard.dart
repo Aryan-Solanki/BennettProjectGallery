@@ -188,8 +188,8 @@ class _RightBoardState extends State<RightBoard> {
                       height: 200,
                       width: 200,
                       child: Stack(
+                        clipBehavior: Clip.none,
                         fit: StackFit.expand,
-                        overflow: Overflow.visible,
                         children: [
                           Positioned(
                             left: 11,
@@ -480,7 +480,7 @@ class _RightBoardState extends State<RightBoard> {
                       width: 160,
                       child: Stack(
                         fit: StackFit.expand,
-                        overflow: Overflow.visible,
+                        clipBehavior: Clip.none,
                         children: [
                           CircleAvatar(
                               foregroundImage: NetworkImage(

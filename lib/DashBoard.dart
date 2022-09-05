@@ -83,12 +83,12 @@ class _DashBoardState extends State<DashBoard> {
     for (int i = 0; i < projectList.length; i++) {
       num_of_reviews = num_of_reviews + projectList[i].Reviews.length;
 
-      for (int i = 0; i < projectList[i].Reviews.length; i++) {
+      for (int j = 0; j < projectList[i].Reviews.length; j++) {
         finalReviewList.add(new Review(
-            reviewText: projectList[i].Reviews[i]["reviewText"],
-            name: projectList[i].Reviews[i]["name"],
-            date: projectList[i].Reviews[i]["date"],
-            rating: projectList[i].Reviews[i]["rating"]));
+            reviewText: projectList[i].Reviews[j]["reviewText"],
+            name: projectList[i].Reviews[j]["name"],
+            date: projectList[i].Reviews[j]["date"],
+            rating: projectList[i].Reviews[j]["rating"]));
       }
 
       no_of_views = no_of_views + projectList[i].viewCount;
@@ -118,241 +118,233 @@ class _DashBoardState extends State<DashBoard> {
                     clipBehavior: Clip.none,
                     children: [
                       SingleChildScrollView(
-                        child: Positioned(
-                          left: 0,
-                          top: 0,
-                          child: Padding(
-                            padding:
-                                EdgeInsets.only(top: 200, right: 20, left: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                Text("Your Projects",
-                                    style: TextStyle(
-                                        fontFamily: "Metrisch-Bold",
-                                        fontSize: 25)),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 400,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: projectList.length,
-                                    itemBuilder:
-                                        (BuildContext ctxt, int index) {
-                                      return Container(
-                                          width: 250,
-                                          margin: EdgeInsets.only(right: 20),
-                                          padding: EdgeInsets.only(bottom: 40),
-                                          child: MediaQuery.of(context)
-                                                      .size
-                                                      .width >
-                                                  800
-                                              ? ProjectCard(
-                                                  project: projectList[index],
-                                                )
-                                              : NoHoverProjectCard());
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text("All Reviews",
-                                    style: TextStyle(
-                                        fontFamily: "Metrisch-Bold",
-                                        fontSize: 25)),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                num_of_reviews == 0
-                                    ? Column(
-                                        children: [
-                                          Center(
-                                            child: Text("No Reviews Found"),
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          )
-                                        ],
-                                      )
-                                    : Container(
-                                        height: num_of_reviews * 130,
-                                        child: ListView.builder(
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          itemCount: num_of_reviews.toInt(),
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 30),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: 80,
-                                                    height: 80,
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      child: Image(
-                                                          fit: BoxFit.cover,
-                                                          image: NetworkImage(
-                                                              "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 30,
-                                                  ),
-                                                  Container(
-                                                    width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width >
-                                                            1050
-                                                        ? 900
-                                                        : MediaQuery.of(context)
-                                                                .size
-                                                                .width -
-                                                            150,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        MediaQuery.of(context)
-                                                                    .size
-                                                                    .width >
-                                                                380
-                                                            ? Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  Text(
-                                                                    finalReviewList[
-                                                                            index]
-                                                                        .name,
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        height:
-                                                                            1.3,
-                                                                        fontFamily:
-                                                                            "Metrisch-Medium",
-                                                                        fontSize:
-                                                                            17),
-                                                                  ),
-                                                                  RatingBarIndicator(
-                                                                    rating: finalReviewList[
-                                                                            index]
-                                                                        .rating,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                                index) =>
-                                                                            Icon(
-                                                                      Icons
-                                                                          .star_rounded,
-                                                                      color: Colors
-                                                                          .amber,
-                                                                    ),
-                                                                    itemCount:
-                                                                        5,
-                                                                    itemSize:
-                                                                        20.0,
-                                                                    direction: Axis
-                                                                        .horizontal,
-                                                                  ),
-                                                                ],
-                                                              )
-                                                            : Column(
-                                                                children: [
-                                                                  Text(
-                                                                    finalReviewList[
-                                                                            index]
-                                                                        .name,
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        height:
-                                                                            1.3,
-                                                                        fontFamily:
-                                                                            "Metrisch-Medium",
-                                                                        fontSize:
-                                                                            17),
-                                                                  ),
-                                                                  RatingBarIndicator(
-                                                                    rating: finalReviewList[
-                                                                            index]
-                                                                        .rating,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                                index) =>
-                                                                            Icon(
-                                                                      Icons
-                                                                          .star_rounded,
-                                                                      color: Colors
-                                                                          .amber,
-                                                                    ),
-                                                                    itemCount:
-                                                                        5,
-                                                                    itemSize:
-                                                                        20.0,
-                                                                    direction: Axis
-                                                                        .horizontal,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                        SizedBox(
-                                                          height: 5,
-                                                        ),
-                                                        Text(
-                                                          finalReviewList[index]
-                                                              .date,
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  "Metrisch-Medium",
-                                                              height: 1.5,
-                                                              fontSize: 12,
-                                                              color: Colors
-                                                                  .black26),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 8,
-                                                        ),
-                                                        Text(
-                                                          finalReviewList[index]
-                                                              .reviewText,
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  "Metrisch-Medium",
-                                                              height: 1.5,
-                                                              fontSize: 15,
-                                                              color: Colors
-                                                                  .black54),
-                                                        )
-                                                      ],
-                                                    ),
+                        child: Padding(
+                          padding:
+                              EdgeInsets.only(top: 200, right: 20, left: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Text("Your Projects",
+                                  style: TextStyle(
+                                      fontFamily: "Metrisch-Bold",
+                                      fontSize: 25)),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 400,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: projectList.length,
+                                  itemBuilder: (BuildContext ctxt, int index) {
+                                    return Container(
+                                        width: 250,
+                                        margin: EdgeInsets.only(right: 20),
+                                        padding: EdgeInsets.only(bottom: 40),
+                                        child:
+                                            MediaQuery.of(context).size.width >
+                                                    800
+                                                ? ProjectCard(
+                                                    project: projectList[index],
                                                   )
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                SizedBox(
-                                  height: 15,
+                                                : NoHoverProjectCard(
+                                                    project: projectList[index],
+                                                  ));
+                                  },
                                 ),
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text("All Reviews",
+                                  style: TextStyle(
+                                      fontFamily: "Metrisch-Bold",
+                                      fontSize: 25)),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              num_of_reviews == 0
+                                  ? Column(
+                                      children: [
+                                        Center(
+                                          child: Text("No Reviews Found"),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        )
+                                      ],
+                                    )
+                                  : Container(
+                                      height: num_of_reviews * 130,
+                                      child: ListView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: num_of_reviews.toInt(),
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            padding:
+                                                EdgeInsets.only(bottom: 30),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 80,
+                                                  height: 80,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    child: Image(
+                                                        fit: BoxFit.cover,
+                                                        image: NetworkImage(
+                                                            "https://firebasestorage.googleapis.com/v0/b/bennettprojectarchive.appspot.com/o/sampleProfilePicImages%2Fpp2.webp?alt=media&token=edc83022-4130-477c-904d-d0cb71b87851")),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 30,
+                                                ),
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width >
+                                                          1050
+                                                      ? 900
+                                                      : MediaQuery.of(context)
+                                                              .size
+                                                              .width -
+                                                          150,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      MediaQuery.of(context)
+                                                                  .size
+                                                                  .width >
+                                                              380
+                                                          ? Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                  finalReviewList[
+                                                                          index]
+                                                                      .name,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      height:
+                                                                          1.3,
+                                                                      fontFamily:
+                                                                          "Metrisch-Medium",
+                                                                      fontSize:
+                                                                          17),
+                                                                ),
+                                                                RatingBarIndicator(
+                                                                  rating: finalReviewList[
+                                                                          index]
+                                                                      .rating,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                              index) =>
+                                                                          Icon(
+                                                                    Icons
+                                                                        .star_rounded,
+                                                                    color: Colors
+                                                                        .amber,
+                                                                  ),
+                                                                  itemCount: 5,
+                                                                  itemSize:
+                                                                      20.0,
+                                                                  direction: Axis
+                                                                      .horizontal,
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : Column(
+                                                              children: [
+                                                                Text(
+                                                                  finalReviewList[
+                                                                          index]
+                                                                      .name,
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      height:
+                                                                          1.3,
+                                                                      fontFamily:
+                                                                          "Metrisch-Medium",
+                                                                      fontSize:
+                                                                          17),
+                                                                ),
+                                                                RatingBarIndicator(
+                                                                  rating: finalReviewList[
+                                                                          index]
+                                                                      .rating,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                              index) =>
+                                                                          Icon(
+                                                                    Icons
+                                                                        .star_rounded,
+                                                                    color: Colors
+                                                                        .amber,
+                                                                  ),
+                                                                  itemCount: 5,
+                                                                  itemSize:
+                                                                      20.0,
+                                                                  direction: Axis
+                                                                      .horizontal,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        finalReviewList[index]
+                                                            .date,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.black26),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8,
+                                                      ),
+                                                      Text(
+                                                        finalReviewList[index]
+                                                            .reviewText,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -418,7 +410,9 @@ class _DashBoardState extends State<DashBoard> {
                                                 ? ProjectCard(
                                                     project: projectList[index],
                                                   )
-                                                : NoHoverProjectCard());
+                                                : NoHoverProjectCard(
+                                                    project: projectList[index],
+                                                  ));
                                   },
                                 ),
                               ),
