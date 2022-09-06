@@ -186,25 +186,53 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
               DataCell(Text(studentIDString)),
               DataCell(Text(studentBatchString)),
               DataCell(Text(studentYogString)),
-              DataCell(FlatButton(
+              DataCell(ElevatedButton(
+                // make this button flat button in style
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff101770),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
+                  ),
+                ),
                 child: Text(project["ProjectDetails"]["DatasetLink"]),
                 onPressed: () {
                   _launchURL(project["ProjectDetails"]["DatasetLink"]);
                 },
               )),
-              DataCell(FlatButton(
+              DataCell(ElevatedButton(
+                // make this button flat button in style
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff101770),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
+                  ),
+                ),
                 child: Text(project["ProjectDetails"]["ProjectLink"]),
                 onPressed: () {
                   _launchURL(project["ProjectDetails"]["ProjectLink"]);
                 },
               )),
-              DataCell(FlatButton(
+              DataCell(ElevatedButton(
+                // make this button flat button in style
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff101770),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
+                  ),
+                ),
                 child: Text(project["ProjectDetails"]["ReportLink"]),
                 onPressed: () {
                   _launchURL(project["ProjectDetails"]["ReportLink"]);
                 },
               )),
-              DataCell(FlatButton(
+              DataCell(ElevatedButton(
+                // make this button flat button in style
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xff101770),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(32.0),
+                  ),
+                ),
                 child: Text(project["ProjectDetails"]["VideoLink"]),
                 onPressed: () {
                   _launchURL(project["ProjectDetails"]["VideoLink"]);
@@ -215,7 +243,14 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                   ? DataCell(
                       Row(
                         children: [
-                          FlatButton(
+                          ElevatedButton(
+                            // make this button flat button in style
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xff101770),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(32.0),
+                              ),
+                            ),
                             child: Text(project["images"][0]),
                             onPressed: () {
                               _launchURL(project["images"][0]);
@@ -228,13 +263,28 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                       ? DataCell(
                           Row(
                             children: [
-                              FlatButton(
+                              ElevatedButton(
+                                // make this button flat button in style
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color(0xff101770),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32.0),
+                                  ),
+                                ),
+                                // make this button flat
                                 child: Text(project["images"][0]),
                                 onPressed: () {
                                   _launchURL(project["images"][0]);
                                 },
                               ),
-                              FlatButton(
+                              ElevatedButton(
+                                // make this button flat button in style
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color(0xff101770),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32.0),
+                                  ),
+                                ),
                                 child: Text(project["images"][1]),
                                 onPressed: () {
                                   _launchURL(project["images"][1]);
@@ -247,19 +297,43 @@ class _AdminDashBoardState extends State<AdminDashBoard> {
                           ? DataCell(
                               Row(
                                 children: [
-                                  FlatButton(
+                                  ElevatedButton(
+                                    // make this button flat button in style
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xff101770),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(32.0),
+                                      ),
+                                    ),
                                     child: Text(project["images"][0]),
                                     onPressed: () {
                                       _launchURL(project["images"][0]);
                                     },
                                   ),
-                                  FlatButton(
+                                  ElevatedButton(
+                                    // make this button flat button in style
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xff101770),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(32.0),
+                                      ),
+                                    ),
                                     child: Text(project["images"][1]),
                                     onPressed: () {
                                       _launchURL(project["images"][1]);
                                     },
                                   ),
-                                  FlatButton(
+                                  ElevatedButton(
+                                    // make this button flat button in style
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xff101770),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(32.0),
+                                      ),
+                                    ),
                                     child: Text(project["images"][2]),
                                     onPressed: () {
                                       _launchURL(project["images"][2]);
