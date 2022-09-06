@@ -2,7 +2,6 @@ import 'dart:html' as html;
 import 'dart:html';
 import 'dart:math';
 
-import 'package:bennettprojectgallery/DashBoard.dart';
 import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:bennettprojectgallery/services/user_services.dart';
 
@@ -43,33 +42,21 @@ class UpperCaseTextFormatter extends TextInputFormatter {
 
 class AddProjectDialog extends StatefulWidget {
   final String id;
-  final String batch;
-  final String course;
-  final String email;
-  final String image;
   final String name;
-  final String school;
   final String yog;
   final List<dynamic> categoryList;
   final List<dynamic> professorList;
   final List<dynamic> studentList;
   final Map studentDict;
-  final Function func;
 
   AddProjectDialog({
     this.id,
-    this.batch,
-    this.course,
-    this.email,
-    this.image,
-    this.name,
-    this.school,
     this.yog,
+    this.name,
     this.categoryList,
     @required this.professorList,
     @required this.studentList,
     this.studentDict,
-    this.func,
   });
 
   @override
@@ -227,7 +214,7 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
     //selected image
   }
 
-  Future<List<Project>> reloadProjectList() async {
+  void reloadProjectList() async {
     List<dynamic> projectList = [];
     UserServices _services = new UserServices();
     var doc = await _services.getUserById(widget.id);
@@ -276,7 +263,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
 
       projectListFinal.sort((a, b) => b.timestamp.compareTo(a.timestamp));
     }
-    return projectListFinal;
   }
 
   Future<String> uploadImageToFirebase(var image) async {
@@ -1377,7 +1363,6 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                               break;
                             }
                           }
-                          widget.func();
                           Navigator.pop(context);
 
                           //  Generate Toast
@@ -1385,26 +1370,12 @@ class _AddProjectDialogState extends State<AddProjectDialog> {
                               msg: "Project Uploaded Successfully",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 2,
+                              timeInSecForIosWeb: 1,
                               backgroundColor: Colors.green,
                               textColor: Colors.white,
                               fontSize: 16.0);
 
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => DashBoard(
-                          //         id: widget.id,
-                          //         batch: widget.batch,
-                          //         course: widget.course,
-                          //         email: widget.email,
-                          //         image: widget.image,
-                          //         name: widget.name,
-                          //         school: widget.school,
-                          //         yog: widget.yog,
-                          //         projectList: projectList),
-                          //   ),
-                          // );
+                          reloadProjectList();
                         } else {
                           Fluttertoast.showToast(
                               msg: errorString,

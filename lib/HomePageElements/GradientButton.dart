@@ -70,13 +70,17 @@ class _GradientButtonState extends State<GradientButton>
         ),
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
         child: Center(
-          child: Text(
-            widget.title,
-            style: TextStyle(
-                color: Colors.white,
-                height: 1.3,
-                fontFamily: "Metrisch-Bold",
-                fontSize: 16),
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Text(
+              widget.title,
+              maxLines: 1,
+              style: TextStyle(
+                  color: Colors.white,
+                  height: 1.3,
+                  fontFamily: "Metrisch-Bold",
+                  fontSize: 16),
+            ),
           ),
         ),
       ),

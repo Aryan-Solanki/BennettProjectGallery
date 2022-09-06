@@ -24,7 +24,7 @@ class _CategoriesButtonState extends State<CategoriesButton> {
         onHover: (x) {
           if (x) {
             setState(() {
-              hover = false;
+              hover = true;
             });
           } else {
             setState(() {

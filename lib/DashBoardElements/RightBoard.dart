@@ -19,7 +19,6 @@ class RightBoard extends StatefulWidget {
   final String yog;
   final double no_of_views;
   final double no_of_reviews;
-  final Function func;
 
   RightBoard({
     this.batch,
@@ -32,7 +31,6 @@ class RightBoard extends StatefulWidget {
     this.yog,
     this.no_of_views,
     this.no_of_reviews,
-    this.func,
   });
 
   @override
@@ -155,10 +153,6 @@ class _RightBoardState extends State<RightBoard> {
     super.initState();
   }
 
-  void runWidgetFunction() {
-    widget.func();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -194,8 +188,8 @@ class _RightBoardState extends State<RightBoard> {
                       height: 200,
                       width: 200,
                       child: Stack(
-                        clipBehavior: Clip.none,
                         fit: StackFit.expand,
+                        overflow: Overflow.visible,
                         children: [
                           Positioned(
                             left: 11,
@@ -460,8 +454,7 @@ class _RightBoardState extends State<RightBoard> {
                                         categoryList: categoryList,
                                         professorList: professorList1,
                                         studentList: studentList1,
-                                        studentDict: studentDict,
-                                        func: runWidgetFunction);
+                                        studentDict: studentDict);
                                     ;
                                   });
                             },
@@ -487,7 +480,7 @@ class _RightBoardState extends State<RightBoard> {
                       width: 160,
                       child: Stack(
                         fit: StackFit.expand,
-                        clipBehavior: Clip.none,
+                        overflow: Overflow.visible,
                         children: [
                           CircleAvatar(
                               foregroundImage: NetworkImage(
@@ -723,8 +716,7 @@ class _RightBoardState extends State<RightBoard> {
                                         categoryList: categoryList,
                                         professorList: professorList1,
                                         studentList: studentList1,
-                                        studentDict: studentDict,
-                                        func: runWidgetFunction);
+                                        studentDict: studentDict);
                                   });
                             },
                             buttonheight: 45,

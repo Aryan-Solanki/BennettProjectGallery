@@ -39,6 +39,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
         try {
           await FirebaseAuth.instance
               .sendPasswordResetEmail(email: _email.trim());
+          print("Password Reset Email Sent");
           Navigator.of(context).pop();
           Fluttertoast.showToast(
               msg: "Password Reset Mail Sent Successful",

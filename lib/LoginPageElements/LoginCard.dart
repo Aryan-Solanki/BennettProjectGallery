@@ -384,9 +384,6 @@ class _LoginCardState extends State<LoginCard> {
                                   });
                                 } else {
                                   setState(() {
-                                    print(
-                                      e.code + " " + e.message,
-                                    );
                                     addError(error: ksomethingerror);
                                   });
                                 }

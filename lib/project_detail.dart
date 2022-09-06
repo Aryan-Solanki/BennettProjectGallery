@@ -35,10 +35,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
 
   bool isloading = false;
 
-  void incrementViewCountInFirestore() async {
-    await ProjectServices().incrementViewCount(widget.project.id);
-  }
-
   @override
   void initState() {
     FirebaseAuth.instance.authStateChanges().listen((User user) {
@@ -48,7 +44,6 @@ class _ProjectDetailState extends State<ProjectDetail> {
         islogin = true;
       }
     });
-    incrementViewCountInFirestore();
     super.initState();
   }
 
