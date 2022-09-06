@@ -4,7 +4,10 @@ import 'package:bennettprojectgallery/HomePageElements/GradientButton.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/HomePageElements/NoAnimationZoomInImage.dart';
 import 'package:bennettprojectgallery/featuredprojects.dart';
+import 'package:bennettprojectgallery/projectgallery.dart';
+import 'package:bennettprojectgallery/services/project_services.dart';
 import 'package:bennettprojectgallery/services/user_simple_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:countup/countup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -96,7 +99,16 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       }
     });
+    getAllCategories();
     super.initState();
+  }
+
+  List<dynamic> categoriesname = [];
+
+  Future<void> getAllCategories() async {
+    ProjectServices _services = ProjectServices();
+    DocumentSnapshot cat = await _services.mainscreen.get();
+    categoriesname = await cat["categoryList"];
   }
 
   @override
@@ -200,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text("How it works",
+                                  Text("How It Works",
                                       style: TextStyle(
                                           fontFamily: "Metrisch-Bold",
                                           fontSize: 25)),
@@ -209,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     padding:
                                         EdgeInsets.only(top: 10, bottom: 40),
                                     child: Text(
-                                      "We enjoy adapting our strategies to offer every client the best solutions that are at the forefront of the industry.",
+                                      """Bennett Project Archive is a central repository where students can upload their projects""",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontFamily: "Metrisch-Medium",
@@ -386,7 +398,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 left: 24.5,
                                                 title:
                                                     "Students of Bennett University ",
-                                                subtitle: "Under Prof Aryan",
+                                                subtitle:
+                                                    "Under Prof Deepak Garg",
                                                 factor: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -397,7 +410,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 left: 550,
                                                 title:
                                                     "Students of Bennett University ",
-                                                subtitle: "Under Prof Aryan",
+                                                subtitle:
+                                                    "Under Prof Deepak Garg",
                                                 factor: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -462,7 +476,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 height: 20,
                                               ),
                                               Text(
-                                                "Project Accomplished by Student of Bennett University",
+                                                "Projects Accomplished by Student of Bennett University",
                                                 textAlign: TextAlign.end,
                                                 style: TextStyle(
                                                     height: 1.3,
@@ -474,7 +488,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               ),
                                               Container(
                                                 child: Text(
-                                                  "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                                  "Explore the notion of 'creative competence' for all the projects developed by the students of Bennett University",
                                                   textAlign: TextAlign.end,
                                                   style: TextStyle(
                                                       fontFamily:
@@ -593,7 +607,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              GradientButton(),
+                                              GradientButton(
+                                                title: "Explore More",
+                                                onPressed: () {
+                                                  Navigator.of(context).pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ProjectGallery(
+                                                                  categoriesname:
+                                                                      categoriesname)));
+                                                },
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -664,7 +688,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 left: 24.5,
                                                 title:
                                                     "Students of Bennett University ",
-                                                subtitle: "Under Prof Aryan",
+                                                subtitle:
+                                                    "Under Prof Deepak Garg",
                                                 factor: 1,
                                               ),
                                               ProfileTile(
@@ -675,7 +700,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     1.4,
                                                 title:
                                                     "Students of Bennett University ",
-                                                subtitle: "Under Prof Aryan",
+                                                subtitle:
+                                                    "Under Prof Deepak Garg",
                                                 factor: 1,
                                               ),
                                             ],
@@ -750,7 +776,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               ),
                                               Container(
                                                 child: Text(
-                                                  "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                                  "Explore the notion of 'creative competence' for all the projects developed by the students of Bennett University",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontFamily:
@@ -869,7 +895,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              GradientButton(),
+                                              GradientButton(
+                                                title: "Explore More",
+                                                onPressed: () {
+                                                  Navigator.of(context).pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ProjectGallery(
+                                                                  categoriesname:
+                                                                      categoriesname)));
+                                                },
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -940,7 +976,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 left: 24.5,
                                                 title:
                                                     "Students of Bennett University ",
-                                                subtitle: "Under Prof Aryan",
+                                                subtitle:
+                                                    "Under Prof Deepak Garg",
                                                 factor: 1,
                                               ),
                                               ProfileTile(
@@ -951,7 +988,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     200,
                                                 title:
                                                     "Students of Bennett University ",
-                                                subtitle: "Under Prof Aryan",
+                                                subtitle:
+                                                    "Under Prof Deepak Garg",
                                                 factor: 1,
                                               ),
                                             ],
@@ -1026,7 +1064,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                               ),
                                               Container(
                                                 child: Text(
-                                                  "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                                  "Explore the notion of 'creative competence' for all the projects developed by the students of Bennett University",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontFamily:
@@ -1137,7 +1175,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              GradientButton(),
+                                              GradientButton(
+                                                title: "Explore More",
+                                                onPressed: () {
+                                                  Navigator.of(context).pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ProjectGallery(
+                                                                  categoriesname:
+                                                                      categoriesname)));
+                                                },
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -1205,7 +1253,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                               left: 24.5,
                                               title:
                                                   "Students of Bennett University ",
-                                              subtitle: "Under Prof Aryan",
+                                              subtitle:
+                                                  "Under Prof Deepak Garg",
                                               factor: 1,
                                             ),
                                             ProfileTile(
@@ -1216,7 +1265,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   1.55,
                                               title:
                                                   "Students of Bennett University ",
-                                              subtitle: "Under Prof Aryan",
+                                              subtitle:
+                                                  "Under Prof Deepak Garg",
                                               factor: 1,
                                             ),
                                           ],
@@ -1291,7 +1341,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ),
                                             Container(
                                               child: Text(
-                                                "Visit all the Projects and Workdone by Students of Bennett University.Visit all the Projects and Workdone by Students of Bennett University ",
+                                                "Explore the notion of 'creative competence' for all the projects developed by the students of Bennett University ",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontFamily:
@@ -1406,7 +1456,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                             SizedBox(
                                               height: 20,
                                             ),
-                                            GradientButton(),
+                                            GradientButton(
+                                              title: "Explore More",
+                                              onPressed: () {
+                                                Navigator.of(context).pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProjectGallery(
+                                                                categoriesname:
+                                                                    categoriesname)));
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1490,8 +1550,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 ZoomInImage(
-                                                  Name: "Aryan Solanki",
-                                                  Title: "General Manager",
+                                                  Name: "Dr. Deepak Garg",
+                                                  Title: "Dean CSET",
                                                   ImageLink:
                                                       "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
                                                 ),
@@ -1499,8 +1559,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   width: 40,
                                                 ),
                                                 ZoomInImage(
-                                                    Name: "Aryan Solanki",
-                                                    Title: "General Manager",
+                                                    Name: "Dr. Tanveer Ahmed",
+                                                    Title:
+                                                        "Professor and Mentor",
                                                     ImageLink:
                                                         "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
                                                 SizedBox(
@@ -1508,7 +1569,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 ),
                                                 ZoomInImage(
                                                     Name: "Akshat Rastogi",
-                                                    Title: "General Manager",
+                                                    Title: "Developers",
                                                     ImageLink:
                                                         "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),
                                                 SizedBox(
@@ -1516,7 +1577,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                 ),
                                                 ZoomInImage(
                                                     Name: "Aryan Solanki",
-                                                    Title: "General Manager",
+                                                    Title: "Developers",
                                                     ImageLink:
                                                         "https://th.bing.com/th/id/OIP.DMOUWpymUM_KKCO1jEaaMgHaGK?pid=ImgDet&rs=1")
                                               ],
@@ -1534,8 +1595,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 NoAnimationZoomInImage(
-                                                  Name: "Aryan Solanki",
-                                                  Title: "General Manager",
+                                                  Name: "Dr. Deepak Garg",
+                                                  Title: "Dean CSET",
                                                   ImageLink:
                                                       "https://th.bing.com/th/id/OIP.c0GTqHSPgp9rz7Pn2Aw_8wHaF7?pid=ImgDet&rs=1",
                                                 ),
@@ -1543,15 +1604,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   width: 40,
                                                 ),
                                                 NoAnimationZoomInImage(
-                                                    Name: "Aryan Solanki",
-                                                    Title: "General Manager",
+                                                    Name: "Dr. Tanveer Ahmed",
+                                                    Title:
+                                                        "Professor and Mentor",
                                                     ImageLink:
                                                         "https://th.bing.com/th/id/OIP.E8MxC5RjDDEdkAbNWZXKjAAAAA?pid=ImgDet&w=367&h=550&rs=1"),
                                                 SizedBox(
                                                   width: 40,
                                                 ),
                                                 NoAnimationZoomInImage(
-                                                    Name: "Aryan Solanki",
+                                                    Name: "Akshat Rastogi",
                                                     Title: "General Manager",
                                                     ImageLink:
                                                         "https://th.bing.com/th/id/OIP.zCCnWcLaZFZMuiCps0LWBQHaHd?pid=ImgDet&w=848&h=854&rs=1"),

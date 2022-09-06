@@ -197,31 +197,46 @@ class _DashBoardState extends State<DashBoard> {
                               SizedBox(
                                 height: 15,
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 400,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: finalProjectList.length,
-                                  itemBuilder: (BuildContext ctxt, int index) {
-                                    return Container(
-                                        width: 250,
-                                        margin: EdgeInsets.only(right: 20),
-                                        padding: EdgeInsets.only(bottom: 40),
-                                        child:
-                                            MediaQuery.of(context).size.width >
-                                                    800
-                                                ? ProjectCard(
-                                                    project:
-                                                        finalProjectList[index],
-                                                  )
-                                                : NoHoverProjectCard(
-                                                    project:
-                                                        finalProjectList[index],
-                                                  ));
-                                  },
-                                ),
-                              ),
+                              finalProjectList.length != 0
+                                  ? Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 400,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: finalProjectList.length,
+                                        itemBuilder:
+                                            (BuildContext ctxt, int index) {
+                                          return Container(
+                                              width: 250,
+                                              margin:
+                                                  EdgeInsets.only(right: 20),
+                                              padding:
+                                                  EdgeInsets.only(bottom: 40),
+                                              child: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      800
+                                                  ? ProjectCard(
+                                                      project: finalProjectList[
+                                                          index],
+                                                    )
+                                                  : NoHoverProjectCard(
+                                                      project: finalProjectList[
+                                                          index],
+                                                    ));
+                                        },
+                                      ),
+                                    )
+                                  : Column(
+                                      children: [
+                                        Center(
+                                          child: Text("No Projects Found"),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        )
+                                      ],
+                                    ),
                               SizedBox(
                                 height: 15,
                               ),
@@ -461,31 +476,46 @@ class _DashBoardState extends State<DashBoard> {
                               SizedBox(
                                 height: 15,
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 400,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: finalProjectList.length,
-                                  itemBuilder: (BuildContext ctxt, int index) {
-                                    return Container(
-                                        width: 250,
-                                        margin: EdgeInsets.only(right: 20),
-                                        padding: EdgeInsets.only(bottom: 40),
-                                        child:
-                                            MediaQuery.of(context).size.width >
-                                                    800
-                                                ? ProjectCard(
-                                                    project:
-                                                        finalProjectList[index],
-                                                  )
-                                                : NoHoverProjectCard(
-                                                    project:
-                                                        finalProjectList[index],
-                                                  ));
-                                  },
-                                ),
-                              ),
+                              finalProjectList.length != 0
+                                  ? Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 400,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: finalProjectList.length,
+                                        itemBuilder:
+                                            (BuildContext ctxt, int index) {
+                                          return Container(
+                                              width: 250,
+                                              margin:
+                                                  EdgeInsets.only(right: 20),
+                                              padding:
+                                                  EdgeInsets.only(bottom: 40),
+                                              child: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      800
+                                                  ? ProjectCard(
+                                                      project: finalProjectList[
+                                                          index],
+                                                    )
+                                                  : NoHoverProjectCard(
+                                                      project: finalProjectList[
+                                                          index],
+                                                    ));
+                                        },
+                                      ),
+                                    )
+                                  : Column(
+                                      children: [
+                                        Center(
+                                          child: Text("No Projects Found"),
+                                        ),
+                                        SizedBox(
+                                          height: 40,
+                                        )
+                                      ],
+                                    ),
                               SizedBox(
                                 height: 15,
                               ),

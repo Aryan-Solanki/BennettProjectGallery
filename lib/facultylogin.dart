@@ -50,7 +50,7 @@ class _FacultyLoginPageState extends State<FacultyLoginPage> {
                                   height: 10,
                                 ),
                                 Text(
-                                    "Welcome to the \nBennett University \nGallery Area",
+                                    "Welcome to the \nBennett University \nProject Archive",
                                     style: TextStyle(
                                         height: 1.3,
                                         fontFamily: "Metrisch-ExtraBold",
@@ -61,7 +61,7 @@ class _FacultyLoginPageState extends State<FacultyLoginPage> {
                                 Container(
                                   width: 250,
                                   child: Text(
-                                    "We enjoy adapting our strategies to offer every client the best ",
+                                    "A central repository for all the projects undertaken by Bennett University students",
                                     style: TextStyle(
                                         fontFamily: "Metrisch-Medium",
                                         height: 1.5,
@@ -80,10 +80,10 @@ class _FacultyLoginPageState extends State<FacultyLoginPage> {
                                           width: 1.0, color: Colors.black),
                                     ),
                                   ),
-                                  child: Text("+91 7983 737272",
-                                      style: TextStyle(
-                                          fontFamily: "Metrisch-ExtraBold",
-                                          fontSize: 23)),
+                                  // child: Text("+91 7983 737272",
+                                  //     style: TextStyle(
+                                  //         fontFamily: "Metrisch-ExtraBold",
+                                  //         fontSize: 23)),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -96,10 +96,10 @@ class _FacultyLoginPageState extends State<FacultyLoginPage> {
                                           width: 1.0, color: Colors.black),
                                     ),
                                   ),
-                                  child: Text("+91 9827 475613",
-                                      style: TextStyle(
-                                          fontFamily: "Metrisch-ExtraBold",
-                                          fontSize: 23)),
+                                  // child: Text("+91 9827 475613",
+                                  //     style: TextStyle(
+                                  //         fontFamily: "Metrisch-ExtraBold",
+                                  //         fontSize: 23)),
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -179,7 +179,7 @@ class _FacultyLoginPageState extends State<FacultyLoginPage> {
                             SizedBox(
                               height: 10,
                             ),
-                            Text("Bennett University \nGallery Area",
+                            Text("Bennett University \nProject Archive",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     height: 1.3,
@@ -191,7 +191,7 @@ class _FacultyLoginPageState extends State<FacultyLoginPage> {
                             Container(
                               width: 250,
                               child: Text(
-                                "We enjoy adapting our strategies to offer every client the best ",
+                                "A central repository for all the projects undertaken by Bennett University students",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontFamily: "Metrisch-Medium",
