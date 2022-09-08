@@ -6,7 +6,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProjectCard extends StatefulWidget {
   final Project project;
-  ProjectCard({@required this.project});
+  ProjectCard({
+    @required this.project,
+  });
   @override
   _ProjectCardState createState() => _ProjectCardState();
 }
@@ -46,7 +48,10 @@ class _ProjectCardState extends State<ProjectCard> {
       onPressed: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => ProjectDetail(
-                project: widget.project, cat: cat, rating: rating)));
+                  project: widget.project,
+                  cat: cat,
+                  rating: rating,
+                )));
       },
       onHover: (x) {
         if (x) {
@@ -141,11 +146,12 @@ class _ProjectCardState extends State<ProjectCard> {
                 child: GradientButton(
                   title: "Open Project",
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ProjectDetail(
-                            project: widget.project,
-                            cat: cat,
-                            rating: rating)));
+                              project: widget.project,
+                              cat: cat,
+                              rating: rating,
+                            )));
                   },
                 ),
               ),

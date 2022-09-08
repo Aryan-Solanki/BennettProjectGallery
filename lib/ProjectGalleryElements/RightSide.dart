@@ -79,7 +79,7 @@ class _RightSideState extends State<RightSide> {
                   children: [
                     searched == false
                         ? Text(
-                            "Showing 1–9 of 12 results",
+                            "",
                             style: TextStyle(
                                 fontFamily: "Metrisch-Medium",
                                 height: 1.5,
@@ -87,7 +87,7 @@ class _RightSideState extends State<RightSide> {
                                 color: Colors.black54),
                           )
                         : Text(
-                            'Showing 1–9 of "${seachcategory}"',
+                            'Showing results for "${seachcategory}"',
                             style: TextStyle(
                                 fontFamily: "Metrisch-Medium",
                                 height: 1.5,
@@ -125,27 +125,27 @@ class _RightSideState extends State<RightSide> {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  height: cardnumber * 140.toDouble(),
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: cardnumber,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 40,
-                        childAspectRatio: 0.68,
-                        crossAxisSpacing: 20),
-                    itemBuilder: (BuildContext context, int index) {
-                      return ProjectCard();
-                    },
-                  ),
-                ),
-                GradientButton(
-                  title: "Load More",
-                ),
+                // SizedBox(
+                //   height: 40,
+                // ),
+                // Container(
+                //   height: cardnumber * 140.toDouble(),
+                //   child: GridView.builder(
+                //     physics: NeverScrollableScrollPhysics(),
+                //     itemCount: cardnumber,
+                //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //         crossAxisCount: 3,
+                //         mainAxisSpacing: 40,
+                //         childAspectRatio: 0.68,
+                //         crossAxisSpacing: 20),
+                //     itemBuilder: (BuildContext context, int index) {
+                //       return ProjectCard();
+                //     },
+                //   ),
+                // ),
+                // GradientButton(
+                //   title: "Load More",
+                // ),
               ],
             ),
           );
@@ -161,7 +161,7 @@ class _RightSideState extends State<RightSide> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Showing 1–9 of 12 results",
+                      "",
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",
                           height: 1.5,
@@ -199,27 +199,27 @@ class _RightSideState extends State<RightSide> {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  height: cardnumber * 130.toDouble(),
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: cardnumber,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 40,
-                        childAspectRatio: 0.63,
-                        crossAxisSpacing: 20),
-                    itemBuilder: (BuildContext context, int index) {
-                      return NoHoverProjectCard();
-                    },
-                  ),
-                ),
-                GradientButton(
-                  title: "Load More",
-                ),
+                // SizedBox(
+                //   height: 40,
+                // ),
+                // Container(
+                //   height: cardnumber * 130.toDouble(),
+                //   child: GridView.builder(
+                //     physics: NeverScrollableScrollPhysics(),
+                //     itemCount: cardnumber,
+                //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //         crossAxisCount: 3,
+                //         mainAxisSpacing: 40,
+                //         childAspectRatio: 0.63,
+                //         crossAxisSpacing: 20),
+                //     itemBuilder: (BuildContext context, int index) {
+                //       return NoHoverProjectCard();
+                //     },
+                //   ),
+                // ),
+                // GradientButton(
+                //   title: "Load More",
+                // ),
               ],
             ),
           );
@@ -234,7 +234,7 @@ class _RightSideState extends State<RightSide> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "Showing 1–9 of 12 results",
+                      "",
                       style: TextStyle(
                           fontFamily: "Metrisch-Medium",
                           height: 1.5,
@@ -275,27 +275,27 @@ class _RightSideState extends State<RightSide> {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: cardnumber * 445.toDouble(),
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: cardnumber,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        mainAxisSpacing: 40,
-                        childAspectRatio: 0.63,
-                        crossAxisSpacing: 20),
-                    itemBuilder: (BuildContext context, int index) {
-                      return NoHoverProjectCard();
-                    },
-                  ),
-                ),
-                GradientButton(
-                  title: "Load More",
-                ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Container(
+                //   height: cardnumber * 445.toDouble(),
+                //   child: GridView.builder(
+                //     physics: NeverScrollableScrollPhysics(),
+                //     itemCount: cardnumber,
+                //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //         crossAxisCount: 1,
+                //         mainAxisSpacing: 40,
+                //         childAspectRatio: 0.63,
+                //         crossAxisSpacing: 20),
+                //     itemBuilder: (BuildContext context, int index) {
+                //       return NoHoverProjectCard();
+                //     },
+                //   ),
+                // ),
+                // GradientButton(
+                //   title: "Load More",
+                // ),
               ],
             ),
           );
@@ -311,7 +311,7 @@ class _RightSideState extends State<RightSide> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Showing 1–9 of 12 results",
+                    "",
                     style: TextStyle(
                         fontFamily: "Metrisch-Medium",
                         height: 1.5,
@@ -349,27 +349,27 @@ class _RightSideState extends State<RightSide> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 40,
-              ),
-              Container(
-                height: cardnumber * 240.toDouble(),
-                child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: cardnumber,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 40,
-                      childAspectRatio: 0.63,
-                      crossAxisSpacing: 20),
-                  itemBuilder: (BuildContext context, int index) {
-                    return NoHoverProjectCard();
-                  },
-                ),
-              ),
-              GradientButton(
-                title: "Load More",
-              ),
+              // SizedBox(
+              //   height: 40,
+              // ),
+              // Container(
+              //   height: cardnumber * 240.toDouble(),
+              //   child: GridView.builder(
+              //     physics: NeverScrollableScrollPhysics(),
+              //     itemCount: cardnumber,
+              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //         crossAxisCount: 2,
+              //         mainAxisSpacing: 40,
+              //         childAspectRatio: 0.63,
+              //         crossAxisSpacing: 20),
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return NoHoverProjectCard();
+              //     },
+              //   ),
+              // ),
+              // GradientButton(
+              //   title: "Load More",
+              // ),
             ],
           ),
         );

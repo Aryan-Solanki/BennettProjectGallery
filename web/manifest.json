@@ -1,11 +1,11 @@
 {
-    "name": "bennett_project_gallery",
-    "short_name": "bennett_project_gallery",
+    "name": "Bennett Project Archive",
+    "short_name": "Bennett Project Archive",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Bennett Project Archive is a central repository where students can upload their projects and share them with the world.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

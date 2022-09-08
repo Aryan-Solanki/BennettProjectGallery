@@ -6,6 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class NoHoverProjectCard extends StatefulWidget {
   final Project project;
+
   NoHoverProjectCard({@required this.project});
   @override
   _NoHoverProjectCardState createState() => _NoHoverProjectCardState();
@@ -61,7 +62,7 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
         children: [
           Card(
             shadowColor: Colors.black,
-            elevation: hover==true?8:1,
+            elevation: hover == true ? 8 : 1,
             clipBehavior: Clip.none,
             child: Center(
               child: Container(
@@ -136,9 +137,12 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
               buttonwidth: 165,
               buttonheight: 40,
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ProjectDetail(
-                        project: widget.project, cat: cat, rating: rating)));
+                          project: widget.project,
+                          cat: cat,
+                          rating: rating,
+                        )));
               },
             ),
           ),

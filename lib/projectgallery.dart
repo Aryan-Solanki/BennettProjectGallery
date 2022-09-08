@@ -4,6 +4,7 @@ import 'package:algolia/algolia.dart';
 import 'package:bennettprojectgallery/HomePageElements/Footer.dart';
 import 'package:bennettprojectgallery/HomePageElements/Header.dart';
 import 'package:bennettprojectgallery/ProjectGalleryElements/LeftSide.dart';
+import 'package:bennettprojectgallery/main.dart';
 import 'package:bennettprojectgallery/models/Project.dart';
 import 'package:bennettprojectgallery/services/algoliaService.dart';
 import 'package:bennettprojectgallery/services/project_services.dart';
@@ -89,15 +90,23 @@ class _ProjectGalleryState extends State<ProjectGallery> {
       );
     }
     // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
-    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
-    setState(() {
-      Future.delayed(Duration(seconds: 1), () {
-        // <-- Delay here
-        setState(() {
-          _loadingProducts = false; // <-- Code run after delay
+    if (ProjectList.length == 0) {
+      setState(() {
+        _loadingProducts = false;
+        _moreProductsAvailable = false;
+      });
+    } else {
+      _lastDocument = _projects[_projects.length - 1];
+      setState(() {
+        Future.delayed(Duration(seconds: 1), () {
+          // <-- Delay here
+          setState(() {
+            _loadingProducts = false; // <-- Code run after delay
+          });
         });
       });
-    });
+    }
+    // _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
   }
 
   getMoreCategoryProducts(String catname) async {
@@ -194,15 +203,31 @@ class _ProjectGalleryState extends State<ProjectGallery> {
       );
     }
     // ProjectList.sort((a, b) => a.timestamp.compareTo(b.timestamp));
-    _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
-    setState(() {
-      Future.delayed(Duration(seconds: 1), () {
-        // <-- Delay here
-        setState(() {
-          _loadingProducts = false; // <-- Code run after delay
+    if (ProjectList.length == 0) {
+      setState(() {
+        _loadingProducts = false;
+        _moreProductsAvailable = false;
+      });
+    } else {
+      _lastDocument = _projects[_projects.length - 1];
+      setState(() {
+        Future.delayed(Duration(seconds: 1), () {
+          // <-- Delay here
+          setState(() {
+            _loadingProducts = false; // <-- Code run after delay
+          });
         });
       });
-    });
+    }
+    // _lastDocument = querySnapshot.docs[querySnapshot.docs.length - 1];
+    // setState(() {
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     // <-- Delay here
+    //     setState(() {
+    //       _loadingProducts = false; // <-- Code run after delay
+    //     });
+    //   });
+    // });
   }
 
   getMoreYearProducts(String yearname) async {
@@ -460,7 +485,7 @@ class _ProjectGalleryState extends State<ProjectGallery> {
 
   @override
   Widget build(BuildContext context) {
-    double catheight = (40 * categoriesname.length) as double;
+    double catheight = (43 * categoriesname.length) as double;
     final Widget normalChildButton = Container(
       color: Color(0xfff3f5fe),
       width: 250,
@@ -496,60 +521,408 @@ class _ProjectGalleryState extends State<ProjectGallery> {
         ),
       ),
     );
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Header(
-            current: "Project Gallery",
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-                    child: ResponsiveBuilder(
-                      breakpoints: ScreenBreakpoints(
-                          tablet: 580, desktop: 971, watch: 300),
-                      builder: (context, sizingInformation) {
-                        // Check the sizing information here and return your UI
-                        if (sizingInformation.deviceScreenType ==
-                            DeviceScreenType.desktop) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ResponsiveBuilder(
-                                breakpoints: ScreenBreakpoints(
-                                    tablet: 971, desktop: 1140, watch: 300),
-                                builder: (context, sizingInformation) {
-                                  // Check the sizing information here and return your UI
-                                  if (sizingInformation.deviceScreenType ==
-                                      DeviceScreenType.desktop) {
-                                    return Container(
-                                      width: 250,
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                                color: Color(0xfff3f5fe)),
-                                            height: 45,
-                                            child: TextField(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => MyHomePage(
+                  isReoaded: false,
+                )));
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Header(
+              current: "Project Gallery",
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                      child: ResponsiveBuilder(
+                        breakpoints: ScreenBreakpoints(
+                            tablet: 580, desktop: 971, watch: 300),
+                        builder: (context, sizingInformation) {
+                          // Check the sizing information here and return your UI
+                          if (sizingInformation.deviceScreenType ==
+                              DeviceScreenType.desktop) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ResponsiveBuilder(
+                                  breakpoints: ScreenBreakpoints(
+                                      tablet: 971, desktop: 1140, watch: 300),
+                                  builder: (context, sizingInformation) {
+                                    // Check the sizing information here and return your UI
+                                    if (sizingInformation.deviceScreenType ==
+                                        DeviceScreenType.desktop) {
+                                      return Container(
+                                        width: 250,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              padding:
+                                                  EdgeInsets.only(left: 10),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.0)),
+                                                  color: Color(0xfff3f5fe)),
+                                              height: 45,
+                                              child: TextField(
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
+                                                    height: 1.5,
+                                                    fontSize: 15,
+                                                    color: Colors.black54),
+                                                onChanged: (value) {
+                                                  searchedvalue = value;
+                                                  //Do something with the user input.
+                                                },
+                                                decoration: InputDecoration(
+                                                  suffixIcon: InkWell(
+                                                      onTap: () {
+                                                        Navigator
+                                                            .pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              searchTerm: searchedvalue,
+                                                                              lm: false,
+                                                                            )));
+                                                      },
+                                                      child: Icon(
+                                                        Icons.search,
+                                                        size: 22,
+                                                        color: Colors.black,
+                                                      )),
+
+                                                  border: InputBorder.none,
+                                                  hintStyle: TextStyle(
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
+                                                      height: 1.5,
+                                                      fontSize: 15,
+                                                      color: Colors.black54),
+
+                                                  hintText: 'Search Project',
+                                                  // contentPadding:
+                                                  // EdgeInsets.symmetric(horizontal: 20.0),
+                                                  // border: OutlineInputBorder(
+                                                  //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  // ),
+                                                ),
+                                                onSubmitted: (query) {
+                                                  Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ProjectGallery(
+                                                                categoriesname:
+                                                                    categoriesname,
+                                                                searchTerm:
+                                                                    query,
+                                                                lm: false,
+                                                              )));
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 20,
+                                                  height: 3,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              "Categories",
                                               style: TextStyle(
-                                                  fontFamily: "Metrisch-Medium",
-                                                  height: 1.5,
-                                                  fontSize: 15,
-                                                  color: Colors.black54),
-                                              onChanged: (value) {
-                                                searchedvalue = value;
-                                                //Do something with the user input.
-                                              },
-                                              decoration: InputDecoration(
-                                                suffixIcon: InkWell(
+                                                  fontSize: 21,
+                                                  color: Colors.black87,
+                                                  fontFamily: "Metrisch-Bold"),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              height: catheight,
+                                              child: ListView.builder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    categoriesname.length,
+                                                itemBuilder: (context, index) {
+                                                  return Column(
+                                                    children: [
+                                                      CategoriesButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            searched = true;
+                                                            Navigator
+                                                                .pushReplacement(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) =>
+                                                                            ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
+                                                          });
+                                                        },
+                                                        categoryName:
+                                                            categoriesname[
+                                                                index]["name"],
+                                                        categoryQuantity:
+                                                            categoriesname[
+                                                                    index]
+                                                                ["number"],
+                                                      ),
+                                                      Divider(
+                                                        color: Colors.black12,
+                                                        thickness: 1,
+                                                      )
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            // SizedBox(
+                                            //   height: 40,
+                                            // ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.center,
+                                            //   children: [
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(5),
+                                            //         color: Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 5,
+                                            //       height: 3,
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 10,
+                                            //     ),
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(5),
+                                            //         color: Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 20,
+                                            //       height: 3,
+                                            //     ),
+                                            //     // SizedBox(
+                                            //     //   width: 10,
+                                            //     // ),
+                                            //     // Container(
+                                            //     //   decoration: BoxDecoration(
+                                            //     //     borderRadius:
+                                            //     //         BorderRadius.circular(5),
+                                            //     //     color: Colors.orange.shade400,
+                                            //     //   ),
+                                            //     //   width: 5,
+                                            //     //   height: 3,
+                                            //     // )
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 15,
+                                            // ),
+                                            // Text(
+                                            //   "Most Viewed Projects",
+                                            //   style: TextStyle(
+                                            //       fontSize: 21,
+                                            //       color: Colors.black87,
+                                            //       fontFamily: "Metrisch-Bold"),
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 20,
+                                            // ),
+                                            // Container(
+                                            //   height: 300,
+                                            //   child: ListView.builder(
+                                            //     physics:
+                                            //         NeverScrollableScrollPhysics(),
+                                            //     shrinkWrap: true,
+                                            //     itemCount: 3,
+                                            //     itemBuilder: (context, index) {
+                                            //       return TopProjects(
+                                            //         projectName:
+                                            //             "Computer Vision using Deep Learning and Machine Learning",
+                                            //         madeBy: "Aryan Solanki",
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // ),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 20,
+                                                  height: 3,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              "Batch Wise Projects",
+                                              style: TextStyle(
+                                                  fontSize: 21,
+                                                  color: Colors.black87,
+                                                  fontFamily: "Metrisch-Bold"),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            BatchWiseProjects(
+                                                notifyParent: refresh,
+                                                categoriesname: categoriesname),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                    if (sizingInformation.deviceScreenType ==
+                                        DeviceScreenType.tablet) {
+                                      return Container(
+                                        width: 220,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              padding:
+                                                  EdgeInsets.only(left: 10),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5.0)),
+                                                  color: Color(0xfff3f5fe)),
+                                              height: 45,
+                                              child: TextField(
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                        "Metrisch-Medium",
+                                                    height: 1.5,
+                                                    fontSize: 15,
+                                                    color: Colors.black54),
+                                                onChanged: (value) {
+                                                  searchedvalue = value;
+                                                  //Do something with the user input.
+                                                },
+                                                onSubmitted: (query) {
+                                                  Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ProjectGallery(
+                                                                categoriesname:
+                                                                    categoriesname,
+                                                                searchTerm:
+                                                                    searchedvalue,
+                                                                lm: false,
+                                                              )));
+                                                },
+                                                decoration: InputDecoration(
+                                                  suffixIcon: InkWell(
                                                     onTap: () {
                                                       Navigator.pushReplacement(
                                                           context,
@@ -567,275 +940,274 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       Icons.search,
                                                       size: 22,
                                                       color: Colors.black,
-                                                    )),
-
-                                                border: InputBorder.none,
-                                                hintStyle: TextStyle(
-                                                    fontFamily:
-                                                        "Metrisch-Medium",
-                                                    height: 1.5,
-                                                    fontSize: 15,
-                                                    color: Colors.black54),
-
-                                                hintText: 'Search Project',
-                                                // contentPadding:
-                                                // EdgeInsets.symmetric(horizontal: 20.0),
-                                                // border: OutlineInputBorder(
-                                                //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                // ),
-                                              ),
-                                              onSubmitted: (query) {
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ProjectGallery(
-                                                              categoriesname:
-                                                                  categoriesname,
-                                                              searchTerm: query,
-                                                              lm: false,
-                                                            )));
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Categories",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: catheight,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: categoriesname.length,
-                                              itemBuilder: (context, index) {
-                                                return Column(
-                                                  children: [
-                                                    CategoriesButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          searched = true;
-                                                          Navigator
-                                                              .pushReplacement(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) =>
-                                                                          ProjectGallery(
-                                                                            categoriesname:
-                                                                                categoriesname,
-                                                                            categoryTerm:
-                                                                                categoriesname[index]["name"],
-                                                                          )));
-                                                        });
-                                                      },
-                                                      categoryName:
-                                                          categoriesname[index]
-                                                              ["name"],
-                                                      categoryQuantity:
-                                                          categoriesname[index]
-                                                              ["number"],
                                                     ),
-                                                    Divider(
-                                                      color: Colors.black12,
-                                                      thickness: 1,
-                                                    )
-                                                  ],
-                                                );
-                                              },
+                                                  ),
+
+                                                  border: InputBorder.none,
+                                                  hintStyle: TextStyle(
+                                                      fontFamily:
+                                                          "Metrisch-Medium",
+                                                      height: 1.5,
+                                                      fontSize: 15,
+                                                      color: Colors.black54),
+                                                  hintText: 'Search Project',
+                                                  // contentPadding:
+                                                  // EdgeInsets.symmetric(horizontal: 20.0),
+                                                  // border: OutlineInputBorder(
+                                                  //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  // ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Most Viewed Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: 300,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: 3,
-                                              itemBuilder: (context, index) {
-                                                return TopProjects(
-                                                  projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
-                                                  madeBy: "Aryan Solanki",
-                                                );
-                                              },
+                                            SizedBox(
+                                              height: 40,
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
                                                 ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
+                                                SizedBox(
+                                                  width: 10,
                                                 ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 20,
+                                                  height: 3,
                                                 ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Batch Wise Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          BatchWiseProjects(
-                                              notifyParent: refresh,
-                                              categoriesname: categoriesname),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }
-                                  if (sizingInformation.deviceScreenType ==
-                                      DeviceScreenType.tablet) {
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              "Categories",
+                                              style: TextStyle(
+                                                  fontSize: 21,
+                                                  color: Colors.black87,
+                                                  fontFamily: "Metrisch-Bold"),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              height: catheight,
+                                              child: ListView.builder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    categoriesname.length,
+                                                itemBuilder: (context, index) {
+                                                  return Column(
+                                                    children: [
+                                                      CategoriesButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            searched = true;
+                                                            Navigator
+                                                                .pushReplacement(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) =>
+                                                                            ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
+                                                          });
+                                                        },
+                                                        categoryName:
+                                                            categoriesname[
+                                                                index]["name"],
+                                                        categoryQuantity:
+                                                            categoriesname[
+                                                                    index]
+                                                                ["number"],
+                                                      ),
+                                                      Divider(
+                                                        color: Colors.black12,
+                                                        thickness: 1,
+                                                      )
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            // SizedBox(
+                                            //   height: 40,
+                                            // ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.center,
+                                            //   children: [
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(5),
+                                            //         color: Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 5,
+                                            //       height: 3,
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 10,
+                                            //     ),
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(5),
+                                            //         color: Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 20,
+                                            //       height: 3,
+                                            //     ),
+                                            //     // SizedBox(
+                                            //     //   width: 10,
+                                            //     // ),
+                                            //     // Container(
+                                            //     //   decoration: BoxDecoration(
+                                            //     //     borderRadius:
+                                            //     //         BorderRadius.circular(5),
+                                            //     //     color: Colors.orange.shade400,
+                                            //     //   ),
+                                            //     //   width: 5,
+                                            //     //   height: 3,
+                                            //     // )
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 15,
+                                            // ),
+                                            // Text(
+                                            //   "Most Viewed Projects",
+                                            //   style: TextStyle(
+                                            //       fontSize: 21,
+                                            //       color: Colors.black87,
+                                            //       fontFamily: "Metrisch-Bold"),
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 20,
+                                            // ),
+                                            // Container(
+                                            //   height: 300,
+                                            //   child: ListView.builder(
+                                            //     physics:
+                                            //         NeverScrollableScrollPhysics(),
+                                            //     shrinkWrap: true,
+                                            //     itemCount: 3,
+                                            //     itemBuilder: (context, index) {
+                                            //       return TopProjects(
+                                            //         projectName:
+                                            //             "Computer Vision using Deep Learning and Machine Learning",
+                                            //         madeBy: "Aryan Solanki",
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // ),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 20,
+                                                  height: 3,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color:
+                                                        Colors.orange.shade400,
+                                                  ),
+                                                  width: 5,
+                                                  height: 3,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              "Batch Wise Projects",
+                                              style: TextStyle(
+                                                  fontSize: 21,
+                                                  color: Colors.black87,
+                                                  fontFamily: "Metrisch-Bold"),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            BatchWiseProjects(
+                                              categoriesname: categoriesname,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
                                     return Container(
-                                      width: 220,
+                                      width: MediaQuery.of(context).size.width -
+                                          40,
                                       child: Column(
                                         children: [
                                           Container(
@@ -853,7 +1225,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   color: Colors.black54),
                                               onChanged: (value) {
                                                 searchedvalue = value;
-                                                //Do something with the user input.
                                               },
                                               onSubmitted: (query) {
                                                 Navigator.pushReplacement(
@@ -1004,77 +1375,77 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                               },
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Most Viewed Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: 300,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: 3,
-                                              itemBuilder: (context, index) {
-                                                return TopProjects(
-                                                  projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
-                                                  madeBy: "Aryan Solanki",
-                                                );
-                                              },
-                                            ),
-                                          ),
+                                          // SizedBox(
+                                          //   height: 40,
+                                          // ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.center,
+                                          //   children: [
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 5,
+                                          //       height: 3,
+                                          //     ),
+                                          //     SizedBox(
+                                          //       width: 10,
+                                          //     ),
+                                          //     Container(
+                                          //       decoration: BoxDecoration(
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(5),
+                                          //         color: Colors.orange.shade400,
+                                          //       ),
+                                          //       width: 20,
+                                          //       height: 3,
+                                          //     ),
+                                          //     // SizedBox(
+                                          //     //   width: 10,
+                                          //     // ),
+                                          //     // Container(
+                                          //     //   decoration: BoxDecoration(
+                                          //     //     borderRadius:
+                                          //     //         BorderRadius.circular(5),
+                                          //     //     color: Colors.orange.shade400,
+                                          //     //   ),
+                                          //     //   width: 5,
+                                          //     //   height: 3,
+                                          //     // )
+                                          //   ],
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 15,
+                                          // ),
+                                          // Text(
+                                          //   "Most Viewed Projects",
+                                          //   style: TextStyle(
+                                          //       fontSize: 21,
+                                          //       color: Colors.black87,
+                                          //       fontFamily: "Metrisch-Bold"),
+                                          // ),
+                                          // SizedBox(
+                                          //   height: 20,
+                                          // ),
+                                          // Container(
+                                          //   height: 300,
+                                          //   child: ListView.builder(
+                                          //     physics:
+                                          //         NeverScrollableScrollPhysics(),
+                                          //     shrinkWrap: true,
+                                          //     itemCount: 3,
+                                          //     itemBuilder: (context, index) {
+                                          //       return TopProjects(
+                                          //         projectName:
+                                          //             "Computer Vision using Deep Learning and Machine Learning",
+                                          //         madeBy: "Aryan Solanki",
+                                          //       );
+                                          //     },
+                                          //   ),
+                                          // ),
                                           SizedBox(
                                             height: 40,
                                           ),
@@ -1139,326 +1510,501 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                         ],
                                       ),
                                     );
-                                  }
-                                  return Container(
-                                    width:
-                                        MediaQuery.of(context).size.width - 40,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.only(left: 10),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5.0)),
-                                              color: Color(0xfff3f5fe)),
-                                          height: 45,
-                                          child: TextField(
-                                            style: TextStyle(
-                                                fontFamily: "Metrisch-Medium",
-                                                height: 1.5,
-                                                fontSize: 15,
-                                                color: Colors.black54),
-                                            onChanged: (value) {
-                                              searchedvalue = value;
-                                            },
-                                            onSubmitted: (query) {
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ProjectGallery(
-                                                            categoriesname:
-                                                                categoriesname,
-                                                            searchTerm:
-                                                                searchedvalue,
-                                                            lm: false,
-                                                          )));
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: InkWell(
-                                                onTap: () {
-                                                  Navigator.pushReplacement(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ProjectGallery(
-                                                                categoriesname:
-                                                                    categoriesname,
-                                                                searchTerm:
-                                                                    searchedvalue,
-                                                                lm: false,
-                                                              )));
-                                                },
-                                                child: Icon(
-                                                  Icons.search,
-                                                  size: 22,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-
-                                              border: InputBorder.none,
-                                              hintStyle: TextStyle(
-                                                  fontFamily: "Metrisch-Medium",
-                                                  height: 1.5,
-                                                  fontSize: 15,
-                                                  color: Colors.black54),
-                                              hintText: 'Search Project',
-                                              // contentPadding:
-                                              // EdgeInsets.symmetric(horizontal: 20.0),
-                                              // border: OutlineInputBorder(
-                                              //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                              // ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 40,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                ResponsiveBuilder(
+                                  breakpoints: ScreenBreakpoints(
+                                      tablet: 700, desktop: 1140, watch: 541),
+                                  builder: (context, sizingInformation) {
+                                    // Check the sizing information here and return your UI
+                                    if (sizingInformation.deviceScreenType ==
+                                        DeviceScreenType.desktop) {
+                                      return Container(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 10),
+                                        width: 800,
+                                        child: Column(
                                           children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 20,
-                                              height: 3,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Text(
-                                          "Categories",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.black87,
-                                              fontFamily: "Metrisch-Bold"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          height: catheight,
-                                          child: ListView.builder(
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: categoriesname.length,
-                                            itemBuilder: (context, index) {
-                                              return Column(
-                                                children: [
-                                                  CategoriesButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        searched = true;
-                                                        Navigator
-                                                            .pushReplacement(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            ProjectGallery(
-                                                                              categoriesname: categoriesname,
-                                                                              categoryTerm: categoriesname[index]["name"],
-                                                                            )));
-                                                      });
-                                                    },
-                                                    categoryName:
-                                                        categoriesname[index]
-                                                            ["name"],
-                                                    categoryQuantity:
-                                                        categoriesname[index]
-                                                            ["number"],
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                widget.searchTerm == ""
+                                                    ? widget.categoryTerm != ""
+                                                        ? Text(
+                                                            'Showing projects based on "${widget.categoryTerm}"',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                height: 1.5,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .black54),
+                                                          )
+                                                        : widget.yearTerm != ""
+                                                            ? Text(
+                                                                "Showing projects for the Batch of ${widget.yearTerm}",
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        "Metrisch-Medium",
+                                                                    height: 1.5,
+                                                                    fontSize:
+                                                                        15,
+                                                                    color: Colors
+                                                                        .black54),
+                                                              )
+                                                            : Text(
+                                                                "",
+                                                                style: TextStyle(
+                                                                    fontFamily:
+                                                                        "Metrisch-Medium",
+                                                                    height: 1.5,
+                                                                    fontSize:
+                                                                        15,
+                                                                    color: Colors
+                                                                        .black54),
+                                                              )
+                                                    : Text(
+                                                        'Showing 1–${ProjectList.length} for "${widget.searchTerm}"',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
+                                                MenuButton<String>(
+                                                  child: normalChildButton,
+                                                  items: sortkeys,
+                                                  itemBuilder: (String value) =>
+                                                      Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                    child: Text(
+                                                      value,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
                                                   ),
-                                                  Divider(
-                                                    color: Colors.black12,
-                                                    thickness: 1,
+                                                  toggledChild: Container(
+                                                    child: normalChildButton,
+                                                  ),
+                                                  onItemSelected:
+                                                      (String value) {
+                                                    setState(() {
+                                                      selectedKey = value;
+                                                    });
+                                                  },
+                                                  onMenuButtonToggle:
+                                                      (bool isToggle) {
+                                                    print(isToggle);
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
+                                            _loadingProducts == true
+                                                ? Container(
+                                                    height: 300,
+                                                    width: 300,
+                                                    child: Lottie.asset(
+                                                        'assets/loading.json',
+                                                        frameRate:
+                                                            FrameRate.max),
                                                   )
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 40,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 20,
-                                              height: 3,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
-                                            )
+                                                : ProjectList.length != 0
+                                                    ? Container(
+                                                        clipBehavior: Clip.none,
+                                                        // height: ProjectList.length *
+                                                        //     160.toDouble(),
+                                                        child: GridView.builder(
+                                                          shrinkWrap: true,
+                                                          physics:
+                                                              NeverScrollableScrollPhysics(),
+                                                          itemCount: ProjectList
+                                                              .length,
+                                                          gridDelegate:
+                                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                                  crossAxisCount:
+                                                                      3,
+                                                                  mainAxisSpacing:
+                                                                      40,
+                                                                  childAspectRatio:
+                                                                      0.68,
+                                                                  crossAxisSpacing:
+                                                                      20),
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  int index) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      bottom:
+                                                                          30.0),
+                                                              child:
+                                                                  ProjectCard(
+                                                                project:
+                                                                    ProjectList[
+                                                                        index],
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                      )
+                                                    : Text("No Projects Found"),
+                                            _moreProductsAvailable == true &&
+                                                    _loadingProducts == false
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 50.0),
+                                                    child: ProjectList.length >
+                                                                9 &&
+                                                            widget.lm == true
+                                                        ? GradientButton(
+                                                            title: "Load More",
+                                                            onPressed: () {
+                                                              if (widget
+                                                                      .categoryTerm !=
+                                                                  "") {
+                                                                getMoreCategoryProducts(
+                                                                    widget
+                                                                        .categoryTerm);
+                                                              } else if (widget
+                                                                      .yearTerm !=
+                                                                  "") {
+                                                                getMoreYearProducts(
+                                                                    widget
+                                                                        .yearTerm);
+                                                              } else if (widget
+                                                                      .searchTerm ==
+                                                                  "") {
+                                                                getMoreProducts();
+                                                              } else {
+                                                                //TODO: Get more products from algolia
+                                                              }
+                                                            },
+                                                          )
+                                                        : Center(),
+                                                  )
+                                                : Center(),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Text(
-                                          "Most Viewed Projects",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.black87,
-                                              fontFamily: "Metrisch-Bold"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          height: 300,
-                                          child: ListView.builder(
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: 3,
-                                            itemBuilder: (context, index) {
-                                              return TopProjects(
-                                                projectName:
-                                                    "Computer Vision using Deep Learning and Machine Learning",
-                                                madeBy: "Aryan Solanki",
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 40,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                      );
+                                    }
+                                    if (sizingInformation.deviceScreenType ==
+                                        DeviceScreenType.tablet) {
+                                      return Container(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 10),
+                                        width: 660,
+                                        child: Column(
                                           children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                widget.searchTerm == ""
+                                                    ? Text(
+                                                        "Showing 1–9 of 12 results",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    : Text(
+                                                        'Showing 1–9 of "${widget.searchTerm}"',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
+                                                MenuButton<String>(
+                                                  child: normalChildButton,
+                                                  items: sortkeys,
+                                                  itemBuilder: (String value) =>
+                                                      Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                    child: Text(
+                                                      value,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
+                                                  ),
+                                                  toggledChild: Container(
+                                                    child: normalChildButton,
+                                                  ),
+                                                  onItemSelected:
+                                                      (String value) {
+                                                    setState(() {
+                                                      selectedKey = value;
+                                                    });
+                                                  },
+                                                  onMenuButtonToggle:
+                                                      (bool isToggle) {
+                                                    print(isToggle);
+                                                  },
+                                                )
+                                              ],
                                             ),
                                             SizedBox(
-                                              width: 10,
+                                              height: 40,
                                             ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 20,
-                                              height: 3,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.orange.shade400,
-                                              ),
-                                              width: 5,
-                                              height: 3,
-                                            )
+                                            _loadingProducts == true
+                                                ? Container(
+                                                    height: 300,
+                                                    width: 300,
+                                                    child: Lottie.asset(
+                                                        'assets/loading.json',
+                                                        frameRate:
+                                                            FrameRate.max),
+                                                  )
+                                                : ProjectList.length != 0
+                                                    ? Container(
+                                                        clipBehavior: Clip.none,
+                                                        // height: ProjectList.length *
+                                                        //     160.toDouble(),
+                                                        child: GridView.builder(
+                                                          clipBehavior:
+                                                              Clip.none,
+                                                          shrinkWrap: true,
+                                                          physics:
+                                                              NeverScrollableScrollPhysics(),
+                                                          itemCount: ProjectList
+                                                              .length,
+                                                          gridDelegate:
+                                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                                  crossAxisCount:
+                                                                      3,
+                                                                  mainAxisSpacing:
+                                                                      40,
+                                                                  childAspectRatio:
+                                                                      0.63,
+                                                                  crossAxisSpacing:
+                                                                      20),
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  int index) {
+                                                            return NoHoverProjectCard(
+                                                              project:
+                                                                  ProjectList[
+                                                                      index],
+                                                            );
+                                                          },
+                                                        ),
+                                                      )
+                                                    : Text("No Projects Found"),
+                                            ProjectList.length > 9 &&
+                                                    widget.lm == true &&
+                                                    _moreProductsAvailable ==
+                                                        true &&
+                                                    _loadingProducts == false
+                                                ? GradientButton(
+                                                    title: "Load More",
+                                                    onPressed: () {
+                                                      if (widget.categoryTerm !=
+                                                          "") {
+                                                        getMoreCategoryProducts(
+                                                            widget
+                                                                .categoryTerm);
+                                                      } else if (widget
+                                                              .yearTerm !=
+                                                          "") {
+                                                        getMoreYearProducts(
+                                                            widget.yearTerm);
+                                                      } else if (widget
+                                                              .searchTerm ==
+                                                          "") {
+                                                        getMoreProducts();
+                                                      } else {
+                                                        //TODO: Get more products from algolia
+                                                      }
+                                                    },
+                                                  )
+                                                : Center(),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 15,
+                                      );
+                                    }
+                                    if (sizingInformation.deviceScreenType ==
+                                        DeviceScreenType.watch) {
+                                      return Container(
+                                        width: 250,
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 10),
+                                        child: Column(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                widget.searchTerm == ""
+                                                    ? Text(
+                                                        "Showing 1–9 of 12 results",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      )
+                                                    : Text(
+                                                        'Showing 1–9 of "${widget.searchTerm}"',
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                MenuButton<String>(
+                                                  child: normalChildButton,
+                                                  items: sortkeys,
+                                                  itemBuilder: (String value) =>
+                                                      Container(
+                                                    height: 40,
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 0.0,
+                                                        horizontal: 16),
+                                                    child: Text(
+                                                      value,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                    ),
+                                                  ),
+                                                  toggledChild: Container(
+                                                    child: normalChildButton,
+                                                  ),
+                                                  onItemSelected:
+                                                      (String value) {
+                                                    setState(() {
+                                                      selectedKey = value;
+                                                    });
+                                                  },
+                                                  onMenuButtonToggle:
+                                                      (bool isToggle) {
+                                                    print(isToggle);
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              height: ProjectList.length *
+                                                  445.toDouble(),
+                                              child: GridView.builder(
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemCount: ProjectList.length,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 1,
+                                                        mainAxisSpacing: 40,
+                                                        childAspectRatio: 0.63,
+                                                        crossAxisSpacing: 20),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return NoHoverProjectCard(
+                                                    project: ProjectList[index],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            ProjectList.length > 9 &&
+                                                    widget.lm == true &&
+                                                    _moreProductsAvailable ==
+                                                        true &&
+                                                    _loadingProducts == false
+                                                ? GradientButton(
+                                                    title: "Load More",
+                                                    onPressed: () {
+                                                      if (widget.categoryTerm !=
+                                                          "") {
+                                                        getMoreCategoryProducts(
+                                                            widget
+                                                                .categoryTerm);
+                                                      } else if (widget
+                                                              .yearTerm !=
+                                                          "") {
+                                                        getMoreYearProducts(
+                                                            widget.yearTerm);
+                                                      } else if (widget
+                                                              .searchTerm ==
+                                                          "") {
+                                                        getMoreProducts();
+                                                      } else {
+                                                        //TODO: Get more products from algolia
+                                                      }
+                                                    },
+                                                  )
+                                                : Center(),
+                                          ],
                                         ),
-                                        Text(
-                                          "Batch Wise Projects",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.black87,
-                                              fontFamily: "Metrisch-Bold"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        BatchWiseProjects(
-                                          categoriesname: categoriesname,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                              SizedBox(
-                                width: 50,
-                              ),
-                              ResponsiveBuilder(
-                                breakpoints: ScreenBreakpoints(
-                                    tablet: 700, desktop: 1140, watch: 541),
-                                builder: (context, sizingInformation) {
-                                  // Check the sizing information here and return your UI
-                                  if (sizingInformation.deviceScreenType ==
-                                      DeviceScreenType.desktop) {
+                                      );
+                                    }
+
                                     return Container(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 10),
-                                      width: 800,
+                                      width: 500,
                                       child: Column(
                                         children: [
                                           Row(
@@ -1468,7 +2014,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               widget.searchTerm == ""
-                                                  // TODO: FOR CATEGORY SEARCH AND YEAR SEARCH
                                                   ? Text(
                                                       "Showing 1–9 of 12 results",
                                                       style: TextStyle(
@@ -1529,20 +2074,163 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                           SizedBox(
                                             height: 40,
                                           ),
-                                          _loadingProducts == true
-                                              ? Container(
-                                                  height: 300,
-                                                  width: 300,
-                                                  child: Lottie.asset(
-                                                      'assets/loading.json',
-                                                      frameRate: FrameRate.max),
+                                          Container(
+                                            height: ProjectList.length *
+                                                240.toDouble(),
+                                            child: GridView.builder(
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              itemCount: ProjectList.length,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 2,
+                                                      mainAxisSpacing: 40,
+                                                      childAspectRatio: 0.63,
+                                                      crossAxisSpacing: 20),
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return NoHoverProjectCard(
+                                                  project: ProjectList[index],
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          ProjectList.length > 9 &&
+                                                  widget.lm == true &&
+                                                  _moreProductsAvailable ==
+                                                      true &&
+                                                  _loadingProducts == false
+                                              ? GradientButton(
+                                                  title: "Load More",
+                                                  onPressed: () {
+                                                    if (widget.categoryTerm !=
+                                                        "") {
+                                                      getMoreCategoryProducts(
+                                                          widget.categoryTerm);
+                                                    } else if (widget
+                                                            .yearTerm !=
+                                                        "") {
+                                                      getMoreYearProducts(
+                                                          widget.yearTerm);
+                                                    } else if (widget
+                                                            .searchTerm ==
+                                                        "") {
+                                                      getMoreProducts();
+                                                    } else {
+                                                      //TODO: Get more products from algolia
+                                                    }
+                                                  },
                                                 )
-                                              : Container(
-                                                  clipBehavior: Clip.none,
-                                                  // height: ProjectList.length *
-                                                  //     160.toDouble(),
+                                              : Center(),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                          if (sizingInformation.deviceScreenType ==
+                              DeviceScreenType.tablet) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    ResponsiveBuilder(
+                                      breakpoints: ScreenBreakpoints(
+                                          tablet: 700,
+                                          desktop: 1140,
+                                          watch: 541),
+                                      builder: (context, sizingInformation) {
+                                        // Check the sizing information here and return your UI
+                                        if (sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.desktop) {
+                                          return Container(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            width: 800,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    widget.searchTerm == ""
+                                                        ? Text(
+                                                            "Showing 1–9 of 12 results",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                height: 1.5,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .black54),
+                                                          )
+                                                        : Text(
+                                                            'Showing 1–9 of "${widget.searchTerm}"',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                height: 1.5,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .black54),
+                                                          ),
+                                                    MenuButton<String>(
+                                                      child: normalChildButton,
+                                                      items: sortkeys,
+                                                      itemBuilder:
+                                                          (String value) =>
+                                                              Container(
+                                                        height: 40,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 0.0,
+                                                                horizontal: 16),
+                                                        child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        ),
+                                                      ),
+                                                      toggledChild: Container(
+                                                        child:
+                                                            normalChildButton,
+                                                      ),
+                                                      onItemSelected:
+                                                          (String value) {
+                                                        setState(() {
+                                                          selectedKey = value;
+                                                        });
+                                                      },
+                                                      onMenuButtonToggle:
+                                                          (bool isToggle) {
+                                                        print(isToggle);
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 40,
+                                                ),
+                                                Container(
+                                                  height: ProjectList.length *
+                                                      140.toDouble(),
                                                   child: GridView.builder(
-                                                    shrinkWrap: true,
                                                     physics:
                                                         NeverScrollableScrollPhysics(),
                                                     itemCount:
@@ -1558,457 +2246,1458 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     itemBuilder:
                                                         (BuildContext context,
                                                             int index) {
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                bottom: 30.0),
-                                                        child: ProjectCard(
-                                                            project:
-                                                                ProjectList[
-                                                                    index]),
+                                                      return ProjectCard(
+                                                        project:
+                                                            ProjectList[index],
                                                       );
                                                     },
                                                   ),
                                                 ),
-                                          _moreProductsAvailable == true &&
-                                                  _loadingProducts == false
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 50.0),
-                                                  child: ProjectList.length >
-                                                              9 &&
-                                                          widget.lm == true
-                                                      ? GradientButton(
-                                                          title: "Load More",
-                                                          onPressed: () {
-                                                            if (widget
-                                                                    .categoryTerm !=
-                                                                "") {
-                                                              getMoreCategoryProducts(
-                                                                  widget
-                                                                      .categoryTerm);
-                                                            } else if (widget
-                                                                    .yearTerm !=
-                                                                "") {
-                                                              getMoreYearProducts(
-                                                                  widget
-                                                                      .yearTerm);
-                                                            } else if (widget
-                                                                    .searchTerm ==
-                                                                "") {
-                                                              getMoreProducts();
-                                                            } else {
-                                                              //TODO: Get more products from algolia
-                                                            }
-                                                          },
-                                                        )
-                                                      : Center(),
-                                                )
-                                              : Center(),
-                                        ],
-                                      ),
-                                    );
-                                  }
-                                  if (sizingInformation.deviceScreenType ==
-                                      DeviceScreenType.tablet) {
-                                    return Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                      width: 660,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              widget.searchTerm == ""
-                                                  ? Text(
-                                                      "Showing 1–9 of 12 results",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
+                                                ProjectList.length > 9 &&
+                                                        widget.lm == true &&
+                                                        _moreProductsAvailable ==
+                                                            true &&
+                                                        _loadingProducts ==
+                                                            false
+                                                    ? GradientButton(
+                                                        title: "Load More",
+                                                        onPressed: () {
+                                                          if (widget
+                                                                  .categoryTerm !=
+                                                              "") {
+                                                            getMoreCategoryProducts(
+                                                                widget
+                                                                    .categoryTerm);
+                                                          } else if (widget
+                                                                  .yearTerm !=
+                                                              "") {
+                                                            getMoreYearProducts(
+                                                                widget
+                                                                    .yearTerm);
+                                                          } else if (widget
+                                                                  .searchTerm ==
+                                                              "") {
+                                                            getMoreProducts();
+                                                          } else {
+                                                            //TODO: Get more products from algolia
+                                                          }
+                                                        },
+                                                      )
+                                                    : Center(),
+                                              ],
+                                            ),
+                                          );
+                                        }
+                                        if (sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.tablet) {
+                                          return Container(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            width: 660,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    widget.searchTerm == ""
+                                                        ? Text(
+                                                            "Showing 1–9 of 12 results",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                height: 1.5,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .black54),
+                                                          )
+                                                        : Text(
+                                                            'Showing 1–9 of "${widget.searchTerm}"',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                height: 1.5,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .black54),
+                                                          ),
+                                                    MenuButton<String>(
+                                                      child: normalChildButton,
+                                                      items: sortkeys,
+                                                      itemBuilder:
+                                                          (String value) =>
+                                                              Container(
+                                                        height: 40,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 0.0,
+                                                                horizontal: 16),
+                                                        child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        ),
+                                                      ),
+                                                      toggledChild: Container(
+                                                        child:
+                                                            normalChildButton,
+                                                      ),
+                                                      onItemSelected:
+                                                          (String value) {
+                                                        setState(() {
+                                                          selectedKey = value;
+                                                        });
+                                                      },
+                                                      onMenuButtonToggle:
+                                                          (bool isToggle) {
+                                                        print(isToggle);
+                                                      },
                                                     )
-                                                  : Text(
-                                                      'Showing 1–9 of "${widget.searchTerm}"',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                              MenuButton<String>(
-                                                child: normalChildButton,
-                                                items: sortkeys,
-                                                itemBuilder: (String value) =>
-                                                    Container(
+                                                  ],
+                                                ),
+                                                SizedBox(
                                                   height: 40,
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 0.0,
-                                                      horizontal: 16),
-                                                  child: Text(
-                                                    value,
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
+                                                ),
+                                                Container(
+                                                  height: ProjectList.length *
+                                                      180.toDouble(),
+                                                  child: GridView.builder(
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    itemCount:
+                                                        ProjectList.length,
+                                                    gridDelegate:
+                                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 3,
+                                                            mainAxisSpacing: 40,
+                                                            childAspectRatio:
+                                                                0.63,
+                                                            crossAxisSpacing:
+                                                                20),
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return NoHoverProjectCard(
+                                                        project:
+                                                            ProjectList[index],
+                                                      );
+                                                    },
                                                   ),
                                                 ),
-                                                toggledChild: Container(
-                                                  child: normalChildButton,
-                                                ),
-                                                onItemSelected: (String value) {
-                                                  setState(() {
-                                                    selectedKey = value;
-                                                  });
-                                                },
-                                                onMenuButtonToggle:
-                                                    (bool isToggle) {
-                                                  print(isToggle);
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          _loadingProducts == true
-                                              ? Container(
-                                            height: 300,
-                                            width: 300,
-                                            child: Lottie.asset(
-                                                'assets/loading.json',
-                                                frameRate: FrameRate.max),
-                                          )
-                                              : Container(
-                                            clipBehavior: Clip.none,
-                                            // height: ProjectList.length *
-                                            //     160.toDouble(),
-                                            child: GridView.builder(
-                                              clipBehavior: Clip.none,
-                                              shrinkWrap: true,
-                                              physics:
-                                              NeverScrollableScrollPhysics(),
-                                              itemCount:
-                                              ProjectList.length,
-                                              gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 3,
-                                                  mainAxisSpacing: 40,
-                                                  childAspectRatio:
-                                                  0.63,
-                                                  crossAxisSpacing:
-                                                  20),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                  int index) {
-                                                return NoHoverProjectCard(
-                                                    project:
-                                                    ProjectList[
-                                                    index]);
-                                              },
+                                                ProjectList.length > 9 &&
+                                                        widget.lm == true &&
+                                                        _moreProductsAvailable ==
+                                                            true &&
+                                                        _loadingProducts ==
+                                                            false
+                                                    ? GradientButton(
+                                                        title: "Load More",
+                                                        onPressed: () {
+                                                          if (widget
+                                                                  .categoryTerm !=
+                                                              "") {
+                                                            getMoreCategoryProducts(
+                                                                widget
+                                                                    .categoryTerm);
+                                                          } else if (widget
+                                                                  .yearTerm !=
+                                                              "") {
+                                                            getMoreYearProducts(
+                                                                widget
+                                                                    .yearTerm);
+                                                          } else if (widget
+                                                                  .searchTerm ==
+                                                              "") {
+                                                            getMoreProducts();
+                                                          } else {
+                                                            //TODO: Get more products from algolia
+                                                          }
+                                                        },
+                                                      )
+                                                    : Center(),
+                                              ],
                                             ),
-                                          ),
-                                          ProjectList.length > 9 &&
-                                                  widget.lm == true &&
-                                                  _moreProductsAvailable ==
-                                                      true &&
-                                                  _loadingProducts == false
-                                              ? GradientButton(
-                                                  title: "Load More",
-                                                  onPressed: () {
-                                                    if (widget.categoryTerm !=
-                                                        "") {
-                                                      getMoreCategoryProducts(
-                                                          widget.categoryTerm);
-                                                    } else if (widget
-                                                            .yearTerm !=
-                                                        "") {
-                                                      getMoreYearProducts(
-                                                          widget.yearTerm);
-                                                    } else if (widget
-                                                            .searchTerm ==
-                                                        "") {
-                                                      getMoreProducts();
-                                                    } else {
-                                                      //TODO: Get more products from algolia
-                                                    }
-                                                  },
-                                                )
-                                              : Center(),
-                                        ],
-                                      ),
-                                    );
-                                  }
-                                  if (sizingInformation.deviceScreenType ==
-                                      DeviceScreenType.watch) {
-                                    return Container(
-                                      width: 250,
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                      child: Column(
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              widget.searchTerm == ""
-                                                  ? Text(
-                                                      "Showing 1–9 of 12 results",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                    )
-                                                  : Text(
-                                                      'Showing 1–9 of "${widget.searchTerm}"',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
+                                          );
+                                        }
+                                        if (sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.watch) {
+                                          return Container(
+                                            width: 250,
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: Column(
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    widget.searchTerm == ""
+                                                        ? Text(
+                                                            "Showing 1–9 of 12 results",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                height: 1.5,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .black54),
+                                                          )
+                                                        : Text(
+                                                            'Showing 1–9 of "${widget.searchTerm}"',
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Metrisch-Medium",
+                                                                height: 1.5,
+                                                                fontSize: 15,
+                                                                color: Colors
+                                                                    .black54),
+                                                          ),
+                                                    SizedBox(
+                                                      height: 20,
                                                     ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              MenuButton<String>(
-                                                child: normalChildButton,
-                                                items: sortkeys,
-                                                itemBuilder: (String value) =>
-                                                    Container(
-                                                  height: 40,
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 0.0,
-                                                      horizontal: 16),
-                                                  child: Text(
-                                                    value,
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
+                                                    MenuButton<String>(
+                                                      child: normalChildButton,
+                                                      items: sortkeys,
+                                                      itemBuilder:
+                                                          (String value) =>
+                                                              Container(
+                                                        height: 40,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 0.0,
+                                                                horizontal: 16),
+                                                        child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        ),
+                                                      ),
+                                                      toggledChild: Container(
+                                                        child:
+                                                            normalChildButton,
+                                                      ),
+                                                      onItemSelected:
+                                                          (String value) {
+                                                        setState(() {
+                                                          selectedKey = value;
+                                                        });
+                                                      },
+                                                      onMenuButtonToggle:
+                                                          (bool isToggle) {
+                                                        print(isToggle);
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Container(
+                                                  height: ProjectList.length *
+                                                      445.toDouble(),
+                                                  child: GridView.builder(
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    itemCount:
+                                                        ProjectList.length,
+                                                    gridDelegate:
+                                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 1,
+                                                            mainAxisSpacing: 40,
+                                                            childAspectRatio:
+                                                                0.63,
+                                                            crossAxisSpacing:
+                                                                20),
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return NoHoverProjectCard(
+                                                        project:
+                                                            ProjectList[index],
+                                                      );
+                                                    },
                                                   ),
                                                 ),
-                                                toggledChild: Container(
-                                                  child: normalChildButton,
-                                                ),
-                                                onItemSelected: (String value) {
-                                                  setState(() {
-                                                    selectedKey = value;
-                                                  });
-                                                },
-                                                onMenuButtonToggle:
-                                                    (bool isToggle) {
-                                                  print(isToggle);
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: ProjectList.length *
-                                                445.toDouble(),
-                                            child: GridView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: ProjectList.length,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 1,
-                                                      mainAxisSpacing: 40,
-                                                      childAspectRatio: 0.63,
-                                                      crossAxisSpacing: 20),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return NoHoverProjectCard(
-                                                    project:
-                                                        ProjectList[index]);
-                                              },
+                                                ProjectList.length > 9 &&
+                                                        widget.lm == true &&
+                                                        _moreProductsAvailable ==
+                                                            true &&
+                                                        _loadingProducts ==
+                                                            false
+                                                    ? GradientButton(
+                                                        title: "Load More",
+                                                        onPressed: () {
+                                                          if (widget
+                                                                  .categoryTerm !=
+                                                              "") {
+                                                            getMoreCategoryProducts(
+                                                                widget
+                                                                    .categoryTerm);
+                                                          } else if (widget
+                                                                  .yearTerm !=
+                                                              "") {
+                                                            getMoreYearProducts(
+                                                                widget
+                                                                    .yearTerm);
+                                                          } else if (widget
+                                                                  .searchTerm ==
+                                                              "") {
+                                                            getMoreProducts();
+                                                          } else {
+                                                            //TODO: Get more products from algolia
+                                                          }
+                                                        },
+                                                      )
+                                                    : Center(),
+                                              ],
                                             ),
-                                          ),
-                                          ProjectList.length > 9 &&
-                                                  widget.lm == true &&
-                                                  _moreProductsAvailable ==
-                                                      true &&
-                                                  _loadingProducts == false
-                                              ? GradientButton(
-                                                  title: "Load More",
-                                                  onPressed: () {
-                                                    if (widget.categoryTerm !=
-                                                        "") {
-                                                      getMoreCategoryProducts(
-                                                          widget.categoryTerm);
-                                                    } else if (widget
-                                                            .yearTerm !=
-                                                        "") {
-                                                      getMoreYearProducts(
-                                                          widget.yearTerm);
-                                                    } else if (widget
-                                                            .searchTerm ==
-                                                        "") {
-                                                      getMoreProducts();
-                                                    } else {
-                                                      //TODO: Get more products from algolia
-                                                    }
-                                                  },
-                                                )
-                                              : Center(),
-                                        ],
-                                      ),
-                                    );
-                                  }
+                                          );
+                                        }
 
-                                  return Container(
-                                    padding: EdgeInsets.symmetric(vertical: 10),
-                                    width: 500,
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            widget.searchTerm == ""
-                                                ? Text(
-                                                    "Showing 1–9 of 12 results",
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
+                                        return Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          width: 500,
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  widget.searchTerm == ""
+                                                      ? Text(
+                                                          "Showing 1–9 of 12 results",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        )
+                                                      : Text(
+                                                          'Showing 1–9 of "${widget.searchTerm}"',
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Metrisch-Medium",
+                                                              height: 1.5,
+                                                              fontSize: 15,
+                                                              color: Colors
+                                                                  .black54),
+                                                        ),
+                                                  MenuButton<String>(
+                                                    child: normalChildButton,
+                                                    items: sortkeys,
+                                                    itemBuilder:
+                                                        (String value) =>
+                                                            Container(
+                                                      height: 40,
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 0.0,
+                                                          horizontal: 16),
+                                                      child: Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Metrisch-Medium",
+                                                            height: 1.5,
+                                                            fontSize: 15,
+                                                            color:
+                                                                Colors.black54),
+                                                      ),
+                                                    ),
+                                                    toggledChild: Container(
+                                                      child: normalChildButton,
+                                                    ),
+                                                    onItemSelected:
+                                                        (String value) {
+                                                      setState(() {
+                                                        selectedKey = value;
+                                                      });
+                                                    },
+                                                    onMenuButtonToggle:
+                                                        (bool isToggle) {
+                                                      print(isToggle);
+                                                    },
                                                   )
-                                                : Text(
-                                                    'Showing 1–9 of "${widget.searchTerm}"',
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 40,
+                                              ),
+                                              Container(
+                                                height: ProjectList.length *
+                                                    240.toDouble(),
+                                                child: GridView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  itemCount: ProjectList.length,
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                          crossAxisCount: 2,
+                                                          mainAxisSpacing: 40,
+                                                          childAspectRatio:
+                                                              0.63,
+                                                          crossAxisSpacing: 20),
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          int index) {
+                                                    return NoHoverProjectCard(
+                                                      project:
+                                                          ProjectList[index],
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                              ProjectList.length > 9 &&
+                                                      widget.lm == true &&
+                                                      _moreProductsAvailable ==
+                                                          true &&
+                                                      _loadingProducts == false
+                                                  ? GradientButton(
+                                                      title: "Load More",
+                                                      onPressed: () {
+                                                        if (widget
+                                                                .categoryTerm !=
+                                                            "") {
+                                                          getMoreCategoryProducts(
+                                                              widget
+                                                                  .categoryTerm);
+                                                        } else if (widget
+                                                                .yearTerm !=
+                                                            "") {
+                                                          getMoreYearProducts(
+                                                              widget.yearTerm);
+                                                        } else if (widget
+                                                                .searchTerm ==
+                                                            "") {
+                                                          getMoreProducts();
+                                                        } else {
+                                                          //TODO: Get more products from algolia
+                                                        }
+                                                      },
+                                                    )
+                                                  : Center(),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 80,
+                                    ),
+                                    ResponsiveBuilder(
+                                      breakpoints: ScreenBreakpoints(
+                                          tablet: 971,
+                                          desktop: 1140,
+                                          watch: 300),
+                                      builder: (context, sizingInformation) {
+                                        // Check the sizing information here and return your UI
+                                        if (sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.desktop) {
+                                          return Container(
+                                            width: 250,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  padding:
+                                                      EdgeInsets.only(left: 10),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5.0)),
+                                                      color: Color(0xfff3f5fe)),
+                                                  height: 45,
+                                                  child: TextField(
                                                     style: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
                                                         height: 1.5,
                                                         fontSize: 15,
                                                         color: Colors.black54),
+                                                    onChanged: (value) {
+                                                      searchedvalue = value;
+                                                      //Do something with the user input.
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      suffixIcon: InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              searched = true;
+                                                            });
+                                                          },
+                                                          child: Icon(
+                                                            Icons.search,
+                                                            size: 22,
+                                                            color: Colors.black,
+                                                          )),
+
+                                                      border: InputBorder.none,
+                                                      hintStyle: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+
+                                                      hintText:
+                                                          'Search Project',
+                                                      // contentPadding:
+                                                      // EdgeInsets.symmetric(horizontal: 20.0),
+                                                      // border: OutlineInputBorder(
+                                                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                      // ),
+                                                    ),
+                                                    onSubmitted: (query) {
+                                                      setState(() {
+                                                        searched = true;
+                                                        searchedvalue = query;
+                                                        _searchalgolia(query);
+                                                      });
+                                                    },
                                                   ),
-                                            MenuButton<String>(
-                                              child: normalChildButton,
-                                              items: sortkeys,
-                                              itemBuilder: (String value) =>
-                                                  Container(
-                                                height: 40,
-                                                alignment: Alignment.centerLeft,
+                                                ),
+                                                SizedBox(
+                                                  height: 40,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 20,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  "Categories",
+                                                  style: TextStyle(
+                                                      fontSize: 21,
+                                                      color: Colors.black87,
+                                                      fontFamily:
+                                                          "Metrisch-Bold"),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Container(
+                                                  height: catheight,
+                                                  child: ListView.builder(
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    itemCount:
+                                                        categoriesname.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Column(
+                                                        children: [
+                                                          CategoriesButton(
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                searched = true;
+                                                                Navigator.pushReplacement(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) => ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
+                                                              });
+                                                            },
+                                                            categoryName:
+                                                                categoriesname[
+                                                                        index]
+                                                                    ["name"],
+                                                            categoryQuantity:
+                                                                categoriesname[
+                                                                        index]
+                                                                    ["number"],
+                                                          ),
+                                                          Divider(
+                                                            color:
+                                                                Colors.black12,
+                                                            thickness: 1,
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                // SizedBox(
+                                                //   height: 40,
+                                                // ),
+                                                // Row(
+                                                //   mainAxisAlignment:
+                                                //       MainAxisAlignment.center,
+                                                //   children: [
+                                                //     Container(
+                                                //       decoration: BoxDecoration(
+                                                //         borderRadius:
+                                                //             BorderRadius.circular(
+                                                //                 5),
+                                                //         color: Colors
+                                                //             .orange.shade400,
+                                                //       ),
+                                                //       width: 5,
+                                                //       height: 3,
+                                                //     ),
+                                                //     SizedBox(
+                                                //       width: 10,
+                                                //     ),
+                                                //     Container(
+                                                //       decoration: BoxDecoration(
+                                                //         borderRadius:
+                                                //             BorderRadius.circular(
+                                                //                 5),
+                                                //         color: Colors
+                                                //             .orange.shade400,
+                                                //       ),
+                                                //       width: 20,
+                                                //       height: 3,
+                                                //     ),
+                                                //     // SizedBox(
+                                                //     //   width: 10,
+                                                //     // ),
+                                                //     // Container(
+                                                //     //   decoration: BoxDecoration(
+                                                //     //     borderRadius:
+                                                //     //         BorderRadius.circular(
+                                                //     //             5),
+                                                //     //     color: Colors
+                                                //     //         .orange.shade400,
+                                                //     //   ),
+                                                //     //   width: 5,
+                                                //     //   height: 3,
+                                                //     // )
+                                                //   ],
+                                                // ),
+                                                // SizedBox(
+                                                //   height: 15,
+                                                // ),
+                                                // Text(
+                                                //   "Most Viewed Projects",
+                                                //   style: TextStyle(
+                                                //       fontSize: 21,
+                                                //       color: Colors.black87,
+                                                //       fontFamily:
+                                                //           "Metrisch-Bold"),
+                                                // ),
+                                                // SizedBox(
+                                                //   height: 20,
+                                                // ),
+                                                // Container(
+                                                //   height: 300,
+                                                //   child: ListView.builder(
+                                                //     physics:
+                                                //         NeverScrollableScrollPhysics(),
+                                                //     shrinkWrap: true,
+                                                //     itemCount: 3,
+                                                //     itemBuilder:
+                                                //         (context, index) {
+                                                //       return TopProjects(
+                                                //         projectName:
+                                                //             "Computer Vision using Deep Learning and Machine Learning",
+                                                //         madeBy: "Aryan Solanki",
+                                                //       );
+                                                //     },
+                                                //   ),
+                                                // ),
+                                                SizedBox(
+                                                  height: 40,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 20,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  "Batch Wise Projects",
+                                                  style: TextStyle(
+                                                      fontSize: 21,
+                                                      color: Colors.black87,
+                                                      fontFamily:
+                                                          "Metrisch-Bold"),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                BatchWiseProjects(
+                                                  categoriesname:
+                                                      categoriesname,
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        }
+                                        if (sizingInformation
+                                                .deviceScreenType ==
+                                            DeviceScreenType.tablet) {
+                                          return Container(
+                                            width: 220,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  padding:
+                                                      EdgeInsets.only(left: 10),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5.0)),
+                                                      color: Color(0xfff3f5fe)),
+                                                  height: 45,
+                                                  child: TextField(
+                                                    onSubmitted: (query) {
+                                                      setState(() {
+                                                        searched = true;
+                                                        searchedvalue = query;
+                                                      });
+                                                    },
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                    onChanged: (value) {
+                                                      searchedvalue = value;
+                                                      //Do something with the user input.
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      suffixIcon: InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            searched = true;
+                                                          });
+                                                        },
+                                                        child: Icon(
+                                                          Icons.search,
+                                                          size: 22,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+
+                                                      border: InputBorder.none,
+
+                                                      hintStyle: TextStyle(
+                                                          fontFamily:
+                                                              "Metrisch-Medium",
+                                                          height: 1.5,
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black54),
+                                                      hintText:
+                                                          'Search Project',
+                                                      // contentPadding:
+                                                      // EdgeInsets.symmetric(horizontal: 20.0),
+                                                      // border: OutlineInputBorder(
+                                                      //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                      // ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 40,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 20,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  "Categories",
+                                                  style: TextStyle(
+                                                      fontSize: 21,
+                                                      color: Colors.black87,
+                                                      fontFamily:
+                                                          "Metrisch-Bold"),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Container(
+                                                  height: catheight,
+                                                  child: ListView.builder(
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    itemCount:
+                                                        categoriesname.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Column(
+                                                        children: [
+                                                          CategoriesButton(
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                searched = true;
+                                                                Navigator.pushReplacement(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) => ProjectGallery(
+                                                                              categoriesname: categoriesname,
+                                                                              categoryTerm: categoriesname[index]["name"],
+                                                                            )));
+                                                              });
+                                                            },
+                                                            categoryName:
+                                                                categoriesname[
+                                                                        index]
+                                                                    ["name"],
+                                                            categoryQuantity:
+                                                                categoriesname[
+                                                                        index]
+                                                                    ["number"],
+                                                          ),
+                                                          Divider(
+                                                            color:
+                                                                Colors.black12,
+                                                            thickness: 1,
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                // SizedBox(
+                                                //   height: 40,
+                                                // ),
+                                                // Row(
+                                                //   mainAxisAlignment:
+                                                //       MainAxisAlignment.center,
+                                                //   children: [
+                                                //     Container(
+                                                //       decoration: BoxDecoration(
+                                                //         borderRadius:
+                                                //             BorderRadius.circular(
+                                                //                 5),
+                                                //         color: Colors
+                                                //             .orange.shade400,
+                                                //       ),
+                                                //       width: 5,
+                                                //       height: 3,
+                                                //     ),
+                                                //     SizedBox(
+                                                //       width: 10,
+                                                //     ),
+                                                //     Container(
+                                                //       decoration: BoxDecoration(
+                                                //         borderRadius:
+                                                //             BorderRadius.circular(
+                                                //                 5),
+                                                //         color: Colors
+                                                //             .orange.shade400,
+                                                //       ),
+                                                //       width: 20,
+                                                //       height: 3,
+                                                //     ),
+                                                //     // SizedBox(
+                                                //     //   width: 10,
+                                                //     // ),
+                                                //     // Container(
+                                                //     //   decoration: BoxDecoration(
+                                                //     //     borderRadius:
+                                                //     //         BorderRadius.circular(
+                                                //     //             5),
+                                                //     //     color: Colors
+                                                //     //         .orange.shade400,
+                                                //     //   ),
+                                                //     //   width: 5,
+                                                //     //   height: 3,
+                                                //     // )
+                                                //   ],
+                                                // ),
+                                                // SizedBox(
+                                                //   height: 15,
+                                                // ),
+                                                // Text(
+                                                //   "Most Viewed Projects",
+                                                //   style: TextStyle(
+                                                //       fontSize: 21,
+                                                //       color: Colors.black87,
+                                                //       fontFamily:
+                                                //           "Metrisch-Bold"),
+                                                // ),
+                                                // SizedBox(
+                                                //   height: 20,
+                                                // ),
+                                                // Container(
+                                                //   height: 300,
+                                                //   child: ListView.builder(
+                                                //     physics:
+                                                //         NeverScrollableScrollPhysics(),
+                                                //     shrinkWrap: true,
+                                                //     itemCount: 3,
+                                                //     itemBuilder:
+                                                //         (context, index) {
+                                                //       return TopProjects(
+                                                //         projectName:
+                                                //             "Computer Vision using Deep Learning and Machine Learning",
+                                                //         madeBy: "Aryan Solanki",
+                                                //       );
+                                                //     },
+                                                //   ),
+                                                // ),
+                                                SizedBox(
+                                                  height: 40,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 20,
+                                                      height: 3,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        color: Colors
+                                                            .orange.shade400,
+                                                      ),
+                                                      width: 5,
+                                                      height: 3,
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text(
+                                                  "Batch Wise Projects",
+                                                  style: TextStyle(
+                                                      fontSize: 21,
+                                                      color: Colors.black87,
+                                                      fontFamily:
+                                                          "Metrisch-Bold"),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                BatchWiseProjects(
+                                                  categoriesname:
+                                                      categoriesname,
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        }
+
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              40,
+                                          child: Column(
+                                            children: [
+                                              Container(
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 0.0,
-                                                        horizontal: 16),
-                                                child: Text(
-                                                  value,
+                                                    EdgeInsets.only(left: 10),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                5.0)),
+                                                    color: Color(0xfff3f5fe)),
+                                                height: 45,
+                                                child: TextField(
+                                                  onSubmitted: (query) {
+                                                    setState(() {
+                                                      searched = true;
+                                                      searchedvalue = query;
+                                                    });
+                                                  },
                                                   style: TextStyle(
                                                       fontFamily:
                                                           "Metrisch-Medium",
                                                       height: 1.5,
                                                       fontSize: 15,
                                                       color: Colors.black54),
+                                                  onChanged: (value) {
+                                                    searchedvalue = value;
+                                                    //Do something with the user input.
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    suffixIcon: InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          searched = true;
+                                                        });
+                                                      },
+                                                      child: Icon(
+                                                        Icons.search,
+                                                        size: 22,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+
+                                                    border: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        fontFamily:
+                                                            "Metrisch-Medium",
+                                                        height: 1.5,
+                                                        fontSize: 15,
+                                                        color: Colors.black54),
+                                                    hintText: 'Search Project',
+                                                    // contentPadding:
+                                                    // EdgeInsets.symmetric(horizontal: 20.0),
+                                                    // border: OutlineInputBorder(
+                                                    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                    // ),
+                                                  ),
                                                 ),
                                               ),
-                                              toggledChild: Container(
-                                                child: normalChildButton,
+                                              SizedBox(
+                                                height: 40,
                                               ),
-                                              onItemSelected: (String value) {
-                                                setState(() {
-                                                  selectedKey = value;
-                                                });
-                                              },
-                                              onMenuButtonToggle:
-                                                  (bool isToggle) {
-                                                print(isToggle);
-                                              },
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 40,
-                                        ),
-                                        Container(
-                                          height: ProjectList.length *
-                                              240.toDouble(),
-                                          child: GridView.builder(
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            itemCount: ProjectList.length,
-                                            gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 2,
-                                                    mainAxisSpacing: 40,
-                                                    childAspectRatio: 0.63,
-                                                    crossAxisSpacing: 20),
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return NoHoverProjectCard(
-                                                  project: ProjectList[index]);
-                                            },
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
+                                                    ),
+                                                    width: 5,
+                                                    height: 3,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
+                                                    ),
+                                                    width: 20,
+                                                    height: 3,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
+                                                    ),
+                                                    width: 5,
+                                                    height: 3,
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Text(
+                                                "Categories",
+                                                style: TextStyle(
+                                                    fontSize: 21,
+                                                    color: Colors.black87,
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Container(
+                                                height: catheight,
+                                                child: ListView.builder(
+                                                  physics:
+                                                      NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount:
+                                                      categoriesname.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Column(
+                                                      children: [
+                                                        CategoriesButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              searched = true;
+                                                              Navigator.pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => ProjectGallery(
+                                                                            categoriesname:
+                                                                                categoriesname,
+                                                                            categoryTerm:
+                                                                                categoriesname[index]["name"],
+                                                                          )));
+                                                            });
+                                                          },
+                                                          categoryName:
+                                                              categoriesname[
+                                                                      index]
+                                                                  ["name"],
+                                                          categoryQuantity:
+                                                              categoriesname[
+                                                                      index]
+                                                                  ["number"],
+                                                        ),
+                                                        Divider(
+                                                          color: Colors.black12,
+                                                          thickness: 1,
+                                                        )
+                                                      ],
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                              // SizedBox(
+                                              //   height: 40,
+                                              // ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color:
+                                              //             Colors.orange.shade400,
+                                              //       ),
+                                              //       width: 5,
+                                              //       height: 3,
+                                              //     ),
+                                              //     SizedBox(
+                                              //       width: 10,
+                                              //     ),
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color:
+                                              //             Colors.orange.shade400,
+                                              //       ),
+                                              //       width: 20,
+                                              //       height: 3,
+                                              //     ),
+                                              //     // SizedBox(
+                                              //     //   width: 10,
+                                              //     // ),
+                                              //     // Container(
+                                              //     //   decoration: BoxDecoration(
+                                              //     //     borderRadius:
+                                              //     //         BorderRadius.circular(
+                                              //     //             5),
+                                              //     //     color:
+                                              //     //         Colors.orange.shade400,
+                                              //     //   ),
+                                              //     //   width: 5,
+                                              //     //   height: 3,
+                                              //     // )
+                                              //   ],
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 15,
+                                              // ),
+                                              // Text(
+                                              //   "Most Viewed Projects",
+                                              //   style: TextStyle(
+                                              //       fontSize: 21,
+                                              //       color: Colors.black87,
+                                              //       fontFamily: "Metrisch-Bold"),
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 20,
+                                              // ),
+                                              // Container(
+                                              //   height: 300,
+                                              //   child: ListView.builder(
+                                              //     physics:
+                                              //         NeverScrollableScrollPhysics(),
+                                              //     shrinkWrap: true,
+                                              //     itemCount: 3,
+                                              //     itemBuilder: (context, index) {
+                                              //       return TopProjects(
+                                              //         projectName:
+                                              //             "Computer Vision using Deep Learning and Machine Learning",
+                                              //         madeBy: "Aryan Solanki",
+                                              //       );
+                                              //     },
+                                              //   ),
+                                              // ),
+                                              SizedBox(
+                                                height: 40,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
+                                                    ),
+                                                    width: 5,
+                                                    height: 3,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
+                                                    ),
+                                                    width: 20,
+                                                    height: 3,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: Colors
+                                                          .orange.shade400,
+                                                    ),
+                                                    width: 5,
+                                                    height: 3,
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
+                                              Text(
+                                                "Batch Wise Projects",
+                                                style: TextStyle(
+                                                    fontSize: 21,
+                                                    color: Colors.black87,
+                                                    fontFamily:
+                                                        "Metrisch-Bold"),
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              BatchWiseProjects(
+                                                categoriesname: categoriesname,
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        ProjectList.length > 9 &&
-                                                widget.lm == true &&
-                                                _moreProductsAvailable ==
-                                                    true &&
-                                                _loadingProducts == false
-                                            ? GradientButton(
-                                                title: "Load More",
-                                                onPressed: () {
-                                                  if (widget.categoryTerm !=
-                                                      "") {
-                                                    getMoreCategoryProducts(
-                                                        widget.categoryTerm);
-                                                  } else if (widget.yearTerm !=
-                                                      "") {
-                                                    getMoreYearProducts(
-                                                        widget.yearTerm);
-                                                  } else if (widget
-                                                          .searchTerm ==
-                                                      "") {
-                                                    getMoreProducts();
-                                                  } else {
-                                                    //TODO: Get more products from algolia
-                                                  }
-                                                },
-                                              )
-                                            : Center(),
-                                      ],
+                                        );
+                                      },
                                     ),
-                                  );
-                                },
-                              ),
-                            ],
-                          );
-                        }
-                        if (sizingInformation.deviceScreenType ==
-                            DeviceScreenType.tablet) {
+                                  ],
+                                ),
+                              ],
+                            );
+                          }
+
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -2116,8 +3805,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       (BuildContext context,
                                                           int index) {
                                                     return ProjectCard(
-                                                        project:
-                                                            ProjectList[index]);
+                                                      project:
+                                                          ProjectList[index],
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -2251,8 +3941,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       (BuildContext context,
                                                           int index) {
                                                     return NoHoverProjectCard(
-                                                        project:
-                                                            ProjectList[index]);
+                                                      project:
+                                                          ProjectList[index],
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -2386,8 +4077,9 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                       (BuildContext context,
                                                           int index) {
                                                     return NoHoverProjectCard(
-                                                        project:
-                                                            ProjectList[index]);
+                                                      project:
+                                                          ProjectList[index],
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -2518,8 +4210,8 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     (BuildContext context,
                                                         int index) {
                                                   return NoHoverProjectCard(
-                                                      project:
-                                                          ProjectList[index]);
+                                                    project: ProjectList[index],
+                                                  );
                                                 },
                                               ),
                                             ),
@@ -2735,85 +4427,83 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: 40,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 20,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Text(
-                                                "Most Viewed Projects",
-                                                style: TextStyle(
-                                                    fontSize: 21,
-                                                    color: Colors.black87,
-                                                    fontFamily:
-                                                        "Metrisch-Bold"),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Container(
-                                                height: 300,
-                                                child: ListView.builder(
-                                                  physics:
-                                                      NeverScrollableScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: 3,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return TopProjects(
-                                                      projectName:
-                                                          "Computer Vision using Deep Learning and Machine Learning",
-                                                      madeBy: "Aryan Solanki",
-                                                    );
-                                                  },
-                                                ),
-                                              ),
+                                              // SizedBox(
+                                              //   height: 40,
+                                              // ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color:
+                                              //             Colors.orange.shade400,
+                                              //       ),
+                                              //       width: 5,
+                                              //       height: 3,
+                                              //     ),
+                                              //     SizedBox(
+                                              //       width: 10,
+                                              //     ),
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color:
+                                              //             Colors.orange.shade400,
+                                              //       ),
+                                              //       width: 20,
+                                              //       height: 3,
+                                              //     ),
+                                              //     // SizedBox(
+                                              //     //   width: 10,
+                                              //     // ),
+                                              //     // Container(
+                                              //     //   decoration: BoxDecoration(
+                                              //     //     borderRadius:
+                                              //     //         BorderRadius.circular(
+                                              //     //             5),
+                                              //     //     color:
+                                              //     //         Colors.orange.shade400,
+                                              //     //   ),
+                                              //     //   width: 5,
+                                              //     //   height: 3,
+                                              //     // )
+                                              //   ],
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 15,
+                                              // ),
+                                              // Text(
+                                              //   "Most Viewed Projects",
+                                              //   style: TextStyle(
+                                              //       fontSize: 21,
+                                              //       color: Colors.black87,
+                                              //       fontFamily: "Metrisch-Bold"),
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 20,
+                                              // ),
+                                              // Container(
+                                              //   height: 300,
+                                              //   child: ListView.builder(
+                                              //     physics:
+                                              //         NeverScrollableScrollPhysics(),
+                                              //     shrinkWrap: true,
+                                              //     itemCount: 3,
+                                              //     itemBuilder: (context, index) {
+                                              //       return TopProjects(
+                                              //         projectName:
+                                              //             "Computer Vision using Deep Learning and Machine Learning",
+                                              //         madeBy: "Aryan Solanki",
+                                              //       );
+                                              //     },
+                                              //   ),
+                                              // ),
                                               SizedBox(
                                                 height: 40,
                                               ),
@@ -2934,7 +4624,6 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                     ),
 
                                                     border: InputBorder.none,
-
                                                     hintStyle: TextStyle(
                                                         fontFamily:
                                                             "Metrisch-Medium",
@@ -3057,85 +4746,83 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                   },
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: 40,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 20,
-                                                    height: 3,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      color: Colors
-                                                          .orange.shade400,
-                                                    ),
-                                                    width: 5,
-                                                    height: 3,
-                                                  )
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Text(
-                                                "Most Viewed Projects",
-                                                style: TextStyle(
-                                                    fontSize: 21,
-                                                    color: Colors.black87,
-                                                    fontFamily:
-                                                        "Metrisch-Bold"),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Container(
-                                                height: 300,
-                                                child: ListView.builder(
-                                                  physics:
-                                                      NeverScrollableScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: 3,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return TopProjects(
-                                                      projectName:
-                                                          "Computer Vision using Deep Learning and Machine Learning",
-                                                      madeBy: "Aryan Solanki",
-                                                    );
-                                                  },
-                                                ),
-                                              ),
+                                              // SizedBox(
+                                              //   height: 40,
+                                              // ),
+                                              // Row(
+                                              //   mainAxisAlignment:
+                                              //       MainAxisAlignment.center,
+                                              //   children: [
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color:
+                                              //             Colors.orange.shade400,
+                                              //       ),
+                                              //       width: 5,
+                                              //       height: 3,
+                                              //     ),
+                                              //     SizedBox(
+                                              //       width: 10,
+                                              //     ),
+                                              //     Container(
+                                              //       decoration: BoxDecoration(
+                                              //         borderRadius:
+                                              //             BorderRadius.circular(
+                                              //                 5),
+                                              //         color:
+                                              //             Colors.orange.shade400,
+                                              //       ),
+                                              //       width: 20,
+                                              //       height: 3,
+                                              //     ),
+                                              //     // SizedBox(
+                                              //     //   width: 10,
+                                              //     // ),
+                                              //     // Container(
+                                              //     //   decoration: BoxDecoration(
+                                              //     //     borderRadius:
+                                              //     //         BorderRadius.circular(
+                                              //     //             5),
+                                              //     //     color:
+                                              //     //         Colors.orange.shade400,
+                                              //     //   ),
+                                              //     //   width: 5,
+                                              //     //   height: 3,
+                                              //     // )
+                                              //   ],
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 15,
+                                              // ),
+                                              // Text(
+                                              //   "Most Viewed Projects",
+                                              //   style: TextStyle(
+                                              //       fontSize: 21,
+                                              //       color: Colors.black87,
+                                              //       fontFamily: "Metrisch-Bold"),
+                                              // ),
+                                              // SizedBox(
+                                              //   height: 20,
+                                              // ),
+                                              // Container(
+                                              //   height: 300,
+                                              //   child: ListView.builder(
+                                              //     physics:
+                                              //         NeverScrollableScrollPhysics(),
+                                              //     shrinkWrap: true,
+                                              //     itemCount: 3,
+                                              //     itemBuilder: (context, index) {
+                                              //       return TopProjects(
+                                              //         projectName:
+                                              //             "Computer Vision using Deep Learning and Machine Learning",
+                                              //         madeBy: "Aryan Solanki",
+                                              //       );
+                                              //     },
+                                              //   ),
+                                              // ),
                                               SizedBox(
                                                 height: 40,
                                               ),
@@ -3375,83 +5062,77 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                                                 },
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Most Viewed Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: 300,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: 3,
-                                                itemBuilder: (context, index) {
-                                                  return TopProjects(
-                                                    projectName:
-                                                        "Computer Vision using Deep Learning and Machine Learning",
-                                                    madeBy: "Aryan Solanki",
-                                                  );
-                                                },
-                                              ),
-                                            ),
+                                            // SizedBox(
+                                            //   height: 40,
+                                            // ),
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.center,
+                                            //   children: [
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(5),
+                                            //         color: Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 5,
+                                            //       height: 3,
+                                            //     ),
+                                            //     SizedBox(
+                                            //       width: 10,
+                                            //     ),
+                                            //     Container(
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(5),
+                                            //         color: Colors.orange.shade400,
+                                            //       ),
+                                            //       width: 20,
+                                            //       height: 3,
+                                            //     ),
+                                            //     // SizedBox(
+                                            //     //   width: 10,
+                                            //     // ),
+                                            //     // Container(
+                                            //     //   decoration: BoxDecoration(
+                                            //     //     borderRadius:
+                                            //     //         BorderRadius.circular(5),
+                                            //     //     color: Colors.orange.shade400,
+                                            //     //   ),
+                                            //     //   width: 5,
+                                            //     //   height: 3,
+                                            //     // )
+                                            //   ],
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 15,
+                                            // ),
+                                            // Text(
+                                            //   "Most Viewed Projects",
+                                            //   style: TextStyle(
+                                            //       fontSize: 21,
+                                            //       color: Colors.black87,
+                                            //       fontFamily: "Metrisch-Bold"),
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 20,
+                                            // ),
+                                            // Container(
+                                            //   height: 300,
+                                            //   child: ListView.builder(
+                                            //     physics:
+                                            //         NeverScrollableScrollPhysics(),
+                                            //     shrinkWrap: true,
+                                            //     itemCount: 3,
+                                            //     itemBuilder: (context, index) {
+                                            //       return TopProjects(
+                                            //         projectName:
+                                            //             "Computer Vision using Deep Learning and Machine Learning",
+                                            //         madeBy: "Aryan Solanki",
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // ),
                                             SizedBox(
                                               height: 40,
                                             ),
@@ -3528,1486 +5209,16 @@ class _ProjectGalleryState extends State<ProjectGallery> {
                               ),
                             ],
                           );
-                        }
-
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: [
-                                ResponsiveBuilder(
-                                  breakpoints: ScreenBreakpoints(
-                                      tablet: 700, desktop: 1140, watch: 541),
-                                  builder: (context, sizingInformation) {
-                                    // Check the sizing information here and return your UI
-                                    if (sizingInformation.deviceScreenType ==
-                                        DeviceScreenType.desktop) {
-                                      return Container(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 10),
-                                        width: 800,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                widget.searchTerm == ""
-                                                    ? Text(
-                                                        "Showing 1–9 of 12 results",
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                "Metrisch-Medium",
-                                                            height: 1.5,
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.black54),
-                                                      )
-                                                    : Text(
-                                                        'Showing 1–9 of "${widget.searchTerm}"',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                "Metrisch-Medium",
-                                                            height: 1.5,
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.black54),
-                                                      ),
-                                                MenuButton<String>(
-                                                  child: normalChildButton,
-                                                  items: sortkeys,
-                                                  itemBuilder: (String value) =>
-                                                      Container(
-                                                    height: 40,
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 0.0,
-                                                        horizontal: 16),
-                                                    child: Text(
-                                                      value,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                  ),
-                                                  toggledChild: Container(
-                                                    child: normalChildButton,
-                                                  ),
-                                                  onItemSelected:
-                                                      (String value) {
-                                                    setState(() {
-                                                      selectedKey = value;
-                                                    });
-                                                  },
-                                                  onMenuButtonToggle:
-                                                      (bool isToggle) {
-                                                    print(isToggle);
-                                                  },
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Container(
-                                              height: ProjectList.length *
-                                                  140.toDouble(),
-                                              child: GridView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                itemCount: ProjectList.length,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 3,
-                                                        mainAxisSpacing: 40,
-                                                        childAspectRatio: 0.68,
-                                                        crossAxisSpacing: 20),
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return ProjectCard(
-                                                      project:
-                                                          ProjectList[index]);
-                                                },
-                                              ),
-                                            ),
-                                            ProjectList.length > 9 &&
-                                                    widget.lm == true &&
-                                                    _moreProductsAvailable ==
-                                                        true &&
-                                                    _loadingProducts == false
-                                                ? GradientButton(
-                                                    title: "Load More",
-                                                    onPressed: () {
-                                                      if (widget.categoryTerm !=
-                                                          "") {
-                                                        getMoreCategoryProducts(
-                                                            widget
-                                                                .categoryTerm);
-                                                      } else if (widget
-                                                              .yearTerm !=
-                                                          "") {
-                                                        getMoreYearProducts(
-                                                            widget.yearTerm);
-                                                      } else if (widget
-                                                              .searchTerm ==
-                                                          "") {
-                                                        getMoreProducts();
-                                                      } else {
-                                                        //TODO: Get more products from algolia
-                                                      }
-                                                    },
-                                                  )
-                                                : Center(),
-                                          ],
-                                        ),
-                                      );
-                                    }
-                                    if (sizingInformation.deviceScreenType ==
-                                        DeviceScreenType.tablet) {
-                                      return Container(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 10),
-                                        width: 660,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                widget.searchTerm == ""
-                                                    ? Text(
-                                                        "Showing 1–9 of 12 results",
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                "Metrisch-Medium",
-                                                            height: 1.5,
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.black54),
-                                                      )
-                                                    : Text(
-                                                        'Showing 1–9 of "${widget.searchTerm}"',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                "Metrisch-Medium",
-                                                            height: 1.5,
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.black54),
-                                                      ),
-                                                MenuButton<String>(
-                                                  child: normalChildButton,
-                                                  items: sortkeys,
-                                                  itemBuilder: (String value) =>
-                                                      Container(
-                                                    height: 40,
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 0.0,
-                                                        horizontal: 16),
-                                                    child: Text(
-                                                      value,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                  ),
-                                                  toggledChild: Container(
-                                                    child: normalChildButton,
-                                                  ),
-                                                  onItemSelected:
-                                                      (String value) {
-                                                    setState(() {
-                                                      selectedKey = value;
-                                                    });
-                                                  },
-                                                  onMenuButtonToggle:
-                                                      (bool isToggle) {
-                                                    print(isToggle);
-                                                  },
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Container(
-                                              height: ProjectList.length *
-                                                  180.toDouble(),
-                                              child: GridView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                itemCount: ProjectList.length,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 3,
-                                                        mainAxisSpacing: 40,
-                                                        childAspectRatio: 0.63,
-                                                        crossAxisSpacing: 20),
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return NoHoverProjectCard(
-                                                      project:
-                                                          ProjectList[index]);
-                                                },
-                                              ),
-                                            ),
-                                            ProjectList.length > 9 &&
-                                                    widget.lm == true &&
-                                                    _moreProductsAvailable ==
-                                                        true &&
-                                                    _loadingProducts == false
-                                                ? GradientButton(
-                                                    title: "Load More",
-                                                    onPressed: () {
-                                                      if (widget.categoryTerm !=
-                                                          "") {
-                                                        getMoreCategoryProducts(
-                                                            widget
-                                                                .categoryTerm);
-                                                      } else if (widget
-                                                              .yearTerm !=
-                                                          "") {
-                                                        getMoreYearProducts(
-                                                            widget.yearTerm);
-                                                      } else if (widget
-                                                              .searchTerm ==
-                                                          "") {
-                                                        getMoreProducts();
-                                                      } else {
-                                                        //TODO: Get more products from algolia
-                                                      }
-                                                    },
-                                                  )
-                                                : Center(),
-                                          ],
-                                        ),
-                                      );
-                                    }
-                                    if (sizingInformation.deviceScreenType ==
-                                        DeviceScreenType.watch) {
-                                      return Container(
-                                        width: 250,
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 10),
-                                        child: Column(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                widget.searchTerm == ""
-                                                    ? Text(
-                                                        "Showing 1–9 of 12 results",
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                "Metrisch-Medium",
-                                                            height: 1.5,
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.black54),
-                                                      )
-                                                    : Text(
-                                                        'Showing 1–9 of "${widget.searchTerm}"',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                "Metrisch-Medium",
-                                                            height: 1.5,
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.black54),
-                                                      ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                MenuButton<String>(
-                                                  child: normalChildButton,
-                                                  items: sortkeys,
-                                                  itemBuilder: (String value) =>
-                                                      Container(
-                                                    height: 40,
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 0.0,
-                                                        horizontal: 16),
-                                                    child: Text(
-                                                      value,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                                  ),
-                                                  toggledChild: Container(
-                                                    child: normalChildButton,
-                                                  ),
-                                                  onItemSelected:
-                                                      (String value) {
-                                                    setState(() {
-                                                      selectedKey = value;
-                                                    });
-                                                  },
-                                                  onMenuButtonToggle:
-                                                      (bool isToggle) {
-                                                    print(isToggle);
-                                                  },
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: ProjectList.length *
-                                                  445.toDouble(),
-                                              child: GridView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                itemCount: ProjectList.length,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 1,
-                                                        mainAxisSpacing: 40,
-                                                        childAspectRatio: 0.63,
-                                                        crossAxisSpacing: 20),
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return NoHoverProjectCard(
-                                                      project:
-                                                          ProjectList[index]);
-                                                },
-                                              ),
-                                            ),
-                                            ProjectList.length > 9 &&
-                                                    widget.lm == true &&
-                                                    _moreProductsAvailable ==
-                                                        true &&
-                                                    _loadingProducts == false
-                                                ? GradientButton(
-                                                    title: "Load More",
-                                                    onPressed: () {
-                                                      if (widget.categoryTerm !=
-                                                          "") {
-                                                        getMoreCategoryProducts(
-                                                            widget
-                                                                .categoryTerm);
-                                                      } else if (widget
-                                                              .yearTerm !=
-                                                          "") {
-                                                        getMoreYearProducts(
-                                                            widget.yearTerm);
-                                                      } else if (widget
-                                                              .searchTerm ==
-                                                          "") {
-                                                        getMoreProducts();
-                                                      } else {
-                                                        //TODO: Get more products from algolia
-                                                      }
-                                                    },
-                                                  )
-                                                : Center(),
-                                          ],
-                                        ),
-                                      );
-                                    }
-
-                                    return Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                      width: 500,
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              widget.searchTerm == ""
-                                                  ? Text(
-                                                      "Showing 1–9 of 12 results",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                    )
-                                                  : Text(
-                                                      'Showing 1–9 of "${widget.searchTerm}"',
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Metrisch-Medium",
-                                                          height: 1.5,
-                                                          fontSize: 15,
-                                                          color:
-                                                              Colors.black54),
-                                                    ),
-                                              MenuButton<String>(
-                                                child: normalChildButton,
-                                                items: sortkeys,
-                                                itemBuilder: (String value) =>
-                                                    Container(
-                                                  height: 40,
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 0.0,
-                                                      horizontal: 16),
-                                                  child: Text(
-                                                    value,
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            "Metrisch-Medium",
-                                                        height: 1.5,
-                                                        fontSize: 15,
-                                                        color: Colors.black54),
-                                                  ),
-                                                ),
-                                                toggledChild: Container(
-                                                  child: normalChildButton,
-                                                ),
-                                                onItemSelected: (String value) {
-                                                  setState(() {
-                                                    selectedKey = value;
-                                                  });
-                                                },
-                                                onMenuButtonToggle:
-                                                    (bool isToggle) {
-                                                  print(isToggle);
-                                                },
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Container(
-                                            height: ProjectList.length *
-                                                240.toDouble(),
-                                            child: GridView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: ProjectList.length,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 2,
-                                                      mainAxisSpacing: 40,
-                                                      childAspectRatio: 0.63,
-                                                      crossAxisSpacing: 20),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return NoHoverProjectCard(
-                                                    project:
-                                                        ProjectList[index]);
-                                              },
-                                            ),
-                                          ),
-                                          ProjectList.length > 9 &&
-                                                  widget.lm == true &&
-                                                  _moreProductsAvailable ==
-                                                      true &&
-                                                  _loadingProducts == false
-                                              ? GradientButton(
-                                                  title: "Load More",
-                                                  onPressed: () {
-                                                    if (widget.categoryTerm !=
-                                                        "") {
-                                                      getMoreCategoryProducts(
-                                                          widget.categoryTerm);
-                                                    } else if (widget
-                                                            .yearTerm !=
-                                                        "") {
-                                                      getMoreYearProducts(
-                                                          widget.yearTerm);
-                                                    } else if (widget
-                                                            .searchTerm ==
-                                                        "") {
-                                                      getMoreProducts();
-                                                    } else {
-                                                      //TODO: Get more products from algolia
-                                                    }
-                                                  },
-                                                )
-                                              : Center(),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 80,
-                                ),
-                                ResponsiveBuilder(
-                                  breakpoints: ScreenBreakpoints(
-                                      tablet: 971, desktop: 1140, watch: 300),
-                                  builder: (context, sizingInformation) {
-                                    // Check the sizing information here and return your UI
-                                    if (sizingInformation.deviceScreenType ==
-                                        DeviceScreenType.desktop) {
-                                      return Container(
-                                        width: 250,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding:
-                                                  EdgeInsets.only(left: 10),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5.0)),
-                                                  color: Color(0xfff3f5fe)),
-                                              height: 45,
-                                              child: TextField(
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        "Metrisch-Medium",
-                                                    height: 1.5,
-                                                    fontSize: 15,
-                                                    color: Colors.black54),
-                                                onChanged: (value) {
-                                                  searchedvalue = value;
-                                                  //Do something with the user input.
-                                                },
-                                                decoration: InputDecoration(
-                                                  suffixIcon: InkWell(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          searched = true;
-                                                        });
-                                                      },
-                                                      child: Icon(
-                                                        Icons.search,
-                                                        size: 22,
-                                                        color: Colors.black,
-                                                      )),
-
-                                                  border: InputBorder.none,
-                                                  hintStyle: TextStyle(
-                                                      fontFamily:
-                                                          "Metrisch-Medium",
-                                                      height: 1.5,
-                                                      fontSize: 15,
-                                                      color: Colors.black54),
-
-                                                  hintText: 'Search Project',
-                                                  // contentPadding:
-                                                  // EdgeInsets.symmetric(horizontal: 20.0),
-                                                  // border: OutlineInputBorder(
-                                                  //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                  // ),
-                                                ),
-                                                onSubmitted: (query) {
-                                                  setState(() {
-                                                    searched = true;
-                                                    searchedvalue = query;
-                                                    _searchalgolia(query);
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Categories",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: catheight,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    categoriesname.length,
-                                                itemBuilder: (context, index) {
-                                                  return Column(
-                                                    children: [
-                                                      CategoriesButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            searched = true;
-                                                            Navigator
-                                                                .pushReplacement(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) =>
-                                                                            ProjectGallery(
-                                                                              categoriesname: categoriesname,
-                                                                              categoryTerm: categoriesname[index]["name"],
-                                                                            )));
-                                                          });
-                                                        },
-                                                        categoryName:
-                                                            categoriesname[
-                                                                index]["name"],
-                                                        categoryQuantity:
-                                                            categoriesname[
-                                                                    index]
-                                                                ["number"],
-                                                      ),
-                                                      Divider(
-                                                        color: Colors.black12,
-                                                        thickness: 1,
-                                                      )
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Most Viewed Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: 300,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: 3,
-                                                itemBuilder: (context, index) {
-                                                  return TopProjects(
-                                                    projectName:
-                                                        "Computer Vision using Deep Learning and Machine Learning",
-                                                    madeBy: "Aryan Solanki",
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Batch Wise Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            BatchWiseProjects(
-                                              categoriesname: categoriesname,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }
-                                    if (sizingInformation.deviceScreenType ==
-                                        DeviceScreenType.tablet) {
-                                      return Container(
-                                        width: 220,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              padding:
-                                                  EdgeInsets.only(left: 10),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5.0)),
-                                                  color: Color(0xfff3f5fe)),
-                                              height: 45,
-                                              child: TextField(
-                                                onSubmitted: (query) {
-                                                  setState(() {
-                                                    searched = true;
-                                                    searchedvalue = query;
-                                                  });
-                                                },
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        "Metrisch-Medium",
-                                                    height: 1.5,
-                                                    fontSize: 15,
-                                                    color: Colors.black54),
-                                                onChanged: (value) {
-                                                  searchedvalue = value;
-                                                  //Do something with the user input.
-                                                },
-                                                decoration: InputDecoration(
-                                                  suffixIcon: InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        searched = true;
-                                                      });
-                                                    },
-                                                    child: Icon(
-                                                      Icons.search,
-                                                      size: 22,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-
-                                                  border: InputBorder.none,
-                                                  hintStyle: TextStyle(
-                                                      fontFamily:
-                                                          "Metrisch-Medium",
-                                                      height: 1.5,
-                                                      fontSize: 15,
-                                                      color: Colors.black54),
-                                                  hintText: 'Search Project',
-                                                  // contentPadding:
-                                                  // EdgeInsets.symmetric(horizontal: 20.0),
-                                                  // border: OutlineInputBorder(
-                                                  //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                  // ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Categories",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: catheight,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    categoriesname.length,
-                                                itemBuilder: (context, index) {
-                                                  return Column(
-                                                    children: [
-                                                      CategoriesButton(
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            searched = true;
-                                                            Navigator
-                                                                .pushReplacement(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                        builder: (context) =>
-                                                                            ProjectGallery(
-                                                                              categoriesname: categoriesname,
-                                                                              categoryTerm: categoriesname[index]["name"],
-                                                                            )));
-                                                          });
-                                                        },
-                                                        categoryName:
-                                                            categoriesname[
-                                                                index]["name"],
-                                                        categoryQuantity:
-                                                            categoriesname[
-                                                                    index]
-                                                                ["number"],
-                                                      ),
-                                                      Divider(
-                                                        color: Colors.black12,
-                                                        thickness: 1,
-                                                      )
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Most Viewed Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              height: 300,
-                                              child: ListView.builder(
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: 3,
-                                                itemBuilder: (context, index) {
-                                                  return TopProjects(
-                                                    projectName:
-                                                        "Computer Vision using Deep Learning and Machine Learning",
-                                                    madeBy: "Aryan Solanki",
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 40,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 20,
-                                                  height: 3,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color:
-                                                        Colors.orange.shade400,
-                                                  ),
-                                                  width: 5,
-                                                  height: 3,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              "Batch Wise Projects",
-                                              style: TextStyle(
-                                                  fontSize: 21,
-                                                  color: Colors.black87,
-                                                  fontFamily: "Metrisch-Bold"),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            BatchWiseProjects(
-                                              categoriesname: categoriesname,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }
-
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width -
-                                          40,
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5.0)),
-                                                color: Color(0xfff3f5fe)),
-                                            height: 45,
-                                            child: TextField(
-                                              onSubmitted: (query) {
-                                                setState(() {
-                                                  searched = true;
-                                                  searchedvalue = query;
-                                                });
-                                              },
-                                              style: TextStyle(
-                                                  fontFamily: "Metrisch-Medium",
-                                                  height: 1.5,
-                                                  fontSize: 15,
-                                                  color: Colors.black54),
-                                              onChanged: (value) {
-                                                searchedvalue = value;
-                                                //Do something with the user input.
-                                              },
-                                              decoration: InputDecoration(
-                                                suffixIcon: InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      searched = true;
-                                                    });
-                                                  },
-                                                  child: Icon(
-                                                    Icons.search,
-                                                    size: 22,
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-
-                                                border: InputBorder.none,
-                                                hintStyle: TextStyle(
-                                                    fontFamily:
-                                                        "Metrisch-Medium",
-                                                    height: 1.5,
-                                                    fontSize: 15,
-                                                    color: Colors.black54),
-                                                hintText: 'Search Project',
-                                                // contentPadding:
-                                                // EdgeInsets.symmetric(horizontal: 20.0),
-                                                // border: OutlineInputBorder(
-                                                //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                // ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Categories",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: catheight,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: categoriesname.length,
-                                              itemBuilder: (context, index) {
-                                                return Column(
-                                                  children: [
-                                                    CategoriesButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          searched = true;
-                                                          Navigator
-                                                              .pushReplacement(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) =>
-                                                                          ProjectGallery(
-                                                                            categoriesname:
-                                                                                categoriesname,
-                                                                            categoryTerm:
-                                                                                categoriesname[index]["name"],
-                                                                          )));
-                                                        });
-                                                      },
-                                                      categoryName:
-                                                          categoriesname[index]
-                                                              ["name"],
-                                                      categoryQuantity:
-                                                          categoriesname[index]
-                                                              ["number"],
-                                                    ),
-                                                    Divider(
-                                                      color: Colors.black12,
-                                                      thickness: 1,
-                                                    )
-                                                  ],
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Most Viewed Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            height: 300,
-                                            child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: 3,
-                                              itemBuilder: (context, index) {
-                                                return TopProjects(
-                                                  projectName:
-                                                      "Computer Vision using Deep Learning and Machine Learning",
-                                                  madeBy: "Aryan Solanki",
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 20,
-                                                height: 3,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.orange.shade400,
-                                                ),
-                                                width: 5,
-                                                height: 3,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            "Batch Wise Projects",
-                                            style: TextStyle(
-                                                fontSize: 21,
-                                                color: Colors.black87,
-                                                fontFamily: "Metrisch-Bold"),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          BatchWiseProjects(
-                                            categoriesname: categoriesname,
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      },
+                        },
+                      ),
                     ),
-                  ),
-                  Footer()
-                ],
+                    Footer()
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
