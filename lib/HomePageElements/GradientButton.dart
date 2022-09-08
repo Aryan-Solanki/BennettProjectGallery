@@ -71,7 +71,7 @@ class _GradientButtonState extends State<GradientButton>
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
         child: Center(
           child: FittedBox(
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.scaleDown,
             child: Text(
               widget.title,
               maxLines: 1,

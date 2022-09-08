@@ -80,18 +80,15 @@ class _NoHoverProjectCardState extends State<NoHoverProjectCard> {
                     ),
                     Container(
                       width: 150,
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: Text(
-                          widget.project.title,
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontFamily: "Metrisch-Bold",
-                              fontSize: 15,
-                              color: Colors.black87),
-                        ),
+                      child: Text(
+                        widget.project.title,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontFamily: "Metrisch-Bold",
+                            fontSize: 15,
+                            color: Colors.black87),
                       ),
                     ),
                     SizedBox(
